@@ -4,16 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PDF Viewer</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#525659;font-family:Arial,sans-serif;display:flex;flex-direction:column;height:100vh;overflow:hidden}
 #toolbar{background:#1e3a5f;color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:50px}
 #back-btn{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:0 6px;flex-shrink:0}
 #title{font-size:13px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#page-info{font-size:12px;opacity:0.85;flex-shrink:0}
-#canvas-wrap{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:#525659;display:flex;flex-direction:column;align-items:center;padding:8px 0}
-#loading{color:#fff;font-size:14px;padding:60px 20px;text-align:center}
+#canvas-wrap{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:#525659;display:flex;flex-direction:column;align-items:center;padding:8px 0;height:0}
+#msg{color:#fff;font-size:14px;padding:60px 20px;text-align:center}
 #footer{background:#1e3a5f;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .nav-btn{padding:8px 20px;border-radius:8px;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:13px;cursor:pointer}
 .nav-btn:disabled{opacity:0.35;cursor:default}
@@ -25,59 +23,66 @@ canvas{display:block;box-shadow:0 2px 8px rgba(0,0,0,0.4)}
 <div id="toolbar">
   <button id="back-btn" onclick="history.back()">&#8592;</button>
   <span id="title">Loading...</span>
-  <span id="page-info"></span>
 </div>
-<div id="canvas-wrap"><div id="loading">Loading PDF...</div></div>
+<div id="canvas-wrap"><div id="msg">Loading PDF...</div></div>
 <div id="footer">
   <button class="nav-btn" id="prev-btn" onclick="changePage(-1)" disabled>&#8592; Prev</button>
   <span id="counter"></span>
   <button class="nav-btn" id="next-btn" onclick="changePage(1)" disabled>Next &#8594;</button>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-const params = new URLSearchParams(location.search);
-const file    = params.get('file') || '';
-const start   = parseInt(params.get('start')) || 1;
-const end     = parseInt(params.get('end'))   || start;
-const title   = params.get('title') || file.replace('.pdf','');
+const params   = new URLSearchParams(location.search);
+const file     = params.get('file') || '';
+const start    = parseInt(params.get('start')) || 1;
+const end      = parseInt(params.get('end'))   || start;
+const title    = params.get('title') || file.replace('.pdf','');
 
-document.getElementById('title').textContent = title;
+document.getElementById('title').textContent = decodeURIComponent(title);
 
 let pdfDoc = null, curPage = start;
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-const base = location.href.replace(/viewer\.html.*/, '');
-pdfjsLib.getDocument(base + file).promise.then(function(doc) {
+// Build PDF URL — same origin as viewer.html
+const pdfUrl = location.origin + location.pathname.replace('viewer.html','') + file;
+document.getElementById('msg').textContent = 'Loading: ' + pdfUrl;
+
+pdfjsLib.getDocument({
+  url: pdfUrl,
+  withCredentials: false
+}).promise.then(function(doc) {
   pdfDoc = doc;
   renderPage(start);
 }).catch(function(e) {
-  document.getElementById('loading').textContent = 'Error: ' + e.message;
+  document.getElementById('msg').textContent = 'Error: ' + e.message + ' | URL: ' + pdfUrl;
 });
 
 function renderPage(num) {
   const wrap = document.getElementById('canvas-wrap');
-  wrap.innerHTML = '<div id="loading">Rendering page ' + num + '...</div>';
+  wrap.innerHTML = '<div id="msg">Rendering page ' + num + '...</div>';
   pdfDoc.getPage(num).then(function(page) {
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const W = Math.min(window.innerWidth, 500);
-    const vp = page.getViewport({scale: (W / page.getViewport({scale:1}).width) * DPR});
+    const W   = wrap.offsetWidth || Math.min(window.innerWidth, 500);
+    const vp  = page.getViewport({scale: (W / page.getViewport({scale:1}).width) * DPR});
     const canvas = document.createElement('canvas');
-    canvas.width = vp.width;
+    canvas.width  = vp.width;
     canvas.height = vp.height;
-    canvas.style.width = W + 'px';
-    canvas.style.height = Math.round(vp.height/DPR) + 'px';
+    canvas.style.width  = W + 'px';
+    canvas.style.height = Math.round(vp.height / DPR) + 'px';
     wrap.innerHTML = '';
     wrap.appendChild(canvas);
     wrap.scrollTop = 0;
     page.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise.then(function() {
       curPage = num;
-      const total = end - start + 1;
-      const current = num - start + 1;
-      document.getElementById('counter').textContent = 'Page ' + current + ' of ' + total;
+      document.getElementById('counter').textContent =
+        'Page ' + (num - start + 1) + ' of ' + (end - start + 1);
       document.getElementById('prev-btn').disabled = num <= start;
       document.getElementById('next-btn').disabled = num >= end;
     });
+  }).catch(function(e) {
+    wrap.innerHTML = '<div id="msg">Page error: ' + e.message + '</div>';
   });
 }
 
