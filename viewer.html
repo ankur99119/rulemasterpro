@@ -7,23 +7,56 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#1e3a5f}
-body{font-family:Arial,sans-serif;display:flex;flex-direction:column;height:100dvh}
-#toolbar{background:#1e3a5f;color:#fff;padding:0 14px;display:flex;align-items:center;gap:10px;flex:1;min-height:50px}
-#back-btn{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:0 8px;flex-shrink:0}
-#title{font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body{font-family:'Segoe UI',Arial,sans-serif;display:flex;flex-direction:column;height:100dvh}
+
+#toolbar{
+  background:#1e3a5f;color:#fff;
+  padding:0 18px;
+  display:flex;align-items:center;gap:14px;
+  flex:1;min-height:60px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+#back-btn{
+  background:rgba(255,255,255,0.12);
+  border:none;color:#fff;font-size:20px;
+  cursor:pointer;
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+#title{font-size:16px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:0.2px}
+#subtitle{font-size:12px;opacity:0.65;margin-top:2px}
+
 #canvas-wrap{flex-shrink:0;overflow:hidden;background:#fff;display:flex;align-items:stretch}
 canvas{display:block;width:100% !important;height:auto !important}
-#footer{background:#1e3a5f;padding:0 12px;display:flex;align-items:center;justify-content:space-between;flex:1;min-height:50px}
-.nav-btn{padding:10px 22px;border-radius:10px;border:none;background:rgba(255,255,255,0.18);color:#fff;font-size:14px;cursor:pointer;font-weight:700}
-.nav-btn:disabled{opacity:0.3;cursor:default}
-#counter{color:#fff;font-size:13px;font-weight:600;text-align:center}
 #msg{color:#aac4e8;font-size:14px;padding:40px 20px;text-align:center;width:100%}
+
+#footer{
+  background:#1e3a5f;
+  padding:0 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex:1;min-height:60px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.nav-btn{
+  padding:12px 28px;border-radius:12px;border:none;
+  background:rgba(255,255,255,0.15);
+  color:#fff;font-size:15px;cursor:pointer;font-weight:700;
+  letter-spacing:0.3px;
+  transition:background 0.15s;
+}
+.nav-btn:active{background:rgba(255,255,255,0.28)}
+.nav-btn:disabled{opacity:0.25;cursor:default}
+#counter{color:#fff;font-size:14px;font-weight:600;text-align:center;opacity:0.9}
 </style>
 </head>
 <body>
 <div id="toolbar">
   <button id="back-btn" onclick="history.back()">&#8592;</button>
-  <span id="title">Loading...</span>
+  <div>
+    <div id="title">Loading...</div>
+    <div id="subtitle"></div>
+  </div>
 </div>
 <div id="canvas-wrap"><div id="msg">Loading PDF...</div></div>
 <div id="footer">
@@ -39,7 +72,10 @@ const start  = parseInt(params.get('start')) || 1;
 const end    = parseInt(params.get('end'))   || start;
 const title  = params.get('title') || file.replace('.pdf','');
 
-document.getElementById('title').textContent = decodeURIComponent(title);
+const decoded = decodeURIComponent(title);
+const parts   = decoded.split('\u00b7');
+document.getElementById('title').textContent    = parts[0] ? parts[0].trim() : decoded;
+document.getElementById('subtitle').textContent = parts[1] ? parts[1].trim() : '';
 
 let pdfDoc = null, curPage = start;
 
@@ -54,7 +90,7 @@ pdfjsLib.getDocument({url:pdfUrl, withCredentials:false}).promise
 
 function renderPage(num) {
   const wrap = document.getElementById('canvas-wrap');
-  wrap.innerHTML = '<div id="msg">Loading...</div>';
+  wrap.innerHTML = '<div id="msg">Loading page '+(num-start+1)+' of '+(end-start+1)+'...</div>';
   pdfDoc.getPage(num).then(function(page) {
     const DPR = Math.min(window.devicePixelRatio||1, 2);
     const W   = window.innerWidth;
