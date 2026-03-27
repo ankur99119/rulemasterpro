@@ -39,22 +39,59 @@ canvas{display:block;width:100% !important;height:auto !important}
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
+const params  = new URLSearchParams(location.search);
+const file    = params.get('file')  || '';
+const start   = parseInt(params.get('start')) || 1;
+const end     = parseInt(params.get('end'))   || start;
+const title   = params.get('title') || file.replace('.pdf','');
+const fromKey = params.get('from')  || '';  // e.g. 'om', 'bwm', 'irpwm' etc.
+
+// Manual key → hash map for back navigation
+const manualHash = {
+  'om':    '#manual/om',
+  'bwm':   '#manual/bwm',
+  'acc':   '#manual/acc',
+  'ira':   '#manual/ira',
+  'irsem': '#manual/irsem',
+  'irpwm': '#manual/irpwm',
+  'gsr':   '#chapters'
+};
+
+const BASE = 'https://ankur99119.github.io/rulemasterpro/';
+
 function goBack() {
   try {
-    if (window.opener) { window.close(); return; }
-    if (window.history.length > 1) { window.history.back(); return; }
-    window.location.href = 'https://ankur99119.github.io/rulemasterpro/';
+    // Fix Issue 1: always go back regardless of current page number
+    // Fix Issue 2: go to specific manual chapter list, not home
+    if (fromKey && manualHash[fromKey]) {
+      // Close tab if opened as new tab, redirect to correct manual
+      if (window.opener) {
+        window.opener.location.hash = manualHash[fromKey];
+        window.close();
+        return;
+      }
+      // Navigate to the correct manual chapter list
+      window.location.href = BASE + manualHash[fromKey];
+      return;
+    }
+    // Fallback — try history back
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    // Last resort — go to app home
+    window.location.href = BASE;
   } catch(e) {
-    window.location.href = 'https://ankur99119.github.io/rulemasterpro/';
+    window.location.href = BASE;
   }
 }
 
-const params = new URLSearchParams(location.search);
-const file   = params.get('file') || '';
-const start  = parseInt(params.get('start')) || 1;
-const end    = parseInt(params.get('end'))   || start;
-const title  = params.get('title') || file.replace('.pdf','');
+// Android hardware back button support
+window.addEventListener('popstate', function(e) {
+  goBack();
+});
 
+// Title display
 const decoded = decodeURIComponent(title);
 const parts   = decoded.split('\u00b7');
 document.getElementById('title').textContent    = parts[0] ? parts[0].trim() : decoded;
@@ -65,11 +102,11 @@ let pdfDoc = null, curPage = start;
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-const pdfUrl = location.origin + location.pathname.replace('viewer.html','') + file;
+const pdfUrl = BASE + file;
 
 pdfjsLib.getDocument({url:pdfUrl, withCredentials:false}).promise
   .then(function(doc){ pdfDoc=doc; renderPage(start); })
-  .catch(function(e){ document.getElementById('msg').textContent='Error: '+e.message; });
+  .catch(function(e){ document.getElementById('msg').textContent='Error loading PDF: '+e.message; });
 
 function renderPage(num) {
   const wrap = document.getElementById('canvas-wrap');
@@ -86,8 +123,8 @@ function renderPage(num) {
     page.render({canvasContext:canvas.getContext('2d'), viewport:vp}).promise.then(function() {
       curPage = num;
       document.getElementById('counter').textContent = 'Page '+(num-start+1)+' of '+(end-start+1);
-      document.getElementById('prev-btn').disabled = num<=start;
-      document.getElementById('next-btn').disabled = num>=end;
+      document.getElementById('prev-btn').disabled = (num <= start);
+      document.getElementById('next-btn').disabled = (num >= end);
     });
   }).catch(function(e){
     wrap.innerHTML='<div id="msg">Error: '+e.message+'</div>';
@@ -95,8 +132,8 @@ function renderPage(num) {
 }
 
 function changePage(d) {
-  const n = curPage+d;
-  if(n>=start && n<=end) renderPage(n);
+  const n = curPage + d;
+  if (n >= start && n <= end) renderPage(n);
 }
 </script>
 </body>
