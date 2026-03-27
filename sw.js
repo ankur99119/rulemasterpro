@@ -1,5 +1,5 @@
 // Rule Master Pro — Service Worker v2
-const CACHE_NAME = 'rulemasterpro-v2';
+const CACHE_NAME = 'rulemasterpro-v3';
 const ASSETS = [
   '/rulemasterpro/',
   '/rulemasterpro/index.html',
