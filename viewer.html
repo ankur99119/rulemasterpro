@@ -8,43 +8,16 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#1e3a5f}
 body{font-family:'Segoe UI',Arial,sans-serif;display:flex;flex-direction:column;height:100dvh}
-
-#toolbar{
-  background:#1e3a5f;color:#fff;
-  padding:0 18px;
-  display:flex;align-items:center;gap:14px;
-  flex:1;min-height:60px;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-}
-#back-btn{
-  background:rgba(255,255,255,0.12);
-  border:none;color:#fff;font-size:20px;
-  cursor:pointer;
-  width:42px;height:42px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
+#toolbar{background:#1e3a5f;color:#fff;padding:0 18px;display:flex;align-items:center;gap:14px;flex:1;min-height:60px;border-bottom:1px solid rgba(255,255,255,0.1);}
+#back-btn{background:rgba(255,255,255,0.12);border:none;color:#fff;font-size:20px;cursor:pointer;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+#back-btn:active{background:rgba(255,255,255,0.28)}
 #title{font-size:16px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:0.2px}
 #subtitle{font-size:12px;opacity:0.65;margin-top:2px}
-
 #canvas-wrap{flex-shrink:0;overflow:hidden;background:#fff;display:flex;align-items:stretch}
 canvas{display:block;width:100% !important;height:auto !important}
 #msg{color:#aac4e8;font-size:14px;padding:40px 20px;text-align:center;width:100%}
-
-#footer{
-  background:#1e3a5f;
-  padding:0 18px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex:1;min-height:60px;
-  border-top:1px solid rgba(255,255,255,0.1);
-}
-.nav-btn{
-  padding:12px 28px;border-radius:12px;border:none;
-  background:rgba(255,255,255,0.15);
-  color:#fff;font-size:15px;cursor:pointer;font-weight:700;
-  letter-spacing:0.3px;
-  transition:background 0.15s;
-}
+#footer{background:#1e3a5f;padding:0 18px;display:flex;align-items:center;justify-content:space-between;flex:1;min-height:60px;border-top:1px solid rgba(255,255,255,0.1);}
+.nav-btn{padding:12px 28px;border-radius:12px;border:none;background:rgba(255,255,255,0.15);color:#fff;font-size:15px;cursor:pointer;font-weight:700;letter-spacing:0.3px;transition:background 0.15s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .nav-btn:active{background:rgba(255,255,255,0.28)}
 .nav-btn:disabled{opacity:0.25;cursor:default}
 #counter{color:#fff;font-size:14px;font-weight:600;text-align:center;opacity:0.9}
@@ -52,7 +25,7 @@ canvas{display:block;width:100% !important;height:auto !important}
 </head>
 <body>
 <div id="toolbar">
-  <button id="back-btn" onclick="history.back()">&#8592;</button>
+  <button id="back-btn" onclick="goBack()" ontouchend="event.preventDefault();goBack();">&#8592;</button>
   <div>
     <div id="title">Loading...</div>
     <div id="subtitle"></div>
@@ -60,12 +33,22 @@ canvas{display:block;width:100% !important;height:auto !important}
 </div>
 <div id="canvas-wrap"><div id="msg">Loading PDF...</div></div>
 <div id="footer">
-  <button class="nav-btn" id="prev-btn" onclick="changePage(-1)" disabled>&#8592; Prev</button>
+  <button class="nav-btn" id="prev-btn" onclick="changePage(-1)" ontouchend="event.preventDefault();changePage(-1);" disabled>&#8592; Prev</button>
   <span id="counter"></span>
-  <button class="nav-btn" id="next-btn" onclick="changePage(1)" disabled>Next &#8594;</button>
+  <button class="nav-btn" id="next-btn" onclick="changePage(1)" ontouchend="event.preventDefault();changePage(1);" disabled>Next &#8594;</button>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
+function goBack() {
+  try {
+    if (window.opener) { window.close(); return; }
+    if (window.history.length > 1) { window.history.back(); return; }
+    window.location.href = 'https://ankur99119.github.io/rulemasterpro/';
+  } catch(e) {
+    window.location.href = 'https://ankur99119.github.io/rulemasterpro/';
+  }
+}
+
 const params = new URLSearchParams(location.search);
 const file   = params.get('file') || '';
 const start  = parseInt(params.get('start')) || 1;
