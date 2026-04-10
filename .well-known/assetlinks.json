@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.northernrailway.rulemasterpro",
+    "sha256_cert_fingerprints": ["0D:C7:6D:CE:5B:43:D4:51:E2:C3:60:45:9B:55:FC:1E:7A:13:40:BC:21:48:00:29:73:01:F0:31:9B:7E:2A:CB"]
+  }
+}]
