@@ -1,51 +1,41 @@
 {
   "name": "Rule Master Pro",
   "short_name": "RuleMaster",
-  "description": "Northern Railway Rule Books \u2014 G&SR, Operating Manual, BWM, Accident Manual, IRSEM, IRPWM",
-  "id": "https://ankur99119.github.io/rulemasterpro/",
-  "start_url": "https://ankur99119.github.io/rulemasterpro/",
-  "scope": "https://ankur99119.github.io/rulemasterpro/",
+  "description": "Northern Railway Rule Books — G&SR, Operating Manual, BWM, Accident Manual, IRSEM, IRPWM",
+  "id": "https://resplendent-blancmange-ebf77f.netlify.app/",
+  "start_url": "https://resplendent-blancmange-ebf77f.netlify.app/",
+  "scope": "https://resplendent-blancmange-ebf77f.netlify.app/",
   "display": "standalone",
   "background_color": "#1e3a5f",
   "theme_color": "#1e3a5f",
   "orientation": "portrait",
   "lang": "en-IN",
   "dir": "ltr",
-  "categories": [
-    "education", 
-    "productivity",
-    "utilities"
-  ],
+  "categories": ["education", "productivity", "utilities"],
   "prefer_related_applications": true,
   "related_applications": [{
     "platform": "play",
     "url": "https://play.google.com/store/apps/details?id=com.northernrailway.rulemasterpro",
     "id": "com.northernrailway.rulemasterpro"
   }],
-  "display_override": [
-    "window-controls-overlay",
-    "standalone",
-    "browser"
-  ],
-  "launch_handler": {
-    "client_mode": "focus-existing"
-  },
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "launch_handler": { "client_mode": "focus-existing" },
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "icons": [
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/icon-192.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/icon-512.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/icon-512.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -53,25 +43,25 @@
   ],
   "screenshots": [
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/screenshot-1.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/screenshot-1.png",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Home Screen \u2014 7 Manuals"
+      "label": "Home Screen — 7 Manuals"
     },
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/screenshot-2.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/screenshot-2.png",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Rule Detail View"
     },
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/screenshot-3.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/screenshot-3.png",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "AI Assist Q&A"
     },
     {
-      "src": "https://ankur99119.github.io/rulemasterpro/screenshot-1.png",
+      "src": "https://resplendent-blancmange-ebf77f.netlify.app/screenshot-1.png",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Rule Master Pro"
@@ -82,37 +72,22 @@
       "name": "Search Rules",
       "short_name": "Search",
       "description": "Search across all 7 manuals",
-      "url": "https://ankur99119.github.io/rulemasterpro/#search",
-      "icons": [
-        {
-          "src": "https://ankur99119.github.io/rulemasterpro/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "url": "https://resplendent-blancmange-ebf77f.netlify.app/#search",
+      "icons": [{ "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "AI Assist",
       "short_name": "AI Q&A",
       "description": "Ask AI about any railway rule",
-      "url": "https://ankur99119.github.io/rulemasterpro/#qa",
-      "icons": [
-        {
-          "src": "https://ankur99119.github.io/rulemasterpro/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "url": "https://resplendent-blancmange-ebf77f.netlify.app/#qa",
+      "icons": [{ "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Quiz",
       "short_name": "Quiz",
       "description": "Test your railway rules knowledge",
-      "url": "https://ankur99119.github.io/rulemasterpro/#quiz",
-      "icons": [
-        {
-          "src": "https://ankur99119.github.io/rulemasterpro/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "url": "https://resplendent-blancmange-ebf77f.netlify.app/#quiz",
+      "icons": [{ "src": "https://resplendent-blancmange-ebf77f.netlify.app/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
