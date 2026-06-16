@@ -5,7 +5,7 @@
   <meta name="theme-color" content="#1e3a5f">
   <meta charset="UTF-8">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Northern Railway — Railway Manuals</title>
@@ -2197,9 +2197,7 @@
           </div>
         </div>
         <div class="header-actions">
-          <button class="icon-btn" id="zoom-out-btn" onclick="changeTextZoom(-1)" title="Decrease text size" style="font-size:16px;font-weight:900;">A−</button>
-          <button class="icon-btn" id="zoom-in-btn" onclick="changeTextZoom(1)" title="Increase text size" style="font-size:16px;font-weight:900;">A+</button>
-          <button class="icon-btn" onclick="window.location.hash='#auth'" id="auth-btn">
+<button class="icon-btn" onclick="window.location.hash='#auth'" id="auth-btn">
             <i class="fas fa-user-circle"></i>
           </button>
           <div style="position:relative">
@@ -9661,7 +9659,6 @@
             <div class="rule-text-content" style="padding-top:4px;font-size:13px;line-height:1.6;color:var(--text-soft);">${bodyHtml}</div>
             <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
               <button class="action-btn show-full-para-btn" style="font-size:11px;opacity:0.7;">Show full para ↓</button>
-              <button class="action-btn share-para-btn" style="font-size:11px;"><i class="fas fa-share-nodes"></i> Share</button>
               <button class="action-btn save-para-btn ${isBookmarked ? 'active' : ''}" style="font-size:11px;"><i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${isBookmarked ? 'Saved' : 'Save'}</button>
             </div>
           </div>`;
@@ -9672,7 +9669,6 @@
           card.querySelector('.rule-text-content').innerHTML = card._fullBody;
           this.style.display = 'none';
         });
-        card.querySelector('.share-para-btn').addEventListener('click', (e) => { e.stopPropagation(); shareRule(manualType.toUpperCase()+' '+para.num, para.title || ''); });
         card.querySelector('.save-para-btn').addEventListener('click', function(e) { e.stopPropagation(); toggleParaBookmark(manualType+'-'+para.num, this); });
         return card;
       }
@@ -9780,7 +9776,6 @@
             <div class="rule-text-content" style="font-size:13px;line-height:1.6;color:var(--text-soft);">${bodyText}</div>
             <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
               <button class="action-btn show-full-btn" style="font-size:11px;opacity:0.7;">Show full rule ↓</button>
-              <button class="action-btn share-btn-s" style="font-size:11px;"><i class="fas fa-share-nodes"></i> Share</button>
               <button class="action-btn bookmark-action-btn-s ${isBookmarked ? 'active' : ''}" style="font-size:11px;"><i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${isBookmarked ? 'Saved' : 'Save'}</button>
             </div>
           </div>`;
@@ -9791,7 +9786,6 @@
           card.querySelector('.rule-text-content').innerHTML = card._fullBody;
           this.style.display = 'none';
         });
-        card.querySelector('.share-btn-s').addEventListener('click', (e) => { e.stopPropagation(); shareRule(rule.num, rule.title); });
         card.querySelector('.bookmark-action-btn-s').addEventListener('click', function(e) { e.stopPropagation(); toggleBookmark(rule.num, this); });
         return card;
       }
@@ -9810,15 +9804,12 @@
         <div class="rule-body">
           <div class="rule-text-content">${bodyText}</div>
           <div class="rule-actions">
-            <button class="action-btn share-btn">
-              <i class="fas fa-share-nodes"></i> Share
-            </button>
             <button class="action-btn bookmark-action-btn ${isBookmarked ? 'active' : ''}">
               <i class="${isBookmarked ? 'fas' : 'far'} fa-bookmark"></i> ${isBookmarked ? 'Saved' : 'Save'}
             </button>
           </div>
         </div>`;
-      card.querySelector('.share-btn').addEventListener('click', () => shareRule(rule.num, rule.title));
+
       card.querySelector('.bookmark-action-btn').addEventListener('click', function () { toggleBookmark(rule.num, this); });
       return card;
     }
