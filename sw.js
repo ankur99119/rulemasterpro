@@ -1,11 +1,11 @@
-// Rule Master Pro — Service Worker v3
-const CACHE_NAME = 'rulemasterpro-v3';
+// Rule Master Pro — Service Worker v4
+const CACHE_NAME = 'rulemasterpro-v4';
 const ASSETS = [
-  '/rulemasterpro/',
-  '/rulemasterpro/index.html',
-  '/rulemasterpro/viewer.html',
-  '/rulemasterpro/icon-192.png',
-  '/rulemasterpro/icon-512.png'
+  '/',
+  '/index.html',
+  '/viewer.html',
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', function(event) {
@@ -35,6 +35,31 @@ self.addEventListener('fetch', function(event) {
       url.hostname.includes('googleapis.com')) {
     return;
   }
+
+  // Network-first for page navigations (HTML) so a freshly deployed
+  // index.html is always picked up when online; fall back to cache offline.
+  var accept = event.request.headers.get('accept') || '';
+  if (event.request.mode === 'navigate' ||
+      (event.request.method === 'GET' && accept.includes('text/html'))) {
+    event.respondWith(
+      fetch(event.request).then(function(response) {
+        if (response && response.status === 200) {
+          var clone = response.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return response;
+      }).catch(function() {
+        return caches.match(event.request).then(function(cached) {
+          return cached || caches.match('/index.html');
+        });
+      })
+    );
+    return;
+  }
+
+  // Cache-first for other static assets, with background refresh.
   event.respondWith(
     caches.match(event.request).then(function(cached) {
       if (cached) return cached;
@@ -48,7 +73,7 @@ self.addEventListener('fetch', function(event) {
         return response;
       }).catch(function() {
         if (event.request.destination === 'document') {
-          return caches.match('/rulemasterpro/index.html');
+          return caches.match('/index.html');
         }
       });
     })

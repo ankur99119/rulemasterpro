@@ -61,7 +61,7 @@ let pdfDoc = null, curPage = start;
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-const BASE = 'https://ankur99119.github.io/rulemasterpro/';
+const BASE = '/';
 const pdfUrl = BASE + file;
 
 pdfjsLib.getDocument({url:pdfUrl, withCredentials:false}).promise
