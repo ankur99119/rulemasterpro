@@ -2473,7 +2473,7 @@
                   <div style="font-size:11px;font-weight:700;color:#f97316;margin-bottom:4px;">⚠️ Disclaimer</div>
                   <div style="font-size:10px;color:var(--text-muted);line-height:1.6;">This app is <strong>sourced from publicly available official Indian Railways manuals</strong>. Always refer to official publications for operational decisions.</div>
                 </div>
-                <div style="text-align:center;margin-top:8px;"><span style="font-size:11px;color:var(--text-muted);">Version 1.0 · March 2026 · <a href="/rulemasterpro/privacy.html" style="color:var(--amber);">Privacy Policy</a> · Northern Railway</span></div>
+                <div style="text-align:center;margin-top:8px;"><span style="font-size:11px;color:var(--text-muted);">Version 1.0 · March 2026 · <a href="/privacy.html" style="color:var(--amber);">Privacy Policy</a> · Northern Railway</span></div>
               </div>
             </div><div class="dropdown-menu" id="notif-menu" style="width:270px;max-height:420px;overflow-y:auto;">
 
@@ -2505,7 +2505,7 @@
                   Northern Railway · Delhi Division<br>
                   G&amp;SR · Operating Manual · BWM · Accident Manual<br>
                   1,203 MCQ · AI Powered Q&amp;A<br>
-                  <span style="color:var(--amber);font-weight:600;">Version 1.0 · March 2026 · <a href="/rulemasterpro/privacy.html" style="color:var(--amber);">Privacy Policy</a></span>
+                  <span style="color:var(--amber);font-weight:600;">Version 1.0 · March 2026 · <a href="/privacy.html" style="color:var(--amber);">Privacy Policy</a></span>
                 </div>
                 <div style="font-size:11px;font-weight:700;color:var(--amber);margin-top:6px;padding:6px 8px;border-top:1px solid var(--border);background:var(--amber-glow);border-radius:6px;text-align:center;">
                   ⚠️ Disclaimer — Unofficial Reference App
@@ -11085,7 +11085,7 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
         name: 'Rule Master Pro',
         short_name: 'RuleMaster',
         description: 'Northern Railway Rule Books — G&SR, Operating Manual, BWM, Accident Manual, IRSEM, IRPWM',
-        id: '/rulemasterpro/',
+        id: 'https://resplendent-blancmange-ebf77f.netlify.app/',
         start_url: 'https://resplendent-blancmange-ebf77f.netlify.app/',
         scope: 'https://resplendent-blancmange-ebf77f.netlify.app/',
         display: 'standalone',
@@ -11593,7 +11593,7 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
     document.addEventListener('DOMContentLoaded', () => {
       // Register Service Worker
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/rulemasterpro/sw.js', { scope: '/rulemasterpro/' })
+        navigator.serviceWorker.register('/sw.js', { scope: '/' })
           .then(function(reg) { console.log('SW registered', reg.scope); })
           .catch(function(err) { console.log('SW registration failed', err); });
       }
