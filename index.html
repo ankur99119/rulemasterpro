@@ -3583,6 +3583,259 @@ button[onclick*="Audit"],
   }
 }
 
+
+
+/* =========================================================
+   FINAL BOOKMARKS / SAVED NOTES IMPROVEMENT
+   - Better saved-rule cards with full text
+   - No cut-outs near bottom navigation
+   - Hide "Show unread topics only" bar everywhere
+   ========================================================= */
+.rmp-unread-filter {
+  display: none !important;
+}
+
+#bookmarks-container {
+  padding-bottom: 96px !important;
+}
+
+.rmp-bookmark-toolbar.rmp-bm-v2 {
+  background: #FFFFFF;
+  border: 1px solid rgba(148,163,184,.25);
+  border-radius: 18px;
+  margin: 10px 0 14px;
+  padding: 14px;
+  box-shadow: 0 10px 26px rgba(15,23,42,.07);
+  overflow: hidden;
+}
+
+.rmp-bm-v2 .rmp-bookmark-toolbar-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rmp-bm-v2 .rmp-bookmark-toolbar-title {
+  font-weight: 900;
+  color: #0F172A;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.rmp-bm-v2 .rmp-chip-btn {
+  border: 1px solid #C7D2FE;
+  border-radius: 999px;
+  background: #EEF2FF;
+  color: #3730A3;
+  font-weight: 900;
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rmp-bm-v2 .rmp-bookmark-folders {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px 0 8px;
+  scrollbar-width: thin;
+}
+
+.rmp-bm-v2 .rmp-bm-folder-chip {
+  flex: 0 0 auto;
+  border: 1px solid rgba(148,163,184,.45);
+  background: #F8FAFC;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #334155;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.rmp-bm-v2 .rmp-bm-folder-chip.active {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  box-shadow: 0 8px 18px rgba(37,99,235,.22);
+}
+
+.rmp-bm-v2 .rmp-bookmark-export-status {
+  font-size: 12px;
+  color: #64748B;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.rmp-saved-card-v2 {
+  background: #FFFFFF;
+  border: 1px solid rgba(148,163,184,.28);
+  border-radius: 18px;
+  margin: 12px 0;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(15,23,42,.06);
+}
+
+.rmp-saved-head-v2 {
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(148,163,184,.20);
+  background: linear-gradient(180deg,#FFFFFF 0%,#F8FAFC 100%);
+}
+
+.rmp-saved-badges-v2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.rmp-saved-badge-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 900;
+  border: 1px solid rgba(37,99,235,.25);
+  color: #1D4ED8;
+  background: #EFF6FF;
+}
+
+.rmp-saved-badge-v2.saved {
+  color: #166534;
+  background: #DCFCE7;
+  border-color: #86EFAC;
+}
+
+.rmp-saved-title-v2 {
+  color: #0F172A;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.rmp-saved-sub-v2 {
+  color: #64748B;
+  font-size: 12px;
+  line-height: 1.35;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.rmp-saved-meta-v2 {
+  padding: 12px 14px;
+  background: #F8FAFC;
+  border-bottom: 1px solid rgba(148,163,184,.20);
+  display: grid;
+  gap: 9px;
+}
+
+.rmp-saved-meta-v2 label {
+  font-size: 11px;
+  font-weight: 900;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: .35px;
+}
+
+.rmp-saved-meta-v2 select,
+.rmp-saved-meta-v2 textarea {
+  width: 100%;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  padding: 10px 11px;
+  font-size: 13px;
+  background: #FFFFFF;
+  color: #0F172A;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+}
+
+.rmp-saved-meta-v2 textarea {
+  min-height: 74px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.rmp-saved-body-v2 {
+  padding: 14px;
+  color: #0F172A;
+  font-size: 13.5px;
+  line-height: 1.72;
+  overflow-wrap: anywhere;
+}
+
+.rmp-saved-body-v2 .rule-text-content,
+.rmp-saved-body-v2 p,
+.rmp-saved-body-v2 div,
+.rmp-saved-body-v2 span {
+  max-width: 100%;
+}
+
+.rmp-saved-actions-v2 {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 14px 14px;
+}
+
+.rmp-saved-action-v2 {
+  border: 1px solid #CBD5E1;
+  background: #F8FAFC;
+  color: #334155;
+  border-radius: 999px;
+  padding: 8px 11px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.rmp-saved-action-v2.danger {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border-color: #FECACA;
+}
+
+@media (max-width: 520px) {
+  #bookmarks-container {
+    padding-bottom: 106px !important;
+  }
+
+  .rmp-bm-v2 .rmp-bookmark-toolbar-top {
+    grid-template-columns: 1fr;
+  }
+
+  .rmp-bm-v2 .rmp-chip-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rmp-saved-card-v2 {
+    border-radius: 18px;
+    margin: 12px 0;
+  }
+
+  .rmp-saved-title-v2 {
+    font-size: 15px;
+  }
+
+  .rmp-saved-body-v2 {
+    font-size: 13.2px;
+    line-height: 1.68;
+  }
+
+  .rmp-saved-actions-v2 .rmp-saved-action-v2 {
+    flex: 1 1 auto;
+  }
+}
+
 </style>
 </head>
 
@@ -13493,6 +13746,232 @@ function dataGlobal(name){
   });
   window.addEventListener('hashchange', function(){ setTimeout(hideUpdateBanner, 80); });
   setInterval(hideUpdateBanner, 1500);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if (window.__rmpBookmarksV2) return;
+  window.__rmpBookmarksV2 = true;
+
+  var META_KEY = 'rmp_bookmark_meta_v1';
+  var FOLDERS = ['General','Safety','Shunting','Stabling','Accident','Block Working','Signalling','Engineering','Personal'];
+
+  function safeJSON(raw, fallback){ try { return JSON.parse(raw); } catch(e) { return fallback; } }
+  function esc(v){ return String(v || '').replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function stripHtml(v){ var d=document.createElement('div'); d.innerHTML=String(v||''); return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim(); }
+  function getMeta(){ var m=safeJSON(localStorage.getItem(META_KEY)||'{}',{}); return (m && typeof m === 'object') ? m : {}; }
+  function saveMeta(m){ localStorage.setItem(META_KEY, JSON.stringify(m || {})); }
+  function ensureMeta(id){ var m=getMeta(); if(!m[id]){ m[id]={folder:'General',note:'',addedAt:Date.now()}; saveMeta(m); } return m[id]; }
+
+  function dataGlobal(name){
+    try {
+      if (name === 'RULES_DATA' && typeof RULES_DATA !== 'undefined') return RULES_DATA;
+      if (name === 'APP_DATA' && typeof APP_DATA !== 'undefined') return APP_DATA;
+      if (name === 'OM_DATA' && typeof OM_DATA !== 'undefined') return OM_DATA;
+      if (name === 'BWM_DATA' && typeof BWM_DATA !== 'undefined') return BWM_DATA;
+      if (name === 'ACC_DATA' && typeof ACC_DATA !== 'undefined') return ACC_DATA;
+      if (name === 'IRA_DATA' && typeof IRA_DATA !== 'undefined') return IRA_DATA;
+      if (name === 'IRSEM_DATA' && typeof IRSEM_DATA !== 'undefined') return IRSEM_DATA;
+      if (name === 'IRPWM_DATA' && typeof IRPWM_DATA !== 'undefined') return IRPWM_DATA;
+    } catch(e) {}
+    return window[name] || {};
+  }
+
+  function bookmarkIds(){
+    if (window.state && Array.isArray(window.state.bookmarks)) return window.state.bookmarks.slice();
+    try { return safeJSON(localStorage.getItem('gsr_bookmarks') || '[]', []); } catch(e) { return []; }
+  }
+
+  function saveBookmarkIds(ids){
+    if (window.state && Array.isArray(window.state.bookmarks)) window.state.bookmarks = ids.slice();
+    localStorage.setItem('gsr_bookmarks', JSON.stringify(ids));
+  }
+
+  function manualLabelFromPrefix(pref){
+    return {gsr:'G&SR',om:'Operating Manual',bwm:'Block Working Manual',acc:'Accident Manual',ira:'Railways Act',irsem:'IRSEM',irpwm:'IRPWM'}[pref] || 'G&SR';
+  }
+
+  function bodyPreview(body){
+    var txt = stripHtml(body);
+    if (!txt) return '';
+    return txt.slice(0, 1200);
+  }
+
+  function findSavedItem(id){
+    var sid = String(id || '');
+    var pref = sid.indexOf('-') > -1 ? sid.split('-')[0] : 'gsr';
+    var num = sid.indexOf('-') > -1 ? sid.substring(pref.length + 1) : sid.replace(/^gsr-/, '');
+
+    if (pref === 'gsr') {
+      var ruleData = dataGlobal('RULES_DATA');
+      var appData = dataGlobal('APP_DATA');
+      var found = null;
+      Object.values(ruleData || {}).some(function(ch){
+        return (ch.rules || []).some(function(r){ if (String(r.num) === String(num)) { found = r; return true; } return false; });
+      });
+      if (!found) {
+        Object.values(appData || {}).some(function(ch){
+          return (ch.rules || []).some(function(r){ if (String(r.num) === String(num)) { found = r; return true; } return false; });
+        });
+      }
+      if (found) return { id:sid, pref:'gsr', num:num, manual:'G&SR', title:found.title || ('Rule '+num), body:found.body || '', type:found.type || 'Rule' };
+    }
+
+    var map = {om:'OM_DATA', bwm:'BWM_DATA', acc:'ACC_DATA', ira:'IRA_DATA', irsem:'IRSEM_DATA', irpwm:'IRPWM_DATA'};
+    var data = dataGlobal(map[pref] || '');
+    var para = null;
+    Object.values(data || {}).some(function(ch){
+      return (ch.paras || []).some(function(p){
+        if (String(p.num) === String(num)) { para = p; return true; }
+        return false;
+      });
+    });
+    if (para) return { id:sid, pref:pref, num:num, manual:manualLabelFromPrefix(pref), title:para.title || ('Para '+num), body:para.body || '', type:para.type || 'Para' };
+
+    return { id:sid, pref:pref, num:num, manual:manualLabelFromPrefix(pref), title:sid, body:'', type:'Bookmark' };
+  }
+
+  function removeBookmark(id){
+    var ids = bookmarkIds().filter(function(x){ return String(x) !== String(id); });
+    saveBookmarkIds(ids);
+    var meta = getMeta(); if (meta[id]) { delete meta[id]; saveMeta(meta); }
+    if (typeof window.showToast === 'function') window.showToast('Removed from saved rules');
+    renderBookmarksV2();
+  }
+
+  function updateMeta(id, field, value){
+    var meta = getMeta();
+    if (!meta[id]) meta[id] = {folder:'General', note:'', addedAt:Date.now()};
+    meta[id][field] = value;
+    meta[id].addedAt = meta[id].addedAt || Date.now();
+    saveMeta(meta);
+  }
+
+  function exportSavedRules(){
+    var ids = bookmarkIds(), meta = getMeta(), lines = [];
+    lines.push('Rule Master Pro - Saved Rules & Notes');
+    lines.push('Exported: ' + new Date().toLocaleString());
+    lines.push('Total: ' + ids.length);
+    lines.push('');
+    ids.forEach(function(id, i){
+      var item = findSavedItem(id), m = meta[id] || {};
+      lines.push((i+1) + '. ' + item.manual + ' · ' + item.num);
+      lines.push('Title: ' + item.title);
+      lines.push('Folder: ' + (m.folder || 'General'));
+      if (m.note) lines.push('Note: ' + m.note);
+      if (item.body) lines.push('Text: ' + stripHtml(item.body).slice(0, 5000));
+      lines.push('');
+    });
+    var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'rule_master_pro_saved_rules.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function createSavedCard(id){
+    var item = findSavedItem(id);
+    var meta = ensureMeta(id);
+    var card = document.createElement('div');
+    card.className = 'rmp-saved-card-v2';
+    card.setAttribute('data-bookmark-id', id);
+
+    var bodyHtml = item.body ? item.body : '<p style="color:#64748B;">Full text could not be located for this saved item. Remove and save it again from the rule card.</p>';
+
+    card.innerHTML =
+      '<div class="rmp-saved-head-v2">' +
+        '<div class="rmp-saved-badges-v2">' +
+          '<span class="rmp-saved-badge-v2 saved">Saved</span>' +
+          '<span class="rmp-saved-badge-v2">' + esc(item.manual) + ' · ' + esc(item.num) + '</span>' +
+        '</div>' +
+        '<div class="rmp-saved-title-v2">' + esc(item.title || item.id) + '</div>' +
+        '<div class="rmp-saved-sub-v2">Full saved rule/para shown below</div>' +
+      '</div>' +
+      '<div class="rmp-saved-meta-v2">' +
+        '<label>Folder</label>' +
+        '<select class="rmp-saved-folder-v2">' + FOLDERS.map(function(f){ return '<option ' + ((meta.folder || 'General') === f ? 'selected' : '') + '>' + esc(f) + '</option>'; }).join('') + '</select>' +
+        '<label>Personal Note</label>' +
+        '<textarea class="rmp-saved-note-v2" placeholder="Add your note for this saved rule...">' + esc(meta.note || '') + '</textarea>' +
+      '</div>' +
+      '<div class="rmp-saved-body-v2">' + bodyHtml + '</div>' +
+      '<div class="rmp-saved-actions-v2">' +
+        '<button type="button" class="rmp-saved-action-v2 rmp-copy-saved-v2">Copy text</button>' +
+        '<button type="button" class="rmp-saved-action-v2 danger rmp-remove-saved-v2">Remove saved</button>' +
+      '</div>';
+
+    card.querySelector('.rmp-saved-folder-v2').addEventListener('change', function(){ updateMeta(id, 'folder', this.value); renderBookmarksV2(); });
+    card.querySelector('.rmp-saved-note-v2').addEventListener('input', function(){ updateMeta(id, 'note', this.value); });
+    card.querySelector('.rmp-remove-saved-v2').addEventListener('click', function(){ removeBookmark(id); });
+    card.querySelector('.rmp-copy-saved-v2').addEventListener('click', function(){
+      var text = item.manual + ' ' + item.num + '\n' + item.title + '\n\n' + stripHtml(item.body);
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(function(){ if(window.showToast) showToast('Saved rule copied'); });
+    });
+    return card;
+  }
+
+  var activeFolder = 'All';
+
+  function renderBookmarksV2(){
+    var container = document.getElementById('bookmarks-container');
+    if (!container) return;
+    var ids = bookmarkIds();
+    var meta = getMeta();
+    container.innerHTML = '';
+
+    var counts = {All:ids.length};
+    FOLDERS.forEach(function(f){ counts[f] = 0; });
+    ids.forEach(function(id){ var f = (meta[id] && meta[id].folder) || 'General'; if (counts[f] !== undefined) counts[f]++; });
+
+    var toolbar = document.createElement('div');
+    toolbar.className = 'rmp-bookmark-toolbar rmp-bm-v2';
+    toolbar.innerHTML =
+      '<div class="rmp-bookmark-toolbar-top">' +
+        '<div class="rmp-bookmark-toolbar-title">Saved Rules & Notes</div>' +
+        '<button class="rmp-chip-btn" type="button" id="rmp-export-bookmarks-v2">Export saved rules</button>' +
+      '</div>' +
+      '<div class="rmp-bookmark-folders">' + ['All'].concat(FOLDERS).map(function(f){
+        return '<button type="button" class="rmp-bm-folder-chip ' + (activeFolder === f ? 'active' : '') + '" data-folder="' + esc(f) + '">' + esc(f) + ' <span style="opacity:.75">' + (counts[f] || 0) + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="rmp-bookmark-export-status">Saved rules show full text below. Choose a folder or add your personal note.</div>';
+    container.appendChild(toolbar);
+
+    toolbar.querySelector('#rmp-export-bookmarks-v2').addEventListener('click', exportSavedRules);
+    toolbar.querySelectorAll('.rmp-bm-folder-chip').forEach(function(btn){
+      btn.addEventListener('click', function(){ activeFolder = this.getAttribute('data-folder') || 'All'; renderBookmarksV2(); });
+    });
+
+    if (!ids.length) {
+      container.insertAdjacentHTML('beforeend', '<div class="empty-state"><i class="far fa-bookmark"></i><p>No saved rules yet.<br>Tap Save on any rule or para.</p></div>');
+      return;
+    }
+
+    var shown = ids.filter(function(id){ if (activeFolder === 'All') return true; return ((meta[id] && meta[id].folder) || 'General') === activeFolder; });
+    if (!shown.length) {
+      container.insertAdjacentHTML('beforeend', '<div class="empty-state"><i class="far fa-folder-open"></i><p>No saved rules in this folder.</p></div>');
+      return;
+    }
+
+    shown.forEach(function(id){ container.appendChild(createSavedCard(id)); });
+  }
+
+  window.renderBookmarks = renderBookmarksV2;
+  window.rmpRenderBookmarksV2 = renderBookmarksV2;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    if ((window.location.hash || '').indexOf('#bookmarks') === 0) setTimeout(renderBookmarksV2, 250);
+    document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); });
+  });
+  window.addEventListener('hashchange', function(){
+    setTimeout(function(){
+      document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); });
+      if ((window.location.hash || '').indexOf('#bookmarks') === 0) renderBookmarksV2();
+    }, 180);
+  });
+  setInterval(function(){ document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); }); }, 1500);
 })();
 </script>
 
