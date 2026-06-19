@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes"><title>PDF Pages</title>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#f1f5f9;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;background:#fff;border-bottom:1px solid #e2e8f0;color:#0f172a}.title{font-size:12px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.range{font-size:11px;color:#64748b;white-space:nowrap}iframe{display:block;width:100%;height:calc(100vh - 38px);border:0;background:#fff}</style></head>
+<body><div class="bar"><div class="title" id="title">Original PDF Pages</div><div class="range" id="range"></div></div><iframe id="pdf" title="PDF"></iframe>
+<script>
+const q=new URLSearchParams(location.search);const file=q.get('file')||'';const start=parseInt(q.get('start')||'1',10)||1;const end=parseInt(q.get('end')||String(start),10)||start;const title=q.get('title')||'Original PDF Pages';
+document.getElementById('title').textContent=title;document.getElementById('range').textContent='Pages '+start+'–'+end;
+const safeFile=file.replace(/^https?:\/\//,'');
+let src=safeFile+'#page='+start+'&zoom=page-fit&toolbar=0&navpanes=0';
+document.getElementById('pdf').src=src;
+</script></body></html>

@@ -1,0 +1,32 @@
+{
+  "name": "Rule Master Pro",
+  "short_name": "RuleMaster",
+  "description": "Rule Master Pro - Northern Railway manuals, correction slips, search, PDFs, quiz and reading progress.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e3a5f",
+  "categories": [
+    "education",
+    "productivity",
+    "reference"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "version": "1.0.11",
+  "id": "/rulemasterpro/"
+}
