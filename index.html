@@ -3385,6 +3385,168 @@ button[onclick*="Audit"],
   display: none !important;
 }
 
+
+
+/* =========================================================
+   FINAL MOBILE UI FIXES
+   1) Disable sticky bottom update banner in public UI.
+   2) Use full mobile width, remove side gaps.
+   3) Show all manual-wise progress cards cleanly.
+   ========================================================= */
+
+/* The update system remains available from App Info, but the constant bottom popup is hidden. */
+#rmp-update-banner,
+#rmp-update-banner.show {
+  display: none !important;
+  visibility: hidden !important;
+  transform: translateX(-50%) translateY(160%) !important;
+  pointer-events: none !important;
+}
+
+/* More app-like full-width mobile layout */
+@media (max-width: 768px) {
+  body {
+    background: #EEF4FF !important;
+    display: block !important;
+    justify-content: initial !important;
+    align-items: initial !important;
+    overflow-x: hidden !important;
+  }
+
+  .app-container,
+  .app-shell,
+  .phone-frame,
+  .mobile-frame,
+  .device-frame {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .app-header,
+  .header,
+  .topbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .content,
+  .screen,
+  .page,
+  .home-content,
+  .manual-content,
+  .search-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Give inner cards a balanced margin, but let large hero/search occupy proper screen width */
+  .home-hero,
+  .hero-card,
+  .home-search-card,
+  .search-panel-v3,
+  .rmp-reading-progress-card,
+  .manual-section,
+  .manuals-section,
+  .section-block,
+  .rmp-section,
+  .home-section,
+  .quick-section {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+  }
+
+  .home-search-card,
+  .search-panel-v3 {
+    display: block !important;
+  }
+
+  .home-search-row,
+  .search-row-v3,
+  .rmp-search-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 46px 52px !important;
+    gap: 8px !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  #global-search,
+  #search-screen-input,
+  .search-input-v3 {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .voice-search-btn-v10 {
+    width: 46px !important;
+    min-width: 46px !important;
+    max-width: 46px !important;
+    height: 46px !important;
+  }
+
+  .search-btn-v3,
+  .home-search-btn,
+  .rmp-search-btn {
+    width: 52px !important;
+    min-width: 52px !important;
+    max-width: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Reading progress should look like a full-width card, not a narrow centered tile */
+  #rmp-reading-progress-card,
+  .rmp-reading-progress-card {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  .rmp-rp-toggle,
+  .rmp-rp-details {
+    width: 100% !important;
+  }
+
+  .rmp-rp-details {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .rmp-rp-manual-grid {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    gap: 8px !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .rmp-rp-manual {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .rmp-rp-manual-head {
+    font-size: 12px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .rmp-rp-manual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
 </style>
 </head>
 
@@ -13242,6 +13404,97 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
   document.addEventListener('DOMContentLoaded', rmpRemovePublicAuditUI);
   window.addEventListener('hashchange', function(){ setTimeout(rmpRemovePublicAuditUI, 80); });
   setTimeout(rmpRemovePublicAuditUI, 500);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  /* Stop constant bottom update popup. Keep manual update check from App Info. */
+  function hideUpdateBannerForever(){
+    try { localStorage.setItem('rmp_update_banner_hidden_public', String(Date.now())); } catch(e) {}
+    var b = document.getElementById('rmp-update-banner');
+    if (b) {
+      b.classList.remove('show');
+      b.style.display = 'none';
+      b.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  window.rmpHideUpdateBanner = hideUpdateBannerForever;
+
+  window.rmpApplyUpdate = function(){
+    hideUpdateBannerForever();
+    try {
+      if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+        navigator.serviceWorker.getRegistrations().then(function(regs){
+          Promise.all(regs.map(function(r){ return r.update ? r.update() : Promise.resolve(); })).finally(function(){
+            window.location.reload();
+          });
+        }).catch(function(){ window.location.reload(); });
+      } else {
+        window.location.reload();
+      }
+    } catch(e) {
+      window.location.reload();
+    }
+  };
+
+  function forceHideBanner(){
+    var b = document.getElementById('rmp-update-banner');
+    if (b) {
+      b.classList.remove('show');
+      b.style.display = 'none';
+      b.setAttribute('aria-hidden', 'true');
+    }
+  }
+  document.addEventListener('DOMContentLoaded', forceHideBanner);
+  window.addEventListener('load', forceHideBanner);
+  window.addEventListener('hashchange', function(){ setTimeout(forceHideBanner, 80); });
+  setInterval(forceHideBanner, 1500);
+
+  /* Ensure manual-wise progress always shows all seven manuals even if some IDs fail to load. */
+  function patchManualWiseProgress(){
+    var manuals = document.getElementById('rmp-rp-manuals');
+    if (!manuals) return;
+    var grid = manuals.querySelector('.rmp-rp-manual-grid');
+    if (!grid) return;
+
+    var labels = [
+      ['G&SR','gsr'],
+      ['Operating Manual','om'],
+      ['Block Working','bwm'],
+      ['Accident Manual','acc'],
+      ['Railways Act','ira'],
+      ['IRSEM','irsem'],
+      ['IRPWM','irpwm']
+    ];
+
+    var html = grid.innerHTML || '';
+    var existing = {};
+    labels.forEach(function(x){
+      var label = x[0];
+      existing[label] = html.indexOf('>'+label+'<') >= 0 || html.indexOf(label) >= 0;
+    });
+
+    labels.forEach(function(x){
+      if (!existing[x[0]]) {
+        var div = document.createElement('div');
+        div.className = 'rmp-rp-manual';
+        div.setAttribute('data-manual-key', x[1]);
+        div.innerHTML = '<div class="rmp-rp-manual-head"><span>'+x[0]+'</span><span>0%</span></div><div class="rmp-rp-mini-bar"><span style="width:0%"></span></div><div style="font-size:10px;color:#64748b;margin-top:4px;font-weight:700;">0 / 0</div>';
+        grid.appendChild(div);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(patchManualWiseProgress, 300);
+    setTimeout(patchManualWiseProgress, 1000);
+  });
+  window.addEventListener('hashchange', function(){ setTimeout(patchManualWiseProgress, 300); });
+  setInterval(patchManualWiseProgress, 2000);
 })();
 </script>
 
