@@ -4315,7 +4315,570 @@ button[onclick*="Audit"],
   }
 }
 
+
+
+/* =========================================================
+   FINAL BOTTOM STOP FIX
+   Last content stops just above bottom navigation, without excessive blank upward gap.
+   ========================================================= */
+:root{
+  --rmp-bottom-nav-height: 82px;
+  --rmp-bottom-stop-gap: 12px;
+  --rmp-bottom-scroll-safe: calc(var(--rmp-bottom-nav-height) + var(--rmp-bottom-stop-gap) + env(safe-area-inset-bottom));
+}
+
+/* Only enough scroll padding for the fixed nav, not a huge extra area */
+.app-content{
+  padding-bottom: var(--rmp-bottom-scroll-safe) !important;
+  scroll-padding-bottom: var(--rmp-bottom-scroll-safe) !important;
+}
+
+/* Remove the very large previous screen pseudo spacer */
+.screen.active::after{
+  content:none !important;
+  display:none !important;
+  height:0 !important;
+}
+
+/* Remove very large previous list pseudo spacers */
+#rule-list-container::after,
+.rule-list::after,
+.manual-list::after,
+.chapter-list::after,
+#bookmarks-container::after,
+#corrections-container::after,
+#search-results::after,
+.quiz-container::after,
+#rmp-about-container::after{
+  content:"";
+  display:block;
+  height: var(--rmp-bottom-scroll-safe) !important;
+}
+
+/* Each screen gets only normal bottom safe padding */
+.screen{
+  padding-bottom: var(--rmp-bottom-scroll-safe) !important;
+}
+
+/* Last item can reach just above nav, not too high */
+.rule-card:last-child,
+.manual-card:last-child,
+.chapter-card:last-child,
+.tool-card:last-child,
+.rmp-saved-card-v3:last-child,
+.rmp-saved-card-v2:last-child{
+  margin-bottom: 8px !important;
+}
+
+/* Hide previous runtime oversized spacers if already injected */
+.rmp-bottom-safe-spacer,
+.rmp-bottom-safe-spacer-inner{
+  height:0 !important;
+  min-height:0 !important;
+  display:none !important;
+}
+
+/* Accurate nav height */
+.bottom-nav{
+  min-height: calc(var(--rmp-bottom-nav-height) + env(safe-area-inset-bottom)) !important;
+  padding-top: 8px !important;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+}
+
+@media(max-width:520px){
+  :root{
+    --rmp-bottom-nav-height: 82px;
+    --rmp-bottom-stop-gap: 10px;
+  }
+}
+
+
+
+/* =========================================================
+   MOVING TRAIN HERO LINE
+   Replaces flashing initiative text with animated train + message + SLR/guard.
+   ========================================================= */
+.rmp-hero-train-window{
+  position:relative;
+  height:54px;
+  margin:2px 0 13px;
+  overflow:hidden;
+  z-index:1;
+  isolation:isolate;
+}
+
+.rmp-hero-train-window::after{
+  content:"";
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:8px;
+  height:2px;
+  border-radius:999px;
+  background:rgba(120,53,15,.38);
+  box-shadow:0 1px 0 rgba(255,255,255,.18);
+}
+
+.rmp-hero-train-consist{
+  position:absolute;
+  left:0;
+  bottom:7px;
+  width:min(820px,92%);
+  min-width:330px;
+  height:42px;
+  display:grid;
+  grid-template-columns:64px minmax(190px,1fr) 72px;
+  align-items:end;
+  gap:5px;
+  animation:rmpTrainAcross 12s linear infinite;
+  will-change:transform;
+}
+
+@keyframes rmpTrainAcross{
+  0%{ transform:translateX(112%); }
+  100%{ transform:translateX(-112%); }
+}
+
+.rmp-hero-engine{
+  position:relative;
+  height:35px;
+  align-self:end;
+  filter:drop-shadow(0 3px 2px rgba(92,43,0,.20));
+}
+
+.rmp-engine-cab{
+  position:absolute;
+  left:22px;
+  bottom:8px;
+  width:33px;
+  height:21px;
+  border-radius:5px 7px 3px 2px;
+  background:linear-gradient(135deg,#B45309,#F97316);
+  border:2px solid rgba(92,43,0,.55);
+}
+
+.rmp-engine-nose{
+  position:absolute;
+  left:2px;
+  bottom:8px;
+  width:28px;
+  height:17px;
+  border-radius:10px 3px 3px 10px;
+  background:linear-gradient(135deg,#EA580C,#FDBA74);
+  border:2px solid rgba(92,43,0,.50);
+}
+
+.rmp-engine-window{
+  position:absolute;
+  left:31px;
+  bottom:20px;
+  width:9px;
+  height:7px;
+  border-radius:2px;
+  background:#DBEAFE;
+  border:1px solid rgba(30,64,175,.45);
+}
+
+.rmp-engine-wheel,
+.rmp-van-wheel{
+  position:absolute;
+  bottom:2px;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#1F2937;
+  border:2px solid #FDE68A;
+}
+
+.rmp-engine-wheel.w1{ left:12px; }
+.rmp-engine-wheel.w2{ left:43px; }
+
+.rmp-hero-message-rope{
+  position:relative;
+  align-self:center;
+  height:27px;
+  border-radius:999px;
+  border:2px solid rgba(120,53,15,.55);
+  background:linear-gradient(180deg,rgba(255,248,220,.96),rgba(254,215,170,.96));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 2px 4px rgba(120,53,15,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 14px;
+  color:#78350F;
+  font-size:12px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.15px;
+  white-space:nowrap;
+}
+
+.rmp-hero-message-rope::before,
+.rmp-hero-message-rope::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:12px;
+  height:12px;
+  transform:translateY(-50%);
+  border-radius:50%;
+  border:2px solid rgba(120,53,15,.65);
+  background:#FEF3C7;
+}
+
+.rmp-hero-message-rope::before{ left:-11px; }
+.rmp-hero-message-rope::after{ right:-11px; }
+
+.rmp-hero-brakevan{
+  position:relative;
+  height:35px;
+  align-self:end;
+  filter:drop-shadow(0 3px 2px rgba(92,43,0,.18));
+}
+
+.rmp-van-body{
+  position:absolute;
+  left:4px;
+  bottom:8px;
+  width:50px;
+  height:24px;
+  border-radius:5px 5px 3px 3px;
+  background:linear-gradient(135deg,#92400E,#C2410C);
+  border:2px solid rgba(92,43,0,.55);
+  color:#FFF7ED;
+  font-size:9px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  letter-spacing:.4px;
+}
+
+.rmp-guard{
+  position:absolute;
+  left:50px;
+  bottom:14px;
+  width:10px;
+  height:17px;
+  border-radius:7px 7px 3px 3px;
+  background:#1E3A8A;
+  border:1px solid rgba(15,23,42,.40);
+}
+
+.rmp-guard::before{
+  content:"";
+  position:absolute;
+  left:1px;
+  top:-7px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#FCD9B6;
+  border:1px solid rgba(120,53,15,.45);
+}
+
+.rmp-flag{
+  position:absolute;
+  left:58px;
+  bottom:27px;
+  width:22px;
+  height:14px;
+  background:#16A34A;
+  border-radius:2px 8px 8px 2px;
+  transform:rotate(12deg);
+  transform-origin:left center;
+  animation:rmpFlagWave .75s ease-in-out infinite alternate;
+}
+
+.rmp-flag::before{
+  content:"";
+  position:absolute;
+  left:-3px;
+  top:2px;
+  width:3px;
+  height:22px;
+  background:#78350F;
+  border-radius:999px;
+  transform:rotate(-12deg);
+}
+
+@keyframes rmpFlagWave{
+  from{ transform:rotate(8deg) skewY(0deg); }
+  to{ transform:rotate(16deg) skewY(-7deg); }
+}
+
+.rmp-van-wheel.vw1{ left:12px; }
+.rmp-van-wheel.vw2{ left:40px; }
+
+@media(max-width:520px){
+  .rmp-hero-train-window{
+    height:48px;
+    margin-bottom:12px;
+  }
+  .rmp-hero-train-consist{
+    min-width:330px;
+    width:96%;
+    grid-template-columns:54px minmax(170px,1fr) 64px;
+    animation-duration:10.5s;
+  }
+  .rmp-hero-message-rope{
+    font-size:10px;
+    padding:0 9px;
+    height:25px;
+  }
+  .rmp-engine-cab{ width:29px; left:19px; }
+  .rmp-engine-nose{ width:25px; }
+  .rmp-van-body{ width:45px; font-size:8px; }
+  .rmp-guard{ left:45px; }
+  .rmp-flag{ left:52px; }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .rmp-hero-train-consist{
+    animation:none;
+    transform:translateX(4%);
+  }
+  .rmp-flag{
+    animation:none;
+  }
+}
+
+
+
+/* =========================================================
+   MOVING TRAIN HERO UPGRADE
+   Direction: right to left. Engine leads/pulls. Improved engine, SLR and white-dress guard.
+   ========================================================= */
+.rmp-hero-train-consist{
+  animation:rmpTrainAcross 12s linear infinite !important;
+  grid-template-columns:78px minmax(190px,1fr) 82px !important;
+}
+
+/* Better diesel engine */
+.rmp-hero-engine{
+  height:39px !important;
+  filter:drop-shadow(0 4px 3px rgba(92,43,0,.25)) !important;
+}
+
+.rmp-hero-engine::before{
+  content:"";
+  position:absolute;
+  left:6px;
+  bottom:9px;
+  width:64px;
+  height:25px;
+  border-radius:11px 5px 4px 8px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.25) 0 12%, transparent 12% 100%),
+    linear-gradient(180deg,#F97316 0%,#C2410C 72%,#7C2D12 100%);
+  border:2px solid rgba(92,43,0,.65);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.22);
+}
+
+.rmp-hero-engine::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:7px;
+  width:14px;
+  height:18px;
+  border-radius:12px 2px 2px 12px;
+  background:linear-gradient(180deg,#FDBA74,#EA580C);
+  border:2px solid rgba(92,43,0,.60);
+  box-shadow:0 0 0 2px rgba(254,243,199,.18) inset;
+}
+
+.rmp-engine-cab{
+  left:36px !important;
+  bottom:15px !important;
+  width:24px !important;
+  height:18px !important;
+  border-radius:4px 6px 2px 2px !important;
+  background:linear-gradient(135deg,#7C2D12,#EA580C) !important;
+  border:2px solid rgba(92,43,0,.70) !important;
+}
+
+.rmp-engine-nose{
+  left:8px !important;
+  bottom:14px !important;
+  width:31px !important;
+  height:15px !important;
+  border-radius:12px 3px 3px 12px !important;
+  background:linear-gradient(135deg,#F59E0B,#EA580C) !important;
+  border:2px solid rgba(92,43,0,.62) !important;
+}
+
+.rmp-engine-window{
+  left:43px !important;
+  bottom:23px !important;
+  width:9px !important;
+  height:7px !important;
+  background:#DBEAFE !important;
+  border:1px solid rgba(30,64,175,.55) !important;
+  box-shadow:-16px 0 0 #DBEAFE, -16px 0 0 1px rgba(30,64,175,.55);
+}
+
+.rmp-hero-engine .rmp-engine-cab::after{
+  content:"";
+  position:absolute;
+  left:-26px;
+  top:10px;
+  width:42px;
+  height:3px;
+  border-radius:999px;
+  background:#FDE68A;
+  box-shadow:0 7px 0 #FDE68A;
+  opacity:.9;
+}
+
+.rmp-engine-wheel{
+  width:10px !important;
+  height:10px !important;
+  bottom:1px !important;
+  border:2px solid #FDE68A !important;
+  background:#111827 !important;
+}
+
+.rmp-engine-wheel.w1{ left:14px !important; }
+.rmp-engine-wheel.w2{ left:52px !important; }
+
+/* Better message banner */
+.rmp-hero-message-rope{
+  height:28px !important;
+  border:2px solid rgba(92,43,0,.62) !important;
+  background:linear-gradient(180deg,#FFF7ED 0%,#FED7AA 100%) !important;
+  color:#78350F !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 3px 6px rgba(120,53,15,.20) !important;
+}
+
+/* Better SLR / brake van */
+.rmp-hero-brakevan{
+  height:40px !important;
+  filter:drop-shadow(0 4px 3px rgba(92,43,0,.23)) !important;
+}
+
+.rmp-van-body{
+  left:7px !important;
+  bottom:8px !important;
+  width:58px !important;
+  height:28px !important;
+  border-radius:5px 5px 4px 4px !important;
+  background:linear-gradient(180deg,#A16207 0%,#B45309 52%,#7C2D12 100%) !important;
+  border:2px solid rgba(92,43,0,.70) !important;
+  color:#FFF7ED !important;
+  font-size:9px !important;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.18) !important;
+}
+
+.rmp-van-body::before{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:6px;
+  width:11px;
+  height:9px;
+  border-radius:2px;
+  background:#FDE68A;
+  border:1px solid rgba(92,43,0,.55);
+  box-shadow:31px 0 0 #FDE68A, 31px 0 0 1px rgba(92,43,0,.55);
+}
+
+.rmp-van-body::after{
+  content:"";
+  position:absolute;
+  left:24px;
+  bottom:4px;
+  width:10px;
+  height:15px;
+  border-radius:2px 2px 0 0;
+  background:#78350F;
+  border:1px solid rgba(254,243,199,.35);
+}
+
+/* Guard in white dress */
+.rmp-guard{
+  left:63px !important;
+  bottom:13px !important;
+  width:11px !important;
+  height:20px !important;
+  border-radius:7px 7px 3px 3px !important;
+  background:linear-gradient(180deg,#FFFFFF 0%,#E5E7EB 100%) !important;
+  border:1px solid rgba(15,23,42,.50) !important;
+}
+
+.rmp-guard::before{
+  left:1px !important;
+  top:-8px !important;
+  width:9px !important;
+  height:9px !important;
+  background:#FCD9B6 !important;
+  border:1px solid rgba(120,53,15,.50) !important;
+  box-shadow:0 -2px 0 #111827;
+}
+
+.rmp-guard::after{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:5px;
+  width:12px;
+  height:2px;
+  background:#FFFFFF;
+  border:1px solid rgba(15,23,42,.35);
+  transform:rotate(-25deg);
+  transform-origin:left center;
+}
+
+/* Green flag clearer */
+.rmp-flag{
+  left:75px !important;
+  bottom:28px !important;
+  width:25px !important;
+  height:15px !important;
+  background:#16A34A !important;
+  border:1px solid #166534 !important;
+  border-radius:2px 9px 9px 2px !important;
+  box-shadow:0 1px 3px rgba(22,101,52,.35) !important;
+}
+
+.rmp-flag::before{
+  left:-4px !important;
+  top:2px !important;
+  height:24px !important;
+  background:#78350F !important;
+}
+
+.rmp-van-wheel{
+  width:10px !important;
+  height:10px !important;
+  bottom:1px !important;
+  border:2px solid #FDE68A !important;
+  background:#111827 !important;
+}
+
+.rmp-van-wheel.vw1{ left:16px !important; }
+.rmp-van-wheel.vw2{ left:50px !important; }
+
+@media(max-width:520px){
+  .rmp-hero-train-consist{
+    min-width:356px !important;
+    width:99% !important;
+    grid-template-columns:70px minmax(170px,1fr) 76px !important;
+    animation-duration:11s !important;
+  }
+  .rmp-hero-message-rope{
+    font-size:9.5px !important;
+    height:26px !important;
+    padding:0 8px !important;
+  }
+  .rmp-van-body{ width:52px !important; }
+  .rmp-guard{ left:57px !important; }
+  .rmp-flag{ left:68px !important; }
+}
+
 </style>
+
+<script>window.__rmpBottomSafeFix=true;</script>
 </head>
 
 <body>
@@ -4466,7 +5029,27 @@ button[onclick*="Audit"],
             <span style="font-family:'Syne',sans-serif;font-size:40px;font-weight:900;color:#fff;line-height:1.1;">Railway</span>
           </div>
           <div style="text-align:center;font-family:'Syne',sans-serif;font-size:30px;font-weight:900;color:rgba(255,255,255,0.88);letter-spacing:3px;margin-bottom:6px;">Manuals</div>
-          <div style="text-align:center;font-size:12px;font-weight:700;color:#FCD34D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px;padding:0 10px;line-height:1.4;animation:flashText 1.6s ease-in-out infinite;">✦ An Initiative by Delhi Division (Operating) ✦</div>
+          <div class="rmp-hero-train-window" aria-label="Prepared by Delhi Division - Operating Department">
+            <div class="rmp-hero-train-consist">
+              <div class="rmp-hero-engine" aria-hidden="true">
+                <span class="rmp-engine-cab"></span>
+                <span class="rmp-engine-nose"></span>
+                <span class="rmp-engine-window"></span>
+                <span class="rmp-engine-wheel w1"></span>
+                <span class="rmp-engine-wheel w2"></span>
+              </div>
+              <div class="rmp-hero-message-rope">
+                <span>Prepared by Delhi Division - Operating Department</span>
+              </div>
+              <div class="rmp-hero-brakevan" aria-hidden="true">
+                <span class="rmp-van-body">SLR</span>
+                <span class="rmp-guard"></span>
+                <span class="rmp-flag"></span>
+                <span class="rmp-van-wheel vw1"></span>
+                <span class="rmp-van-wheel vw2"></span>
+              </div>
+            </div>
+          </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
             <div style="background:rgba(255,255,255,0.2);border-radius:10px;padding:7px 12px;font-size:12px;font-weight:800;color:#fff;">G&amp;SR</div>
             <div style="background:rgba(255,255,255,0.2);border-radius:10px;padding:7px 12px;font-size:12px;font-weight:800;color:#fff;">Operating Manual</div>
@@ -14969,6 +15552,62 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     clearTimeout(window.__rmpBottomSafeTimer);
     window.__rmpBottomSafeTimer = setTimeout(applyBottomSafeSpace, 120);
   });
+  document.addEventListener('DOMContentLoaded', function(){
+    if (document.body) mo.observe(document.body, {childList:true, subtree:true});
+  });
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if (window.__rmpBottomStopFix) return;
+  window.__rmpBottomStopFix = true;
+
+  function removeOldLargeSpacers(){
+    document.querySelectorAll('.rmp-bottom-safe-spacer,.rmp-bottom-safe-spacer-inner').forEach(function(el){
+      el.remove();
+    });
+  }
+
+  function addCompactEndSpacers(){
+    removeOldLargeSpacers();
+
+    var targets = [
+      document.getElementById('rule-list-container'),
+      document.getElementById('bookmarks-container'),
+      document.getElementById('corrections-container'),
+      document.getElementById('search-results'),
+      document.getElementById('rmp-about-container')
+    ].filter(Boolean);
+
+    targets.forEach(function(el){
+      if (!el.querySelector(':scope > .rmp-bottom-stop-spacer')) {
+        var sp = document.createElement('div');
+        sp.className = 'rmp-bottom-stop-spacer';
+        sp.style.cssText = 'height:92px;min-height:92px;display:block;pointer-events:none;';
+        el.appendChild(sp);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    addCompactEndSpacers();
+    setTimeout(addCompactEndSpacers, 300);
+    setTimeout(addCompactEndSpacers, 1000);
+  });
+
+  window.addEventListener('hashchange', function(){
+    setTimeout(addCompactEndSpacers, 150);
+    setTimeout(addCompactEndSpacers, 600);
+  });
+
+  var mo = new MutationObserver(function(){
+    clearTimeout(window.__rmpBottomStopTimer);
+    window.__rmpBottomStopTimer = setTimeout(addCompactEndSpacers, 120);
+  });
+
   document.addEventListener('DOMContentLoaded', function(){
     if (document.body) mo.observe(document.body, {childList:true, subtree:true});
   });
