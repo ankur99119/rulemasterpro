@@ -6491,7 +6491,7 @@ button[onclick*="Audit"],
       return a;
     }
 
-    const RMP_PDF_VIEWER_BASE = './viewer.html';
+    const RMP_PDF_VIEWER_BASE = './pdf-page-viewer.html';
     let RMP_PDF_STATE = { manual:'', id:'', file:'', start:1, end:1, current:1, title:'', returnTo:'#home', zoom:1, mode:'range', src:'' };
 
     function buildRmpPdfHash(manualType, id, file, start, end, title, returnTo) {
@@ -6561,19 +6561,11 @@ function renderRmpPdfScreen(path) {
 
         const card = document.getElementById('rmp-pdf-frame-card');
         if (card) {
-          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening selected PDF pages...<small>Starting from page ' + start + '.</small></div>';
+          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening selected PDF page...<small>Starting from page ' + start + '.</small></div>';
         }
 
-        // Desktop Chrome opens exact PDF page correctly with #page.
-        // Mobile browser/PWA often ignores #page in native PDF viewer, so mobile uses our PDF.js page viewer.
-        setTimeout(function(){
-          if (rmpPdfIsMobileDevice()) {
-            const src = rmpViewerUrl(rmpPdfCanonicalFileName(file), start, end, title);
-            window.location.href = src;
-          } else {
-            rmpPdfOpenDirect(file, start);
-          }
-        }, 80);
+        const src = rmpViewerUrl(rmpPdfCanonicalFileName(file), start, end, title) + '&returnTo=' + encodeURIComponent(returnTo || '#home') + '&v=pdfjs-final-2';
+        setTimeout(function(){ window.location.href = src; }, 60);
         return;
       } catch (e) {
         console.error(e);
@@ -6639,7 +6631,7 @@ function renderRmpPdfScreen(path) {
     }
 
     function rmpPdfOpenExternal() {
-      const src = rmpPdfDirectUrl(RMP_PDF_STATE.file, RMP_PDF_STATE.start);
+      const src = rmpViewerUrl(rmpPdfCanonicalFileName(RMP_PDF_STATE.file), RMP_PDF_STATE.start, RMP_PDF_STATE.end, RMP_PDF_STATE.title) + '&v=pdfjs-final-2';
       window.open(src, '_blank', 'noopener');
     }
 
