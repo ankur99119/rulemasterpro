@@ -4099,6 +4099,39 @@ button[onclick*="Audit"],
   }
 }
 
+
+
+/* =========================================================
+   FINAL PDF DIRECT OPEN FIX - ALL DEVICES
+   PDF pages open as real browser PDF page on all devices, not inside blocked iframe.
+   ========================================================= */
+.rmp-pdf-mobile-opening {
+  padding: 18px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(148,163,184,.24);
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(15,23,42,.08);
+  color: #0F172A;
+  font-weight: 900;
+}
+.rmp-pdf-mobile-opening small {
+  display: block;
+  margin-top: 8px;
+  color: #64748B;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+
+
+/* FINAL SAVED PAGE FOLDER CLEANUP
+   Folder selector/display is allowed only in All saved rules view. */
+.rmp-bm-not-all .rmp-saved-folder-fixed-v3,
+.rmp-bm-not-all .rmp-saved-folder-fixed-v3 + label {
+  display: none !important;
+}
+
 </style>
 </head>
 
@@ -6466,10 +6499,27 @@ button[onclick*="Audit"],
     }
 
     function rmpViewerUrl(file, start, end, title) {
-      return RMP_PDF_VIEWER_BASE + '?file=' + file + '&start=' + start + '&end=' + end + '&title=' + encodeURIComponent(title || 'Original PDF Pages');
+      return RMP_PDF_VIEWER_BASE + '?file=' + encodeURIComponent(file || '') + '&start=' + start + '&end=' + end + '&title=' + encodeURIComponent(title || 'Original PDF Pages');
     }
 
-    function renderRmpPdfScreen(path) {
+    
+    function rmpPdfIsMobileDevice() {
+      return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '') || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+    }
+
+    function rmpPdfDirectUrl(file, start) {
+      const clean = String(file || '').replace(/^\.?\//, '');
+      const path = clean.split('/').map(function(part){ return encodeURIComponent(part); }).join('/');
+      return './' + path + '#page=' + (start || 1) + '&zoom=page-fit';
+    }
+
+    function rmpPdfOpenDirect(file, start) {
+      const url = rmpPdfDirectUrl(file, start);
+      try { window.location.href = url; }
+      catch(e) { window.open(url, '_self'); }
+    }
+
+function renderRmpPdfScreen(path) {
       try {
         const manual = decodeURIComponent(path[1] || '');
         const id = decodeURIComponent(path[2] || '');
@@ -6480,6 +6530,12 @@ button[onclick*="Audit"],
         const returnTo = decodeURIComponent(path[7] || '#home');
         RMP_PDF_STATE = { manual, id, file, start, end, current:start, title, returnTo, zoom:1, mode:'range', src:'' };
         document.getElementById('header-subtitle').textContent = 'Original PDF Pages';
+        const card = document.getElementById('rmp-pdf-frame-card');
+        if (card) {
+          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening original PDF page...<small>The PDF will open directly at page ' + start + '. Use browser Back to return to Rule Master Pro.</small></div>';
+        }
+        setTimeout(function(){ rmpPdfOpenDirect(file, start); }, 80);
+        return;
         const kicker = document.getElementById('rmp-pdf-kicker');
         const titleEl = document.getElementById('rmp-pdf-title');
         const subEl = document.getElementById('rmp-pdf-subtitle');
@@ -6551,7 +6607,7 @@ button[onclick*="Audit"],
     }
 
     function rmpPdfOpenExternal() {
-      const src = RMP_PDF_STATE.src || rmpViewerUrl(RMP_PDF_STATE.file, RMP_PDF_STATE.start, RMP_PDF_STATE.end, RMP_PDF_STATE.title);
+      const src = rmpPdfDirectUrl(RMP_PDF_STATE.file, RMP_PDF_STATE.start);
       window.open(src, '_blank', 'noopener');
     }
 
@@ -13122,10 +13178,15 @@ function dataGlobal(name){
   function statsForIds(ids){
     var total = ids.length || 0, read = getReadSet();
     var done = ids.filter(function(id){ return !!read[id]; }).length;
-    var pct = total ? Math.round((done / total) * 100) : 0;
+    var pct = total ? Number(((done / total) * 100).toFixed(1)) : 0.0;
     return {done:done,total:total,pct:pct};
   }
-  function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids); st.ids = ids; return st; }
+  
+  function pctText(v){
+    var n = Number(v || 0);
+    return n.toFixed(1).replace(/\.0$/, '.0');
+  }
+function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids); st.ids = ids; return st; }
   function manualStats(){
     var ids = allReadableIds(), grouped = {};
     manualOrder.forEach(function(k){ grouped[k]=[]; });
@@ -13195,7 +13256,7 @@ function dataGlobal(name){
     var box=ensureWidget(); if(!box) return;
     var st=progressStats(), recent=getRecent();
     var percent=document.getElementById('rmp-rp-percent'), fill=document.getElementById('rmp-rp-bar-fill'), count=document.getElementById('rmp-rp-count'), last=document.getElementById('rmp-rp-last'), cont=document.getElementById('rmp-rp-continue'), manuals=document.getElementById('rmp-rp-manuals');
-    if(percent) percent.textContent=st.pct+'%';
+    if(percent) percent.textContent=pctText(st.pct)+'%';
     if(fill) fill.style.width=Math.max(0,Math.min(100,st.pct))+'%';
     if(count) count.textContent=st.done.toLocaleString('en-IN')+' of '+st.total.toLocaleString('en-IN')+' topics read';
     if(cont) {
@@ -13205,7 +13266,7 @@ function dataGlobal(name){
     }
     if(manuals) {
       manuals.innerHTML = '<div class="rmp-rp-manual-title">Manual-wise progress</div><div class="rmp-rp-manual-grid">' + manualStats().map(function(m){
-        return '<div class="rmp-rp-manual"><div class="rmp-rp-manual-head"><span>'+escapeHtml(m.label)+'</span><span>'+m.pct+'%</span></div><div class="rmp-rp-mini-bar"><span style="width:'+m.pct+'%"></span></div><div style="font-size:10px;color:#64748b;margin-top:4px;font-weight:700;">'+m.done.toLocaleString('en-IN')+' / '+m.total.toLocaleString('en-IN')+'</div></div>';
+        return '<div class="rmp-rp-manual"><div class="rmp-rp-manual-head"><span>'+escapeHtml(m.label)+'</span><span>'+pctText(m.pct)+'%</span></div><div class="rmp-rp-mini-bar"><span style="width:'+m.pct+'%"></span></div><div style="font-size:10px;color:#64748b;margin-top:4px;font-weight:700;">'+m.done.toLocaleString('en-IN')+' / '+m.total.toLocaleString('en-IN')+'</div></div>';
       }).join('') + '</div>';
     }
     if(last) {
@@ -14182,6 +14243,7 @@ function dataGlobal(name){
     var ids = bookmarkIds();
     var meta = getMeta();
     container.innerHTML = '';
+    container.classList.toggle('rmp-bm-not-all', activeFolder !== 'All');
 
     var counts = {All:ids.length};
     FOLDERS.forEach(function(f){ counts[f] = 0; });
@@ -14392,9 +14454,7 @@ function dataGlobal(name){
         '<label>Folder</label>' +
         '<select class="rmp-saved-folder-v3">' + FOLDERS.map(function(f){ return '<option ' + ((meta.folder || 'General') === f ? 'selected' : '') + '>' + esc(f) + '</option>'; }).join('') + '</select>';
     } else {
-      folderControl =
-        '<label>Folder</label>' +
-        '<div class="rmp-saved-folder-fixed-v3">' + esc((meta.folder || activeFolder || 'General')) + '</div>';
+      folderControl = '';
     }
 
     card.innerHTML =
@@ -14452,6 +14512,7 @@ function dataGlobal(name){
     var ids = bookmarkIds();
     var meta = getMeta();
     container.innerHTML = '';
+    container.classList.toggle('rmp-bm-not-all', activeFolder !== 'All');
 
     var counts = {All:ids.length};
     FOLDERS.forEach(function(f){ counts[f] = 0; });
@@ -14467,7 +14528,7 @@ function dataGlobal(name){
       '<div class="rmp-bookmark-folders">' + ['All'].concat(FOLDERS).map(function(f){
         return '<button type="button" class="rmp-bm-folder-chip ' + (activeFolder === f ? 'active' : '') + '" data-folder="' + esc(f) + '">' + esc(f) + ' <span style="opacity:.75">' + (counts[f] || 0) + '</span></button>';
       }).join('') + '</div>' +
-      '<div class="rmp-bookmark-export-status">Saved rules are collapsed by default. Open a card to read full text or edit notes. Folder change is available only in All.</div>';
+      '<div class="rmp-bookmark-export-status">Saved rules are collapsed by default. Open a card to read full text or edit notes. Folder change is available only under All.</div>';
     container.appendChild(toolbar);
 
     toolbar.querySelector('#rmp-export-bookmarks-v3').addEventListener('click', exportSavedRules);
@@ -14506,6 +14567,33 @@ function dataGlobal(name){
   });
 
   setInterval(function(){ document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); }); }, 1500);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if (window.__rmpDecimalProgressFix) return;
+  window.__rmpDecimalProgressFix = true;
+
+  function decimalizePercentText(){
+    var main = document.getElementById('rmp-rp-percent');
+    if (main && /^\d+%$/.test(main.textContent.trim())) {
+      main.textContent = Number(main.textContent.replace('%','')).toFixed(1) + '%';
+    }
+    document.querySelectorAll('.rmp-rp-manual-head span:last-child').forEach(function(el){
+      var t = (el.textContent || '').trim();
+      if (/^\d+%$/.test(t)) el.textContent = Number(t.replace('%','')).toFixed(1) + '%';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(decimalizePercentText, 300);
+    setTimeout(decimalizePercentText, 1000);
+  });
+  window.addEventListener('hashchange', function(){ setTimeout(decimalizePercentText, 300); });
+  setInterval(decimalizePercentText, 2000);
 })();
 </script>
 
