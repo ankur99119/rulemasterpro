@@ -1,8 +1,8 @@
-const CACHE_NAME = 'rule-master-pro-final-deploy-ready';
+const CACHE_NAME = 'rule-master-pro-final-pdf-high-quality';
 const APP_SHELL = [
   './',
   './index.html',
-  './viewer.html',
+  './viewer.html,/pdf-page-viewer.html',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png'

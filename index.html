@@ -4223,6 +4223,26 @@ button[onclick*="Audit"],
   .rmp-pdf-canvas-stage{border-radius:12px;min-height:calc(100svh - 235px);padding-bottom:92px;}
 }
 
+
+
+/* FINAL PDF HIGH QUALITY READABILITY FIX */
+.rmp-pdf-canvas-stage{
+  justify-content:flex-start !important;
+  align-items:flex-start !important;
+  overflow:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+.rmp-pdf-canvas-stage canvas{
+  image-rendering:auto !important;
+  flex:0 0 auto !important;
+}
+@media(max-width:520px){
+  .rmp-pdf-canvas-stage{
+    padding-left:8px !important;
+    padding-right:8px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -6755,16 +6775,31 @@ function renderRmpPdfScreen(path) {
       try {
         const page = await RMP_PDF_DOC.getPage(RMP_PDF_STATE.current);
         const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const available = Math.max(280, Math.min(stage.clientWidth ? stage.clientWidth - 16 : window.innerWidth - 24, 1050));
-        const viewport1 = page.getViewport({ scale: 1 });
-        const scale = (available / viewport1.width) * (RMP_PDF_STATE.zoom || 1);
-        const viewport = page.getViewport({ scale: scale });
+        const ctx = canvas.getContext('2d', { alpha: false });
 
-        canvas.width = Math.floor(viewport.width);
-        canvas.height = Math.floor(viewport.height);
+        const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+        const available = Math.max(300, Math.min(stage.clientWidth ? stage.clientWidth - 12 : window.innerWidth - 16, 1120));
+        const viewport1 = page.getViewport({ scale: 1 });
+
+        // Mobile readability: open a little zoomed, but user can still reduce with Smaller.
+        if (!RMP_PDF_STATE.__qualityDefaultSet) {
+          RMP_PDF_STATE.zoom = isMobile ? Math.max(RMP_PDF_STATE.zoom || 1, 1.22) : (RMP_PDF_STATE.zoom || 1);
+          RMP_PDF_STATE.__qualityDefaultSet = true;
+          rmpPdfUpdateSizeLabel();
+        }
+
+        const cssScale = (available / viewport1.width) * (RMP_PDF_STATE.zoom || 1);
+        const viewport = page.getViewport({ scale: cssScale });
+
+        // Render sharper than displayed CSS size. This fixes blurry text on mobile high-DPI screens.
+        const outputScale = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
         canvas.style.width = Math.floor(viewport.width) + 'px';
         canvas.style.height = Math.floor(viewport.height) + 'px';
+
+        ctx.setTransform(outputScale, 0, 0, outputScale, 0, 0);
+        ctx.imageSmoothingEnabled = false;
 
         stage.innerHTML = '';
         stage.appendChild(canvas);
