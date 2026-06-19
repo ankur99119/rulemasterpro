@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
+<title>Original PDF Pages</title>
+<style>
+  :root{--blue:#2563eb;--dark:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#eef4ff}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--dark)}
+  .bar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 6px 18px rgba(15,23,42,.08)}
+  .top{display:flex;align-items:center;gap:10px;padding:10px 12px}
+  .back{border:0;background:#e0ecff;color:#1e40af;border-radius:999px;padding:9px 12px;font-weight:900;font-size:13px}
+  .titlebox{min-width:0;flex:1}
+  .title{font-size:13px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .range{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px}
+  .controls{display:flex;gap:8px;padding:0 12px 10px;overflow-x:auto}
+  .btn{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;color:#334155;white-space:nowrap;text-decoration:none}
+  .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .btn:disabled{opacity:.45}
+  #status{padding:18px;text-align:center;color:var(--muted);font-weight:800}
+  #pageWrap{padding:10px 8px 24px;display:flex;justify-content:center}
+  canvas{display:block;max-width:100%;height:auto;background:#fff;border-radius:8px;box-shadow:0 10px 30px rgba(15,23,42,.18)}
+  .fallback{margin:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 10px 26px rgba(15,23,42,.08);text-align:center}
+  .fallback b{display:block;margin-bottom:8px}.fallback span{color:#64748b;font-size:13px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="top">
+    <button class="back" onclick="goBack()">← Back</button>
+    <div class="titlebox">
+      <div class="title" id="title">Original PDF Pages</div>
+      <div class="range" id="range">Loading...</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" id="prevBtn">← Prev</button>
+    <button class="btn primary" id="pageBtn">Page</button>
+    <button class="btn" id="nextBtn">Next →</button>
+    <button class="btn" id="zoomOut">− Smaller</button>
+    <button class="btn" id="zoomIn">+ Bigger</button>
+  </div>
+</div>
+
+<div id="status">Opening selected PDF page...</div>
+<div id="pageWrap"><canvas id="canvas"></canvas></div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+const q = new URLSearchParams(location.search);
+const file = q.get('file') || '';
+const startPage = Math.max(1, parseInt(q.get('start') || '1', 10) || 1);
+const endPage = Math.max(startPage, parseInt(q.get('end') || String(startPage), 10) || startPage);
+const title = q.get('title') || 'Original PDF Pages';
+const returnTo = q.get('returnTo') || '';
+
+let pdfDoc = null;
+let currentPage = startPage;
+let zoom = 1.0;
+let rendering = false;
+let pendingPage = null;
+
+function goBack(){
+  if (returnTo) {
+    location.href = './index.html' + returnTo;
+    return;
+  }
+  history.back();
+}
+
+function cleanFileName(v){
+  let clean = String(v || '').replace(/^\.?\//,'');
+  try {
+    for(let i=0;i<3 && /%[0-9A-Fa-f]{2}/.test(clean);i++){
+      const d = decodeURIComponent(clean);
+      if(d === clean) break;
+      clean = d;
+    }
+  } catch(e) {}
+  const map = {
+    'G and SR reprinted edition 2025.pdf':'g and sr reprinted edition 2025.pdf',
+    'Operating Manual.pdf':'operating manual.pdf',
+    'Block Working Manual NR.pdf':'block working manual nr.pdf',
+    'Accident Manual.pdf':'accident manual.pdf',
+    'IRPWM 2024.pdf':'irpwm 2024.pdf',
+    'IRSEM-Version3_compressed.pdf':'irsem-version3_compressed.pdf',
+    'Railways_Act_1989.pdf':'railways_act_1989.pdf'
+  };
+  return map[clean] || clean.toLowerCase();
+}
+
+function pdfPath(){
+  const clean = cleanFileName(file);
+  return './' + clean.split('/').map(encodeURIComponent).join('/');
+}
+
+function setStatus(txt){ document.getElementById('status').textContent = txt || ''; }
+
+function updateUi(){
+  document.getElementById('title').textContent = title;
+  document.getElementById('range').textContent = 'Page ' + currentPage + ' · Range ' + startPage + '–' + endPage;
+  document.getElementById('pageBtn').textContent = currentPage + ' / ' + endPage;
+  document.getElementById('prevBtn').disabled = currentPage <= startPage;
+  document.getElementById('nextBtn').disabled = currentPage >= endPage;
+}
+
+async function renderPage(num){
+  if (!pdfDoc) return;
+  if (rendering) { pendingPage = num; return; }
+
+  rendering = true;
+  currentPage = Math.min(Math.max(num, startPage), Math.min(endPage, pdfDoc.numPages));
+  updateUi();
+  setStatus('Loading page ' + currentPage + '...');
+
+  try {
+    const page = await pdfDoc.getPage(currentPage);
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const containerWidth = Math.max(280, Math.min(window.innerWidth - 16, 980));
+    const viewport1 = page.getViewport({scale:1});
+    const scale = (containerWidth / viewport1.width) * zoom;
+    const viewport = page.getViewport({scale});
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+    canvas.style.width = Math.floor(viewport.width) + 'px';
+    canvas.style.height = Math.floor(viewport.height) + 'px';
+    await page.render({canvasContext:ctx, viewport}).promise;
+    setStatus('');
+  } catch(err) {
+    console.error(err);
+    document.getElementById('pageWrap').innerHTML =
+      '<div class="fallback"><b>Unable to render this PDF page.</b><span>Check internet once, because this viewer uses an in-app PDF renderer. The PDF file path was: '+pdfPath()+'</span></div>';
+    setStatus('');
+  } finally {
+    rendering = false;
+    if (pendingPage !== null) {
+      const p = pendingPage;
+      pendingPage = null;
+      renderPage(p);
+    }
+  }
+}
+
+async function init(){
+  document.getElementById('title').textContent = title;
+  updateUi();
+
+  if (!window.pdfjsLib) {
+    document.getElementById('pageWrap').innerHTML =
+      '<div class="fallback"><b>PDF page renderer could not load.</b><span>Please check internet once and reopen. This prevents mobile from opening page 1 only.</span></div>';
+    setStatus('');
+    return;
+  }
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+  try {
+    setStatus('Loading PDF...');
+    pdfDoc = await pdfjsLib.getDocument({url: pdfPath()}).promise;
+    if (startPage > pdfDoc.numPages) currentPage = 1;
+    await renderPage(currentPage);
+  } catch(err) {
+    console.error(err);
+    document.getElementById('pageWrap').innerHTML =
+      '<div class="fallback"><b>Unable to open selected PDF page.</b><span>The file may not be present in the deployed package or old cache may still be active. Path tried: '+pdfPath()+'</span></div>';
+    setStatus('');
+  }
+}
+
+document.getElementById('prevBtn').onclick = () => renderPage(currentPage - 1);
+document.getElementById('nextBtn').onclick = () => renderPage(currentPage + 1);
+document.getElementById('zoomOut').onclick = () => { zoom = Math.max(.65, zoom - .1); renderPage(currentPage); };
+document.getElementById('zoomIn').onclick = () => { zoom = Math.min(2.2, zoom + .1); renderPage(currentPage); };
+window.addEventListener('resize', () => { clearTimeout(window.__rmpPdfResize); window.__rmpPdfResize = setTimeout(() => renderPage(currentPage), 250); });
+
+init();
+</script>
+</body>
+</html>
