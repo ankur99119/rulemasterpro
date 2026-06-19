@@ -4132,6 +4132,97 @@ button[onclick*="Audit"],
   display: none !important;
 }
 
+
+
+/* =========================================================
+   FINAL IN-APP PDF VIEWER — no external viewer page
+   Prevents 404 and avoids native mobile PDF page-1 problem.
+   ========================================================= */
+.rmp-pdf-canvas-toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:10px 10px;
+  background:#fff;
+  border:1px solid rgba(148,163,184,.25);
+  border-radius:14px;
+  margin-bottom:10px;
+  box-shadow:0 6px 16px rgba(15,23,42,.06);
+}
+.rmp-pdf-canvas-toolbar .rmp-pdf-page-pill{
+  background:#EFF6FF;
+  color:#1D4ED8;
+  border:1px solid #BFDBFE;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+}
+.rmp-pdf-canvas-toolbar button{
+  border:1px solid #CBD5E1;
+  background:#F8FAFC;
+  color:#334155;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.rmp-pdf-canvas-toolbar button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.rmp-pdf-canvas-stage{
+  min-height:calc(100svh - 260px);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:8px 4px 80px;
+  overflow:auto;
+  background:#eef4ff;
+  border-radius:16px;
+  border:1px solid rgba(148,163,184,.18);
+}
+.rmp-pdf-canvas-stage canvas{
+  display:block;
+  max-width:100%;
+  height:auto;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 12px 30px rgba(15,23,42,.20);
+}
+.rmp-pdf-loading-box{
+  width:100%;
+  margin:14px;
+  background:#fff;
+  border:1px solid #E2E8F0;
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+  color:#64748B;
+  font-weight:800;
+  box-shadow:0 10px 26px rgba(15,23,42,.08);
+}
+.rmp-pdf-loading-box b{
+  display:block;
+  color:#0F172A;
+  font-size:16px;
+  margin-bottom:8px;
+}
+.rmp-pdf-loading-box small{
+  display:block;
+  line-height:1.5;
+}
+@media(max-width:520px){
+  .rmp-pdf-toolbar{border-radius:0 0 16px 16px!important;margin:0 0 8px 0!important;}
+  .rmp-pdf-actions{gap:6px!important;}
+  .rmp-pdf-btn{padding:8px 10px!important;font-size:12px!important;}
+  .rmp-pdf-canvas-toolbar{border-radius:14px;margin:0 0 8px 0;}
+  .rmp-pdf-canvas-stage{border-radius:12px;min-height:calc(100svh - 235px);padding-bottom:92px;}
+}
+
 </style>
 </head>
 
@@ -6556,43 +6647,159 @@ function renderRmpPdfScreen(path) {
         const title = decodeURIComponent(path[6] || 'Original PDF Pages');
         const returnTo = decodeURIComponent(path[7] || '#home');
 
-        RMP_PDF_STATE = { manual, id, file, start, end, current:start, title, returnTo, zoom:1, mode:'range', src:'' };
+        RMP_PDF_STATE = { manual, id, file, start, end, current:start, title, returnTo, zoom:1, mode:'canvas', src:'' };
         document.getElementById('header-subtitle').textContent = 'Original PDF Pages';
 
-        const card = document.getElementById('rmp-pdf-frame-card');
-        if (card) {
-          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening selected PDF page...<small>Starting from page ' + start + '.</small></div>';
-        }
+        const kicker = document.getElementById('rmp-pdf-kicker');
+        const titleEl = document.getElementById('rmp-pdf-title');
+        const subEl = document.getElementById('rmp-pdf-subtitle');
+        if (kicker) kicker.textContent = 'Original PDF Pages';
+        if (titleEl) titleEl.textContent = title;
+        if (subEl) subEl.textContent = 'Pages ' + start + '–' + end + ' · ' + (end - start + 1) + ' page' + ((end - start + 1) !== 1 ? 's' : '');
 
-        const src = rmpViewerUrl(rmpPdfCanonicalFileName(file), start, end, title) + '&returnTo=' + encodeURIComponent(returnTo || '#home') + '&v=pdfjs-final-2';
-        setTimeout(function(){ window.location.href = src; }, 60);
-        return;
+        rmpPdfRenderCanvasViewer();
       } catch (e) {
         console.error(e);
         showToast('Unable to open PDF pages');
       }
     }
 
-    function rmpPdfLoad(start, end, mode) {
-      const f = document.getElementById('rmp-pdf-frame');
-      if (!f || !RMP_PDF_STATE.file) return;
-      RMP_PDF_STATE.mode = mode || 'range';
-      const src = rmpViewerUrl(RMP_PDF_STATE.file, start, end, RMP_PDF_STATE.title);
-      RMP_PDF_STATE.src = src;
-      f.src = src;
-      rmpPdfUpdateButtons();
-      rmpPdfResetZoom(false);
+    let RMP_PDF_DOC = null;
+    let RMP_PDF_RENDERING = false;
+    let RMP_PDF_PENDING_PAGE = null;
+    let RMP_PDFJS_LOADING = null;
+
+    function rmpPdfStatus(htmlText) {
+      const card = document.getElementById('rmp-pdf-frame-card');
+      if (card) {
+        card.innerHTML = '<div class="rmp-pdf-loading-box">' + htmlText + '</div>';
+      }
     }
 
-    function rmpPdfLoadRange() { rmpPdfLoad(RMP_PDF_STATE.start, RMP_PDF_STATE.end, 'range'); }
+    function rmpPdfEnsurePdfJs() {
+      if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+      if (RMP_PDFJS_LOADING) return RMP_PDFJS_LOADING;
+      RMP_PDFJS_LOADING = new Promise(function(resolve, reject){
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+        s.onload = function(){ resolve(window.pdfjsLib); };
+        s.onerror = function(){ reject(new Error('PDF.js failed to load')); };
+        document.head.appendChild(s);
+      });
+      return RMP_PDFJS_LOADING;
+    }
+
+    function rmpPdfFileUrl() {
+      const clean = rmpPdfCanonicalFileName(RMP_PDF_STATE.file);
+      const path = clean.split('/').map(function(part){ return encodeURIComponent(part); }).join('/');
+      return './' + path;
+    }
+
+    async function rmpPdfRenderCanvasViewer() {
+      const card = document.getElementById('rmp-pdf-frame-card');
+      if (!card) return;
+
+      card.innerHTML =
+        '<div class="rmp-pdf-canvas-toolbar">' +
+          '<button id="rmp-pdf-canvas-prev" type="button">← Previous</button>' +
+          '<span class="rmp-pdf-page-pill" id="rmp-pdf-canvas-page">Page</span>' +
+          '<button id="rmp-pdf-canvas-next" type="button">Next →</button>' +
+        '</div>' +
+        '<div class="rmp-pdf-canvas-stage" id="rmp-pdf-canvas-stage">' +
+          '<div class="rmp-pdf-loading-box"><b>Opening selected PDF page...</b><small>Starting from page ' + RMP_PDF_STATE.start + '</small></div>' +
+        '</div>';
+
+      document.getElementById('rmp-pdf-canvas-prev').onclick = function(){ rmpPdfGoPage(-1); };
+      document.getElementById('rmp-pdf-canvas-next').onclick = function(){ rmpPdfGoPage(1); };
+
+      try {
+        const pdfjsLib = await rmpPdfEnsurePdfJs();
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+        RMP_PDF_DOC = await pdfjsLib.getDocument({ url: rmpPdfFileUrl() }).promise;
+        if (RMP_PDF_STATE.start > RMP_PDF_DOC.numPages) {
+          RMP_PDF_STATE.current = 1;
+        }
+        await rmpPdfRenderCanvasPage(RMP_PDF_STATE.current || RMP_PDF_STATE.start);
+      } catch (err) {
+        console.error(err);
+        const stage = document.getElementById('rmp-pdf-canvas-stage');
+        if (stage) {
+          stage.innerHTML =
+            '<div class="rmp-pdf-loading-box"><b>Unable to open selected PDF page inside app.</b>' +
+            '<small>Please confirm the PDF file is present in deploy and internet is available once for the page renderer.<br>Path tried: ' + rmpPdfFileUrl() + '</small></div>';
+        }
+      }
+    }
+
+    async function rmpPdfRenderCanvasPage(pageNum) {
+      if (!RMP_PDF_DOC) return;
+      if (RMP_PDF_RENDERING) { RMP_PDF_PENDING_PAGE = pageNum; return; }
+
+      RMP_PDF_RENDERING = true;
+      const minPage = RMP_PDF_STATE.start || 1;
+      const maxPage = Math.min(RMP_PDF_STATE.end || RMP_PDF_DOC.numPages, RMP_PDF_DOC.numPages);
+      RMP_PDF_STATE.current = Math.max(minPage, Math.min(maxPage, pageNum));
+
+      const pagePill = document.getElementById('rmp-pdf-canvas-page');
+      const prev = document.getElementById('rmp-pdf-canvas-prev');
+      const next = document.getElementById('rmp-pdf-canvas-next');
+      if (pagePill) pagePill.textContent = 'Page ' + RMP_PDF_STATE.current + ' / ' + maxPage;
+      if (prev) prev.disabled = RMP_PDF_STATE.current <= minPage;
+      if (next) next.disabled = RMP_PDF_STATE.current >= maxPage;
+
+      const stage = document.getElementById('rmp-pdf-canvas-stage');
+      if (!stage) { RMP_PDF_RENDERING = false; return; }
+      stage.innerHTML = '<div class="rmp-pdf-loading-box"><b>Loading page ' + RMP_PDF_STATE.current + '...</b></div>';
+
+      try {
+        const page = await RMP_PDF_DOC.getPage(RMP_PDF_STATE.current);
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const available = Math.max(280, Math.min(stage.clientWidth ? stage.clientWidth - 16 : window.innerWidth - 24, 1050));
+        const viewport1 = page.getViewport({ scale: 1 });
+        const scale = (available / viewport1.width) * (RMP_PDF_STATE.zoom || 1);
+        const viewport = page.getViewport({ scale: scale });
+
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        canvas.style.width = Math.floor(viewport.width) + 'px';
+        canvas.style.height = Math.floor(viewport.height) + 'px';
+
+        stage.innerHTML = '';
+        stage.appendChild(canvas);
+
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+      } catch (err) {
+        console.error(err);
+        stage.innerHTML = '<div class="rmp-pdf-loading-box"><b>Unable to render page ' + RMP_PDF_STATE.current + '.</b><small>' + (err && err.message ? err.message : 'Unknown PDF rendering error') + '</small></div>';
+      } finally {
+        RMP_PDF_RENDERING = false;
+        if (RMP_PDF_PENDING_PAGE !== null) {
+          const p = RMP_PDF_PENDING_PAGE;
+          RMP_PDF_PENDING_PAGE = null;
+          rmpPdfRenderCanvasPage(p);
+        }
+      }
+    }
+
+    function rmpPdfLoad(start, end, mode) {
+      if (!RMP_PDF_DOC) return;
+      RMP_PDF_STATE.mode = 'canvas';
+      RMP_PDF_STATE.start = start || RMP_PDF_STATE.start;
+      RMP_PDF_STATE.end = end || RMP_PDF_STATE.end;
+      rmpPdfRenderCanvasPage(RMP_PDF_STATE.start);
+    }
+
+    function rmpPdfLoadRange() { rmpPdfRenderCanvasPage(RMP_PDF_STATE.start); }
     function rmpPdfShowRange() { RMP_PDF_STATE.current = RMP_PDF_STATE.start; rmpPdfLoadRange(); }
 
     function rmpPdfGoPage(delta) {
-      let next = (RMP_PDF_STATE.mode === 'range' ? RMP_PDF_STATE.start : RMP_PDF_STATE.current) + delta;
+      let next = (RMP_PDF_STATE.current || RMP_PDF_STATE.start || 1) + delta;
       if (next < RMP_PDF_STATE.start) next = RMP_PDF_STATE.start;
       if (next > RMP_PDF_STATE.end) next = RMP_PDF_STATE.end;
       RMP_PDF_STATE.current = next;
-      rmpPdfLoad(next, next, 'page');
+      rmpPdfRenderCanvasPage(next);
       const subEl = document.getElementById('rmp-pdf-subtitle');
       if (subEl) subEl.textContent = 'Page ' + next + ' of range ' + RMP_PDF_STATE.start + '–' + RMP_PDF_STATE.end;
     }
@@ -6610,28 +6817,20 @@ function renderRmpPdfScreen(path) {
     }
 
     function rmpPdfZoom(delta) {
-      const f = document.getElementById('rmp-pdf-frame');
-      if (!f) return;
-      RMP_PDF_STATE.zoom = Math.max(0.85, Math.min(1.7, (RMP_PDF_STATE.zoom || 1) + delta));
-      f.style.transform = 'scale(' + RMP_PDF_STATE.zoom.toFixed(2) + ')';
-      f.style.width = (100 / RMP_PDF_STATE.zoom) + '%';
-      f.style.height = (100 / RMP_PDF_STATE.zoom) + '%';
+      RMP_PDF_STATE.zoom = Math.max(0.7, Math.min(2.2, (RMP_PDF_STATE.zoom || 1) + delta));
       rmpPdfUpdateSizeLabel();
+      rmpPdfRenderCanvasPage(RMP_PDF_STATE.current || RMP_PDF_STATE.start);
     }
 
     function rmpPdfResetZoom(showMsg) {
-      const f = document.getElementById('rmp-pdf-frame');
-      if (!f) return;
       RMP_PDF_STATE.zoom = 1;
-      f.style.transform = 'scale(1)';
-      f.style.width = '100%';
-      f.style.height = '100%';
       rmpPdfUpdateSizeLabel();
+      rmpPdfRenderCanvasPage(RMP_PDF_STATE.current || RMP_PDF_STATE.start);
       if (showMsg === true) showToast('PDF view fitted');
     }
 
     function rmpPdfOpenExternal() {
-      const src = rmpViewerUrl(rmpPdfCanonicalFileName(RMP_PDF_STATE.file), RMP_PDF_STATE.start, RMP_PDF_STATE.end, RMP_PDF_STATE.title) + '&v=pdfjs-final-2';
+      const src = rmpPdfDirectUrl(RMP_PDF_STATE.file, RMP_PDF_STATE.current || RMP_PDF_STATE.start);
       window.open(src, '_blank', 'noopener');
     }
 
