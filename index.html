@@ -6555,21 +6555,26 @@ function renderRmpPdfScreen(path) {
         const file = decodeURIComponent(path[5] || '');
         const title = decodeURIComponent(path[6] || 'Original PDF Pages');
         const returnTo = decodeURIComponent(path[7] || '#home');
+
         RMP_PDF_STATE = { manual, id, file, start, end, current:start, title, returnTo, zoom:1, mode:'range', src:'' };
         document.getElementById('header-subtitle').textContent = 'Original PDF Pages';
+
         const card = document.getElementById('rmp-pdf-frame-card');
         if (card) {
-          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening original PDF page...<small>The PDF will open directly at page ' + start + '. Use browser Back to return to Rule Master Pro.</small></div>';
+          card.innerHTML = '<div class="rmp-pdf-mobile-opening">Opening selected PDF pages...<small>Starting from page ' + start + '.</small></div>';
         }
-        setTimeout(function(){ rmpPdfOpenDirect(file, start); }, 80);
+
+        // Desktop Chrome opens exact PDF page correctly with #page.
+        // Mobile browser/PWA often ignores #page in native PDF viewer, so mobile uses our PDF.js page viewer.
+        setTimeout(function(){
+          if (rmpPdfIsMobileDevice()) {
+            const src = rmpViewerUrl(rmpPdfCanonicalFileName(file), start, end, title);
+            window.location.href = src;
+          } else {
+            rmpPdfOpenDirect(file, start);
+          }
+        }, 80);
         return;
-        const kicker = document.getElementById('rmp-pdf-kicker');
-        const titleEl = document.getElementById('rmp-pdf-title');
-        const subEl = document.getElementById('rmp-pdf-subtitle');
-        if (kicker) kicker.textContent = 'Original PDF Pages';
-        if (titleEl) titleEl.textContent = title;
-        if (subEl) subEl.textContent = 'Pages ' + start + '–' + end + ' · ' + (end - start + 1) + ' page' + ((end - start + 1) !== 1 ? 's' : '');
-        rmpPdfLoadRange();
       } catch (e) {
         console.error(e);
         showToast('Unable to open PDF pages');
