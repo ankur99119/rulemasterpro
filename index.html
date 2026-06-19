@@ -3388,132 +3388,121 @@ button[onclick*="Audit"],
 
 
 /* =========================================================
-   FINAL MOBILE UI FIXES
-   1) Disable sticky bottom update banner in public UI.
-   2) Use full mobile width, remove side gaps.
-   3) Show all manual-wise progress cards cleanly.
+   FINAL MOBILE ALIGNMENT FIX
+   - No persistent update popup
+   - Search stays one row
+   - Bottom nav covers full app width and all six tabs
+   - No extra scroll gap after final Tools/App Info card
+   - Manual-wise progress shows all manuals neatly
    ========================================================= */
-
-/* The update system remains available from App Info, but the constant bottom popup is hidden. */
 #rmp-update-banner,
 #rmp-update-banner.show {
   display: none !important;
   visibility: hidden !important;
-  transform: translateX(-50%) translateY(160%) !important;
   pointer-events: none !important;
 }
 
-/* More app-like full-width mobile layout */
 @media (max-width: 768px) {
-  body {
-    background: #EEF4FF !important;
-    display: block !important;
-    justify-content: initial !important;
-    align-items: initial !important;
+  html, body {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden !important;
   }
 
-  .app-container,
-  .app-shell,
-  .phone-frame,
-  .mobile-frame,
-  .device-frame {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
+  body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    min-height: 100svh !important;
+    background: #C7D2FE !important;
+  }
+
+  #app {
+    width: 100% !important;
+    max-width: 430px !important;
+    height: 100svh !important;
+    min-height: 100svh !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
     border-radius: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
     box-shadow: none !important;
   }
 
-  .app-header,
-  .header,
-  .topbar {
+  .app-content {
+    padding-bottom: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .screen {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .home-screen {
+    padding: 0 !important;
+  }
+
+  .home-body {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+    padding-bottom: 76px !important;
+  }
+
+  .home-body > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .home-search-card {
     width: 100% !important;
     max-width: 100% !important;
-    border-radius: 0 !important;
-  }
-
-  .content,
-  .screen,
-  .page,
-  .home-content,
-  .manual-content,
-  .search-content {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  /* Give inner cards a balanced margin, but let large hero/search occupy proper screen width */
-  .home-hero,
-  .hero-card,
-  .home-search-card,
-  .search-panel-v3,
-  .rmp-reading-progress-card,
-  .manual-section,
-  .manuals-section,
-  .section-block,
-  .rmp-section,
-  .home-section,
-  .quick-section {
-    width: calc(100vw - 24px) !important;
-    max-width: calc(100vw - 24px) !important;
-    margin-left: 12px !important;
-    margin-right: 12px !important;
-  }
-
-  .home-search-card,
-  .search-panel-v3 {
-    display: block !important;
-  }
-
-  .home-search-row,
-  .search-row-v3,
-  .rmp-search-row {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 46px 52px !important;
-    gap: 8px !important;
+    grid-template-columns: 22px minmax(0, 1fr) 48px 52px !important;
     align-items: center !important;
-    width: 100% !important;
+    gap: 8px !important;
+    padding: 8px 8px 8px 14px !important;
+    overflow: hidden !important;
   }
 
-  #global-search,
-  #search-screen-input,
-  .search-input-v3 {
+  .home-search-card > i {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  #global-search {
+    width: 100% !important;
     min-width: 0 !important;
-    width: 100% !important;
+    padding: 11px 0 !important;
+    font-size: 14px !important;
   }
 
-  .voice-search-btn-v10 {
-    width: 46px !important;
-    min-width: 46px !important;
-    max-width: 46px !important;
-    height: 46px !important;
+  .home-search-card .voice-search-btn-v10 {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
   }
 
-  .search-btn-v3,
-  .home-search-btn,
-  .rmp-search-btn {
+  .home-search-card button[onclick="triggerSearch()"] {
     width: 52px !important;
     min-width: 52px !important;
-    max-width: 52px !important;
     height: 52px !important;
+    align-self: center !important;
+    border-radius: 16px !important;
+    padding: 0 !important;
   }
 
-  /* Reading progress should look like a full-width card, not a narrow centered tile */
-  #rmp-reading-progress-card,
-  .rmp-reading-progress-card {
-    width: calc(100vw - 24px) !important;
-    max-width: calc(100vw - 24px) !important;
-    margin-left: 12px !important;
-    margin-right: 12px !important;
-    border-radius: 18px !important;
-  }
-
-  .rmp-rp-toggle,
-  .rmp-rp-details {
+  .rmp-reading-progress-card,
+  #rmp-reading-progress-card {
     width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-radius: 18px !important;
   }
 
   .rmp-rp-details {
@@ -3523,7 +3512,6 @@ button[onclick*="Audit"],
 
   .rmp-rp-manual-grid {
     grid-template-columns: 1fr !important;
-    width: 100% !important;
     gap: 8px !important;
     max-height: none !important;
     overflow: visible !important;
@@ -3536,14 +3524,62 @@ button[onclick*="Audit"],
     border-radius: 14px !important;
   }
 
-  .rmp-rp-manual-head {
-    font-size: 12px !important;
+  .bottom-nav {
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    max-width: 430px !important;
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    padding: 8px 0 calc(10px + env(safe-area-inset-bottom)) 0 !important;
+    border-radius: 0 !important;
+    background: #fff !important;
+    box-shadow: 0 -8px 24px rgba(15,23,42,.08) !important;
+    z-index: 999 !important;
+  }
+
+  .bottom-nav .nav-item {
+    min-width: 0 !important;
+    width: auto !important;
+    font-size: 8.5px !important;
+    white-space: normal !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+
+  .bottom-nav .nav-item i {
+    font-size: 16px !important;
+  }
+
+  .home-card:last-child,
+  .tool-card:last-child,
+  .tools-card:last-child {
+    margin-bottom: 0 !important;
   }
 }
 
-@media (min-width: 769px) {
-  .rmp-rp-manual-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+@media (max-width: 370px) {
+  .home-search-card {
+    grid-template-columns: 20px minmax(0, 1fr) 44px 48px !important;
+    gap: 6px !important;
+    padding-left: 12px !important;
+  }
+  .home-search-card .voice-search-btn-v10 {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+  }
+  .home-search-card button[onclick="triggerSearch()"] {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+  }
+  .bottom-nav .nav-item span {
+    font-size: 8px !important;
   }
 }
 
@@ -12536,18 +12572,37 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
       (ch.paras || []).forEach(function(p){ if (isOfficialPara(p, key, ch)) ids.push(key + '-' + String(p.num).trim()); });
     });
   }
+  
+function dataGlobal(name){
+    try {
+      if (name === 'RULES_DATA' && typeof RULES_DATA !== 'undefined') return RULES_DATA;
+      if (name === 'APP_DATA' && typeof APP_DATA !== 'undefined') return APP_DATA;
+      if (name === 'OM_DATA' && typeof OM_DATA !== 'undefined') return OM_DATA;
+      if (name === 'BWM_DATA' && typeof BWM_DATA !== 'undefined') return BWM_DATA;
+      if (name === 'ACC_DATA' && typeof ACC_DATA !== 'undefined') return ACC_DATA;
+      if (name === 'IRA_DATA' && typeof IRA_DATA !== 'undefined') return IRA_DATA;
+      if (name === 'IRSEM_DATA' && typeof IRSEM_DATA !== 'undefined') return IRSEM_DATA;
+      if (name === 'IRPWM_DATA' && typeof IRPWM_DATA !== 'undefined') return IRPWM_DATA;
+    } catch(e) {}
+    return window[name] || {};
+  }
   function allReadableIds(){
     var ids = [];
     try {
-      Object.values(window.RULES_DATA || {}).forEach(function(ch){ (ch.rules || []).forEach(function(r){ if(r && r.num) ids.push('gsr-' + String(r.num).trim()); }); });
-      Object.values(window.APP_DATA || {}).forEach(function(ch){ (ch.rules || []).forEach(function(r){ if(r && r.num) ids.push('gsr-' + String(r.num).trim()); }); });
-      addManualIds(ids, 'om', window.OM_DATA); addManualIds(ids, 'bwm', window.BWM_DATA); addManualIds(ids, 'acc', window.ACC_DATA);
-      addManualIds(ids, 'ira', window.IRA_DATA); addManualIds(ids, 'irsem', window.IRSEM_DATA); addManualIds(ids, 'irpwm', window.IRPWM_DATA);
+      Object.values(dataGlobal('RULES_DATA') || {}).forEach(function(ch){ (ch.rules || []).forEach(function(r){ if(r && r.num) ids.push('gsr-' + String(r.num).trim()); }); });
+      Object.values(dataGlobal('APP_DATA') || {}).forEach(function(ch){ (ch.rules || []).forEach(function(r){ if(r && r.num) ids.push('gsr-' + String(r.num).trim()); }); });
+      addManualIds(ids, 'om', dataGlobal('OM_DATA'));
+      addManualIds(ids, 'bwm', dataGlobal('BWM_DATA'));
+      addManualIds(ids, 'acc', dataGlobal('ACC_DATA'));
+      addManualIds(ids, 'ira', dataGlobal('IRA_DATA'));
+      addManualIds(ids, 'irsem', dataGlobal('IRSEM_DATA'));
+      addManualIds(ids, 'irpwm', dataGlobal('IRPWM_DATA'));
     } catch(e) {}
     var seen = {}, clean = [];
     ids.forEach(function(id){ if(id && !seen[id]) { seen[id]=true; clean.push(id); } });
     return clean;
   }
+
   function statsForIds(ids){
     var total = ids.length || 0, read = getReadSet();
     var done = ids.filter(function(id){ return !!read[id]; }).length;
@@ -12559,7 +12614,7 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
     var ids = allReadableIds(), grouped = {};
     manualOrder.forEach(function(k){ grouped[k]=[]; });
     ids.forEach(function(id){ var m=manualFromId(id); if(!grouped[m]) grouped[m]=[]; grouped[m].push(id); });
-    return manualOrder.map(function(k){ var st=statsForIds(grouped[k]||[]); st.key=k; st.label=manualLabels[k]||k.toUpperCase(); return st; }).filter(function(x){ return x.total>0; });
+    return manualOrder.map(function(k){ var st=statsForIds(grouped[k]||[]); st.key=k; st.label=manualLabels[k]||k.toUpperCase(); return st; });
   }
   function getRecent(){ var arr=safeJSON(localStorage.getItem(RECENT_KEY)||'[]',[]); return Array.isArray(arr)?arr.slice(0,3):[]; }
   function saveRecentItem(item){
@@ -13411,9 +13466,7 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
 
 <script>
 (function(){
-  /* Stop constant bottom update popup. Keep manual update check from App Info. */
-  function hideUpdateBannerForever(){
-    try { localStorage.setItem('rmp_update_banner_hidden_public', String(Date.now())); } catch(e) {}
+  function hideUpdateBanner(){
     var b = document.getElementById('rmp-update-banner');
     if (b) {
       b.classList.remove('show');
@@ -13421,80 +13474,25 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
       b.setAttribute('aria-hidden', 'true');
     }
   }
-
-  window.rmpHideUpdateBanner = hideUpdateBannerForever;
-
+  window.rmpHideUpdateBanner = hideUpdateBanner;
   window.rmpApplyUpdate = function(){
-    hideUpdateBannerForever();
+    hideUpdateBanner();
     try {
       if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
         navigator.serviceWorker.getRegistrations().then(function(regs){
-          Promise.all(regs.map(function(r){ return r.update ? r.update() : Promise.resolve(); })).finally(function(){
-            window.location.reload();
-          });
-        }).catch(function(){ window.location.reload(); });
-      } else {
-        window.location.reload();
-      }
-    } catch(e) {
-      window.location.reload();
-    }
+          Promise.all(regs.map(function(r){ return r.update ? r.update() : Promise.resolve(); })).finally(function(){ location.reload(); });
+        }).catch(function(){ location.reload(); });
+      } else { location.reload(); }
+    } catch(e) { location.reload(); }
   };
-
-  function forceHideBanner(){
-    var b = document.getElementById('rmp-update-banner');
-    if (b) {
-      b.classList.remove('show');
-      b.style.display = 'none';
-      b.setAttribute('aria-hidden', 'true');
-    }
-  }
-  document.addEventListener('DOMContentLoaded', forceHideBanner);
-  window.addEventListener('load', forceHideBanner);
-  window.addEventListener('hashchange', function(){ setTimeout(forceHideBanner, 80); });
-  setInterval(forceHideBanner, 1500);
-
-  /* Ensure manual-wise progress always shows all seven manuals even if some IDs fail to load. */
-  function patchManualWiseProgress(){
-    var manuals = document.getElementById('rmp-rp-manuals');
-    if (!manuals) return;
-    var grid = manuals.querySelector('.rmp-rp-manual-grid');
-    if (!grid) return;
-
-    var labels = [
-      ['G&SR','gsr'],
-      ['Operating Manual','om'],
-      ['Block Working','bwm'],
-      ['Accident Manual','acc'],
-      ['Railways Act','ira'],
-      ['IRSEM','irsem'],
-      ['IRPWM','irpwm']
-    ];
-
-    var html = grid.innerHTML || '';
-    var existing = {};
-    labels.forEach(function(x){
-      var label = x[0];
-      existing[label] = html.indexOf('>'+label+'<') >= 0 || html.indexOf(label) >= 0;
-    });
-
-    labels.forEach(function(x){
-      if (!existing[x[0]]) {
-        var div = document.createElement('div');
-        div.className = 'rmp-rp-manual';
-        div.setAttribute('data-manual-key', x[1]);
-        div.innerHTML = '<div class="rmp-rp-manual-head"><span>'+x[0]+'</span><span>0%</span></div><div class="rmp-rp-mini-bar"><span style="width:0%"></span></div><div style="font-size:10px;color:#64748b;margin-top:4px;font-weight:700;">0 / 0</div>';
-        grid.appendChild(div);
-      }
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function(){
-    setTimeout(patchManualWiseProgress, 300);
-    setTimeout(patchManualWiseProgress, 1000);
+    hideUpdateBanner();
+    setTimeout(hideUpdateBanner, 300);
+    setTimeout(function(){ if (window.RMP_READING_PROGRESS && window.RMP_READING_PROGRESS.update) window.RMP_READING_PROGRESS.update(); }, 600);
+    setTimeout(function(){ if (window.RMP_READING_PROGRESS && window.RMP_READING_PROGRESS.update) window.RMP_READING_PROGRESS.update(); }, 1600);
   });
-  window.addEventListener('hashchange', function(){ setTimeout(patchManualWiseProgress, 300); });
-  setInterval(patchManualWiseProgress, 2000);
+  window.addEventListener('hashchange', function(){ setTimeout(hideUpdateBanner, 80); });
+  setInterval(hideUpdateBanner, 1500);
 })();
 </script>
 
