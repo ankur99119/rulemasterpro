@@ -4243,6 +4243,78 @@ button[onclick*="Audit"],
   }
 }
 
+
+
+/* =========================================================
+   FINAL GLOBAL BOTTOM SAFE AREA FIX
+   Prevents last rule/card on every page from hiding behind fixed bottom nav.
+   ========================================================= */
+:root{
+  --rmp-bottom-nav-safe: 142px;
+}
+
+.app-content{
+  padding-bottom: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom)) !important;
+  scroll-padding-bottom: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom)) !important;
+}
+
+.screen{
+  padding-bottom: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom)) !important;
+}
+
+.screen.active::after{
+  content:"";
+  display:block;
+  height: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom));
+  flex: 0 0 auto;
+}
+
+#rule-list-container::after,
+.rule-list::after,
+.manual-list::after,
+.chapter-list::after,
+#bookmarks-container::after,
+#corrections-container::after,
+#search-results::after,
+.quiz-container::after,
+#rmp-about-container::after{
+  content:"";
+  display:block;
+  height: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom));
+}
+
+.rule-card:last-child,
+.manual-card:last-child,
+.chapter-card:last-child,
+.tool-card:last-child,
+.rmp-saved-card-v3:last-child,
+.rmp-saved-card-v2:last-child{
+  margin-bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+}
+
+.bottom-nav{
+  min-height: calc(74px + env(safe-area-inset-bottom)) !important;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+}
+
+@media(max-width:520px){
+  :root{
+    --rmp-bottom-nav-safe: 160px;
+  }
+
+  .app-content{
+    padding-bottom: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom)) !important;
+  }
+
+  .screen{
+    padding-bottom: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom)) !important;
+  }
+
+  .screen.active::after{
+    height: calc(var(--rmp-bottom-nav-safe) + env(safe-area-inset-bottom));
+  }
+}
+
 </style>
 </head>
 
@@ -14852,6 +14924,54 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   });
   window.addEventListener('hashchange', function(){ setTimeout(decimalizePercentText, 300); });
   setInterval(decimalizePercentText, 2000);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if (window.__rmpBottomSafeFix) return;
+  window.__rmpBottomSafeFix = true;
+
+  function applyBottomSafeSpace(){
+    document.querySelectorAll('.screen').forEach(function(screen){
+      if (!screen.querySelector(':scope > .rmp-bottom-safe-spacer')) {
+        var spacer = document.createElement('div');
+        spacer.className = 'rmp-bottom-safe-spacer';
+        spacer.style.cssText = 'display:block;height:160px;min-height:160px;flex:0 0 auto;pointer-events:none;';
+        screen.appendChild(spacer);
+      }
+    });
+
+    ['rule-list-container','bookmarks-container','corrections-container','search-results','rmp-about-container'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el && !el.querySelector(':scope > .rmp-bottom-safe-spacer-inner')) {
+        var sp = document.createElement('div');
+        sp.className = 'rmp-bottom-safe-spacer-inner';
+        sp.style.cssText = 'display:block;height:120px;min-height:120px;pointer-events:none;';
+        el.appendChild(sp);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    applyBottomSafeSpace();
+    setTimeout(applyBottomSafeSpace, 300);
+    setTimeout(applyBottomSafeSpace, 1000);
+  });
+  window.addEventListener('hashchange', function(){
+    setTimeout(applyBottomSafeSpace, 150);
+    setTimeout(applyBottomSafeSpace, 700);
+  });
+
+  var mo = new MutationObserver(function(){
+    clearTimeout(window.__rmpBottomSafeTimer);
+    window.__rmpBottomSafeTimer = setTimeout(applyBottomSafeSpace, 120);
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    if (document.body) mo.observe(document.body, {childList:true, subtree:true});
+  });
 })();
 </script>
 
