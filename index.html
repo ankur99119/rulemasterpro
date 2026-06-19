@@ -3836,6 +3836,269 @@ button[onclick*="Audit"],
   }
 }
 
+
+
+/* =========================================================
+   FINAL HINDI SUPPORT SIMPLIFIED
+   Show only Hindi translation. Remove English + Hindi / English tabs.
+   ========================================================= */
+.rmp-hi-seg {
+  display: none !important;
+}
+.rmp-hi-box-title,
+.rmp-hi-english {
+  display: none !important;
+}
+.rmp-hi-panel .rmp-hi-title::after {
+  content: " · हिंदी";
+  color: #2563EB;
+}
+
+
+
+/* =========================================================
+   FINAL BOOKMARKS COLLAPSED VIEW
+   - Saved rules collapsed by default
+   - Folder selector only in All view
+   ========================================================= */
+.rmp-saved-card-v3 {
+  background:#FFFFFF;
+  border:1px solid rgba(148,163,184,.28);
+  border-radius:18px;
+  margin:12px 0;
+  overflow:hidden;
+  box-shadow:0 10px 26px rgba(15,23,42,.06);
+}
+
+.rmp-saved-summary-v3 {
+  width:100%;
+  border:0;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F8FAFC 100%);
+  padding:14px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  text-align:left;
+  cursor:pointer;
+  align-items:center;
+}
+
+.rmp-saved-summary-v3:active {
+  transform:scale(.995);
+}
+
+.rmp-saved-title-wrap-v3 {
+  min-width:0;
+}
+
+.rmp-saved-badges-v3 {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.rmp-saved-badge-v3 {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:999px;
+  padding:4px 9px;
+  font-size:11px;
+  font-weight:900;
+  border:1px solid rgba(37,99,235,.25);
+  color:#1D4ED8;
+  background:#EFF6FF;
+}
+
+.rmp-saved-badge-v3.saved {
+  color:#166534;
+  background:#DCFCE7;
+  border-color:#86EFAC;
+}
+
+.rmp-saved-title-v3 {
+  color:#0F172A;
+  font-size:16px;
+  font-weight:900;
+  line-height:1.35;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+
+.rmp-saved-sub-v3 {
+  color:#64748B;
+  font-size:12px;
+  line-height:1.35;
+  margin-top:4px;
+  font-weight:700;
+}
+
+.rmp-saved-chevron-v3 {
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  background:#EEF2FF;
+  color:#1D4ED8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:18px;
+  flex-shrink:0;
+  transition:transform .18s ease;
+}
+
+.rmp-saved-card-v3.open .rmp-saved-chevron-v3 {
+  transform:rotate(180deg);
+}
+
+.rmp-saved-details-v3 {
+  display:none;
+  border-top:1px solid rgba(148,163,184,.20);
+}
+
+.rmp-saved-card-v3.open .rmp-saved-details-v3 {
+  display:block;
+}
+
+.rmp-saved-meta-v3 {
+  padding:12px 14px;
+  background:#F8FAFC;
+  border-bottom:1px solid rgba(148,163,184,.20);
+  display:grid;
+  gap:9px;
+}
+
+.rmp-saved-meta-v3 label {
+  font-size:11px;
+  font-weight:900;
+  color:#475569;
+  text-transform:uppercase;
+  letter-spacing:.35px;
+}
+
+.rmp-saved-meta-v3 select,
+.rmp-saved-meta-v3 textarea {
+  width:100%;
+  border:1px solid #CBD5E1;
+  border-radius:12px;
+  padding:10px 11px;
+  font-size:13px;
+  background:#FFFFFF;
+  color:#0F172A;
+  font-family:'DM Sans',sans-serif;
+  outline:none;
+}
+
+.rmp-saved-meta-v3 textarea {
+  min-height:74px;
+  resize:vertical;
+  line-height:1.45;
+}
+
+.rmp-saved-folder-fixed-v3 {
+  border:1px solid #CBD5E1;
+  border-radius:12px;
+  padding:10px 11px;
+  background:#FFFFFF;
+  color:#334155;
+  font-size:13px;
+  font-weight:800;
+}
+
+.rmp-saved-body-v3 {
+  padding:14px;
+  color:#0F172A;
+  font-size:13.5px;
+  line-height:1.72;
+  overflow-wrap:anywhere;
+  max-height:none;
+}
+
+.rmp-saved-actions-v3 {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:0 14px 14px;
+}
+
+.rmp-saved-action-v3 {
+  border:1px solid #CBD5E1;
+  background:#F8FAFC;
+  color:#334155;
+  border-radius:999px;
+  padding:8px 11px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.rmp-saved-action-v3.danger {
+  background:#FEF2F2;
+  color:#B91C1C;
+  border-color:#FECACA;
+}
+
+@media(max-width:520px){
+  .rmp-saved-summary-v3 {
+    padding:13px;
+    grid-template-columns:minmax(0,1fr) 34px;
+  }
+  .rmp-saved-title-v3 {
+    font-size:15px;
+  }
+  .rmp-saved-body-v3 {
+    font-size:13.2px;
+    line-height:1.68;
+  }
+  .rmp-saved-actions-v3 .rmp-saved-action-v3 {
+    flex:1 1 auto;
+  }
+}
+
+
+
+/* =========================================================
+   FINAL APP INFO BOTTOM SAFE FIX
+   Prevent last line/card from being hidden behind fixed bottom navigation.
+   ========================================================= */
+#about.screen {
+  padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+}
+
+#about #rmp-about-container {
+  padding-bottom: 6px !important;
+}
+
+#about #rmp-about-container .rmp-phase11-card:last-child {
+  margin-bottom: 0 !important;
+}
+
+.app-content {
+  scroll-padding-bottom: calc(108px + env(safe-area-inset-bottom)) !important;
+}
+
+@media (max-width: 768px) {
+  #about.screen,
+  #bookmarks.screen,
+  #manual-view.screen,
+  #search.screen,
+  #corrections.screen,
+  #quiz.screen,
+  #qa.screen {
+    padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+  }
+
+  #about #rmp-about-container .rmp-phase11-card:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
 </style>
 </head>
 
@@ -13458,9 +13721,7 @@ function dataGlobal(name){
     saveSettings(s);
   }
 
-  function getDefaultMode(){
-    return getSettings().mode || 'hi';
-  }
+  function getDefaultMode(){ return 'hi'; }
 
   function cardKey(card){
     var id = card.getAttribute('data-id') || cleanText(card.querySelector('.rule-id,.rule-badges,.rule-name')?.textContent || '').slice(0,80);
@@ -13544,8 +13805,8 @@ function dataGlobal(name){
     var segBtns = wrap.querySelectorAll('.rmp-hi-seg button');
     var translated = cleanText((data && data.translated) || '');
     var source = pieces.source;
-    mode = mode || getDefaultMode();
-    setDefaultMode(mode);
+    mode = 'hi';
+    setDefaultMode('hi');
     segBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mode') === mode); });
 
     panel.classList.add('show');
@@ -13971,6 +14232,279 @@ function dataGlobal(name){
       if ((window.location.hash || '').indexOf('#bookmarks') === 0) renderBookmarksV2();
     }, 180);
   });
+  setInterval(function(){ document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); }); }, 1500);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  function simplifyHindiPanel(){
+    try {
+      var s = JSON.parse(localStorage.getItem('rmp_hi_settings_v2') || '{}');
+      s.mode = 'hi';
+      localStorage.setItem('rmp_hi_settings_v2', JSON.stringify(s));
+    } catch(e) {}
+    document.querySelectorAll('.rmp-hi-seg, .rmp-hi-seg button[data-mode="both"], .rmp-hi-seg button[data-mode="en"]').forEach(function(el){
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('.rmp-hi-box').forEach(function(box){
+      var title = box.querySelector('.rmp-hi-box-title');
+      if (title && /original english/i.test(title.textContent || '')) box.remove();
+    });
+  }
+  document.addEventListener('DOMContentLoaded', simplifyHindiPanel);
+  window.addEventListener('hashchange', function(){ setTimeout(simplifyHindiPanel, 150); });
+  setInterval(simplifyHindiPanel, 1500);
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if (window.__rmpBookmarksCollapsedV3) return;
+  window.__rmpBookmarksCollapsedV3 = true;
+
+  var META_KEY = 'rmp_bookmark_meta_v1';
+  var FOLDERS = ['General','Safety','Shunting','Stabling','Accident','Block Working','Signalling','Engineering','Personal'];
+  var activeFolder = 'All';
+
+  function safeJSON(raw, fallback){ try { return JSON.parse(raw); } catch(e) { return fallback; } }
+  function esc(v){ return String(v || '').replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function stripHtml(v){ var d=document.createElement('div'); d.innerHTML=String(v||''); return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim(); }
+  function getMeta(){ var m=safeJSON(localStorage.getItem(META_KEY)||'{}',{}); return (m && typeof m === 'object') ? m : {}; }
+  function saveMeta(m){ localStorage.setItem(META_KEY, JSON.stringify(m || {})); }
+  function ensureMeta(id){ var m=getMeta(); if(!m[id]){ m[id]={folder:'General',note:'',addedAt:Date.now()}; saveMeta(m); } return m[id]; }
+
+  function dataGlobal(name){
+    try {
+      if (name === 'RULES_DATA' && typeof RULES_DATA !== 'undefined') return RULES_DATA;
+      if (name === 'APP_DATA' && typeof APP_DATA !== 'undefined') return APP_DATA;
+      if (name === 'OM_DATA' && typeof OM_DATA !== 'undefined') return OM_DATA;
+      if (name === 'BWM_DATA' && typeof BWM_DATA !== 'undefined') return BWM_DATA;
+      if (name === 'ACC_DATA' && typeof ACC_DATA !== 'undefined') return ACC_DATA;
+      if (name === 'IRA_DATA' && typeof IRA_DATA !== 'undefined') return IRA_DATA;
+      if (name === 'IRSEM_DATA' && typeof IRSEM_DATA !== 'undefined') return IRSEM_DATA;
+      if (name === 'IRPWM_DATA' && typeof IRPWM_DATA !== 'undefined') return IRPWM_DATA;
+    } catch(e) {}
+    return window[name] || {};
+  }
+
+  function bookmarkIds(){
+    if (window.state && Array.isArray(window.state.bookmarks)) return window.state.bookmarks.slice();
+    return safeJSON(localStorage.getItem('gsr_bookmarks') || '[]', []);
+  }
+
+  function saveBookmarkIds(ids){
+    if (window.state && Array.isArray(window.state.bookmarks)) window.state.bookmarks = ids.slice();
+    localStorage.setItem('gsr_bookmarks', JSON.stringify(ids));
+  }
+
+  function manualLabelFromPrefix(pref){
+    return {gsr:'G&SR',om:'Operating Manual',bwm:'Block Working Manual',acc:'Accident Manual',ira:'Railways Act',irsem:'IRSEM',irpwm:'IRPWM'}[pref] || 'G&SR';
+  }
+
+  function findSavedItem(id){
+    var sid = String(id || '');
+    var pref = sid.indexOf('-') > -1 ? sid.split('-')[0] : 'gsr';
+    var num = sid.indexOf('-') > -1 ? sid.substring(pref.length + 1) : sid.replace(/^gsr-/, '');
+
+    if (pref === 'gsr') {
+      var found = null;
+      Object.values(dataGlobal('RULES_DATA') || {}).some(function(ch){
+        return (ch.rules || []).some(function(r){ if (String(r.num) === String(num)) { found = r; return true; } return false; });
+      });
+      if (!found) {
+        Object.values(dataGlobal('APP_DATA') || {}).some(function(ch){
+          return (ch.rules || []).some(function(r){ if (String(r.num) === String(num)) { found = r; return true; } return false; });
+        });
+      }
+      if (found) return { id:sid, pref:'gsr', num:num, manual:'G&SR', title:found.title || ('Rule '+num), body:found.body || '', type:found.type || 'Rule' };
+    }
+
+    var map = {om:'OM_DATA', bwm:'BWM_DATA', acc:'ACC_DATA', ira:'IRA_DATA', irsem:'IRSEM_DATA', irpwm:'IRPWM_DATA'};
+    var data = dataGlobal(map[pref] || '');
+    var para = null;
+    Object.values(data || {}).some(function(ch){
+      return (ch.paras || []).some(function(p){
+        if (String(p.num) === String(num)) { para = p; return true; }
+        return false;
+      });
+    });
+    if (para) return { id:sid, pref:pref, num:num, manual:manualLabelFromPrefix(pref), title:para.title || ('Para '+num), body:para.body || '', type:para.type || 'Para' };
+
+    return { id:sid, pref:pref, num:num, manual:manualLabelFromPrefix(pref), title:sid, body:'', type:'Bookmark' };
+  }
+
+  function removeBookmark(id){
+    var ids = bookmarkIds().filter(function(x){ return String(x) !== String(id); });
+    saveBookmarkIds(ids);
+    var meta = getMeta(); if (meta[id]) { delete meta[id]; saveMeta(meta); }
+    if (typeof window.showToast === 'function') window.showToast('Removed from saved rules');
+    renderBookmarksCollapsedV3();
+  }
+
+  function updateMeta(id, field, value){
+    var meta = getMeta();
+    if (!meta[id]) meta[id] = {folder:'General',note:'',addedAt:Date.now()};
+    meta[id][field] = value;
+    meta[id].addedAt = meta[id].addedAt || Date.now();
+    saveMeta(meta);
+  }
+
+  function exportSavedRules(){
+    var ids = bookmarkIds(), meta = getMeta(), lines = [];
+    lines.push('Rule Master Pro - Saved Rules & Notes');
+    lines.push('Exported: ' + new Date().toLocaleString());
+    lines.push('Total: ' + ids.length);
+    lines.push('');
+    ids.forEach(function(id, i){
+      var item = findSavedItem(id), m = meta[id] || {};
+      lines.push((i+1) + '. ' + item.manual + ' · ' + item.num);
+      lines.push('Title: ' + item.title);
+      lines.push('Folder: ' + (m.folder || 'General'));
+      if (m.note) lines.push('Note: ' + m.note);
+      if (item.body) lines.push('Text: ' + stripHtml(item.body).slice(0, 5000));
+      lines.push('');
+    });
+    var blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'rule_master_pro_saved_rules.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function createSavedCard(id){
+    var item = findSavedItem(id);
+    var meta = ensureMeta(id);
+    var card = document.createElement('div');
+    card.className = 'rmp-saved-card-v3';
+    card.setAttribute('data-bookmark-id', id);
+
+    var bodyHtml = item.body ? item.body : '<p style="color:#64748B;">Full text could not be located for this saved item. Remove and save it again from the rule card.</p>';
+    var folderControl = '';
+
+    if (activeFolder === 'All') {
+      folderControl =
+        '<label>Folder</label>' +
+        '<select class="rmp-saved-folder-v3">' + FOLDERS.map(function(f){ return '<option ' + ((meta.folder || 'General') === f ? 'selected' : '') + '>' + esc(f) + '</option>'; }).join('') + '</select>';
+    } else {
+      folderControl =
+        '<label>Folder</label>' +
+        '<div class="rmp-saved-folder-fixed-v3">' + esc((meta.folder || activeFolder || 'General')) + '</div>';
+    }
+
+    card.innerHTML =
+      '<button type="button" class="rmp-saved-summary-v3" aria-expanded="false">' +
+        '<span class="rmp-saved-title-wrap-v3">' +
+          '<span class="rmp-saved-badges-v3">' +
+            '<span class="rmp-saved-badge-v3 saved">Saved</span>' +
+            '<span class="rmp-saved-badge-v3">' + esc(item.manual) + ' · ' + esc(item.num) + '</span>' +
+          '</span>' +
+          '<span class="rmp-saved-title-v3">' + esc(item.title || item.id) + '</span>' +
+          '<span class="rmp-saved-sub-v3">Tap to open saved rule/para</span>' +
+        '</span>' +
+        '<span class="rmp-saved-chevron-v3">⌄</span>' +
+      '</button>' +
+      '<div class="rmp-saved-details-v3">' +
+        '<div class="rmp-saved-meta-v3">' +
+          folderControl +
+          '<label>Personal Note</label>' +
+          '<textarea class="rmp-saved-note-v3" placeholder="Add your note for this saved rule...">' + esc(meta.note || '') + '</textarea>' +
+        '</div>' +
+        '<div class="rmp-saved-body-v3">' + bodyHtml + '</div>' +
+        '<div class="rmp-saved-actions-v3">' +
+          '<button type="button" class="rmp-saved-action-v3 rmp-copy-saved-v3">Copy text</button>' +
+          '<button type="button" class="rmp-saved-action-v3 danger rmp-remove-saved-v3">Remove saved</button>' +
+        '</div>' +
+      '</div>';
+
+    var summary = card.querySelector('.rmp-saved-summary-v3');
+    summary.addEventListener('click', function(){
+      var open = card.classList.toggle('open');
+      summary.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    var select = card.querySelector('.rmp-saved-folder-v3');
+    if (select) select.addEventListener('change', function(){
+      updateMeta(id, 'folder', this.value);
+      renderBookmarksCollapsedV3();
+    });
+
+    var note = card.querySelector('.rmp-saved-note-v3');
+    if (note) note.addEventListener('input', function(){ updateMeta(id, 'note', this.value); });
+
+    card.querySelector('.rmp-remove-saved-v3').addEventListener('click', function(){ removeBookmark(id); });
+    card.querySelector('.rmp-copy-saved-v3').addEventListener('click', function(){
+      var text = item.manual + ' ' + item.num + '\n' + item.title + '\n\n' + stripHtml(item.body);
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(function(){ if(window.showToast) showToast('Saved rule copied'); });
+    });
+
+    return card;
+  }
+
+  function renderBookmarksCollapsedV3(){
+    var container = document.getElementById('bookmarks-container');
+    if (!container) return;
+    var ids = bookmarkIds();
+    var meta = getMeta();
+    container.innerHTML = '';
+
+    var counts = {All:ids.length};
+    FOLDERS.forEach(function(f){ counts[f] = 0; });
+    ids.forEach(function(id){ var f = (meta[id] && meta[id].folder) || 'General'; if (counts[f] !== undefined) counts[f]++; });
+
+    var toolbar = document.createElement('div');
+    toolbar.className = 'rmp-bookmark-toolbar rmp-bm-v2';
+    toolbar.innerHTML =
+      '<div class="rmp-bookmark-toolbar-top">' +
+        '<div class="rmp-bookmark-toolbar-title">Saved Rules & Notes</div>' +
+        '<button class="rmp-chip-btn" type="button" id="rmp-export-bookmarks-v3">Export saved rules</button>' +
+      '</div>' +
+      '<div class="rmp-bookmark-folders">' + ['All'].concat(FOLDERS).map(function(f){
+        return '<button type="button" class="rmp-bm-folder-chip ' + (activeFolder === f ? 'active' : '') + '" data-folder="' + esc(f) + '">' + esc(f) + ' <span style="opacity:.75">' + (counts[f] || 0) + '</span></button>';
+      }).join('') + '</div>' +
+      '<div class="rmp-bookmark-export-status">Saved rules are collapsed by default. Open a card to read full text or edit notes. Folder change is available only in All.</div>';
+    container.appendChild(toolbar);
+
+    toolbar.querySelector('#rmp-export-bookmarks-v3').addEventListener('click', exportSavedRules);
+    toolbar.querySelectorAll('.rmp-bm-folder-chip').forEach(function(btn){
+      btn.addEventListener('click', function(){ activeFolder = this.getAttribute('data-folder') || 'All'; renderBookmarksCollapsedV3(); });
+    });
+
+    if (!ids.length) {
+      container.insertAdjacentHTML('beforeend', '<div class="empty-state"><i class="far fa-bookmark"></i><p>No saved rules yet.<br>Tap Save on any rule or para.</p></div>');
+      return;
+    }
+
+    var shown = ids.filter(function(id){ if (activeFolder === 'All') return true; return ((meta[id] && meta[id].folder) || 'General') === activeFolder; });
+    if (!shown.length) {
+      container.insertAdjacentHTML('beforeend', '<div class="empty-state"><i class="far fa-folder-open"></i><p>No saved rules in this folder.</p></div>');
+      return;
+    }
+
+    shown.forEach(function(id){ container.appendChild(createSavedCard(id)); });
+  }
+
+  window.renderBookmarks = renderBookmarksCollapsedV3;
+  window.rmpRenderBookmarksV2 = renderBookmarksCollapsedV3;
+  window.rmpRenderBookmarksCollapsedV3 = renderBookmarksCollapsedV3;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); });
+    if ((window.location.hash || '').indexOf('#bookmarks') === 0) setTimeout(renderBookmarksCollapsedV3, 250);
+  });
+
+  window.addEventListener('hashchange', function(){
+    setTimeout(function(){
+      document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); });
+      if ((window.location.hash || '').indexOf('#bookmarks') === 0) renderBookmarksCollapsedV3();
+    }, 180);
+  });
+
   setInterval(function(){ document.querySelectorAll('.rmp-unread-filter').forEach(function(el){ el.remove(); }); }, 1500);
 })();
 </script>
