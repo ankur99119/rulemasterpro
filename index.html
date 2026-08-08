@@ -13490,6 +13490,130 @@ body{
 </style>
 
 <!-- Page theme colors v34 generated on 2026-08-08. -->
+
+<style id="rmp-voice-percent-fix-v35">
+/* =========================================================
+   Rule Master Pro — Voice + Percentage Alignment Fix v35
+   Fixes:
+   - voice/speech-to-text mic not responding reliably
+   - percentage text inside circular coverage ring not centered
+   ========================================================= */
+
+@media (max-width:760px){
+
+  /* Make all mic buttons visibly tappable and not hidden behind other layers */
+  .rmp27-mic,
+  #home .voice-search-btn-v10,
+  #search .voice-search-btn-v10,
+  button[data-voice-target],
+  [aria-label="Voice search"]{
+    position:relative !important;
+    z-index:5 !important;
+    pointer-events:auto !important;
+    cursor:pointer !important;
+    touch-action:manipulation !important;
+  }
+
+  .rmp27-mic.rmp35-listening,
+  #home .voice-search-btn-v10.rmp35-listening,
+  #search .voice-search-btn-v10.rmp35-listening,
+  button[data-voice-target].rmp35-listening,
+  [aria-label="Voice search"].rmp35-listening{
+    background:#ECFDF5 !important;
+    border-color:#86EFAC !important;
+    color:#16A34A !important;
+    box-shadow:0 0 0 4px rgba(22,163,74,.13), 0 8px 18px rgba(22,163,74,.16) !important;
+  }
+
+  /* Coverage ring percentage alignment — Home status card */
+  .rmp27-ring,
+  .rmp21-progress-ring,
+  .rmp20-progress-ring,
+  .rmp21-status-card .rmp21-progress-ring{
+    display:grid !important;
+    place-items:center !important;
+    align-items:center !important;
+    justify-items:center !important;
+    text-align:center !important;
+    position:relative !important;
+    overflow:visible !important;
+    font-variant-numeric:tabular-nums !important;
+    line-height:1 !important;
+  }
+
+  .rmp27-ring::before,
+  .rmp21-progress-ring::before,
+  .rmp20-progress-ring::before{
+    content:"" !important;
+    position:absolute !important;
+    inset:6px !important;
+    border-radius:50% !important;
+    background:#FFFFFF !important;
+    z-index:1 !important;
+  }
+
+  .rmp27-ring::after{
+    content:"2.8%" !important;
+    position:absolute !important;
+    inset:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    z-index:2 !important;
+    color:#0F172A !important;
+    font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
+    font-size:10.8px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.02em !important;
+    text-align:center !important;
+    transform:translateY(0) !important;
+  }
+
+  .rmp21-progress-ring span,
+  .rmp20-progress-ring span{
+    position:absolute !important;
+    inset:0 !important;
+    z-index:2 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    height:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    color:#0F172A !important;
+    font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
+    font-size:10.8px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.02em !important;
+    text-align:center !important;
+    transform:none !important;
+  }
+
+  /* Prevent duplicate hidden 2.8% text from affecting alignment */
+  .rmp27-ring{
+    color:transparent !important;
+    font-size:0 !important;
+  }
+
+  /* Coverage card text alignment */
+  .rmp27-coverage,
+  .rmp21-status-card.progress{
+    align-items:center !important;
+  }
+
+  .rmp27-coverage > div:not(.rmp27-ring),
+  .rmp21-status-card.progress .rmp21-status-text{
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+  }
+}
+</style>
+
+  <!-- Voice and percent alignment fix v35 generated on 2026-08-08. -->
 </head>
 
 <body>
@@ -24317,6 +24441,166 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
   window.addEventListener("hashchange", () => setTimeout(cleanupSearchArtifacts, 50));
   setTimeout(cleanupSearchArtifacts, 500);
+})();
+</script>
+
+
+<script id="rmp-voice-percent-fix-v35-script">
+(function(){
+  function getSpeechRecognition(){
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  }
+
+  function resolveVoiceTarget(targetId){
+    if(targetId && document.getElementById(targetId)) return document.getElementById(targetId);
+
+    // Prefer current visible screen input.
+    const hash = (location.hash || "#home").replace("#","").split("/")[0];
+    if(hash === "search" && document.getElementById("search-screen-input")) return document.getElementById("search-screen-input");
+    if(document.getElementById("rmp27-search-input")) return document.getElementById("rmp27-search-input");
+    if(document.getElementById("global-search")) return document.getElementById("global-search");
+    if(document.getElementById("search-screen-input")) return document.getElementById("search-screen-input");
+    return null;
+  }
+
+  function syncSearchInputs(value, target){
+    const ids = ["global-search", "rmp27-search-input", "search-screen-input"];
+    ids.forEach(id => {
+      const input = document.getElementById(id);
+      if(input && input !== target) input.value = value;
+    });
+  }
+
+  function setListeningState(btn, state){
+    if(!btn) return;
+    btn.classList.toggle("rmp35-listening", !!state);
+  }
+
+  function showVoiceNote(message){
+    let note = document.getElementById("voice-search-note");
+    if(note){
+      note.textContent = message || "";
+      note.style.display = message ? "block" : "";
+      return;
+    }
+    // Home fallback small toast
+    let toast = document.getElementById("rmp35-voice-toast");
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id = "rmp35-voice-toast";
+      toast.style.cssText = "position:fixed;left:18px;right:18px;bottom:92px;z-index:10000;background:#0F172A;color:#fff;border-radius:16px;padding:11px 14px;font-size:12px;font-weight:800;text-align:center;box-shadow:0 12px 28px rgba(15,23,42,.25);";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.display = message ? "block" : "none";
+    if(message){
+      setTimeout(() => { if(toast) toast.style.display = "none"; }, 2600);
+    }
+  }
+
+  window.rmpVoiceSearch = function(targetId){
+    const target = resolveVoiceTarget(targetId);
+    const SR = getSpeechRecognition();
+    const activeBtn = document.activeElement && document.activeElement.tagName === "BUTTON" ? document.activeElement : null;
+
+    if(!target){
+      showVoiceNote("Search input not found.");
+      return;
+    }
+
+    if(!SR){
+      target.focus();
+      showVoiceNote("Voice typing is not supported in this browser. Use Chrome voice keyboard or type your search.");
+      return;
+    }
+
+    try{
+      const recognition = new SR();
+      recognition.lang = "en-IN";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.continuous = false;
+
+      setListeningState(activeBtn, true);
+      showVoiceNote("Listening... speak now.");
+
+      recognition.onresult = function(event){
+        const transcript = event && event.results && event.results[0] && event.results[0][0] ? event.results[0][0].transcript : "";
+        if(transcript){
+          target.value = transcript;
+          syncSearchInputs(transcript, target);
+          target.dispatchEvent(new Event("input", {bubbles:true}));
+          showVoiceNote("Captured: " + transcript);
+        }
+      };
+
+      recognition.onerror = function(event){
+        const err = event && event.error ? event.error : "voice error";
+        if(err === "not-allowed" || err === "service-not-allowed"){
+          showVoiceNote("Microphone permission is blocked. Allow mic permission for this site.");
+        }else if(err === "no-speech"){
+          showVoiceNote("No speech detected. Tap mic and try again.");
+        }else{
+          showVoiceNote("Voice search could not start: " + err);
+        }
+      };
+
+      recognition.onend = function(){
+        setListeningState(activeBtn, false);
+      };
+
+      recognition.start();
+    }catch(e){
+      setListeningState(activeBtn, false);
+      target.focus();
+      showVoiceNote("Voice search unavailable. Please type your search.");
+    }
+  };
+
+  function bindVoiceButtons(){
+    const selectors = [
+      ".rmp27-mic",
+      "#home .voice-search-btn-v10",
+      "#search .voice-search-btn-v10",
+      "button[data-voice-target]",
+      "button[aria-label='Voice search']"
+    ];
+
+    document.querySelectorAll(selectors.join(",")).forEach(btn => {
+      if(btn.dataset.rmp35VoiceBound === "1") return;
+      btn.dataset.rmp35VoiceBound = "1";
+
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        const target = btn.getAttribute("data-voice-target") ||
+                       btn.dataset.voiceTarget ||
+                       (btn.closest("#search") ? "search-screen-input" : "rmp27-search-input");
+        window.rmpVoiceSearch(target);
+      }, true);
+    });
+  }
+
+  function fixRings(){
+    document.querySelectorAll(".rmp21-progress-ring span, .rmp20-progress-ring span").forEach(span => {
+      const t = (span.textContent || "").trim();
+      if(!t) span.textContent = "2.8%";
+    });
+  }
+
+  function run(){
+    bindVoiceButtons();
+    fixRings();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+  window.addEventListener("hashchange", () => setTimeout(run, 80));
+  setTimeout(run, 400);
+  setTimeout(run, 1200);
 })();
 </script>
 
