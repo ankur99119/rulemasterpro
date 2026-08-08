@@ -13491,208 +13491,96 @@ body{
 
 <!-- Page theme colors v34 generated on 2026-08-08. -->
 
-<style id="rmp-voice-percent-fix-v35">
+
+
+<style id="rmp-no-voice-v38">
 /* =========================================================
-   Rule Master Pro — Voice + Percentage Alignment Fix v35
-   Fixes:
-   - voice/speech-to-text mic not responding reliably
-   - percentage text inside circular coverage ring not centered
+   Rule Master Pro — No Voice Search v38
+   Voice search has been removed completely from visible UI.
+   Search bars are rebalanced without microphone buttons.
    ========================================================= */
 
+/* Hide any legacy voice/mic controls if an old cached node appears */
+.rmp27-mic,
+.voice-search-btn-v10,
+.rmp-search-v18-mic,
+.voice-btn,
+.search-voice,
+#voiceSearchBtn,
+#voice-btn,
+.rmp-action-voice-final,
+.voice-search-note-v10,
+[class*="voice-status"],
+[id*="voice-search-note"]{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+/* Mobile home search now has: icon + input + search button */
 @media (max-width:760px){
-
-  /* Make all mic buttons visibly tappable and not hidden behind other layers */
-  .rmp27-mic,
-  #home .voice-search-btn-v10,
-  #search .voice-search-btn-v10,
-  button[data-voice-target],
-  [aria-label="Voice search"]{
-    position:relative !important;
-    z-index:5 !important;
-    pointer-events:auto !important;
-    cursor:pointer !important;
-    touch-action:manipulation !important;
+  .rmp27-search{
+    grid-template-columns:42px minmax(0,1fr) 42px !important;
+    gap:8px !important;
   }
 
-  .rmp27-mic.rmp35-listening,
-  #home .voice-search-btn-v10.rmp35-listening,
-  #search .voice-search-btn-v10.rmp35-listening,
-  button[data-voice-target].rmp35-listening,
-  [aria-label="Voice search"].rmp35-listening{
-    background:#ECFDF5 !important;
-    border-color:#86EFAC !important;
-    color:#16A34A !important;
-    box-shadow:0 0 0 4px rgba(22,163,74,.13), 0 8px 18px rgba(22,163,74,.16) !important;
-  }
-
-  /* Coverage ring percentage alignment — Home status card */
-  .rmp27-ring,
-  .rmp21-progress-ring,
-  .rmp20-progress-ring,
-  .rmp21-status-card .rmp21-progress-ring{
+  .rmp27-search .rmp27-go{
     display:grid !important;
-    place-items:center !important;
-    align-items:center !important;
-    justify-items:center !important;
-    text-align:center !important;
-    position:relative !important;
-    overflow:visible !important;
-    font-variant-numeric:tabular-nums !important;
-    line-height:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
   }
 
-  .rmp27-ring::before,
-  .rmp21-progress-ring::before,
-  .rmp20-progress-ring::before{
-    content:"" !important;
-    position:absolute !important;
-    inset:6px !important;
-    border-radius:50% !important;
-    background:#FFFFFF !important;
-    z-index:1 !important;
-  }
-
-  .rmp27-ring::after{
-    content:"2.8%" !important;
-    position:absolute !important;
-    inset:0 !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    z-index:2 !important;
-    color:#0F172A !important;
-    font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
-    font-size:10.8px !important;
-    line-height:1 !important;
-    font-weight:1000 !important;
-    letter-spacing:-.02em !important;
-    text-align:center !important;
-    transform:translateY(0) !important;
-  }
-
-  .rmp21-progress-ring span,
-  .rmp20-progress-ring span{
-    position:absolute !important;
-    inset:0 !important;
-    z-index:2 !important;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    width:100% !important;
-    height:100% !important;
-    margin:0 !important;
-    padding:0 !important;
-    color:#0F172A !important;
-    font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
-    font-size:10.8px !important;
-    line-height:1 !important;
-    font-weight:1000 !important;
-    letter-spacing:-.02em !important;
-    text-align:center !important;
-    transform:none !important;
-  }
-
-  /* Prevent duplicate hidden 2.8% text from affecting alignment */
-  .rmp27-ring{
-    color:transparent !important;
-    font-size:0 !important;
-  }
-
-  /* Coverage card text alignment */
-  .rmp27-coverage,
-  .rmp21-status-card.progress{
-    align-items:center !important;
-  }
-
-  .rmp27-coverage > div:not(.rmp27-ring),
-  .rmp21-status-card.progress .rmp21-status-text{
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:center !important;
-  }
-}
-</style>
-
-  <!-- Voice and percent alignment fix v35 generated on 2026-08-08. -->
-
-<!-- Realtime voice search v36 generated on 2026-08-08. -->
-
-<style id="rmp-realtime-voice-clean-v37">
-/* =========================================================
-   Rule Master Pro — Realtime Voice Clean v37
-   Fix:
-   - remove "old voice activation text" from search bar
-   - do not let voice status become default placeholder
-   - keep realtime typing
-   ========================================================= */
-
-@media (max-width:760px){
-
-  input.rmp37-voice-active,
-  #global-search.rmp37-voice-active,
-  #rmp27-search-input.rmp37-voice-active,
-  #search-screen-input.rmp37-voice-active{
-    background:#FFFFFF !important;
-    color:#0F172A !important;
-    box-shadow:inset 0 0 0 1px #86EFAC !important;
-  }
-
-  .rmp37-voice-status{
-    position:absolute !important;
-    left:16px !important;
-    right:16px !important;
-    bottom:-26px !important;
-    min-height:22px !important;
-    border-radius:999px !important;
-    padding:5px 10px !important;
-    background:#ECFDF5 !important;
-    color:#047857 !important;
-    border:1px solid #BBF7D0 !important;
-    font-size:10px !important;
-    line-height:1 !important;
-    font-weight:900 !important;
-    text-align:center !important;
-    box-shadow:0 8px 16px rgba(15,23,42,.08) !important;
-    z-index:10 !important;
-    display:none !important;
-  }
-
-  .rmp37-voice-status.show{
-    display:block !important;
-  }
-
-  .rmp27-search,
-  #search .search-row-v3,
   #home .home-search-card{
-    position:relative !important;
+    display:grid !important;
+    grid-template-columns:42px minmax(0,1fr) 42px !important;
+    gap:8px !important;
+    align-items:center !important;
   }
 
-  .rmp37-mic-live,
-  .rmp27-mic.rmp37-mic-live,
-  #home .voice-search-btn-v10.rmp37-mic-live,
-  #search .voice-search-btn-v10.rmp37-mic-live,
-  button[aria-label="Voice search"].rmp37-mic-live{
-    background:#ECFDF5 !important;
-    border-color:#86EFAC !important;
-    color:#16A34A !important;
-    box-shadow:0 0 0 4px rgba(22,163,74,.14), 0 8px 18px rgba(22,163,74,.16) !important;
+  #home .home-search-card button[onclick="triggerSearch()"],
+  #home .home-search-card .home-search-btn,
+  #home .home-search-card .rmp-search-btn{
+    display:grid !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
   }
 
-  .rmp37-mic-live::after{
-    content:"" !important;
-    position:absolute !important;
-    width:8px !important;
-    height:8px !important;
-    right:5px !important;
-    top:5px !important;
-    border-radius:50% !important;
-    background:#22C55E !important;
-    box-shadow:0 0 0 4px rgba(34,197,94,.18) !important;
+  /* Search page row now has: input + search button */
+  #search .search-row-v3,
+  #search.screen.active .search-row-v3{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 44px !important;
+    gap:9px !important;
+    align-items:center !important;
+  }
+
+  #search .search-btn-v3,
+  #search.screen.active .search-btn-v3{
+    display:grid !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+    width:44px !important;
+    min-width:44px !important;
+    height:44px !important;
+    border-radius:16px !important;
+  }
+
+  #search .search-input-v3,
+  #search.screen.active .search-input-v3{
+    min-width:0 !important;
+    width:100% !important;
+  }
+}
+
+/* Desktop/tablet search row rebalance */
+@media (min-width:761px){
+  #search .search-row-v3{
+    grid-template-columns:minmax(0,1fr) 48px !important;
   }
 }
 </style>
 
-  <!-- Realtime voice clean v37 generated on 2026-08-08. -->
+  <!-- Voice search removed v38 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -13912,7 +13800,6 @@ body{
   <div class="rmp27-search">
     <span class="rmp27-search-icon">⌕</span>
     <input id="rmp27-search-input" type="text" placeholder="Search rule, para or keyword..." />
-    <button type="button" class="rmp27-mic" aria-label="Voice search">🎙</button>
     <button type="button" class="rmp27-go" aria-label="Search">➜</button>
   </div>
 
@@ -13942,7 +13829,6 @@ body{
           <div class="home-search-card">
             <i class="fas fa-search" style="color:var(--text-muted);flex-shrink:0;"></i>
             <input id="global-search" type="text" placeholder="Type keyword and press Enter or tap →" style="background:transparent;border:none;outline:none;color:var(--text-main);font-size:14px;width:100%;font-family:'DM Sans',sans-serif;padding-left:4px;">
-            <button type="button" class="voice-search-btn-v10" data-voice-target="global-search" onclick="rmpVoiceSearch('global-search')" title="Voice search" aria-label="Voice search"><i class="fas fa-microphone"></i></button>
             <button onclick="triggerSearch()" style="background:var(--amber);border:none;color:#fff;border-radius:10px;padding:0 18px;font-size:18px;font-weight:700;cursor:pointer;flex-shrink:0;align-self:stretch;display:flex;align-items:center;justify-content:center;min-width:44px;">→</button>
           </div>
 
@@ -14142,7 +14028,6 @@ body{
         <div class="search-panel-v3">
           <div class="search-row-v3">
             <input id="search-screen-input" class="search-input-v3" type="text" placeholder="Search rule, para, section or keyword..." onkeydown="if(event.key==='Enter') triggerSearchFromScreen();">
-            <button type="button" class="voice-search-btn-v10" data-voice-target="search-screen-input" onclick="rmpVoiceSearch('search-screen-input')" title="Voice search" aria-label="Voice search"><i class="fas fa-microphone"></i></button>
             <button class="search-btn-v3" onclick="triggerSearchFromScreen()"><i class="fas fa-search"></i></button>
           </div>
           <div class="search-filter-row-v3">
@@ -14164,7 +14049,6 @@ body{
             <button class="search-chip-v3" onclick="setSearchManualFilter('corr')">Slips</button>
           </div>
           <div id="recent-searches-row" class="recent-search-row-v4"></div>
-          <div id="voice-search-note" class="voice-search-note-v10"></div>
           <div class="search-tip-v3">Tip: exact numbers are ranked first. Wrong spelling and common railway synonyms are handled. Try <b>shiting</b>, <b>guard</b>, <b>driver</b>, <b>4.65</b>, <b>29001</b>, or <b>train parting</b>.</div>
         </div>
         <div id="search-stats"></div>
@@ -22120,98 +22004,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
 <script>
 (function(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let activeRecognition = null;
-  const placeholders = {
-    'global-search': 'Type keyword and press Enter or tap →',
-    'search-screen-input': 'Search rule, para, section or keyword...'
-  };
-  function setVoiceButtons(targetId, listening){
-    document.querySelectorAll('[data-voice-target="'+targetId+'"]').forEach(btn=>{
-      btn.classList.toggle('listening', !!listening);
-      btn.innerHTML = listening ? '<i class="fas fa-stop"></i>' : '<i class="fas fa-microphone"></i>';
-      btn.setAttribute('aria-label', listening ? 'Stop voice search' : 'Voice search');
-      btn.title = listening ? 'Stop listening' : 'Voice search';
-    });
-  }
-  function showVoiceNote(msg){
-    const n=document.getElementById('voice-search-note');
-    if(!n) return;
-    n.textContent=msg||'';
-    n.classList.toggle('show', !!msg);
-    if(msg) setTimeout(()=>{ if(n.textContent===msg){ n.textContent=''; n.classList.remove('show'); } }, 4500);
-  }
-  function syncSearchInputs(value, sourceId){
-    const ids=['global-search','search-screen-input'];
-    ids.forEach(id=>{ if(id!==sourceId){ const el=document.getElementById(id); if(el) el.value=value; } });
-  }
-  window.rmpVoiceSearch = function(targetId){
-    const input = document.getElementById(targetId) || document.getElementById('search-screen-input') || document.getElementById('global-search');
-    if(!input) return;
-    if(activeRecognition){
-      try{ activeRecognition.abort(); }catch(e){}
-      activeRecognition = null;
-      setVoiceButtons(targetId,false);
-      return;
-    }
-    if(!SpeechRecognition){
-      showVoiceNote('Voice search is not supported in this browser. Please use Chrome/Android browser.');
-      input.focus();
-      return;
-    }
-    try{
-      const rec = new SpeechRecognition();
-      activeRecognition = rec;
-      rec.lang = 'en-IN';
-      rec.interimResults = true;
-      rec.continuous = false;
-      rec.maxAlternatives = 3;
-      let finalText = '';
-      setVoiceButtons(targetId,true);
-      input.placeholder = 'Listening... speak now';
-      input.focus();
-      showVoiceNote('Listening… speak your search word or rule number.');
-      rec.onresult = function(event){
-        let interim = '';
-        for(let i=event.resultIndex;i<event.results.length;i++){
-          const part = event.results[i][0] && event.results[i][0].transcript ? event.results[i][0].transcript : '';
-          if(event.results[i].isFinal) finalText += ' ' + part;
-          else interim += ' ' + part;
-        }
-        const spoken = (finalText || interim).trim();
-        if(spoken){ input.value = spoken; syncSearchInputs(spoken,targetId); }
-      };
-      rec.onerror = function(ev){
-        const code = ev && ev.error ? ev.error : 'voice error';
-        if(code !== 'aborted') showVoiceNote('Voice search stopped: '+code+'. You can type instead.');
-      };
-      rec.onend = function(){
-        const value = (input.value || '').trim();
-        activeRecognition = null;
-        setVoiceButtons(targetId,false);
-        input.placeholder = placeholders[targetId] || 'Search rule, para, section or keyword...';
-        if(value){
-          syncSearchInputs(value,targetId);
-          if(targetId === 'global-search' && typeof triggerSearch === 'function') triggerSearch();
-          else if(typeof triggerSearchFromScreen === 'function') triggerSearchFromScreen();
-        }
-      };
-      rec.start();
-    }catch(err){
-      activeRecognition = null;
-      setVoiceButtons(targetId,false);
-      input.placeholder = placeholders[targetId] || 'Search rule, para, section or keyword...';
-      showVoiceNote('Unable to start voice search. Please allow microphone permission.');
-    }
-  };
-})();
-</script>
-
-
-
-
-<script>
-(function(){
   const VERSION = 'clean-stable-v1';
   const VERSION_LABEL = 'Guard White v9 · July 2026';
   const UPDATED = '01 July 2026';
@@ -23476,446 +23268,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 </script>
 
 
-<script id="advanced-search-ui-v18-script">
-(function(){
-  'use strict';
-
-  var RECENT_KEY = 'rmp_search_recent_v18';
-  var popular = ['IBS at ON','5.23','Train parting','BPAC failure','Signal failed','Shunting','Line Clear','Stabled load'];
-  var modes = [
-    {key:'all', label:'All Manuals'},
-    {key:'gsr', label:'G&SR'},
-    {key:'bwm', label:'BWM'},
-    {key:'om', label:'Operating'},
-    {key:'signal', label:'Signal'},
-    {key:'shunting', label:'Shunting'},
-    {key:'accident', label:'Accident'}
-  ];
-  var templates = [
-    {q:'ibs at on', type:'Situation / Rule', title:'IBS Signal at ON', sub:'Try G&SR 3.75, automatic block rules, related signal passing procedure'},
-    {q:'train parting', type:'Accident', title:'Train Parting', sub:'Relevant to G&SR 6.08 and portion left in block section'},
-    {q:'5.23', type:'Exact Rule', title:'Securing of Vehicles at Station', sub:'Direct rule number style search'},
-    {q:'bpac failure', type:'Block Working', title:'BPAC / Axle Counter Failure', sub:'Useful for Block Working Manual and G&SR block rules'},
-    {q:'signal failed', type:'Signal Failure', title:'Defective Signal Procedure', sub:'Duties of SM and LP when signal is defective'},
-    {q:'stabled load', type:'Yard Safety', title:'Stabling and Securing', sub:'Searches securing, handbrake, wedges and safety chain topics'}
-  ];
-
-  function esc(s){
-    return String(s == null ? '' : s).replace(/[&<>"']/g,function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
-
-  function safeJSON(raw, fallback){
-    try { return JSON.parse(raw); } catch(e){ return fallback; }
-  }
-
-  function getRecent(){
-    var arr = safeJSON(localStorage.getItem(RECENT_KEY) || '[]', []);
-    return Array.isArray(arr) ? arr.slice(0,6) : [];
-  }
-
-  function saveRecent(q){
-    q = String(q || '').trim();
-    if(!q) return;
-    var arr = getRecent().filter(function(x){ return String(x).toLowerCase() !== q.toLowerCase(); });
-    arr.unshift(q);
-    localStorage.setItem(RECENT_KEY, JSON.stringify(arr.slice(0,6)));
-  }
-
-  function findSearchInput(){
-    var selectors = [
-      '#global-search',
-      '#searchInput',
-      '#search-input',
-      'input[type="search"]',
-      '.home-search-card input[type="text"]',
-      '.home-search-card input'
-    ];
-    for(var i=0;i<selectors.length;i++){
-      var el = document.querySelector(selectors[i]);
-      if(el) return el;
-    }
-    return null;
-  }
-
-  function findSearchCard(input){
-    if(!input) return null;
-    return input.closest('.home-search-card') ||
-           input.closest('.search-card') ||
-           input.closest('.search-panel') ||
-           input.closest('.search-container') ||
-           input.parentElement;
-  }
-
-  function findSearchButton(card){
-    if(!card) return null;
-    return card.querySelector('.rmp-search-v18-submit') ||
-           card.querySelector('#searchBtn') ||
-           card.querySelector('#search-btn') ||
-           card.querySelector('.search-button') ||
-           card.querySelector('button[type="submit"]') ||
-           Array.prototype.slice.call(card.querySelectorAll('button')).filter(function(b){
-             return !/mic|voice/i.test(b.id + ' ' + b.className + ' ' + b.textContent);
-           }).pop();
-  }
-
-  function findMicButton(card){
-    if(!card) return null;
-    return card.querySelector('.rmp-search-v18-mic') ||
-           card.querySelector('#voiceSearchBtn') ||
-           card.querySelector('#voice-btn') ||
-           card.querySelector('.voice-btn') ||
-           card.querySelector('.search-voice') ||
-           Array.prototype.slice.call(card.querySelectorAll('button')).filter(function(b){
-             return /mic|voice|🎙|🎤/i.test(b.id + ' ' + b.className + ' ' + b.textContent);
-           })[0];
-  }
-
-  function detectType(q){
-    q = String(q || '').trim().toLowerCase();
-    if(!q) return 'Ready for Smart Search';
-    if(/^\d+(\.\d+)?(\/[\w()]+)?$/.test(q) || /\b\d+\.\d+\b/.test(q)) return 'Exact Rule / Para';
-    if(/ibs| at on|signal|starter|home|distant|calling|shunt signal/.test(q)) return 'Signal / Situation';
-    if(/bpac|block|line clear|token|instrument|communication/.test(q)) return 'Block Working';
-    if(/shunt|stabling|secured|wagon|load|yard|fouling/.test(q)) return 'Yard / Shunting';
-    if(/accident|parting|fire|obstruction|derail|runaway/.test(q)) return 'Accident / Unusual';
-    return 'Keyword Search';
-  }
-
-  function setInputValue(input, value){
-    if(!input) return;
-    input.value = value;
-    input.dispatchEvent(new Event('input', {bubbles:true}));
-    input.focus();
-  }
-
-  function submitSearch(input, card){
-    if(!input) return;
-    saveRecent(input.value);
-    renderRecent(card, input);
-    var btn = findSearchButton(card);
-    if(btn && !btn.classList.contains('rmp-search-v18-submit')) {
-      btn.click();
-      return;
-    }
-    if(btn && btn.classList.contains('rmp-search-v18-submit')) {
-      // Try native search functions by triggering Enter and form submit.
-      input.dispatchEvent(new KeyboardEvent('keydown', {key:'Enter', code:'Enter', bubbles:true}));
-      input.dispatchEvent(new KeyboardEvent('keyup', {key:'Enter', code:'Enter', bubbles:true}));
-      var form = input.closest('form');
-      if(form) form.dispatchEvent(new Event('submit', {bubbles:true, cancelable:true}));
-      return;
-    }
-    input.dispatchEvent(new KeyboardEvent('keydown', {key:'Enter', code:'Enter', bubbles:true}));
-  }
-
-  function renderRecent(card, input){
-    var host = card && card.querySelector('.rmp-search-v18-recent');
-    if(!host) return;
-    var arr = getRecent();
-    host.innerHTML = arr.length ? arr.map(function(q){
-      return '<button type="button" class="rmp-search-v18-recent-chip" data-q="'+esc(q)+'">'+esc(q)+'</button>';
-    }).join('') : '<span class="rmp-search-v18-inline-muted">No recent searches yet</span>';
-    host.querySelectorAll('button[data-q]').forEach(function(b){
-      b.addEventListener('click', function(){
-        setInputValue(input, this.getAttribute('data-q') || '');
-        submitSearch(input, card);
-      });
-    });
-  }
-
-  function renderSuggestions(card, input){
-    var box = card && card.querySelector('.rmp-search-v18-suggestions');
-    var detect = card && card.querySelector('.rmp-search-v18-detect');
-    var clear = card && card.querySelector('.rmp-search-v18-clear');
-    if(!box || !input) return;
-    var q = input.value.trim();
-    if(detect) detect.textContent = detectType(q);
-    if(clear) clear.classList.toggle('show', !!q);
-
-    if(!q){
-      box.classList.remove('show');
-      box.innerHTML = '';
-      return;
-    }
-    var low = q.toLowerCase();
-    var matches = templates.filter(function(t){
-      return t.q.indexOf(low) >= 0 || low.indexOf(t.q) >= 0 || t.title.toLowerCase().indexOf(low) >= 0 || t.sub.toLowerCase().indexOf(low) >= 0;
-    }).slice(0,3);
-    if(!matches.length && q.length >= 2){
-      matches = [
-        {q:q, type:detectType(q), title:'Search all manuals for “'+q+'”', sub:'Press Enter or arrow to show ranked rule results'}
-      ];
-    }
-    if(!matches.length){
-      box.classList.remove('show');
-      return;
-    }
-    box.innerHTML = '<div class="rmp-search-v18-suggestion-head"><span>Smart Suggestions</span><span>'+esc(detectType(q))+'</span></div>' +
-      matches.map(function(m){
-        return '<button type="button" class="rmp-search-v18-suggestion-item" data-q="'+esc(m.q)+'">' +
-          '<span class="rmp-search-v18-suggestion-badge">'+esc(m.type)+'</span>' +
-          '<span class="rmp-search-v18-suggestion-text"><b>'+esc(m.title)+'</b><small>'+esc(m.sub)+'</small></span>' +
-          '</button>';
-      }).join('');
-    box.classList.add('show');
-    box.querySelectorAll('button[data-q]').forEach(function(b){
-      b.addEventListener('click', function(){
-        setInputValue(input, this.getAttribute('data-q') || '');
-        submitSearch(input, card);
-      });
-    });
-  }
-
-  function buildShell(card, input){
-    if(!card || !input || card.querySelector('.rmp-search-v18-wrap')) return;
-
-    var originalParent = input.parentElement;
-    var existingButtons = Array.prototype.slice.call(card.querySelectorAll('button'));
-    var mic = findMicButton(card);
-    var submit = findSearchButton(card);
-
-    var wrap = document.createElement('div');
-    wrap.className = 'rmp-search-v18-wrap';
-    wrap.innerHTML = ''
-      + '<div class="rmp-search-v18-title">'
-      +   '<div class="rmp-search-v18-title-main">'
-      +     '<div class="rmp-search-v18-kicker">Rule Master Pro Search Console</div>'
-      +     '<div class="rmp-search-v18-heading">Search rule, para, topic or field situation</div>'
-      +   '</div>'
-      +   '<div class="rmp-search-v18-detect">Ready for Smart Search</div>'
-      + '</div>'
-      + '<div class="rmp-search-v18-sub">Try: <b>IBS at ON</b> · <b>5.23</b> · <b>train parting</b> · <b>BPAC failure</b> · <b>shunting</b></div>'
-      + '<div class="rmp-search-v18-shell">'
-      +   '<span class="rmp-search-v18-icon" aria-hidden="true">⌕</span>'
-      +   '<div class="rmp-search-v18-input-zone"></div>'
-      +   '<button type="button" class="rmp-search-v18-clear" title="Clear search">×</button>'
-      +   '<div class="rmp-search-v18-actions"></div>'
-      + '</div>'
-      + '<div class="rmp-search-v18-listening-note">🎙 Listening… speak rule number, topic, signal, shunting or block working situation.</div>'
-      + '<div class="rmp-search-v18-utility">'
-      +   '<div class="rmp-search-v18-chips"></div>'
-      + '</div>'
-      + '<div class="rmp-search-v18-suggestions"></div>'
-      + '<div class="rmp-search-v18-section">'
-      +   '<div class="rmp-search-v18-section-title">Recent Searches</div>'
-      +   '<div class="rmp-search-v18-recent"></div>'
-      + '</div>'
-      + '<div class="rmp-search-v18-section">'
-      +   '<div class="rmp-search-v18-section-title">Popular Quick Searches</div>'
-      +   '<div class="rmp-search-v18-popular"></div>'
-      + '</div>';
-
-    // Clear only the visual contents of the search card and re-insert functional controls.
-    while(card.firstChild) card.removeChild(card.firstChild);
-    card.appendChild(wrap);
-
-    var inputZone = wrap.querySelector('.rmp-search-v18-input-zone');
-    input.placeholder = 'Search rule, para or topic...';
-    inputZone.appendChild(input);
-    var hint = document.createElement('div');
-    hint.className = 'rmp-search-v18-hint';
-    hint.textContent = 'Smart match supports rule numbers, wrong spellings, synonyms and railway situations';
-    inputZone.appendChild(hint);
-
-    var actions = wrap.querySelector('.rmp-search-v18-actions');
-    if(mic){
-      mic.classList.add('rmp-search-v18-mic');
-      mic.title = mic.title || 'Voice search';
-      actions.appendChild(mic);
-    } else {
-      mic = document.createElement('button');
-      mic.type = 'button';
-      mic.className = 'rmp-search-v18-mic';
-      mic.innerHTML = '<i class="fas fa-microphone"></i>';
-      mic.title = 'Voice search';
-      actions.appendChild(mic);
-    }
-    if(submit && submit !== mic){
-      submit.classList.add('rmp-search-v18-submit');
-      submit.title = submit.title || 'Search';
-      submit.innerHTML = '<i class="fas fa-paper-plane"></i>';
-      actions.appendChild(submit);
-    } else {
-      submit = document.createElement('button');
-      submit.type = 'button';
-      submit.className = 'rmp-search-v18-submit';
-      submit.innerHTML = '<i class="fas fa-paper-plane"></i>';
-      submit.title = 'Search';
-      actions.appendChild(submit);
-    }
-
-    // Chips
-    var chipHost = wrap.querySelector('.rmp-search-v18-chips');
-    chipHost.innerHTML = modes.map(function(m, idx){
-      return '<button type="button" class="rmp-search-v18-chip '+(idx===0?'active':'')+'" data-mode="'+esc(m.key)+'">'+esc(m.label)+'</button>';
-    }).join('');
-    chipHost.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click', function(){
-        chipHost.querySelectorAll('button').forEach(function(x){ x.classList.remove('active'); });
-        this.classList.add('active');
-        var mode = this.getAttribute('data-mode');
-        var q = input.value.trim();
-        if(mode && mode !== 'all'){
-          var prefix = ({gsr:'G&SR ', bwm:'BWM ', om:'Operating Manual ', signal:'signal ', shunting:'shunting ', accident:'accident '})[mode] || '';
-          if(prefix && q && q.toLowerCase().indexOf(prefix.trim().toLowerCase()) !== 0) setInputValue(input, prefix + q);
-          else if(prefix && !q) setInputValue(input, prefix.trim());
-        }
-        renderSuggestions(card, input);
-      });
-    });
-
-    var popularHost = wrap.querySelector('.rmp-search-v18-popular');
-    popularHost.innerHTML = popular.map(function(q){
-      return '<button type="button" class="rmp-search-v18-popular-chip" data-q="'+esc(q)+'">'+esc(q)+'</button>';
-    }).join('');
-    popularHost.querySelectorAll('button[data-q]').forEach(function(b){
-      b.addEventListener('click', function(){
-        setInputValue(input, this.getAttribute('data-q') || '');
-        submitSearch(input, card);
-      });
-    });
-
-    var clear = wrap.querySelector('.rmp-search-v18-clear');
-    clear.addEventListener('click', function(){
-      setInputValue(input, '');
-      renderSuggestions(card, input);
-    });
-
-    submit.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      submitSearch(input, card);
-    });
-
-    input.addEventListener('input', function(){ renderSuggestions(card, input); });
-    input.addEventListener('keydown', function(e){
-      if(e.key === 'Enter'){
-        saveRecent(input.value);
-        renderRecent(card, input);
-      }
-    });
-
-    mic.addEventListener('click', function(){
-      var note = card.querySelector('.rmp-search-v18-listening-note');
-      mic.classList.add('listening');
-      if(note) note.classList.add('show');
-      setTimeout(function(){
-        mic.classList.remove('listening');
-        if(note) note.classList.remove('show');
-      }, 3200);
-    }, true);
-
-    renderRecent(card, input);
-    renderSuggestions(card, input);
-  }
-
-  function enhance(){
-    var input = findSearchInput();
-    var card = findSearchCard(input);
-    if(input && card) buildShell(card, input);
-  }
-
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance);
-  else enhance();
-
-  var tries = 0;
-  var timer = setInterval(function(){
-    tries++;
-    enhance();
-    if(tries > 20 || document.querySelector('.rmp-search-v18-wrap')) clearInterval(timer);
-  }, 400);
-
-  window.RMP_ADVANCED_SEARCH_UI_V18 = {enhance: enhance};
-})();
-</script>
-
-
-<script id="search-actions-final-v24-script">
-(function(){
-  'use strict';
-
-  var micSvg = ''
-    + '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-    + '<path d="M12 3.75a3 3 0 0 0-3 3v5.5a3 3 0 1 0 6 0v-5.5a3 3 0 0 0-3-3Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>'
-    + '<path d="M6.5 10.75v1.1a5.5 5.5 0 0 0 11 0v-1.1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>'
-    + '<path d="M12 17.5v2.75M8.75 20.25h6.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>'
-    + '</svg>';
-
-  var sendSvg = ''
-    + '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-    + '<path d="M4.25 11.6 20.1 4.45c.36-.16.72.2.56.56L13.5 20.86c-.16.35-.67.31-.77-.07l-1.62-6.02a1.15 1.15 0 0 0-.82-.82L4.27 12.33c-.38-.1-.42-.57-.02-.73Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>'
-    + '<path d="m11.35 13.65 4.65-4.66" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>'
-    + '</svg>';
-
-  function q(sel){ return document.querySelector(sel); }
-
-  function findCard(){
-    return q('.home-search-card') || q('.search-card') || q('.search-panel') || q('.search-container');
-  }
-
-  function findMic(card){
-    if(!card) return null;
-    return card.querySelector('.rmp-search-v18-mic') ||
-           card.querySelector('.voice-search-btn-v10') ||
-           card.querySelector('#voiceSearchBtn') ||
-           card.querySelector('#voice-btn') ||
-           card.querySelector('.voice-btn') ||
-           card.querySelector('.search-voice') ||
-           Array.prototype.slice.call(card.querySelectorAll('button')).filter(function(b){
-             return /mic|voice|microphone|🎙|🎤/i.test(b.id + ' ' + b.className + ' ' + b.title + ' ' + b.getAttribute('aria-label') + ' ' + b.textContent);
-           })[0];
-  }
-
-  function findSearch(card, mic){
-    if(!card) return null;
-    return card.querySelector('.rmp-search-v18-submit') ||
-           card.querySelector('#searchBtn') ||
-           card.querySelector('#search-btn') ||
-           card.querySelector('.search-button') ||
-           Array.prototype.slice.call(card.querySelectorAll('button')).filter(function(b){
-             return b !== mic && !/mic|voice|microphone|🎙|🎤/i.test(b.id + ' ' + b.className + ' ' + b.title + ' ' + b.getAttribute('aria-label') + ' ' + b.textContent);
-           }).pop();
-  }
-
-  function apply(){
-    var card = findCard();
-    if(!card) return false;
-
-    var mic = findMic(card);
-    var send = findSearch(card, mic);
-
-    if(mic){
-      mic.classList.add('rmp-action-btn-final','rmp-action-voice-final');
-      mic.innerHTML = micSvg;
-      mic.setAttribute('aria-label','Voice search');
-      mic.setAttribute('title','Voice search');
-    }
-
-    if(send){
-      send.classList.add('rmp-action-btn-final','rmp-action-search-final');
-      send.innerHTML = sendSvg;
-      send.setAttribute('aria-label','Search');
-      send.setAttribute('title','Search');
-    }
-
-    return !!(mic && send);
-  }
-
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply);
-  else apply();
-
-  var tries = 0;
-  var t = setInterval(function(){
-    tries++;
-    var ok = apply();
-    if(ok || tries > 30) clearInterval(t);
-  }, 250);
-
-  window.RMP_SEARCH_ACTIONS_FINAL_V24 = {apply:apply};
-})();
-</script>
 
 
 <style id="rmp-mobile-continuous-fix-v11">
@@ -24224,57 +23576,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 </script>
 
 
-<script id="rmp-hard-mobile-reset-v27-script">
-(function(){
-  function bindV27(){
-    const v27 = document.getElementById("rmp27-search-input");
-    const old = document.getElementById("global-search");
-    if(v27 && old && !v27.dataset.bound){
-      v27.dataset.bound = "1";
-      v27.addEventListener("input", () => { old.value = v27.value; });
-      v27.addEventListener("keydown", (e) => {
-        if(e.key === "Enter"){
-          old.value = v27.value;
-          if(typeof triggerSearch === "function") triggerSearch();
-        }
-      });
-    }
-    document.querySelector(".rmp27-go")?.addEventListener("click", () => {
-      const v = document.getElementById("rmp27-search-input");
-      const oldInput = document.getElementById("global-search");
-      if(v && oldInput) oldInput.value = v.value;
-      if(typeof triggerSearch === "function") triggerSearch();
-    }, {once:false});
-    document.querySelector(".rmp27-mic")?.addEventListener("click", () => {
-      if(typeof rmpVoiceSearch === "function") rmpVoiceSearch("global-search");
-    }, {once:false});
-  }
-
-  function clearOldPwaCacheOnce(){
-    try{
-      if(!localStorage.getItem("rmp27CacheCleared")){
-        localStorage.setItem("rmp27CacheCleared","1");
-        if("serviceWorker" in navigator){
-          navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
-        }
-        if(window.caches){
-          caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-        }
-      }
-    }catch(e){}
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", () => { bindV27(); clearOldPwaCacheOnce(); });
-  }else{
-    bindV27();
-    clearOldPwaCacheOnce();
-  }
-  setTimeout(bindV27,500);
-  setTimeout(bindV27,1500);
-})();
-</script>
-
 
 <script id="rmp-mobile-fullwidth-nav-v28-script">
 (function(){
@@ -24523,427 +23824,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 })();
 </script>
 
-
-<script id="rmp-voice-percent-fix-v35-script">
-(function(){
-  function getSpeechRecognition(){
-    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
-  }
-
-  function resolveVoiceTarget(targetId){
-    if(targetId && document.getElementById(targetId)) return document.getElementById(targetId);
-
-    // Prefer current visible screen input.
-    const hash = (location.hash || "#home").replace("#","").split("/")[0];
-    if(hash === "search" && document.getElementById("search-screen-input")) return document.getElementById("search-screen-input");
-    if(document.getElementById("rmp27-search-input")) return document.getElementById("rmp27-search-input");
-    if(document.getElementById("global-search")) return document.getElementById("global-search");
-    if(document.getElementById("search-screen-input")) return document.getElementById("search-screen-input");
-    return null;
-  }
-
-  function syncSearchInputs(value, target){
-    const ids = ["global-search", "rmp27-search-input", "search-screen-input"];
-    ids.forEach(id => {
-      const input = document.getElementById(id);
-      if(input && input !== target) input.value = value;
-    });
-  }
-
-  function setListeningState(btn, state){
-    if(!btn) return;
-    btn.classList.toggle("rmp35-listening", !!state);
-  }
-
-  function showVoiceNote(message){
-    let note = document.getElementById("voice-search-note");
-    if(note){
-      note.textContent = message || "";
-      note.style.display = message ? "block" : "";
-      return;
-    }
-    // Home fallback small toast
-    let toast = document.getElementById("rmp35-voice-toast");
-    if(!toast){
-      toast = document.createElement("div");
-      toast.id = "rmp35-voice-toast";
-      toast.style.cssText = "position:fixed;left:18px;right:18px;bottom:92px;z-index:10000;background:#0F172A;color:#fff;border-radius:16px;padding:11px 14px;font-size:12px;font-weight:800;text-align:center;box-shadow:0 12px 28px rgba(15,23,42,.25);";
-      document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-    toast.style.display = message ? "block" : "none";
-    if(message){
-      setTimeout(() => { if(toast) toast.style.display = "none"; }, 2600);
-    }
-  }
-
-  window.rmpVoiceSearch = function(targetId){
-    const target = resolveVoiceTarget(targetId);
-    const SR = getSpeechRecognition();
-    const activeBtn = document.activeElement && document.activeElement.tagName === "BUTTON" ? document.activeElement : null;
-
-    if(!target){
-      showVoiceNote("Search input not found.");
-      return;
-    }
-
-    if(!SR){
-      target.focus();
-      showVoiceNote("Voice typing is not supported in this browser. Use Chrome voice keyboard or type your search.");
-      return;
-    }
-
-    try{
-      const recognition = new SR();
-      recognition.lang = "en-IN";
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-      recognition.continuous = false;
-
-      setListeningState(activeBtn, true);
-      showVoiceNote("Listening... speak now.");
-
-      recognition.onresult = function(event){
-        const transcript = event && event.results && event.results[0] && event.results[0][0] ? event.results[0][0].transcript : "";
-        if(transcript){
-          target.value = transcript;
-          syncSearchInputs(transcript, target);
-          target.dispatchEvent(new Event("input", {bubbles:true}));
-          showVoiceNote("Captured: " + transcript);
-        }
-      };
-
-      recognition.onerror = function(event){
-        const err = event && event.error ? event.error : "voice error";
-        if(err === "not-allowed" || err === "service-not-allowed"){
-          showVoiceNote("Microphone permission is blocked. Allow mic permission for this site.");
-        }else if(err === "no-speech"){
-          showVoiceNote("No speech detected. Tap mic and try again.");
-        }else{
-          showVoiceNote("Voice search could not start: " + err);
-        }
-      };
-
-      recognition.onend = function(){
-        setListeningState(activeBtn, false);
-      };
-
-      recognition.start();
-    }catch(e){
-      setListeningState(activeBtn, false);
-      target.focus();
-      showVoiceNote("Voice search unavailable. Please type your search.");
-    }
-  };
-
-  function bindVoiceButtons(){
-    const selectors = [
-      ".rmp27-mic",
-      "#home .voice-search-btn-v10",
-      "#search .voice-search-btn-v10",
-      "button[data-voice-target]",
-      "button[aria-label='Voice search']"
-    ];
-
-    document.querySelectorAll(selectors.join(",")).forEach(btn => {
-      if(btn.dataset.rmp35VoiceBound === "1") return;
-      btn.dataset.rmp35VoiceBound = "1";
-
-      btn.addEventListener("click", function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        const target = btn.getAttribute("data-voice-target") ||
-                       btn.dataset.voiceTarget ||
-                       (btn.closest("#search") ? "search-screen-input" : "rmp27-search-input");
-        window.rmpVoiceSearch(target);
-      }, true);
-    });
-  }
-
-  function fixRings(){
-    document.querySelectorAll(".rmp21-progress-ring span, .rmp20-progress-ring span").forEach(span => {
-      const t = (span.textContent || "").trim();
-      if(!t) span.textContent = "2.8%";
-    });
-  }
-
-  function run(){
-    bindVoiceButtons();
-    fixRings();
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", run);
-  }else{
-    run();
-  }
-  window.addEventListener("hashchange", () => setTimeout(run, 80));
-  setTimeout(run, 400);
-  setTimeout(run, 1200);
-})();
-</script>
-
-
-
-<script id="rmp-realtime-voice-clean-v37-script">
-(function(){
-  const DEFAULT_PLACEHOLDER = "Search rule, para or keyword...";
-  const BAD_PLACEHOLDER_PATTERNS = [
-    "Voice search activated",
-    "Listening and typing...",
-    "Listening..."
-  ];
-
-  let activeRecognition = null;
-  let activeTarget = null;
-  let activeButton = null;
-  let finalTranscript = "";
-  let originalPlaceholder = DEFAULT_PLACEHOLDER;
-
-  function SpeechRecognitionCtor(){
-    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
-  }
-
-  function cleanBadPlaceholder(input){
-    if(!input) return;
-    const ph = input.getAttribute("placeholder") || "";
-    if(BAD_PLACEHOLDER_PATTERNS.some(p => ph.includes(p))){
-      input.setAttribute("placeholder", DEFAULT_PLACEHOLDER);
-    }
-  }
-
-  function cleanAllBadPlaceholders(){
-    ["global-search","rmp27-search-input","search-screen-input"].forEach(id => {
-      cleanBadPlaceholder(document.getElementById(id));
-    });
-    document.querySelectorAll("input[type='search'], input[type='text']").forEach(cleanBadPlaceholder);
-  }
-
-  function resolveTarget(targetId){
-    if(targetId && document.getElementById(targetId)) return document.getElementById(targetId);
-
-    const hash = (location.hash || "#home").replace("#","").split("/")[0];
-    const candidates = [];
-    if(hash === "search"){
-      candidates.push(document.getElementById("search-screen-input"));
-      candidates.push(document.querySelector("#search input[type='search'], #search input[type='text']"));
-    }else{
-      candidates.push(document.getElementById("rmp27-search-input"));
-      candidates.push(document.getElementById("global-search"));
-      candidates.push(document.querySelector("#home input[type='search'], #home input[type='text']"));
-    }
-    candidates.push(document.getElementById("global-search"));
-    candidates.push(document.getElementById("search-screen-input"));
-    return candidates.find(Boolean) || null;
-  }
-
-  function syncInputs(value, target){
-    ["global-search","rmp27-search-input","search-screen-input"].forEach(id => {
-      const el = document.getElementById(id);
-      if(el && el !== target) el.value = value;
-    });
-  }
-
-  function statusHost(target){
-    return (target && target.closest(".rmp27-search, .search-row-v3, .home-search-card")) || target?.parentElement || document.body;
-  }
-
-  function setStatus(target, text, show){
-    const host = statusHost(target);
-    let status = host.querySelector(".rmp37-voice-status");
-    if(!status){
-      status = document.createElement("div");
-      status.className = "rmp37-voice-status";
-      host.appendChild(status);
-    }
-    status.textContent = text || "";
-    status.classList.toggle("show", !!show);
-  }
-
-  function startUI(target, btn){
-    activeTarget = target;
-    activeButton = btn || null;
-
-    cleanBadPlaceholder(target);
-    originalPlaceholder = target.getAttribute("placeholder") || DEFAULT_PLACEHOLDER;
-
-    // Do NOT put activation text into placeholder/value.
-    // Keep normal placeholder until spoken words start appearing.
-    if(!target.value.trim()){
-      target.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
-    }
-
-    target.classList.add("rmp37-voice-active");
-    if(btn) btn.classList.add("rmp37-mic-live", "rmp35-listening");
-
-    setStatus(target, "Listening…", true);
-    target.focus({preventScroll:true});
-  }
-
-  function updateUI(text, isInterim){
-    if(!activeTarget) return;
-    activeTarget.value = text;
-    activeTarget.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
-    syncInputs(text, activeTarget);
-    activeTarget.dispatchEvent(new Event("input", {bubbles:true}));
-    setStatus(activeTarget, text.trim() ? (isInterim ? "Typing live…" : "Captured") : "Listening…", true);
-  }
-
-  function stopUI(message){
-    if(activeTarget){
-      activeTarget.classList.remove("rmp37-voice-active");
-      cleanBadPlaceholder(activeTarget);
-      if(!activeTarget.value.trim()){
-        activeTarget.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
-      }
-      setStatus(activeTarget, message || "", !!message);
-      if(message){
-        const t = activeTarget;
-        setTimeout(() => setStatus(t, "", false), 1800);
-      }
-    }
-    if(activeButton){
-      activeButton.classList.remove("rmp37-mic-live", "rmp35-listening");
-    }
-    activeRecognition = null;
-    activeTarget = null;
-    activeButton = null;
-    finalTranscript = "";
-  }
-
-  function stopExisting(){
-    try{
-      if(activeRecognition){
-        activeRecognition.onend = null;
-        activeRecognition.stop();
-      }
-    }catch(e){}
-    if(activeTarget || activeButton) stopUI("");
-  }
-
-  window.rmpVoiceSearch = function(targetId){
-    const target = resolveTarget(targetId);
-    const SR = SpeechRecognitionCtor();
-    const btn = (document.activeElement && document.activeElement.tagName === "BUTTON") ? document.activeElement : null;
-
-    if(!target) return;
-
-    stopExisting();
-    cleanAllBadPlaceholders();
-
-    if(!SR){
-      target.focus();
-      setStatus(target, "Voice typing not supported. Please type here.", true);
-      setTimeout(() => setStatus(target, "", false), 2500);
-      return;
-    }
-
-    try{
-      const recognition = new SR();
-      activeRecognition = recognition;
-      finalTranscript = "";
-
-      recognition.lang = "en-IN";
-      recognition.interimResults = true;
-      recognition.continuous = true;
-      recognition.maxAlternatives = 1;
-
-      startUI(target, btn);
-
-      recognition.onstart = function(){
-        setStatus(target, "Listening…", true);
-      };
-
-      recognition.onresult = function(event){
-        let interimTranscript = "";
-
-        for(let i = event.resultIndex; i < event.results.length; i++){
-          const chunk = event.results[i][0] && event.results[i][0].transcript ? event.results[i][0].transcript : "";
-          if(event.results[i].isFinal){
-            finalTranscript += chunk + " ";
-          }else{
-            interimTranscript += chunk;
-          }
-        }
-
-        const liveText = (finalTranscript + interimTranscript).replace(/\s+/g, " ").trim();
-        updateUI(liveText, !!interimTranscript);
-      };
-
-      recognition.onerror = function(event){
-        const err = event && event.error ? event.error : "voice error";
-        if(err === "not-allowed" || err === "service-not-allowed"){
-          stopUI("Mic permission blocked.");
-        }else if(err === "no-speech"){
-          stopUI("No speech detected.");
-        }else if(err === "aborted"){
-          stopUI("");
-        }else{
-          stopUI("Voice error.");
-        }
-      };
-
-      recognition.onend = function(){
-        if(activeTarget && activeTarget.value.trim()){
-          stopUI("Done");
-        }else{
-          stopUI("");
-        }
-      };
-
-      recognition.start();
-    }catch(e){
-      stopUI("");
-      target.focus();
-      setStatus(target, "Voice unavailable. Please type here.", true);
-      setTimeout(() => setStatus(target, "", false), 2500);
-    }
-  };
-
-  function targetForButton(btn){
-    return btn.getAttribute("data-voice-target") ||
-           btn.dataset.voiceTarget ||
-           (btn.closest("#search") ? "search-screen-input" : "rmp27-search-input");
-  }
-
-  function bindButtons(){
-    const selector = [
-      ".rmp27-mic",
-      "#home .voice-search-btn-v10",
-      "#search .voice-search-btn-v10",
-      "button[data-voice-target]",
-      "button[aria-label='Voice search']"
-    ].join(",");
-
-    document.querySelectorAll(selector).forEach(btn => {
-      if(btn.dataset.rmp37RealtimeBound === "1") return;
-      btn.dataset.rmp37RealtimeBound = "1";
-
-      btn.addEventListener("click", function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        const target = targetForButton(btn);
-        window.rmpVoiceSearch(target);
-      }, true);
-    });
-  }
-
-  function run(){
-    cleanAllBadPlaceholders();
-    bindButtons();
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", run);
-  }else{
-    run();
-  }
-  window.addEventListener("hashchange", () => setTimeout(run, 80));
-  setTimeout(run, 300);
-  setTimeout(run, 900);
-  setTimeout(run, 1800);
-})();
-</script>
 
 </body>
 </html>
