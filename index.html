@@ -10668,6 +10668,1092 @@ body{
 </style>
 
   <!-- Mobile hero real phone fix v25 generated on 2026-08-08. -->
+
+<style id="rmp-mobile-alignment-v26">
+/* =========================================================
+   Rule Master Pro — Mobile Alignment v26
+   Real phone correction:
+   - same left/right spacing for hero, search, cards and lists
+   - hero closer to desktop premium design but phone-safe
+   - bottom nav tabs equal, not oversized on Home
+   - scroll ending stops cleanly after last tools card
+   ========================================================= */
+
+:root{
+  --rmp26-edge:14px;
+  --rmp26-radius:26px;
+  --rmp26-blue:#092957;
+  --rmp26-blue2:#1559B7;
+  --rmp26-orange:#F47B20;
+  --rmp26-text:#0F172A;
+  --rmp26-muted:#64748B;
+  --rmp26-border:#E2E8F0;
+  --rmp26-card:#FFFFFF;
+}
+
+/* MOBILE MAIN ALIGNMENT */
+@media (max-width: 760px){
+
+  html, body{
+    overflow-x:hidden !important;
+  }
+
+  #home.home-screen.active{
+    background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+  }
+
+  /* One common edge for everything */
+  #home .home-body{
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 var(--rmp26-edge) calc(92px + env(safe-area-inset-bottom,0px)) !important;
+    gap:13px !important;
+  }
+
+  /* Hero has same left/right edge as home body */
+  .rmp21-hero{
+    box-sizing:border-box !important;
+    width:calc(100% - (var(--rmp26-edge) * 2)) !important;
+    max-width:none !important;
+    margin:12px var(--rmp26-edge) 12px !important;
+    border-radius:28px !important;
+    overflow:hidden !important;
+    background:
+      radial-gradient(circle at 90% 52%,rgba(244,123,32,.28),transparent 36%),
+      linear-gradient(145deg,#071B3B 0%,#0B2D63 52%,#1559B7 100%) !important;
+    box-shadow:0 16px 34px rgba(9,41,87,.22) !important;
+  }
+
+  .rmp21-hero-content{
+    display:block !important;
+    min-height:0 !important;
+  }
+
+  .rmp21-hero-left{
+    padding:24px 20px 14px !important;
+    max-width:none !important;
+    width:100% !important;
+  }
+
+  .rmp21-brand-chip{
+    height:30px !important;
+    max-width:max-content !important;
+    padding:0 11px !important;
+    margin:0 0 14px !important;
+    font-size:9.8px !important;
+    letter-spacing:.07em !important;
+    border-radius:999px !important;
+  }
+
+  .rmp21-hero h1{
+    margin:0 0 6px !important;
+    font-size:31px !important;
+    line-height:1.02 !important;
+    letter-spacing:-.055em !important;
+    font-weight:1000 !important;
+  }
+
+  .rmp21-hero-title{
+    margin:0 0 10px !important;
+    font-size:19px !important;
+    line-height:1.12 !important;
+    font-weight:950 !important;
+    letter-spacing:-.035em !important;
+  }
+
+  .rmp21-hero-sub{
+    margin:0 !important;
+    max-width:none !important;
+    font-size:13.2px !important;
+    line-height:1.48 !important;
+    font-weight:650 !important;
+    color:rgba(239,245,255,.82) !important;
+  }
+
+  .rmp21-hero-actions{
+    margin-top:16px !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+
+  .rmp21-hero-btn{
+    width:100% !important;
+    min-height:42px !important;
+    border-radius:16px !important;
+    padding:0 8px !important;
+    font-size:13px !important;
+    font-weight:950 !important;
+  }
+
+  /* Bring back a compact original-like visual on mobile */
+  .rmp24-hero-visual,
+  .rmp21-hero-visual{
+    display:block !important;
+    position:relative !important;
+    min-height:142px !important;
+    height:142px !important;
+    padding:0 18px 14px !important;
+    overflow:hidden !important;
+  }
+
+  .rmp24-hero-glow{
+    display:block !important;
+    position:absolute !important;
+    right:12px !important;
+    top:6px !important;
+    width:138px !important;
+    height:138px !important;
+    border-radius:50% !important;
+    background:radial-gradient(circle,#FDBA35 0%,#F47B20 48%,rgba(244,123,32,.16) 70%,transparent 72%) !important;
+    opacity:.90 !important;
+    filter:drop-shadow(0 14px 24px rgba(244,123,32,.22)) !important;
+  }
+
+  .rmp24-visual-card{
+    display:flex !important;
+    position:absolute !important;
+    left:18px !important;
+    right:auto !important;
+    width:calc(100% - 70px) !important;
+    min-height:42px !important;
+    padding:9px 11px !important;
+    border-radius:18px !important;
+    align-items:center !important;
+    gap:9px !important;
+    background:rgba(255,255,255,.15) !important;
+    border:1px solid rgba(255,255,255,.18) !important;
+    box-shadow:0 12px 24px rgba(8,16,40,.16) !important;
+    backdrop-filter:blur(10px) !important;
+    transform:none !important;
+    z-index:3 !important;
+  }
+
+  .rmp24-visual-card.card-search{
+    top:4px !important;
+  }
+
+  .rmp24-visual-card.card-library{
+    top:52px !important;
+    left:38px !important;
+    width:calc(100% - 90px) !important;
+  }
+
+  .rmp24-visual-card.card-assist{
+    display:none !important;
+  }
+
+  .rmp24-card-icon{
+    flex:0 0 32px !important;
+    width:32px !important;
+    height:32px !important;
+    border-radius:12px !important;
+    font-size:15px !important;
+    background:rgba(255,255,255,.18) !important;
+  }
+
+  .rmp24-visual-card strong{
+    font-size:12.5px !important;
+    line-height:1.1 !important;
+    font-weight:950 !important;
+  }
+
+  .rmp24-visual-card small{
+    margin-top:3px !important;
+    font-size:10.5px !important;
+    line-height:1.15 !important;
+    font-weight:720 !important;
+  }
+
+  .rmp24-visual-badge{
+    display:block !important;
+    position:absolute !important;
+    left:18px !important;
+    right:18px !important;
+    bottom:12px !important;
+    top:auto !important;
+    width:auto !important;
+    padding:9px 10px !important;
+    border-radius:999px !important;
+    background:rgba(8,26,56,.38) !important;
+    border:1px solid rgba(255,255,255,.16) !important;
+    color:rgba(255,245,225,.92) !important;
+    font-size:10.5px !important;
+    line-height:1.18 !important;
+    font-weight:850 !important;
+    text-align:center !important;
+    letter-spacing:.01em !important;
+    z-index:4 !important;
+  }
+
+  .rmp24-rail-track,
+  .rmp24-mini-loco,
+  .rmp21-book-stack,
+  .rmp21-rail-lines,
+  .rmp21-mini-train,
+  .rmp23-credit-panel{
+    display:none !important;
+  }
+
+  .rmp21-hero-stats{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    background:rgba(255,255,255,.08) !important;
+    border-top:1px solid rgba(255,255,255,.12) !important;
+  }
+
+  .rmp21-hero-stats div{
+    padding:10px 10px !important;
+    text-align:left !important;
+  }
+
+  .rmp21-hero-stats strong{
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+  }
+
+  .rmp21-hero-stats span{
+    margin-top:4px !important;
+    font-size:9px !important;
+    line-height:1 !important;
+    letter-spacing:.08em !important;
+    font-weight:850 !important;
+  }
+
+  /* Same width as hero/content, not stretched wider or narrower */
+  #home .home-search-card{
+    box-sizing:border-box !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    min-height:62px !important;
+    border-radius:24px !important;
+    padding:9px !important;
+    display:grid !important;
+    grid-template-columns:40px minmax(0,1fr) 40px 40px !important;
+    align-items:center !important;
+    gap:7px !important;
+    box-shadow:0 12px 26px rgba(15,23,42,.10) !important;
+  }
+
+  #home .home-search-card::after{
+    width:5px !important;
+    border-radius:24px 0 0 24px !important;
+  }
+
+  #home .home-search-card > i{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    flex:none !important;
+    border-radius:16px !important;
+    font-size:13px !important;
+  }
+
+  #global-search{
+    min-width:0 !important;
+    width:100% !important;
+    font-size:13.2px !important;
+    font-weight:700 !important;
+    padding-left:0 !important;
+  }
+
+  #global-search::placeholder{
+    font-size:13.2px !important;
+  }
+
+  #home .voice-search-btn-v10{
+    width:40px !important;
+    min-width:40px !important;
+    height:40px !important;
+    border-radius:15px !important;
+  }
+
+  #home .home-search-card button[onclick="triggerSearch()"]{
+    width:40px !important;
+    min-width:40px !important;
+    height:40px !important;
+    border-radius:15px !important;
+    padding:0 !important;
+    font-size:16px !important;
+  }
+
+  /* All cards/tabs same left and right edge */
+  .rmp21-front-panels,
+  .rmp21-quick-grid,
+  .rmp21-status-row,
+  #home .manuals-grid,
+  #home .home-card{
+    width:100% !important;
+    box-sizing:border-box !important;
+  }
+
+  .rmp21-section-head{
+    margin:2px 2px -2px !important;
+  }
+
+  .rmp21-quick-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+
+  .rmp21-quick-card{
+    box-sizing:border-box !important;
+    min-height:124px !important;
+    border-radius:24px !important;
+    padding:15px 14px !important;
+  }
+
+  .rmp21-status-row{
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  .rmp21-status-card{
+    box-sizing:border-box !important;
+    width:100% !important;
+    min-height:110px !important;
+    border-radius:24px !important;
+    padding:15px !important;
+  }
+
+  #home .manuals-grid{
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  #home .manual-tile{
+    box-sizing:border-box !important;
+    width:100% !important;
+    min-height:110px !important;
+    border-radius:24px !important;
+    padding:15px 48px 14px 74px !important;
+  }
+
+  #home .home-card{
+    box-sizing:border-box !important;
+    min-height:78px !important;
+    border-radius:24px !important;
+  }
+
+  /* Bottom navigation: all tabs equal, active tab not oversized */
+  .bottom-nav{
+    position:fixed !important;
+    left:var(--rmp26-edge) !important;
+    right:var(--rmp26-edge) !important;
+    bottom:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:74px !important;
+    border-radius:24px !important;
+    padding:6px !important;
+    display:grid !important;
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    align-items:center !important;
+    gap:4px !important;
+    z-index:999 !important;
+  }
+
+  .bottom-nav .nav-item{
+    height:62px !important;
+    min-width:0 !important;
+    width:100% !important;
+    border-radius:18px !important;
+    padding:6px 2px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:4px !important;
+    font-size:9.5px !important;
+    line-height:1.05 !important;
+    font-weight:850 !important;
+    white-space:nowrap !important;
+    transform:none !important;
+  }
+
+  .bottom-nav .nav-item i{
+    font-size:18px !important;
+    margin:0 !important;
+  }
+
+  .bottom-nav .nav-item.active,
+  .bottom-nav .nav-item.current,
+  .bottom-nav .nav-item[aria-current="page"],
+  .bottom-nav .nav-item:first-child{
+    background:#FFF7ED !important;
+    color:#EA580C !important;
+    box-shadow:inset 0 0 0 1px rgba(249,115,22,.20) !important;
+  }
+
+  /* Stop scrolling cleanly near the last tools card */
+  #home .home-body > *:last-child{
+    margin-bottom:0 !important;
+  }
+
+  #home .home-card:last-of-type,
+  #home .tools-card:last-of-type{
+    margin-bottom:2px !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 390px){
+  :root{
+    --rmp26-edge:12px;
+  }
+
+  .rmp21-hero h1{
+    font-size:29px !important;
+  }
+
+  .rmp21-hero-title{
+    font-size:18px !important;
+  }
+
+  .rmp21-hero-sub{
+    font-size:12.8px !important;
+  }
+
+  .rmp24-hero-visual,
+  .rmp21-hero-visual{
+    height:132px !important;
+    min-height:132px !important;
+  }
+
+  .rmp24-visual-card{
+    min-height:39px !important;
+    padding:8px 10px !important;
+  }
+
+  .rmp24-visual-card.card-library{
+    top:48px !important;
+  }
+
+  .rmp24-visual-badge{
+    font-size:9.8px !important;
+    bottom:10px !important;
+  }
+
+  #home .home-search-card{
+    grid-template-columns:38px minmax(0,1fr) 38px 38px !important;
+    gap:6px !important;
+  }
+
+  #home .home-search-card > i,
+  #home .voice-search-btn-v10,
+  #home .home-search-card button[onclick="triggerSearch()"]{
+    width:38px !important;
+    min-width:38px !important;
+    height:38px !important;
+  }
+
+  #global-search,
+  #global-search::placeholder{
+    font-size:12.5px !important;
+  }
+
+  .bottom-nav{
+    height:72px !important;
+  }
+
+  .bottom-nav .nav-item{
+    height:60px !important;
+    font-size:9px !important;
+  }
+}
+
+/* Desktop/tablet: keep the premium v24 hero closer to reference image */
+@media (min-width: 761px){
+  .rmp21-hero{
+    max-width:1040px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  #home .home-body{
+    max-width:1040px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+}
+</style>
+
+  <!-- Mobile alignment and equal spacing fix v26 generated on 2026-08-08. -->
+
+<style id="rmp-hard-mobile-reset-v27">
+/* =========================================================
+   v27 HARD MOBILE RESET
+   Mobile no longer depends on old desktop hero/classes.
+   ========================================================= */
+
+#rmp27-mobile-home{
+  display:none;
+}
+
+@media (max-width: 760px){
+
+  :root{
+    --rmp27-edge:14px;
+    --rmp27-blue:#092957;
+    --rmp27-blue2:#1559B7;
+    --rmp27-orange:#F47B20;
+    --rmp27-card:#FFFFFF;
+    --rmp27-text:#0F172A;
+    --rmp27-muted:#64748B;
+    --rmp27-border:#E2E8F0;
+  }
+
+  html, body{
+    overflow-x:hidden !important;
+    background:#F4F7FB !important;
+  }
+
+  #home.home-screen.active{
+    background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+  }
+
+  /* Hide old mobile front only. Manual list/tools remain visible. */
+  #home > .rmp21-hero,
+  #home > .hero-section,
+  #home .home-body > .home-search-card,
+  #home .home-body > #rmp21-front-panels,
+  #home .home-body > #rmp-v12-dashboard,
+  #home .home-body > #rmp14-dashboard,
+  #home .home-body > #rmp20-status-grid,
+  #home .home-body > .rmp-reading-progress-card{
+    display:none !important;
+  }
+
+  #rmp27-mobile-home{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:13px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:12px var(--rmp27-edge) 0 !important;
+  }
+
+  #home .home-body{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:13px var(--rmp27-edge) calc(96px + env(safe-area-inset-bottom,0px)) !important;
+    box-sizing:border-box !important;
+    gap:13px !important;
+  }
+
+  .rmp27-hero{
+    width:100% !important;
+    box-sizing:border-box !important;
+    border-radius:28px !important;
+    overflow:hidden !important;
+    background:
+      radial-gradient(circle at 92% 48%,rgba(244,123,32,.28),transparent 34%),
+      linear-gradient(145deg,#071E41 0%,#0B2D63 55%,#1559B7 100%) !important;
+    color:#FFFFFF !important;
+    box-shadow:0 16px 34px rgba(9,41,87,.22) !important;
+    padding:22px 20px 0 !important;
+  }
+
+  .rmp27-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    height:30px;
+    padding:0 11px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.16);
+    color:#ECF5FF;
+    font-size:9.8px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:15px;
+  }
+
+  .rmp27-chip span{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#39D98A;
+    box-shadow:0 0 0 4px rgba(57,217,138,.16);
+  }
+
+  .rmp27-hero h1{
+    margin:0 0 6px !important;
+    color:#FFFFFF !important;
+    font-size:31px !important;
+    line-height:1.02 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.055em !important;
+  }
+
+  .rmp27-hero h2{
+    margin:0 0 10px !important;
+    color:rgba(255,255,255,.94) !important;
+    font-size:19px !important;
+    line-height:1.12 !important;
+    font-weight:950 !important;
+    letter-spacing:-.035em !important;
+  }
+
+  .rmp27-hero p{
+    margin:0 !important;
+    color:rgba(239,245,255,.82) !important;
+    font-size:13.2px !important;
+    line-height:1.48 !important;
+    font-weight:650 !important;
+    text-align:left !important;
+  }
+
+  .rmp27-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:17px;
+  }
+
+  .rmp27-actions button{
+    border:0;
+    height:42px;
+    border-radius:16px;
+    color:#FFFFFF;
+    font-size:13px;
+    font-weight:950;
+  }
+
+  .rmp27-actions button:first-child{
+    background:linear-gradient(135deg,#F47B20,#EA580C);
+    box-shadow:0 12px 22px rgba(244,123,32,.24);
+  }
+
+  .rmp27-actions button:last-child{
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.18);
+  }
+
+  .rmp27-credit{
+    margin-top:16px;
+    padding:10px 12px;
+    border-radius:18px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.16);
+    color:rgba(255,245,225,.92);
+    text-align:center;
+    font-size:10.8px;
+    line-height:1.2;
+    font-weight:850;
+  }
+
+  .rmp27-stats{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    margin:18px -20px 0;
+    border-top:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.08);
+  }
+
+  .rmp27-stats div{
+    padding:10px 12px;
+  }
+
+  .rmp27-stats strong{
+    display:block;
+    font-size:15px;
+    line-height:1;
+    font-weight:1000;
+    color:#FFFFFF;
+  }
+
+  .rmp27-stats span{
+    display:block;
+    margin-top:4px;
+    font-size:9px;
+    line-height:1;
+    letter-spacing:.08em;
+    font-weight:850;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.72);
+  }
+
+  .rmp27-search{
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr) 40px 40px;
+    align-items:center;
+    gap:7px;
+    width:100%;
+    box-sizing:border-box;
+    min-height:62px;
+    padding:9px;
+    border-radius:24px;
+    background:#FFFFFF;
+    border:1px solid var(--rmp27-border);
+    box-shadow:0 12px 26px rgba(15,23,42,.10);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .rmp27-search::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:5px;
+    background:linear-gradient(180deg,#F47B20,#1559B7);
+  }
+
+  .rmp27-search-icon,
+  .rmp27-mic,
+  .rmp27-go{
+    width:40px;
+    height:40px;
+    border-radius:15px;
+    display:grid;
+    place-items:center;
+    border:0;
+    font-weight:900;
+  }
+
+  .rmp27-search-icon{
+    background:#EFF6FF;
+    color:#092957;
+    font-size:16px;
+  }
+
+  .rmp27-search input{
+    min-width:0;
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:#0F172A;
+    font-size:13.2px;
+    font-weight:700;
+    font-family:inherit;
+  }
+
+  .rmp27-search input::placeholder{
+    color:#64748B;
+    font-style:italic;
+  }
+
+  .rmp27-mic{
+    background:#F8FAFC;
+    color:#092957;
+    border:1px solid #E2E8F0;
+  }
+
+  .rmp27-go{
+    background:linear-gradient(135deg,#F47B20,#EA580C);
+    color:white;
+    font-size:17px;
+  }
+
+  .rmp27-section-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:2px 2px -2px;
+  }
+
+  .rmp27-section-title span{
+    color:#64748B;
+    font-size:9.8px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+
+  .rmp27-section-title span::after{
+    content:"•";
+    color:#CBD5E1;
+    margin-left:8px;
+  }
+
+  .rmp27-section-title b{
+    color:#0F172A;
+    font-size:16px;
+    line-height:1;
+    font-weight:1000;
+    letter-spacing:-.03em;
+  }
+
+  .rmp27-quick{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .rmp27-quick button{
+    min-height:124px;
+    border:1px solid #E2E8F0;
+    border-radius:24px;
+    background:#FFFFFF;
+    box-shadow:0 8px 20px rgba(15,23,42,.06);
+    padding:15px 14px;
+    text-align:left;
+  }
+
+  .rmp27-quick i{
+    width:44px;
+    height:44px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    background:#EFF6FF;
+    color:#1559B7;
+    font-style:normal;
+    font-size:19px;
+    font-weight:900;
+    margin-bottom:12px;
+  }
+
+  .rmp27-quick button:nth-child(1) i{background:#FFF7ED;color:#F47B20;}
+  .rmp27-quick button:nth-child(3) i{background:#F0FDF4;color:#16A34A;}
+  .rmp27-quick button:nth-child(4) i{background:#F5F3FF;color:#7C3AED;}
+
+  .rmp27-quick strong{
+    display:block;
+    color:#0F172A;
+    font-size:16px;
+    line-height:1.1;
+    font-weight:1000;
+  }
+
+  .rmp27-quick small{
+    display:block;
+    margin-top:7px;
+    color:#64748B;
+    font-size:12px;
+    line-height:1.25;
+    font-weight:700;
+  }
+
+  .rmp27-card{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    width:100%;
+    box-sizing:border-box;
+    min-height:108px;
+    border-radius:24px;
+    padding:15px;
+    background:#FFFFFF;
+    border:1px solid #E2E8F0;
+    box-shadow:0 8px 20px rgba(15,23,42,.06);
+  }
+
+  .rmp27-card i{
+    flex:0 0 50px;
+    width:50px;
+    height:50px;
+    border-radius:20px;
+    display:grid;
+    place-items:center;
+    background:#EFF6FF;
+    font-style:normal;
+    font-size:22px;
+  }
+
+  .rmp27-card div{
+    min-width:0;
+    flex:1;
+  }
+
+  .rmp27-card span{
+    display:block;
+    color:#64748B;
+    font-size:9.8px;
+    line-height:1;
+    font-weight:950;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+
+  .rmp27-card strong{
+    display:block;
+    margin-top:7px;
+    color:#0F172A;
+    font-size:16px;
+    line-height:1.16;
+    font-weight:1000;
+  }
+
+  .rmp27-card small{
+    display:block;
+    margin-top:5px;
+    color:#64748B;
+    font-size:12px;
+    line-height:1.3;
+    font-weight:700;
+  }
+
+  .rmp27-card button{
+    flex:0 0 auto;
+    border:0;
+    min-width:78px;
+    height:40px;
+    border-radius:16px;
+    background:#092957;
+    color:#FFFFFF;
+    font-size:12px;
+    font-weight:950;
+  }
+
+  .rmp27-ring{
+    flex:0 0 58px !important;
+    width:58px !important;
+    height:58px !important;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:conic-gradient(#1559B7 0deg,#1559B7 10deg,#E2E8F0 10deg,#E2E8F0 360deg);
+    color:#0F172A;
+    font-size:12px;
+    font-weight:1000;
+    position:relative;
+  }
+
+  .rmp27-ring::before{
+    content:"";
+    position:absolute;
+    inset:7px;
+    background:#fff;
+    border-radius:50%;
+  }
+
+  .rmp27-ring{
+    z-index:0;
+  }
+
+  .rmp27-ring::after{
+    content:"2.8%";
+    position:relative;
+    z-index:1;
+  }
+
+  .rmp27-ring{
+    font-size:0;
+  }
+
+  /* All existing lower sections use exact same spacing */
+  #home .browse-label,
+  #home .manuals-grid,
+  #home .home-card{
+    box-sizing:border-box !important;
+    width:100% !important;
+  }
+
+  #home .manuals-grid{
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  #home .manual-tile,
+  #home .home-card{
+    box-sizing:border-box !important;
+    width:100% !important;
+    border-radius:24px !important;
+  }
+
+  /* Equal bottom nav tabs */
+  .bottom-nav{
+    position:fixed !important;
+    left:var(--rmp27-edge) !important;
+    right:var(--rmp27-edge) !important;
+    bottom:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:74px !important;
+    border-radius:24px !important;
+    padding:6px !important;
+    display:grid !important;
+    grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+    align-items:center !important;
+    gap:4px !important;
+    z-index:999 !important;
+  }
+
+  .bottom-nav .nav-item{
+    height:62px !important;
+    min-width:0 !important;
+    width:100% !important;
+    border-radius:18px !important;
+    padding:6px 2px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:4px !important;
+    font-size:9.5px !important;
+    line-height:1.05 !important;
+    font-weight:850 !important;
+    white-space:nowrap !important;
+    transform:none !important;
+  }
+
+  .bottom-nav .nav-item i{
+    font-size:18px !important;
+    margin:0 !important;
+  }
+
+  .bottom-nav .nav-item.active,
+  .bottom-nav .nav-item.current,
+  .bottom-nav .nav-item[aria-current="page"],
+  .bottom-nav .nav-item:first-child{
+    background:#FFF7ED !important;
+    color:#EA580C !important;
+    box-shadow:inset 0 0 0 1px rgba(249,115,22,.20) !important;
+  }
+}
+
+@media (max-width: 390px){
+  :root{
+    --rmp27-edge:12px;
+  }
+
+  .rmp27-hero h1{
+    font-size:29px !important;
+  }
+
+  .rmp27-hero h2{
+    font-size:18px !important;
+  }
+
+  .rmp27-hero p{
+    font-size:12.8px !important;
+  }
+
+  .rmp27-search{
+    grid-template-columns:38px minmax(0,1fr) 38px 38px;
+    gap:6px;
+  }
+
+  .rmp27-search-icon,
+  .rmp27-mic,
+  .rmp27-go{
+    width:38px;
+    height:38px;
+  }
+
+  .rmp27-search input{
+    font-size:12.6px;
+  }
+}
+</style>
+
+  <!-- Hard mobile reset v27 generated on 2026-08-08. -->
 </head>
 
 <body>
@@ -10862,6 +11948,57 @@ body{
     <div><strong>Offline</strong><span>Ready</span></div>
   </div>
 </div>
+
+<section id="rmp27-mobile-home" class="rmp27-mobile-home" aria-label="Mobile home">
+  <div class="rmp27-hero">
+    <div class="rmp27-chip"><span></span> Railway Reference App</div>
+    <h1>Rule Master Pro</h1>
+    <h2>Railway Rules &amp; Manuals</h2>
+    <p>Search, read, save and revise railway rules in one clean reference app.</p>
+
+    <div class="rmp27-actions">
+      <button type="button" onclick="document.querySelector('.manuals-grid')?.scrollIntoView({behavior:'smooth',block:'start'})">Open Library</button>
+      <button type="button" onclick="window.location.hash='#manual/gsr'">Continue</button>
+    </div>
+
+    <div class="rmp27-credit">Prepared by Delhi Division • Northern Railway</div>
+
+    <div class="rmp27-stats">
+      <div><strong>7</strong><span>Manuals</span></div>
+      <div><strong>3,188</strong><span>Topics</span></div>
+      <div><strong>Offline</strong><span>Ready</span></div>
+    </div>
+  </div>
+
+  <div class="rmp27-search">
+    <span class="rmp27-search-icon">⌕</span>
+    <input id="rmp27-search-input" type="text" placeholder="Search rule, para or keyword..." />
+    <button type="button" class="rmp27-mic" aria-label="Voice search">🎙</button>
+    <button type="button" class="rmp27-go" aria-label="Search">➜</button>
+  </div>
+
+  <div class="rmp27-section-title">
+    <span>Quick Access</span><b>Start faster</b>
+  </div>
+
+  <div class="rmp27-quick">
+    <button type="button" onclick="document.getElementById('rmp27-search-input')?.focus()"><i>⌕</i><strong>Smart Search</strong><small>Find rule or keyword</small></button>
+    <button type="button" onclick="document.querySelector('.manuals-grid')?.scrollIntoView({behavior:'smooth',block:'start'})"><i>▤</i><strong>Library</strong><small>Open manuals</small></button>
+    <button type="button" onclick="window.location.hash='#bookmarks'"><i>★</i><strong>Saved</strong><small>Bookmarks &amp; notes</small></button>
+    <button type="button" onclick="window.location.hash='#corrections'"><i>↻</i><strong>Updates</strong><small>Correction slips</small></button>
+  </div>
+
+  <div class="rmp27-card rmp27-continue">
+    <i>📖</i>
+    <div><span>Continue Reading</span><strong>Start from G&amp;SR</strong><small>Open reviewed rules and continue reading.</small></div>
+    <button type="button" onclick="window.location.hash='#manual/gsr'">Resume</button>
+  </div>
+
+  <div class="rmp27-card rmp27-coverage">
+    <div class="rmp27-ring">2.8%</div>
+    <div><span>Manual Coverage</span><strong>3,188 searchable topics</strong><small>Rules, sections and references available offline.</small></div>
+  </div>
+</section>
 <div class="home-body">
           <div class="home-search-card">
             <i class="fas fa-search" style="color:var(--text-muted);flex-shrink:0;"></i>
@@ -21144,6 +22281,58 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",runV22);}else{runV22();}
   setTimeout(runV22,500);
+})();
+</script>
+
+
+<script id="rmp-hard-mobile-reset-v27-script">
+(function(){
+  function bindV27(){
+    const v27 = document.getElementById("rmp27-search-input");
+    const old = document.getElementById("global-search");
+    if(v27 && old && !v27.dataset.bound){
+      v27.dataset.bound = "1";
+      v27.addEventListener("input", () => { old.value = v27.value; });
+      v27.addEventListener("keydown", (e) => {
+        if(e.key === "Enter"){
+          old.value = v27.value;
+          if(typeof triggerSearch === "function") triggerSearch();
+        }
+      });
+    }
+    document.querySelector(".rmp27-go")?.addEventListener("click", () => {
+      const v = document.getElementById("rmp27-search-input");
+      const oldInput = document.getElementById("global-search");
+      if(v && oldInput) oldInput.value = v.value;
+      if(typeof triggerSearch === "function") triggerSearch();
+    }, {once:false});
+    document.querySelector(".rmp27-mic")?.addEventListener("click", () => {
+      if(typeof rmpVoiceSearch === "function") rmpVoiceSearch("global-search");
+    }, {once:false});
+  }
+
+  function clearOldPwaCacheOnce(){
+    try{
+      if(!localStorage.getItem("rmp27CacheCleared")){
+        localStorage.setItem("rmp27CacheCleared","1");
+        if("serviceWorker" in navigator){
+          navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+        }
+        if(window.caches){
+          caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+        }
+      }
+    }catch(e){}
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", () => { bindV27(); clearOldPwaCacheOnce(); });
+  }else{
+    bindV27();
+    clearOldPwaCacheOnce();
+  }
+  setTimeout(bindV27,500);
+  setTimeout(bindV27,1500);
 })();
 </script>
 
