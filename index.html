@@ -11791,6 +11791,142 @@ body{
 </style>
 
   <!-- Mobile full-width nav balance v28 generated on 2026-08-08. -->
+
+<style id="rmp-stats-row-fix-v29">
+/* =========================================================
+   Rule Master Pro — Stats Row Fix v29
+   Fixes circled hero stats row:
+   - bold
+   - centered
+   - equal-width
+   - same baseline
+   - proper visual separation
+   ========================================================= */
+
+@media (max-width: 760px){
+
+  /* Hero stats row: exact alignment */
+  .rmp27-stats,
+  .rmp21-hero-stats{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    align-items:stretch !important;
+    width:calc(100% + 32px) !important;
+    margin:18px -16px 0 !important;
+    min-height:78px !important;
+    background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.13)) !important;
+    border-top:1px solid rgba(255,255,255,.16) !important;
+    overflow:hidden !important;
+  }
+
+  .rmp27-stats div,
+  .rmp21-hero-stats div{
+    min-width:0 !important;
+    height:78px !important;
+    padding:12px 6px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    gap:7px !important;
+    border-right:1px solid rgba(255,255,255,.10) !important;
+    box-sizing:border-box !important;
+  }
+
+  .rmp27-stats div:last-child,
+  .rmp21-hero-stats div:last-child{
+    border-right:0 !important;
+  }
+
+  .rmp27-stats strong,
+  .rmp21-hero-stats strong{
+    display:block !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    color:#FFFFFF !important;
+    font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
+    font-size:21px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.025em !important;
+    text-align:center !important;
+    text-shadow:0 4px 14px rgba(0,0,0,.18) !important;
+    font-variant-numeric:tabular-nums !important;
+  }
+
+  .rmp27-stats div:nth-child(3) strong,
+  .rmp21-hero-stats div:nth-child(3) strong{
+    font-size:20px !important;
+    letter-spacing:-.02em !important;
+  }
+
+  .rmp27-stats span,
+  .rmp21-hero-stats span{
+    display:block !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    color:rgba(255,255,255,.78) !important;
+    font-family:"Segoe UI","Aptos",system-ui,sans-serif !important;
+    font-size:10.2px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:.14em !important;
+    text-align:center !important;
+    text-transform:uppercase !important;
+  }
+
+  /* Keep search clearly below stats row */
+  .rmp27-search{
+    margin-top:0 !important;
+    border-top:1px solid #E2E8F0 !important;
+  }
+
+  /* Make bottom nav labels/icons visually equal */
+  .bottom-nav .nav-item{
+    font-weight:900 !important;
+  }
+
+  .bottom-nav .nav-item .rmp28-nav-icon,
+  .bottom-nav .nav-item i,
+  .bottom-nav .nav-item svg{
+    opacity:1 !important;
+  }
+}
+
+@media (max-width: 390px){
+  .rmp27-stats,
+  .rmp21-hero-stats{
+    min-height:72px !important;
+  }
+
+  .rmp27-stats div,
+  .rmp21-hero-stats div{
+    height:72px !important;
+    gap:6px !important;
+  }
+
+  .rmp27-stats strong,
+  .rmp21-hero-stats strong{
+    font-size:19px !important;
+  }
+
+  .rmp27-stats div:nth-child(3) strong,
+  .rmp21-hero-stats div:nth-child(3) strong{
+    font-size:18px !important;
+  }
+
+  .rmp27-stats span,
+  .rmp21-hero-stats span{
+    font-size:9.4px !important;
+    letter-spacing:.12em !important;
+  }
+}
+</style>
+
+  <!-- Stats row alignment fix v29 generated on 2026-08-08. -->
 </head>
 
 <body>
