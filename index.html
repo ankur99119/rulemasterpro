@@ -13344,6 +13344,152 @@ body{
 </style>
 
   <!-- Search yellow redesign v33 generated on 2026-08-08. -->
+
+<style id="rmp-page-theme-colors-v34">
+/* =========================================================
+   Rule Master Pro — Page Theme Color Differentiation v34
+   Goal: Search, Quiz, Slips and other pages must not look same.
+   Each page gets its own mobile color identity.
+   ========================================================= */
+
+@media (max-width:760px){
+  /* ---------- SEARCH = warm amber ---------- */
+  body.rmp32-top-search .bottom-nav .nav-item.rmp32-active{
+    background:#FFF7ED !important;
+    color:#C2410C !important;
+    box-shadow:inset 0 0 0 1px rgba(249,115,22,.22) !important;
+  }
+  body.rmp32-top-search .bottom-nav .nav-item.rmp32-active i,
+  body.rmp32-top-search .bottom-nav .nav-item.rmp32-active svg,
+  body.rmp32-top-search .bottom-nav .nav-item.rmp32-active .rmp28-nav-icon{
+    color:#EA580C !important;
+  }
+
+  /* ---------- QUIZ = purple / magenta ---------- */
+  #quiz.screen.active > .rmp32-page-hero.quiz{
+    background:
+      radial-gradient(circle at 85% 18%,rgba(255,255,255,.20),transparent 28%),
+      radial-gradient(circle at 80% 82%,rgba(255,255,255,.14),transparent 30%),
+      linear-gradient(135deg,#581C87 0%,#7C3AED 55%,#C026D3 100%) !important;
+    box-shadow:0 14px 32px rgba(124,58,237,.22) !important;
+  }
+  #quiz.screen.active > .rmp32-page-hero.quiz .rmp32-kicker{
+    background:rgba(255,255,255,.16) !important;
+    border-color:rgba(255,255,255,.20) !important;
+    color:#F5F3FF !important;
+  }
+  #quiz.screen.active > .rmp32-page-hero.quiz .rmp32-kicker i{
+    background:#FBBF24 !important;
+    box-shadow:0 0 0 3px rgba(251,191,36,.18) !important;
+  }
+  #quiz.screen.active > .rmp32-page-hero.quiz p,
+  #quiz.screen.active > .rmp32-page-hero.quiz h2{
+    color:#fff !important;
+  }
+  #quiz.screen.active > .rmp32-page-hero.quiz .rmp32-page-badges span{
+    background:rgba(255,255,255,.15) !important;
+    border:1px solid rgba(255,255,255,.18) !important;
+    color:#FAF5FF !important;
+  }
+
+  #quiz .series-list-tip{
+    background:#F5F3FF !important;
+    border-color:#DDD6FE !important;
+    color:#5B21B6 !important;
+  }
+  #quiz .series-card{
+    background:linear-gradient(135deg,#FFFFFF,#FAF5FF) !important;
+    border-color:#E9D5FF !important;
+    box-shadow:0 8px 20px rgba(91,33,182,.07) !important;
+  }
+  #quiz .series-card::after{
+    background:#F5F3FF !important;
+    color:#8B5CF6 !important;
+  }
+  #quiz .series-num{ color:#111827 !important; }
+  #quiz .srs-card-score{ color:#6D28D9 !important; }
+  body.rmp32-top-quiz .bottom-nav .nav-item.rmp32-active{
+    background:#FAF5FF !important;
+    color:#7C3AED !important;
+    box-shadow:inset 0 0 0 1px rgba(124,58,237,.22) !important;
+  }
+  body.rmp32-top-quiz .bottom-nav .nav-item.rmp32-active i,
+  body.rmp32-top-quiz .bottom-nav .nav-item.rmp32-active svg,
+  body.rmp32-top-quiz .bottom-nav .nav-item.rmp32-active .rmp28-nav-icon{
+    color:#7C3AED !important;
+  }
+
+  /* ---------- SAVED = green ---------- */
+  body.rmp32-top-bookmarks .bottom-nav .nav-item.rmp32-active{
+    background:#ECFDF5 !important;
+    color:#16A34A !important;
+    box-shadow:inset 0 0 0 1px rgba(22,163,74,.20) !important;
+  }
+  body.rmp32-top-bookmarks .bottom-nav .nav-item.rmp32-active i,
+  body.rmp32-top-bookmarks .bottom-nav .nav-item.rmp32-active svg,
+  body.rmp32-top-bookmarks .bottom-nav .nav-item.rmp32-active .rmp28-nav-icon{
+    color:#16A34A !important;
+  }
+
+  /* ---------- AI = indigo ---------- */
+  body.rmp32-top-qa .bottom-nav .nav-item.rmp32-active{
+    background:#EEF2FF !important;
+    color:#4F46E5 !important;
+    box-shadow:inset 0 0 0 1px rgba(79,70,229,.20) !important;
+  }
+  body.rmp32-top-qa .bottom-nav .nav-item.rmp32-active i,
+  body.rmp32-top-qa .bottom-nav .nav-item.rmp32-active svg,
+  body.rmp32-top-qa .bottom-nav .nav-item.rmp32-active .rmp28-nav-icon{
+    color:#4F46E5 !important;
+  }
+
+  /* ---------- SLIPS / CORRECTIONS = teal ---------- */
+  #corrections.screen.active > .rmp32-page-hero.slips{
+    background:
+      radial-gradient(circle at 87% 16%,rgba(255,255,255,.20),transparent 28%),
+      radial-gradient(circle at 76% 84%,rgba(255,255,255,.14),transparent 30%),
+      linear-gradient(135deg,#0F766E 0%,#0891B2 52%,#2563EB 100%) !important;
+    box-shadow:0 14px 32px rgba(8,145,178,.20) !important;
+  }
+  #corrections.screen.active > .rmp32-page-hero.slips .rmp32-kicker{
+    background:rgba(255,255,255,.16) !important;
+    border-color:rgba(255,255,255,.20) !important;
+    color:#ECFEFF !important;
+  }
+  #corrections.screen.active > .rmp32-page-hero.slips .rmp32-kicker i{
+    background:#FDE68A !important;
+    box-shadow:0 0 0 3px rgba(253,230,138,.20) !important;
+  }
+  #corrections.screen.active > .rmp32-page-hero.slips .rmp32-page-badges span{
+    background:rgba(255,255,255,.15) !important;
+    border:1px solid rgba(255,255,255,.18) !important;
+    color:#ECFEFF !important;
+  }
+  #corrections .corr-audit-bar{
+    background:#ECFEFF !important;
+    border-color:#A5F3FC !important;
+  }
+  #corr-tabs-grid button{
+    box-shadow:0 8px 20px rgba(8,145,178,.06) !important;
+  }
+  #corr-tabs-grid button::after{
+    background:#F0FDFA !important;
+    color:#0F766E !important;
+  }
+  body.rmp32-top-corrections .bottom-nav .nav-item.rmp32-active{
+    background:#F0FDFA !important;
+    color:#0F766E !important;
+    box-shadow:inset 0 0 0 1px rgba(15,118,110,.20) !important;
+  }
+  body.rmp32-top-corrections .bottom-nav .nav-item.rmp32-active i,
+  body.rmp32-top-corrections .bottom-nav .nav-item.rmp32-active svg,
+  body.rmp32-top-corrections .bottom-nav .nav-item.rmp32-active .rmp28-nav-icon{
+    color:#0F766E !important;
+  }
+}
+</style>
+
+<!-- Page theme colors v34 generated on 2026-08-08. -->
 </head>
 
 <body>
