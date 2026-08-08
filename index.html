@@ -10215,6 +10215,459 @@ body{
 }
 </style>
 
+
+<style id="rmp-mobile-hero-fix-v25">
+/* =========================================================
+   Rule Master Pro — Mobile Hero Fix v25
+   Real phone correction:
+   - desktop hero is NOT forced into mobile
+   - hero height reduced
+   - right visual cards hidden on phone
+   - credit shown as compact line
+   - search input not squeezed
+   - bottom nav not covering content
+   ========================================================= */
+
+/* Phone-specific correction */
+@media (max-width: 760px){
+
+  html, body{
+    overflow-x:hidden !important;
+  }
+
+  #home.home-screen.active{
+    background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+  }
+
+  #home .home-body{
+    padding:0 14px calc(126px + env(safe-area-inset-bottom,0px)) !important;
+    gap:13px !important;
+  }
+
+  /* HERO: compact phone card */
+  .rmp21-hero{
+    margin:12px 12px 10px !important;
+    border-radius:26px !important;
+    max-width:none !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+    background:
+      radial-gradient(circle at 100% 0%,rgba(244,123,32,.22),transparent 32%),
+      linear-gradient(145deg,#071E41 0%,#0A2D63 56%,#1559B7 100%) !important;
+    box-shadow:0 16px 32px rgba(9,41,87,.22) !important;
+  }
+
+  .rmp21-hero::after{
+    opacity:.10 !important;
+  }
+
+  .rmp21-hero-content{
+    display:block !important;
+    min-height:0 !important;
+    grid-template-columns:1fr !important;
+  }
+
+  .rmp21-hero-left{
+    padding:24px 20px 16px !important;
+    max-width:none !important;
+    width:100% !important;
+  }
+
+  .rmp21-brand-chip{
+    height:30px !important;
+    padding:0 11px !important;
+    margin:0 0 14px !important;
+    font-size:9.8px !important;
+    letter-spacing:.07em !important;
+    border-radius:999px !important;
+  }
+
+  .rmp21-chip-dot{
+    width:8px !important;
+    height:8px !important;
+  }
+
+  .rmp21-hero h1{
+    margin:0 0 6px !important;
+    font-size:32px !important;
+    line-height:1.02 !important;
+    letter-spacing:-.055em !important;
+    font-weight:1000 !important;
+  }
+
+  .rmp21-hero-title{
+    margin:0 0 10px !important;
+    font-size:20px !important;
+    line-height:1.15 !important;
+    font-weight:950 !important;
+    letter-spacing:-.035em !important;
+  }
+
+  .rmp21-hero-sub{
+    margin:0 !important;
+    max-width:none !important;
+    font-size:13.4px !important;
+    line-height:1.48 !important;
+    font-weight:650 !important;
+    color:rgba(239,245,255,.82) !important;
+  }
+
+  .rmp21-hero-actions{
+    margin-top:17px !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+
+  .rmp21-hero-btn{
+    width:100% !important;
+    min-height:42px !important;
+    border-radius:16px !important;
+    padding:0 10px !important;
+    font-size:13px !important;
+    font-weight:950 !important;
+  }
+
+  /* Hide desktop visual stack completely on mobile */
+  .rmp24-hero-visual,
+  .rmp21-hero-visual{
+    display:block !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:0 20px 16px !important;
+    overflow:visible !important;
+  }
+
+  .rmp24-hero-glow,
+  .rmp24-visual-card,
+  .rmp24-rail-track,
+  .rmp24-mini-loco,
+  .rmp21-book-stack,
+  .rmp21-rail-lines,
+  .rmp21-mini-train{
+    display:none !important;
+  }
+
+  /* Keep credit but as a neat compact strip */
+  .rmp24-visual-badge{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    top:auto !important;
+    width:100% !important;
+    display:block !important;
+    padding:10px 12px !important;
+    border-radius:18px !important;
+    background:rgba(255,255,255,.12) !important;
+    border:1px solid rgba(255,255,255,.16) !important;
+    color:rgba(255,245,225,.92) !important;
+    font-size:11px !important;
+    line-height:1.25 !important;
+    font-weight:850 !important;
+    letter-spacing:.01em !important;
+    text-align:center !important;
+    backdrop-filter:blur(8px) !important;
+  }
+
+  .rmp23-credit-panel{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    min-height:0 !important;
+    padding:10px 12px !important;
+    border-radius:18px !important;
+    background:rgba(255,255,255,.12) !important;
+    border:1px solid rgba(255,255,255,.16) !important;
+    box-shadow:none !important;
+  }
+
+  .rmp23-credit-panel span{
+    display:none !important;
+  }
+
+  .rmp23-credit-panel strong,
+  .rmp23-credit-panel em{
+    display:inline !important;
+    margin:0 !important;
+    font-size:11px !important;
+    line-height:1.25 !important;
+    font-weight:850 !important;
+    font-style:normal !important;
+    letter-spacing:.01em !important;
+    color:rgba(255,245,225,.92) !important;
+  }
+
+  .rmp23-credit-panel strong::before{
+    content:"Prepared by " !important;
+    font-weight:750 !important;
+    color:rgba(255,255,255,.72) !important;
+  }
+
+  .rmp23-credit-panel strong::after{
+    content:" • " !important;
+    color:rgba(255,255,255,.55) !important;
+  }
+
+  /* Stats: compact row, not giant */
+  .rmp21-hero-stats{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    background:rgba(255,255,255,.08) !important;
+    border-top:1px solid rgba(255,255,255,.12) !important;
+  }
+
+  .rmp21-hero-stats div{
+    padding:10px 10px !important;
+    gap:3px !important;
+    text-align:left !important;
+  }
+
+  .rmp21-hero-stats strong{
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+  }
+
+  .rmp21-hero-stats span{
+    font-size:9px !important;
+    line-height:1 !important;
+    letter-spacing:.08em !important;
+    font-weight:850 !important;
+    text-transform:uppercase !important;
+  }
+
+  /* SEARCH: phone-safe, input gets space */
+  #home .home-search-card{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    min-height:62px !important;
+    border-radius:24px !important;
+    padding:9px !important;
+    gap:7px !important;
+    box-shadow:0 12px 26px rgba(15,23,42,.10) !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  #home .home-search-card::after{
+    width:5px !important;
+    border-radius:24px 0 0 24px !important;
+  }
+
+  #home .home-search-card > i{
+    flex:0 0 40px !important;
+    width:40px !important;
+    height:40px !important;
+    border-radius:16px !important;
+    font-size:13px !important;
+  }
+
+  #global-search{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    width:100% !important;
+    font-size:13.6px !important;
+    font-weight:700 !important;
+    padding-left:2px !important;
+  }
+
+  #global-search::placeholder{
+    font-size:13.6px !important;
+  }
+
+  #home .voice-search-btn-v10{
+    flex:0 0 42px !important;
+    width:42px !important;
+    min-width:42px !important;
+    height:42px !important;
+    border-radius:16px !important;
+  }
+
+  #home .home-search-card button[onclick="triggerSearch()"]{
+    flex:0 0 42px !important;
+    width:42px !important;
+    min-width:42px !important;
+    height:42px !important;
+    border-radius:16px !important;
+    padding:0 !important;
+    font-size:16px !important;
+  }
+
+  /* Quick access: balanced cards */
+  .rmp21-front-panels{
+    gap:13px !important;
+  }
+
+  .rmp21-section-head{
+    margin:2px 2px -2px !important;
+  }
+
+  .rmp21-section-head div{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+  }
+
+  .rmp21-section-head span{
+    font-size:9.8px !important;
+    letter-spacing:.13em !important;
+  }
+
+  .rmp21-section-head strong{
+    font-size:16px !important;
+  }
+
+  .rmp21-quick-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+
+  .rmp21-quick-card{
+    min-height:132px !important;
+    border-radius:24px !important;
+    padding:16px 14px !important;
+  }
+
+  .rmp21-quick-icon{
+    width:44px !important;
+    height:44px !important;
+    border-radius:18px !important;
+    font-size:19px !important;
+  }
+
+  .rmp21-quick-card strong{
+    font-size:16px !important;
+  }
+
+  .rmp21-quick-card small{
+    font-size:12px !important;
+    line-height:1.25 !important;
+  }
+
+  /* Status cards: do not get hidden under bottom nav */
+  .rmp21-status-row{
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  .rmp21-status-card{
+    min-height:112px !important;
+    border-radius:24px !important;
+    padding:15px !important;
+    align-items:center !important;
+  }
+
+  .rmp21-card-icon{
+    flex:0 0 50px !important;
+    width:50px !important;
+    height:50px !important;
+    border-radius:20px !important;
+  }
+
+  .rmp21-status-text strong{
+    font-size:16px !important;
+  }
+
+  .rmp21-status-text small{
+    font-size:12px !important;
+  }
+
+  .rmp21-status-card button{
+    min-width:82px !important;
+    min-height:42px !important;
+    border-radius:17px !important;
+  }
+
+  .rmp21-progress-ring{
+    width:58px !important;
+    height:58px !important;
+    flex-basis:58px !important;
+  }
+
+  /* Manual grid single column on phone */
+  #home .manuals-grid{
+    grid-template-columns:1fr !important;
+    gap:11px !important;
+  }
+
+  #home .manual-tile{
+    min-height:112px !important;
+    border-radius:24px !important;
+    padding:15px 48px 14px 74px !important;
+  }
+
+  /* Bottom nav: compact and content-safe */
+  .bottom-nav{
+    position:fixed !important;
+    left:10px !important;
+    right:10px !important;
+    bottom:10px !important;
+    transform:none !important;
+    max-width:none !important;
+    height:78px !important;
+    border-radius:26px !important;
+    padding-bottom:env(safe-area-inset-bottom,0px) !important;
+    z-index:999 !important;
+  }
+
+  .bottom-nav .nav-item{
+    min-width:0 !important;
+    font-size:10px !important;
+    line-height:1.05 !important;
+  }
+
+  .bottom-nav .nav-item i{
+    font-size:20px !important;
+  }
+
+}
+
+/* Very small devices */
+@media (max-width: 390px){
+  .rmp21-hero h1{
+    font-size:29px !important;
+  }
+
+  .rmp21-hero-title{
+    font-size:18px !important;
+  }
+
+  .rmp21-hero-sub{
+    font-size:13px !important;
+  }
+
+  .rmp21-quick-card{
+    min-height:120px !important;
+  }
+
+  .rmp21-status-card{
+    align-items:flex-start !important;
+  }
+
+  #global-search{
+    font-size:12.8px !important;
+  }
+
+  #global-search::placeholder{
+    font-size:12.8px !important;
+  }
+}
+
+/* Larger screens keep v24 premium hero */
+@media (min-width: 761px){
+  .rmp24-visual-badge{
+    display:block !important;
+  }
+}
+</style>
+
+  <!-- Mobile hero real phone fix v25 generated on 2026-08-08. -->
 </head>
 
 <body>
