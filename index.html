@@ -14569,6 +14569,322 @@ mark.rmp40-hit{
 </style>
 
   <!-- Search results simple v41 generated on 2026-08-09. -->
+
+<style id="rmp-search-readable-v42">
+/* =========================================================
+   Rule Master Pro — Search Readability + Expand Repair v42
+   Fixes:
+   - Show full rule tap not working due collapse-enforcer observer
+   - Results looked cluttered on mobile
+   - Expanded full rule readability improved
+   ========================================================= */
+
+:root{
+  --rmp42-card:#FFFFFF;
+  --rmp42-bg:#F8FAFC;
+  --rmp42-border:#E2E8F0;
+  --rmp42-title:#0F172A;
+  --rmp42-text:#334155;
+  --rmp42-muted:#64748B;
+  --rmp42-orange:#EA580C;
+  --rmp42-navy:#092957;
+  --rmp42-blue:#1559B7;
+  --rmp42-highlight:#FEF08A;
+}
+
+/* Results list spacing */
+#search-results-container.rmp40-results{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:12px !important;
+  padding-bottom:8px !important;
+}
+
+/* Softer, wider, more readable result card */
+.rmp40-result-card{
+  border-radius:22px !important;
+  background:var(--rmp42-card) !important;
+  border:1px solid var(--rmp42-border) !important;
+  box-shadow:0 8px 20px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+.rmp40-result-card::before{
+  width:0 !important;
+  display:none !important;
+}
+
+/* Main clickable area */
+.rmp40-result-head{
+  width:100% !important;
+  padding:15px 14px 12px !important;
+  display:grid !important;
+  grid-template-columns:1fr 30px !important;
+  gap:10px !important;
+  align-items:start !important;
+  background:linear-gradient(135deg,#FFFFFF 0%,#F8FAFC 100%) !important;
+}
+
+/* Hide big left icon to reduce clutter */
+.rmp40-result-icon{
+  display:none !important;
+}
+
+/* Give main text full width */
+.rmp40-result-main{
+  min-width:0 !important;
+  width:100% !important;
+  display:block !important;
+}
+
+/* Badges become compact metadata row */
+.rmp40-result-badges{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:5px !important;
+  margin:0 0 8px !important;
+}
+
+.rmp40-badge{
+  min-height:22px !important;
+  border-radius:999px !important;
+  padding:0 8px !important;
+  background:#F8FAFC !important;
+  border:1px solid #E2E8F0 !important;
+  color:#64748B !important;
+  font-size:9px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  letter-spacing:.02em !important;
+}
+
+.rmp40-badge.orange{
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#C2410C !important;
+}
+
+.rmp40-badge.green{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+/* Better title and snippet hierarchy */
+.rmp40-result-title{
+  display:block !important;
+  color:var(--rmp42-title) !important;
+  font-family:"Segoe UI Variable","Aptos","Segoe UI",system-ui,sans-serif !important;
+  font-size:15px !important;
+  line-height:1.32 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.018em !important;
+  margin:0 !important;
+}
+
+.rmp40-result-snippet{
+  display:block !important;
+  margin-top:9px !important;
+  color:var(--rmp42-text) !important;
+  font-family:"Segoe UI","Aptos",system-ui,sans-serif !important;
+  font-size:12.7px !important;
+  line-height:1.62 !important;
+  font-weight:640 !important;
+}
+
+/* Small arrow only */
+.rmp40-result-chevron{
+  width:30px !important;
+  height:30px !important;
+  border-radius:13px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  color:#64748B !important;
+  font-size:17px !important;
+  font-weight:1000 !important;
+  transition:transform .18s ease, background .18s ease, color .18s ease !important;
+}
+
+.rmp40-result-card.rmp40-open .rmp40-result-chevron{
+  transform:rotate(180deg) !important;
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#EA580C !important;
+}
+
+/* Action area: clear full-width button */
+.rmp40-result-actions{
+  display:block !important;
+  padding:0 14px 14px !important;
+}
+
+.rmp40-expand-btn{
+  width:100% !important;
+  min-height:42px !important;
+  border-radius:16px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border:1px solid #FED7AA !important;
+  background:#FFF7ED !important;
+  color:#C2410C !important;
+  font-family:"Segoe UI","Aptos",system-ui,sans-serif !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+  box-shadow:none !important;
+  cursor:pointer !important;
+}
+
+.rmp40-open .rmp40-expand-btn{
+  background:#092957 !important;
+  border-color:#092957 !important;
+  color:#FFFFFF !important;
+}
+
+/* Expanded rule: comfortable reading block */
+.rmp40-full{
+  display:none !important;
+  padding:16px 15px 17px !important;
+  background:#FFFFFF !important;
+  border-top:1px solid #E2E8F0 !important;
+}
+
+.rmp40-result-card.rmp40-open .rmp40-full{
+  display:block !important;
+}
+
+.rmp40-full-title{
+  display:none !important;
+}
+
+.rmp40-full-body{
+  color:#1F2937 !important;
+  font-family:"Segoe UI","Aptos",system-ui,sans-serif !important;
+  font-size:13.2px !important;
+  line-height:1.72 !important;
+  font-weight:620 !important;
+  word-break:normal !important;
+  overflow-wrap:anywhere !important;
+}
+
+.rmp40-full-body p,
+.rmp40-full-body div{
+  margin:0 0 11px !important;
+}
+
+.rmp40-full-body ul,
+.rmp40-full-body ol{
+  margin:8px 0 12px 20px !important;
+  padding:0 !important;
+}
+
+.rmp40-full-body li{
+  margin:0 0 7px !important;
+  line-height:1.68 !important;
+}
+
+.rmp40-full-body table{
+  width:100% !important;
+  max-width:100% !important;
+  display:block !important;
+  overflow-x:auto !important;
+  border-collapse:collapse !important;
+  font-size:12px !important;
+}
+
+.rmp40-full-body th,
+.rmp40-full-body td{
+  padding:8px !important;
+  border:1px solid #E2E8F0 !important;
+  vertical-align:top !important;
+}
+
+/* Highlight should be visible but not harsh */
+.rmp40-hit,
+mark.rmp40-hit{
+  background:linear-gradient(180deg,#FEF9C3,#FDE68A) !important;
+  color:#713F12 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  font-weight:1000 !important;
+}
+
+/* Stats made shorter and less noisy */
+#search-stats.rmp40-stats{
+  border-radius:20px !important;
+  padding:11px 12px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.052) !important;
+}
+
+.rmp40-stats-title{
+  font-size:13.4px !important;
+  line-height:1.25 !important;
+  color:#0F172A !important;
+  font-weight:1000 !important;
+}
+
+.rmp40-stats-sub{
+  font-size:10.8px !important;
+  line-height:1.38 !important;
+  color:#64748B !important;
+}
+
+.rmp40-stats-count{
+  background:#EA580C !important;
+  color:#FFFFFF !important;
+  border-radius:12px !important;
+  min-width:46px !important;
+  padding:6px 8px !important;
+  font-size:12px !important;
+}
+
+.rmp40-filter-summary{
+  display:none !important;
+}
+
+/* Mobile tuning */
+@media(max-width:760px){
+  .rmp40-result-card{
+    border-radius:21px !important;
+  }
+
+  .rmp40-result-head{
+    padding:14px 13px 11px !important;
+  }
+
+  .rmp40-result-title{
+    font-size:14.4px !important;
+    line-height:1.34 !important;
+  }
+
+  .rmp40-result-snippet{
+    font-size:12.2px !important;
+    line-height:1.6 !important;
+  }
+
+  .rmp40-full{
+    padding:15px 14px 16px !important;
+  }
+
+  .rmp40-full-body{
+    font-size:12.9px !important;
+    line-height:1.7 !important;
+  }
+
+  .rmp40-expand-btn{
+    min-height:40px !important;
+    font-size:11.6px !important;
+  }
+}
+</style>
+
+  <!-- Search readable expand fix v42 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -25368,41 +25684,93 @@ return card;
 </script>
 
 
-<script id="rmp-search-results-simple-v41-script">
+
+<script id="rmp-search-readable-v42-script">
 (function(){
-  function enforceCollapsedResults(){
-    document.querySelectorAll(".rmp40-result-card.rmp40-open").forEach(card => {
-      card.classList.remove("rmp40-open");
-      const head = card.querySelector(".rmp40-result-head");
-      const btn = card.querySelector(".rmp40-expand-btn");
-      if(head) head.setAttribute("aria-expanded","false");
-      if(btn) btn.textContent = "Show full rule";
-    });
-
-    document.querySelectorAll(".rmp40-expand-btn").forEach(btn => {
-      if(btn.dataset.rmp41TextFixed === "1") return;
-      btn.dataset.rmp41TextFixed = "1";
-      if(/Show full highlighted text|Show full highlighted/i.test(btn.textContent || "")){
-        btn.textContent = "Show full rule";
-      }
-    });
-
-    document.querySelectorAll(".rmp40-full-title").forEach(el => el.remove());
+  function cleanFullTitle(card){
+    card.querySelectorAll(".rmp40-full-title").forEach(el => el.remove());
   }
 
-  function observeResults(){
+  function ensureFullBodyLoaded(card){
+    const body = card.querySelector(".rmp40-full-body");
+    const btn = card.querySelector(".rmp40-expand-btn");
+    if(!body) return true;
+
+    // v40/v41 normal path loads the body inside the original click handler.
+    // If it still stays empty because old handler failed, show a readable fallback from snippet.
+    setTimeout(function(){
+      if(card.classList.contains("rmp40-open") && !body.textContent.trim()){
+        const snippet = card.querySelector(".rmp40-result-snippet");
+        const title = card.querySelector(".rmp40-result-title");
+        body.innerHTML =
+          '<p>' + (title ? title.innerHTML : "Selected rule") + '</p>' +
+          '<p>' + (snippet ? snippet.innerHTML : "Full rule text could not be loaded from this card. Search result text is shown above.") + '</p>';
+      }
+      cleanFullTitle(card);
+    }, 80);
+    return true;
+  }
+
+  function setCardOpen(card, open){
+    const head = card.querySelector(".rmp40-result-head");
+    const btn = card.querySelector(".rmp40-expand-btn");
+
+    card.classList.toggle("rmp40-open", !!open);
+    if(head) head.setAttribute("aria-expanded", open ? "true" : "false");
+    if(btn) btn.textContent = open ? "Hide full rule" : "Show full rule";
+
+    if(open) ensureFullBodyLoaded(card);
+  }
+
+  function rebindCard(card){
+    if(card.dataset.rmp42Bound === "1") return;
+    card.dataset.rmp42Bound = "1";
+
+    cleanFullTitle(card);
+    setCardOpen(card, false);
+
+    const head = card.querySelector(".rmp40-result-head");
+    const btn = card.querySelector(".rmp40-expand-btn");
+
+    if(btn){
+      btn.textContent = "Show full rule";
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        const willOpen = !card.classList.contains("rmp40-open");
+        setCardOpen(card, willOpen);
+      }, true);
+    }
+
+    if(head){
+      head.addEventListener("click", function(e){
+        // Header should also open/collapse for user convenience.
+        e.preventDefault();
+        e.stopPropagation();
+        const willOpen = !card.classList.contains("rmp40-open");
+        setCardOpen(card, willOpen);
+      }, true);
+    }
+  }
+
+  function bindAllCards(){
+    document.querySelectorAll(".rmp40-result-card").forEach(rebindCard);
+  }
+
+  function observe(){
     const container = document.getElementById("search-results-container");
-    if(!container || container.dataset.rmp41Observed === "1") return;
-    container.dataset.rmp41Observed = "1";
-    const mo = new MutationObserver(() => {
-      setTimeout(enforceCollapsedResults, 30);
+    if(!container || container.dataset.rmp42Observed === "1") return;
+    container.dataset.rmp42Observed = "1";
+
+    const mo = new MutationObserver(function(){
+      setTimeout(bindAllCards, 30);
     });
-    mo.observe(container, {childList:true, subtree:true});
+    mo.observe(container, {childList:true, subtree:false});
   }
 
   function run(){
-    enforceCollapsedResults();
-    observeResults();
+    bindAllCards();
+    observe();
   }
 
   if(document.readyState === "loading"){
@@ -25410,9 +25778,9 @@ return card;
   }else{
     run();
   }
-  window.addEventListener("hashchange", () => setTimeout(run, 100));
+  window.addEventListener("hashchange", () => setTimeout(run, 120));
   setTimeout(run, 500);
-  setTimeout(run, 1200);
+  setTimeout(run, 1300);
 })();
 </script>
 
