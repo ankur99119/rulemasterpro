@@ -13967,6 +13967,407 @@ body{
 </style>
 
   <!-- UI polish after voice removal v39 generated on 2026-08-09. -->
+
+<style id="rmp-search-feature-v40">
+/* =========================================================
+   Rule Master Pro — Search Feature Repair v40
+   Fixes:
+   - Home search button not triggering actual search
+   - mobile shell search button not bound
+   - Search results not expanding cleanly
+   - highlight not retained in full expanded text
+   ========================================================= */
+
+:root{
+  --rmp40-hit-bg:#FEF08A;
+  --rmp40-hit-text:#713F12;
+  --rmp40-search-orange:#F47B20;
+  --rmp40-search-blue:#1559B7;
+  --rmp40-border:#E2E8F0;
+  --rmp40-text:#0F172A;
+  --rmp40-muted:#64748B;
+}
+
+/* Search input focus and search button */
+#global-search:focus,
+#rmp27-search-input:focus,
+#search-screen-input:focus{
+  outline:none !important;
+}
+
+.rmp40-hit,
+mark.rmp40-hit{
+  background:linear-gradient(180deg,#FEF9C3,#FDE68A) !important;
+  color:#713F12 !important;
+  border-radius:5px !important;
+  padding:0 3px !important;
+  font-weight:1000 !important;
+  box-decoration-break:clone !important;
+  -webkit-box-decoration-break:clone !important;
+}
+
+/* Result stats */
+#search-stats.rmp40-stats{
+  margin:0 0 12px !important;
+  padding:12px 13px !important;
+  border-radius:18px !important;
+  background:linear-gradient(135deg,#FFF7ED,#FFFFFF) !important;
+  border:1px solid #FED7AA !important;
+  box-shadow:0 8px 20px rgba(15,23,42,.05) !important;
+  color:#475569 !important;
+}
+
+.rmp40-stats-main{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.rmp40-stats-title{
+  color:#0F172A;
+  font-size:14px;
+  line-height:1.2;
+  font-weight:1000;
+  letter-spacing:-.025em;
+}
+
+.rmp40-stats-sub{
+  margin-top:5px;
+  color:#64748B;
+  font-size:11px;
+  line-height:1.35;
+  font-weight:700;
+}
+
+.rmp40-stats-count{
+  flex:0 0 auto;
+  min-width:54px;
+  border-radius:14px;
+  padding:7px 9px;
+  background:#EA580C;
+  color:#FFFFFF;
+  font-size:13px;
+  line-height:1;
+  font-weight:1000;
+  text-align:center;
+}
+
+.rmp40-filter-summary{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.rmp40-filter-summary span{
+  display:inline-flex;
+  align-items:center;
+  min-height:26px;
+  border-radius:999px;
+  padding:0 9px;
+  background:#FFFFFF;
+  border:1px solid #FED7AA;
+  color:#9A3412;
+  font-size:10px;
+  font-weight:900;
+}
+
+/* Search result cards */
+#search-results-container.rmp40-results{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:11px !important;
+}
+
+.rmp40-result-card{
+  border-radius:24px !important;
+  background:linear-gradient(135deg,#FFFFFF 0%,#F8FAFC 100%) !important;
+  border:1px solid var(--rmp40-border) !important;
+  box-shadow:0 9px 22px rgba(15,23,42,.065) !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+.rmp40-result-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:linear-gradient(180deg,var(--rmp40-search-orange),var(--rmp40-search-blue));
+}
+
+.rmp40-result-head{
+  width:100%;
+  appearance:none;
+  border:0;
+  background:transparent;
+  padding:14px 14px 12px 18px;
+  display:flex;
+  gap:11px;
+  align-items:flex-start;
+  text-align:left;
+  cursor:pointer;
+}
+
+.rmp40-result-icon{
+  flex:0 0 42px;
+  width:42px;
+  height:42px;
+  border-radius:17px;
+  display:grid;
+  place-items:center;
+  background:#FFF7ED;
+  color:#EA580C;
+  font-size:18px;
+  font-weight:1000;
+}
+
+.rmp40-result-main{
+  min-width:0;
+  flex:1;
+}
+
+.rmp40-result-badges{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.rmp40-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  border-radius:999px;
+  padding:0 8px;
+  background:#EFF6FF;
+  border:1px solid #BFDBFE;
+  color:#1559B7;
+  font-size:9.7px;
+  font-weight:1000;
+  letter-spacing:.03em;
+}
+
+.rmp40-badge.orange{
+  background:#FFF7ED;
+  border-color:#FED7AA;
+  color:#EA580C;
+}
+
+.rmp40-badge.green{
+  background:#ECFDF5;
+  border-color:#BBF7D0;
+  color:#047857;
+}
+
+.rmp40-result-title{
+  color:#0F172A;
+  font-size:15.2px;
+  line-height:1.18;
+  font-weight:1000;
+  letter-spacing:-.028em;
+}
+
+.rmp40-result-snippet{
+  margin-top:8px;
+  color:#475569;
+  font-size:12px;
+  line-height:1.52;
+  font-weight:700;
+}
+
+.rmp40-result-chevron{
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:#F8FAFC;
+  color:#64748B;
+  font-size:18px;
+  font-weight:1000;
+  transition:transform .18s ease, background .18s ease;
+}
+
+.rmp40-result-card.rmp40-open .rmp40-result-chevron{
+  transform:rotate(180deg);
+  background:#FFF7ED;
+  color:#EA580C;
+}
+
+.rmp40-result-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:0 14px 14px 18px;
+}
+
+.rmp40-expand-btn{
+  border:0;
+  min-height:36px;
+  border-radius:14px;
+  padding:0 13px;
+  background:#092957;
+  color:#FFFFFF;
+  font-size:11px;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.rmp40-open .rmp40-expand-btn{
+  background:#EA580C;
+}
+
+.rmp40-full{
+  display:none;
+  border-top:1px solid #E2E8F0;
+  background:#FFFFFF;
+  padding:14px 16px 16px 18px;
+}
+
+.rmp40-result-card.rmp40-open .rmp40-full{
+  display:block;
+}
+
+.rmp40-full-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#0F172A;
+  font-size:12px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.rmp40-full-body{
+  color:#1F2937;
+  font-size:13px;
+  line-height:1.66;
+  font-weight:620;
+}
+
+.rmp40-full-body p{
+  margin:0 0 10px;
+}
+
+.rmp40-full-body table{
+  max-width:100%;
+  overflow:auto;
+}
+
+.rmp40-ready{
+  border-radius:24px;
+  padding:26px 18px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  box-shadow:0 9px 22px rgba(15,23,42,.055);
+  text-align:center;
+  color:#64748B;
+}
+
+.rmp40-ready i{
+  display:block;
+  font-size:38px;
+  color:#CBD5E1;
+  margin-bottom:10px;
+}
+
+.rmp40-ready strong{
+  display:block;
+  color:#0F172A;
+  font-size:16px;
+  font-weight:1000;
+  margin-bottom:5px;
+}
+
+.rmp40-no-result{
+  border-radius:24px;
+  padding:26px 18px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  box-shadow:0 9px 22px rgba(15,23,42,.055);
+  text-align:center;
+}
+
+.rmp40-no-result i{
+  display:block;
+  font-size:38px;
+  color:#CBD5E1;
+  margin-bottom:12px;
+}
+
+.rmp40-no-result p{
+  color:#64748B;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:700;
+}
+
+.rmp40-suggestion-btn{
+  margin-top:10px;
+  min-height:38px;
+  border:0;
+  border-radius:15px;
+  background:#EA580C;
+  color:#FFFFFF;
+  padding:0 14px;
+  font-size:12px;
+  font-weight:1000;
+}
+
+/* Search page panel minor repair after no voice */
+#search .search-row-v3,
+#search.screen.active .search-row-v3{
+  grid-template-columns:minmax(0,1fr) 44px !important;
+}
+
+#search .search-btn-v3,
+#search.screen.active .search-btn-v3{
+  display:grid !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+@media(max-width:760px){
+  #search-results-container.rmp40-results{
+    gap:10px !important;
+  }
+
+  .rmp40-result-head{
+    padding:13px 12px 11px 17px;
+  }
+
+  .rmp40-result-title{
+    font-size:14.5px;
+  }
+
+  .rmp40-result-snippet{
+    font-size:11.5px;
+  }
+
+  .rmp40-full-body{
+    font-size:12.6px;
+    line-height:1.62;
+  }
+
+  .rmp40-stats-title{
+    font-size:13.2px;
+  }
+
+  .rmp40-stats-sub{
+    font-size:10.6px;
+  }
+}
+</style>
+
+  <!-- Search feature repair v40 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -24245,6 +24646,527 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   window.addEventListener("hashchange",()=>setTimeout(run,50));
   setTimeout(run,400);
   setTimeout(run,1200);
+})();
+</script>
+
+
+<script id="rmp-search-feature-v40-script">
+(function(){
+  const LIMIT = 150;
+  const STORE_LAST = "rmp_search_last_query_v40";
+
+  function $(id){ return document.getElementById(id); }
+
+  function esc(s){
+    if(typeof html_esc_js === "function") return html_esc_js(s == null ? "" : String(s));
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function stripHtml(html){
+    if(typeof stripHtmlForSearch === "function") return stripHtmlForSearch(html || "");
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
+    return (div.textContent || div.innerText || "").replace(/\s+/g," ").trim();
+  }
+
+  function escapeRegExp(s){
+    if(window.RegExp && typeof RegExp.escape === "function") return RegExp.escape(String(s || ""));
+    return String(s || "").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  }
+
+  function norm(s){
+    if(typeof normalizeSearchText === "function") return normalizeSearchText(s || "");
+    return String(s || "").toLowerCase().replace(/\s+/g," ").trim();
+  }
+
+  function queryTerms(query, matchedQuery){
+    const raw = [query, matchedQuery].filter(Boolean).map(s => String(s).trim()).filter(Boolean);
+    const parts = [];
+    raw.forEach(q => {
+      parts.push(q);
+      q.split(/[\s,;:()]+/).forEach(w => {
+        w = w.trim();
+        if(w.length >= 2) parts.push(w);
+      });
+    });
+    const seen = new Set();
+    return parts
+      .map(x => x.trim())
+      .filter(x => x && x.length >= 2)
+      .sort((a,b) => b.length - a.length)
+      .filter(x => {
+        const k = norm(x);
+        if(seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      })
+      .slice(0, 12);
+  }
+
+  function highlightPlain(text, query, matchedQuery){
+    const terms = queryTerms(query, matchedQuery);
+    let safe = esc(text || "");
+    if(!terms.length) return safe;
+    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+    return safe.replace(rx, '<mark class="rmp40-hit">$1</mark>');
+  }
+
+  function highlightHtml(rawHtml, query, matchedQuery){
+    const terms = queryTerms(query, matchedQuery);
+    if(!terms.length) return rawHtml || "";
+    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+    const template = document.createElement("template");
+    template.innerHTML = rawHtml || "";
+    const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node){
+        if(!node.nodeValue || !rx.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+        rx.lastIndex = 0;
+        const p = node.parentElement;
+        if(!p || /^(SCRIPT|STYLE|TEXTAREA|INPUT|MARK|BUTTON)$/i.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const span = document.createElement("span");
+      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp40-hit">$1</mark>');
+      node.parentNode.replaceChild(span, node);
+    });
+    return template.innerHTML;
+  }
+
+  function makeSnippet(text, query, matchedQuery){
+    const plain = String(text || "").replace(/\s+/g," ").trim();
+    if(!plain) return "";
+    const terms = queryTerms(query, matchedQuery);
+    let pos = -1, term = "";
+    const low = plain.toLowerCase();
+    for(const t of terms){
+      const p = low.indexOf(t.toLowerCase());
+      if(p >= 0 && (pos < 0 || p < pos)){ pos = p; term = t; }
+    }
+    if(pos < 0){
+      const words = terms.filter(t => t.length > 2);
+      for(const t of words){
+        const p = low.indexOf(t.toLowerCase());
+        if(p >= 0){ pos = p; term = t; break; }
+      }
+    }
+    if(pos < 0){
+      return highlightPlain(plain.slice(0, 190) + (plain.length > 190 ? "…" : ""), query, matchedQuery);
+    }
+    const start = Math.max(0, pos - 82);
+    const end = Math.min(plain.length, pos + term.length + 118);
+    const snip = (start > 0 ? "…" : "") + plain.slice(start, end) + (end < plain.length ? "…" : "");
+    return highlightPlain(snip, query, matchedQuery);
+  }
+
+  function manualLabel(item){
+    if(item.manualLabel) return item.manualLabel;
+    try{
+      if(typeof SEARCH_MANUAL_LABELS !== "undefined") return SEARCH_MANUAL_LABELS[item.manual] || String(item.manual || "").toUpperCase();
+    }catch(e){}
+    return String(item.manual || "").toUpperCase();
+  }
+
+  function itemIcon(item){
+    const m = item.manual || "";
+    if(item.type === "correction" || m === "corr") return "▣";
+    if(m === "gsr") return "§";
+    if(m === "om") return "📘";
+    if(m === "bwm") return "🚦";
+    if(m === "acc") return "⚠";
+    if(m === "ira") return "⚖";
+    if(m === "irsem") return "📡";
+    if(m === "irpwm") return "🛤";
+    return "📄";
+  }
+
+  function fullBodyFor(item){
+    if(item.type === "correction"){
+      const slip = item.raw || {};
+      const changes = Array.isArray(slip.changes) ? slip.changes : [];
+      if(changes.length){
+        return '<div class="rmp40-correction-full">' + changes.map(c => {
+          return '<p><b>' + esc(c.rule || c.type || "Change") + ':</b> ' + esc(c.text || "") + '</p>';
+        }).join("") + '</div>';
+      }
+      return '<p>' + esc(item.bodyText || item.body || "") + '</p>';
+    }
+    return item.body || (item.raw && item.raw.body) || ('<p>' + esc(item.bodyText || "") + '</p>');
+  }
+
+  function titleFor(item){
+    const n = item.num ? String(item.num).trim() : "";
+    const title = item.title || (item.raw && item.raw.title) || "Untitled reference";
+    return (n ? n + " — " : "") + title;
+  }
+
+  function makeResultCard(item, index, query, usedSuggestion){
+    const card = document.createElement("article");
+    card.className = "rmp40-result-card";
+    card.setAttribute("data-rmp40-result", String(index + 1));
+
+    const mLabel = manualLabel(item);
+    const title = highlightPlain(titleFor(item), query, item.matchedQuery);
+    const plainBody = item.bodyText || stripHtml(item.body || (item.raw && item.raw.body) || "");
+    const snippet = makeSnippet(plainBody, query, item.matchedQuery || query);
+    const idBadge = item.num ? '<span class="rmp40-badge orange">' + esc(item.num) + '</span>' : "";
+    const kindBadge = item.matchKind && item.matchKind !== "exact"
+      ? '<span class="rmp40-badge green">' + esc(item.matchKind) + '</span>' : "";
+    const suggestionBadge = usedSuggestion
+      ? '<span class="rmp40-badge green">suggested spelling</span>' : "";
+
+    card.innerHTML =
+      '<button type="button" class="rmp40-result-head" aria-expanded="false">' +
+        '<span class="rmp40-result-icon">' + esc(itemIcon(item)) + '</span>' +
+        '<span class="rmp40-result-main">' +
+          '<span class="rmp40-result-badges">' +
+            '<span class="rmp40-badge">' + esc(mLabel) + '</span>' + idBadge + kindBadge + suggestionBadge +
+          '</span>' +
+          '<span class="rmp40-result-title">' + title + '</span>' +
+          '<span class="rmp40-result-snippet">' + snippet + '</span>' +
+        '</span>' +
+        '<span class="rmp40-result-chevron">⌄</span>' +
+      '</button>' +
+      '<div class="rmp40-result-actions">' +
+        '<button type="button" class="rmp40-expand-btn">Show full highlighted text</button>' +
+      '</div>' +
+      '<div class="rmp40-full">' +
+        '<div class="rmp40-full-title">Full highlighted reference</div>' +
+        '<div class="rmp40-full-body"></div>' +
+      '</div>';
+
+    const fullHtml = fullBodyFor(item);
+    const header = card.querySelector(".rmp40-result-head");
+    const btn = card.querySelector(".rmp40-expand-btn");
+    const body = card.querySelector(".rmp40-full-body");
+
+    function openClose(force){
+      const willOpen = typeof force === "boolean" ? force : !card.classList.contains("rmp40-open");
+      card.classList.toggle("rmp40-open", willOpen);
+      header.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      btn.textContent = willOpen ? "Collapse" : "Show full highlighted text";
+      if(willOpen && !body.dataset.loaded){
+        body.innerHTML = highlightHtml(fullHtml, query, item.matchedQuery || query);
+        body.dataset.loaded = "1";
+      }
+    }
+
+    header.addEventListener("click", function(e){ e.preventDefault(); openClose(); });
+    btn.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); openClose(); });
+
+    // Auto-open first result so the user immediately sees expanded highlighted text.
+    if(index === 0) setTimeout(() => openClose(true), 0);
+
+    return card;
+  }
+
+  function getFilter(){
+    try{ if(typeof getSearchManualFilter === "function") return getSearchManualFilter(); }catch(e){}
+    const sel = $("search-manual-filter");
+    return sel ? (sel.value || "all") : "all";
+  }
+
+  function getTypeFilterSafe(){
+    try{ if(typeof getSearchTypeFilter === "function") return getSearchTypeFilter(); }catch(e){}
+    const sel = $("search-type-filter");
+    return sel ? (sel.value || "all") : "all";
+  }
+
+  function getIndex(){
+    try{
+      if(typeof buildSearchIndex === "function") return buildSearchIndex() || [];
+    }catch(e){ console.warn("Search index error", e); }
+    return [];
+  }
+
+  function scoreItem(item, q, typeMode){
+    try{
+      if(typeof scoreSearchItemAdvanced === "function"){
+        const s = scoreSearchItemAdvanced(item, q, typeMode || "all");
+        if(s && s.score > 0) return s;
+      }
+    }catch(e){}
+    const hay = norm([item.num, item.title, item.bodyText, manualLabel(item)].join(" "));
+    const nq = norm(q);
+    if(!nq) return {score:0, query:q, kind:"exact"};
+    let score = 0;
+    if(hay.includes(nq)) score += 100;
+    const words = nq.split(" ").filter(w => w.length > 2);
+    if(words.length && words.every(w => hay.includes(w))) score += 55;
+    return {score:score, query:q, kind:"exact"};
+  }
+
+  function noSearchState(){
+    return '<div class="rmp40-ready"><i class="fas fa-search"></i><strong>Search ready</strong><p>Type a rule number, para, keyword or railway phrase. Results open with highlighted matching words.</p></div>';
+  }
+
+  function applyInputs(q){
+    const homeNew = $("rmp27-search-input");
+    const homeOld = $("global-search");
+    const screen = $("search-screen-input");
+    [homeNew, homeOld, screen].forEach(el => { if(el) el.value = q; });
+  }
+
+  function routeToSearchThen(q, cb){
+    applyInputs(q);
+    if(window.location.hash !== "#search"){
+      window.location.hash = "#search";
+      setTimeout(cb, 150);
+      setTimeout(cb, 450);
+      setTimeout(cb, 900);
+    }else{
+      cb();
+    }
+  }
+
+  function searchV40(term, fromFilterChange){
+    const container = $("search-results-container");
+    const stats = $("search-stats");
+    if(!container) return;
+
+    term = String(term || "").trim();
+    applyInputs(term);
+    try{ if(typeof updateSearchFilterChips === "function") updateSearchFilterChips(); }catch(e){}
+
+    container.classList.add("rmp40-results");
+    container.innerHTML = "";
+
+    if(!term){
+      if(stats){ stats.className = ""; stats.innerHTML = ""; }
+      try{ if(typeof renderRecentSearches === "function") renderRecentSearches(); }catch(e){}
+      container.innerHTML = noSearchState();
+      return;
+    }
+
+    try{ localStorage.setItem(STORE_LAST, term); }catch(e){}
+    try{ if(typeof saveRecentSearch === "function") saveRecentSearch(term); }catch(e){}
+    try{ if(typeof hideSearchSuggestions === "function") hideSearchSuggestions(); }catch(e){}
+
+    const filter = getFilter();
+    const typeMode = getTypeFilterSafe();
+    const allItems = getIndex();
+    let usedTerm = term;
+    let usedSuggestion = false;
+
+    function collect(q){
+      const arr = [];
+      allItems.forEach(item => {
+        if(filter !== "all" && item.manual !== filter) return;
+        const match = scoreItem(item, q, typeMode);
+        if(match.score > 0) arr.push(Object.assign({}, item, {
+          score: match.score,
+          matchedQuery: match.query || q,
+          matchKind: match.kind || "exact"
+        }));
+      });
+      return arr;
+    }
+
+    let scored = collect(term);
+
+    if(!scored.length){
+      try{
+        const suggestion = typeof suggestSearchCorrection === "function" ? suggestSearchCorrection(term, allItems, filter) : null;
+        if(suggestion && suggestion.corrected){
+          const sug = collect(suggestion.corrected);
+          if(sug.length){
+            scored = sug;
+            usedTerm = suggestion.corrected;
+            usedSuggestion = true;
+          }
+        }
+      }catch(e){}
+    }
+
+    scored.sort((a,b) => {
+      if(b.score !== a.score) return b.score - a.score;
+      const am = manualLabel(a), bm = manualLabel(b);
+      if(am !== bm) return am.localeCompare(bm);
+      return String(a.num || "").localeCompare(String(b.num || ""), undefined, {numeric:true});
+    });
+
+    const visible = scored.slice(0, LIMIT);
+
+    if(stats){
+      const counts = {};
+      scored.forEach(r => { const k = manualLabel(r); counts[k] = (counts[k] || 0) + 1; });
+      const countChips = Object.keys(counts).slice(0, 7).map(k => '<span>' + esc(k) + ': ' + counts[k] + '</span>').join("");
+      stats.className = "rmp40-stats";
+      stats.innerHTML =
+        '<div class="rmp40-stats-main">' +
+          '<div>' +
+            '<div class="rmp40-stats-title">Results for “' + esc(usedTerm) + '”</div>' +
+            '<div class="rmp40-stats-sub">Tap any result to expand. Matching words remain highlighted in the full text.</div>' +
+          '</div>' +
+          '<div class="rmp40-stats-count">' + scored.length + '</div>' +
+        '</div>' +
+        '<div class="rmp40-filter-summary">' + (countChips || '<span>No matching manual</span>') + '</div>';
+    }
+
+    if(!visible.length){
+      let suggestionHtml = "";
+      try{
+        const suggestion = typeof suggestSearchCorrection === "function" ? suggestSearchCorrection(term, allItems, filter) : null;
+        if(suggestion && suggestion.corrected){
+          suggestionHtml = '<button class="rmp40-suggestion-btn" type="button">Search “' + esc(suggestion.corrected) + '”</button>';
+        }
+      }catch(e){}
+
+      container.innerHTML =
+        '<div class="rmp40-no-result"><i class="fas fa-search"></i><p>No result found for <b>“' + esc(term) + '”</b>.<br>Try exact number like 5.23, shorter keyword, or All Manuals.</p>' + suggestionHtml + '</div>';
+
+      const sBtn = container.querySelector(".rmp40-suggestion-btn");
+      if(sBtn){
+        const suggested = sBtn.textContent.replace(/^Search “|”$/g,"");
+        sBtn.addEventListener("click", () => { applyInputs(suggested); searchV40(suggested); });
+      }
+      return;
+    }
+
+    const frag = document.createDocumentFragment();
+    visible.forEach((item, index) => frag.appendChild(makeResultCard(item, index, usedTerm, usedSuggestion)));
+    container.appendChild(frag);
+    container.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  window.performSearch = function(term){ searchV40(term, false); };
+
+  window.triggerSearch = function(){
+    const q = (($("rmp27-search-input") && $("rmp27-search-input").value) ||
+               ($("global-search") && $("global-search").value) || "").trim();
+    if(!q){
+      routeToSearchThen("", function(){
+        const si = $("search-screen-input");
+        if(si) si.focus();
+        searchV40("");
+      });
+      return;
+    }
+    routeToSearchThen(q, function(){ searchV40(q); });
+  };
+
+  window.triggerSearchFromScreen = function(fromFilterChange){
+    const si = $("search-screen-input");
+    const q = si ? si.value.trim() : "";
+    if(!q && !fromFilterChange){
+      searchV40("");
+      if(si) si.focus();
+      return;
+    }
+    searchV40(q, !!fromFilterChange);
+  };
+
+  function bind(){
+    const homeInput = $("rmp27-search-input");
+    const oldHome = $("global-search");
+    const screenInput = $("search-screen-input");
+    const homeBtn = document.querySelector(".rmp27-go");
+
+    if(homeInput && !homeInput.dataset.rmp40Bound){
+      homeInput.dataset.rmp40Bound = "1";
+      homeInput.addEventListener("keydown", e => {
+        if(e.key === "Enter"){ e.preventDefault(); window.triggerSearch(); }
+      });
+      homeInput.addEventListener("input", () => { if(oldHome) oldHome.value = homeInput.value; });
+    }
+
+    if(oldHome && !oldHome.dataset.rmp40Bound){
+      oldHome.dataset.rmp40Bound = "1";
+      oldHome.addEventListener("keydown", e => {
+        if(e.key === "Enter"){ e.preventDefault(); window.triggerSearch(); }
+      });
+      oldHome.addEventListener("input", () => { if(homeInput) homeInput.value = oldHome.value; });
+    }
+
+    if(homeBtn && !homeBtn.dataset.rmp40Bound){
+      homeBtn.dataset.rmp40Bound = "1";
+      homeBtn.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.triggerSearch();
+      }, true);
+    }
+
+    const oldArrow = document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
+    if(oldArrow && !oldArrow.dataset.rmp40Bound){
+      oldArrow.dataset.rmp40Bound = "1";
+      oldArrow.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.triggerSearch();
+      }, true);
+    }
+
+    if(screenInput && !screenInput.dataset.rmp40Bound){
+      screenInput.dataset.rmp40Bound = "1";
+      let timer = null;
+      screenInput.addEventListener("keydown", e => {
+        if(e.key === "Enter"){ e.preventDefault(); window.triggerSearchFromScreen(false); }
+      });
+      screenInput.addEventListener("input", () => {
+        const q = screenInput.value.trim();
+        applyInputs(q);
+        clearTimeout(timer);
+        if(q.length >= 2){
+          timer = setTimeout(() => searchV40(q), 350);
+        }else if(q.length === 0 && window.location.hash === "#search"){
+          timer = setTimeout(() => searchV40(""), 250);
+        }
+      });
+    }
+
+    document.querySelectorAll(".search-chip-v3").forEach(btn => {
+      if(btn.dataset.rmp40Bound) return;
+      btn.dataset.rmp40Bound = "1";
+      btn.addEventListener("click", () => setTimeout(() => {
+        const q = ($("search-screen-input") && $("search-screen-input").value || "").trim();
+        searchV40(q, true);
+      }, 50));
+    });
+
+    const manualFilter = $("search-manual-filter");
+    if(manualFilter && !manualFilter.dataset.rmp40Bound){
+      manualFilter.dataset.rmp40Bound = "1";
+      manualFilter.addEventListener("change", () => {
+        const q = ($("search-screen-input") && $("search-screen-input").value || "").trim();
+        searchV40(q, true);
+      });
+    }
+  }
+
+  function restoreLastOnSearch(){
+    if(window.location.hash !== "#search") return;
+    const si = $("search-screen-input");
+    const current = si ? si.value.trim() : "";
+    if(current) return;
+    try{
+      const last = localStorage.getItem(STORE_LAST) || "";
+      if(last){
+        applyInputs(last);
+        searchV40(last);
+      }else{
+        searchV40("");
+      }
+    }catch(e){ searchV40(""); }
+  }
+
+  function run(){
+    bind();
+    restoreLastOnSearch();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+  window.addEventListener("hashchange", () => setTimeout(run, 80));
+  setTimeout(run, 400);
+  setTimeout(run, 1200);
 })();
 </script>
 
