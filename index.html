@@ -16617,6 +16617,304 @@ mark.rmp46-hit,
 </style>
 
   <!-- Clean search and about layout v46 generated on 2026-08-09. -->
+
+<style id="rmp-search-save-only-v47">
+/* =========================================================
+   Rule Master Pro — v47 Search Save Only
+   User requirement:
+   - No Copy / Open / Share in search result
+   - Only two options: Show full rule and Save
+   - One clean card per searched rule
+   - Expanded area should show complete rule body
+   ========================================================= */
+
+/* hard-hide any older full-rule toolbars/actions */
+.rmp45-full-toolbar,
+.rmp45-full-actions,
+.rmp45-rule-action,
+.rmp44-full-toolbar,
+.rmp44-full-actions,
+.rmp40-full-title{
+  display:none !important;
+}
+
+/* clean one-card layout */
+#search-results-container.rmp47-results{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:11px !important;
+  padding-bottom:14px !important;
+}
+
+.rmp47-card{
+  border-radius:20px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+}
+
+.rmp47-head{
+  border:0 !important;
+  background:#FFFFFF !important;
+  display:block !important;
+  width:100% !important;
+  padding:14px 14px 12px !important;
+  text-align:left !important;
+}
+
+.rmp47-meta{
+  display:flex !important;
+  gap:6px !important;
+  flex-wrap:wrap !important;
+  margin-bottom:8px !important;
+}
+
+.rmp47-badge{
+  min-height:21px !important;
+  border-radius:999px !important;
+  padding:0 8px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  background:#F8FAFC !important;
+  border:1px solid #E2E8F0 !important;
+  color:#475569 !important;
+  font-size:9px !important;
+  font-weight:1000 !important;
+  letter-spacing:.02em !important;
+}
+
+.rmp47-badge.gsr{
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#C2410C !important;
+}
+
+.rmp47-badge.om{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+.rmp47-badge.bwm{
+  background:#EFF6FF !important;
+  border-color:#BFDBFE !important;
+  color:#1559B7 !important;
+}
+
+.rmp47-badge.acc{
+  background:#FEF2F2 !important;
+  border-color:#FECACA !important;
+  color:#B91C1C !important;
+}
+
+.rmp47-title{
+  display:block !important;
+  color:#0F172A !important;
+  font-size:14.7px !important;
+  line-height:1.36 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.015em !important;
+}
+
+.rmp47-title .gsr-prefix{
+  color:#C2410C !important;
+  font-weight:1000 !important;
+}
+
+.rmp47-snippet{
+  display:block !important;
+  margin-top:8px !important;
+  color:#334155 !important;
+  font-size:12.25px !important;
+  line-height:1.6 !important;
+  font-weight:650 !important;
+}
+
+/* only two buttons */
+.rmp47-actions{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:9px !important;
+  padding:0 14px 14px !important;
+}
+
+.rmp47-show-btn,
+.rmp47-save-btn{
+  min-height:40px !important;
+  border-radius:16px !important;
+  font-size:11.8px !important;
+  font-weight:1000 !important;
+  border:1px solid #E2E8F0 !important;
+}
+
+.rmp47-show-btn{
+  background:#FFF7ED !important;
+  color:#C2410C !important;
+  border-color:#FED7AA !important;
+}
+
+.rmp47-save-btn{
+  background:#F8FAFC !important;
+  color:#092957 !important;
+  border-color:#DCE4EF !important;
+}
+
+.rmp47-card.open .rmp47-show-btn{
+  background:#092957 !important;
+  color:#FFFFFF !important;
+  border-color:#092957 !important;
+}
+
+.rmp47-save-btn.saved{
+  background:#ECFDF5 !important;
+  color:#047857 !important;
+  border-color:#BBF7D0 !important;
+}
+
+.rmp47-full{
+  display:none !important;
+  border-top:1px solid #E2E8F0 !important;
+  background:#FFFFFF !important;
+  padding:15px 14px 16px !important;
+}
+
+.rmp47-card.open .rmp47-full{
+  display:block !important;
+}
+
+.rmp47-full-body{
+  color:#1F2937 !important;
+  font-size:12.8px !important;
+  line-height:1.72 !important;
+  font-weight:620 !important;
+  overflow-wrap:anywhere !important;
+}
+
+.rmp47-full-body p,
+.rmp47-full-body div{
+  margin:0 0 11px !important;
+}
+
+.rmp47-full-body ul,
+.rmp47-full-body ol{
+  margin:8px 0 12px 20px !important;
+  padding:0 !important;
+}
+
+.rmp47-full-body li{
+  margin:0 0 7px !important;
+}
+
+.rmp47-full-body table{
+  width:100% !important;
+  max-width:100% !important;
+  display:block !important;
+  overflow-x:auto !important;
+  border-collapse:collapse !important;
+  font-size:12px !important;
+}
+
+.rmp47-full-body th,
+.rmp47-full-body td{
+  padding:8px !important;
+  border:1px solid #E2E8F0 !important;
+  vertical-align:top !important;
+}
+
+/* light yellow highlight only */
+.rmp47-hit,
+mark.rmp47-hit,
+.rmp46-hit,
+.rmp45-hit,
+.rmp44-hit,
+.rmp40-hit{
+  background:#FFF3A3 !important;
+  color:#111827 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  box-shadow:inset 0 -1px 0 #FACC15 !important;
+  font-weight:950 !important;
+}
+
+#search-stats.rmp47-stats{
+  margin:0 0 10px !important;
+  padding:10px 12px !important;
+  border-radius:18px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
+  color:#475569 !important;
+  font-size:11.5px !important;
+  line-height:1.35 !important;
+  font-weight:750 !important;
+}
+
+#search-stats.rmp47-stats b{
+  color:#0F172A !important;
+  font-weight:1000 !important;
+}
+
+.rmp47-ready,
+.rmp47-empty{
+  border-radius:20px !important;
+  padding:24px 16px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.045) !important;
+  text-align:center !important;
+}
+
+.rmp47-ready strong,
+.rmp47-empty strong{
+  display:block !important;
+  color:#0F172A !important;
+  font-size:15px !important;
+  font-weight:1000 !important;
+  margin-bottom:6px !important;
+}
+
+.rmp47-ready p,
+.rmp47-empty p{
+  color:#64748B !important;
+  font-size:12px !important;
+  line-height:1.45 !important;
+  font-weight:700 !important;
+  margin:0 !important;
+}
+
+@media(max-width:760px){
+  .rmp47-card{
+    border-radius:19px !important;
+  }
+
+  .rmp47-head{
+    padding:13px 13px 11px !important;
+  }
+
+  .rmp47-title{
+    font-size:14.1px !important;
+    line-height:1.36 !important;
+  }
+
+  .rmp47-snippet{
+    font-size:12px !important;
+    line-height:1.58 !important;
+  }
+
+  .rmp47-full-body{
+    font-size:12.5px !important;
+    line-height:1.7 !important;
+  }
+
+  .rmp47-actions{
+    gap:8px !important;
+    padding:0 13px 13px !important;
+  }
+}
+</style>
+
+  <!-- Search save only v47 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -26902,10 +27200,12 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
 
 
-<script id="rmp-clean-search-v46-script">
+
+<script id="rmp-search-save-only-v47-script">
 (function(){
-  const STORAGE_SELECTED = "rmp46_selected_manuals";
-  const STORAGE_LAST = "rmp46_last_query";
+  const STORAGE_SELECTED = "rmp47_selected_manuals";
+  const STORAGE_LAST = "rmp47_last_query";
+  const STORAGE_SAVED = "rmp47_saved_rules";
 
   const MANUALS = [
     {id:"all", label:"All"},
@@ -26975,19 +27275,16 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     return String(id || "").toUpperCase();
   }
 
-  function getIndex(){
-    if(indexCache) return indexCache;
-    try{
-      indexCache = typeof buildSearchIndex === "function" ? (buildSearchIndex() || []) : [];
-    }catch(e){
-      indexCache = [];
-    }
-    return indexCache;
-  }
-
   function selectedLabel(){
     if(selectedIsAll()) return "All manuals";
     return selected.map(labelFor).join(" + ");
+  }
+
+  function getIndex(){
+    if(indexCache) return indexCache;
+    try{ indexCache = typeof buildSearchIndex === "function" ? (buildSearchIndex() || []) : []; }
+    catch(e){ indexCache = []; }
+    return indexCache;
   }
 
   function allowed(item){
@@ -27022,12 +27319,28 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       "stable":"stabling",
       "stabeling":"stabling"
     };
-    Object.keys(syn).forEach(k => {
-      if(x.includes(k)) out.add(syn[k]);
-    });
+    Object.keys(syn).forEach(k => { if(x.includes(k)) out.add(syn[k]); });
     const f = x.match(/\bt\s*\/?\s*(\d{3})\b/);
     if(f){ out.add("T/" + f[1]); out.add("T " + f[1]); }
     return Array.from(out).filter(Boolean);
+  }
+
+  function fullBody(item){
+    // Full body source priority. This prevents showing only snippet when complete HTML exists.
+    if(item.type === "correction"){
+      const slip = item.raw || {};
+      const changes = Array.isArray(slip.changes) ? slip.changes : [];
+      if(changes.length){
+        return changes.map(c => '<p><b>'+esc(c.rule || c.type || "Change")+':</b> '+esc(c.text || "")+'</p>').join("");
+      }
+      return '<p>' + esc(item.bodyText || item.body || "") + '</p>';
+    }
+
+    if(item.body && String(item.body).trim()) return item.body;
+    if(item.raw && item.raw.body && String(item.raw.body).trim()) return item.raw.body;
+
+    // fallback only when no HTML exists in index
+    return '<p>' + esc(item.bodyText || "") + '</p>';
   }
 
   function score(item, q){
@@ -27081,7 +27394,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     const ts = terms(q, matched);
     if(!ts.length) return safe;
     const rx = new RegExp("(" + ts.map(escapeRegExp).join("|") + ")", "gi");
-    return safe.replace(rx, '<mark class="rmp46-hit">$1</mark>');
+    return safe.replace(rx, '<mark class="rmp47-hit">$1</mark>');
   }
 
   function highlightHtml(rawHtml, q, matched){
@@ -27105,30 +27418,16 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     while(walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(node => {
       const span = document.createElement("span");
-      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp46-hit">$1</mark>');
+      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp47-hit">$1</mark>');
       node.parentNode.replaceChild(span, node);
     });
     return template.innerHTML;
   }
 
-  function fullBody(item){
-    if(item.type === "correction"){
-      const slip = item.raw || {};
-      const changes = Array.isArray(slip.changes) ? slip.changes : [];
-      if(changes.length){
-        return changes.map(c => '<p><b>'+esc(c.rule || c.type || "Change")+':</b> '+esc(c.text || "")+'</p>').join("");
-      }
-      return '<p>' + esc(item.bodyText || item.body || "") + '</p>';
-    }
-    return item.body || (item.raw && item.raw.body) || ('<p>' + esc(item.bodyText || "") + '</p>');
-  }
-
   function rawTitle(item){
     const n = itemNumber(item);
     const t = item.title || (item.raw && item.raw.title) || "Untitled reference";
-    if(item.manual === "gsr"){
-      return gsrType(item) + " " + n + (t ? " — " + t : "");
-    }
+    if(item.manual === "gsr") return gsrType(item) + " " + n + (t ? " — " + t : "");
     return (n ? n + " — " : "") + t;
   }
 
@@ -27149,12 +27448,38 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       if(p >= 0 && (pos < 0 || p < pos)){ pos = p; term = t; }
     }
     if(pos < 0){
-      const s = text.slice(0,190) + (text.length > 190 ? "…" : "");
+      const s = text.slice(0,165) + (text.length > 165 ? "…" : "");
       return highlightPlain(s, q, item.matchedQuery);
     }
-    const start = Math.max(0, pos - 70);
-    const end = Math.min(text.length, pos + term.length + 105);
+    const start = Math.max(0, pos - 55);
+    const end = Math.min(text.length, pos + term.length + 80);
     return highlightPlain((start>0?"…":"") + text.slice(start,end) + (end<text.length?"…":""), q, item.matchedQuery);
+  }
+
+  function savedId(item){
+    return (item.manual || "") + "|" + (item.num || "") + "|" + (item.title || "");
+  }
+
+  function isSaved(item){
+    const list = readJSON(STORAGE_SAVED, []);
+    return Array.isArray(list) && list.some(x => x.id === savedId(item));
+  }
+
+  function saveRule(item, btn){
+    const list = readJSON(STORAGE_SAVED, []);
+    const arr = Array.isArray(list) ? list : [];
+    const rec = {
+      id:savedId(item),
+      manual:item.manual || "",
+      num:item.num || "",
+      title:rawTitle(item),
+      body:stripHtml(fullBody(item)).slice(0,1000),
+      ts:Date.now()
+    };
+    const next = [rec].concat(arr.filter(x => x.id !== rec.id)).slice(0,200);
+    writeJSON(STORAGE_SAVED, next);
+    btn.classList.add("saved");
+    btn.textContent = "Saved";
   }
 
   function renderFilter(){
@@ -27196,35 +27521,43 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
   function resultCard(item, q){
     const card = document.createElement("article");
-    card.className = "rmp46-card";
+    card.className = "rmp47-card";
     const m = item.manual || "";
-    const gsrBadge = m === "gsr" ? '<span class="rmp46-badge gsr">'+esc(gsrType(item))+'</span>' : "";
+    const gsrBadge = m === "gsr" ? '<span class="rmp47-badge gsr">'+esc(gsrType(item))+'</span>' : "";
     card.innerHTML =
-      '<button type="button" class="rmp46-card-head" aria-expanded="false">' +
-        '<span class="rmp46-meta"><span class="rmp46-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsrBadge+'</span>' +
-        '<span class="rmp46-title">'+titleHtml(item,q)+'</span>' +
-        '<span class="rmp46-snippet">'+snippet(item,q)+'</span>' +
+      '<button type="button" class="rmp47-head" aria-expanded="false">' +
+        '<span class="rmp47-meta"><span class="rmp47-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsrBadge+'</span>' +
+        '<span class="rmp47-title">'+titleHtml(item,q)+'</span>' +
+        '<span class="rmp47-snippet">'+snippet(item,q)+'</span>' +
       '</button>' +
-      '<div class="rmp46-actions"><button type="button" class="rmp46-show-btn">Show full rule</button></div>' +
-      '<div class="rmp46-full"><div class="rmp46-full-body"></div></div>';
+      '<div class="rmp47-actions">' +
+        '<button type="button" class="rmp47-show-btn">Show full rule</button>' +
+        '<button type="button" class="rmp47-save-btn">'+(isSaved(item) ? "Saved" : "Save")+'</button>' +
+      '</div>' +
+      '<div class="rmp47-full"><div class="rmp47-full-body"></div></div>';
 
-    const head = card.querySelector(".rmp46-card-head");
-    const btn = card.querySelector(".rmp46-show-btn");
-    const body = card.querySelector(".rmp46-full-body");
+    const head = card.querySelector(".rmp47-head");
+    const showBtn = card.querySelector(".rmp47-show-btn");
+    const saveBtn = card.querySelector(".rmp47-save-btn");
+    const body = card.querySelector(".rmp47-full-body");
+
+    if(isSaved(item)) saveBtn.classList.add("saved");
 
     function toggle(){
       const open = !card.classList.contains("open");
       card.classList.toggle("open", open);
       head.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.textContent = open ? "Hide full rule" : "Show full rule";
+      showBtn.textContent = open ? "Hide full rule" : "Show full rule";
       if(open && !body.dataset.loaded){
-        body.innerHTML = highlightHtml(fullBody(item), q, item.matchedQuery);
+        const full = fullBody(item);
+        body.innerHTML = highlightHtml(full, q, item.matchedQuery);
         body.dataset.loaded = "1";
       }
     }
 
     head.addEventListener("click", e => { e.preventDefault(); toggle(); });
-    btn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
+    showBtn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
+    saveBtn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); saveRule(item, saveBtn); });
     return card;
   }
 
@@ -27242,11 +27575,11 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function ready(){
-    return '<div class="rmp46-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear in simple highlighted form.</p></div>';
+    return '<div class="rmp47-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear as simple rule cards.</p></div>';
   }
 
   function empty(q){
-    return '<div class="rmp46-empty"><strong>No result found</strong><p>No result found for <b>“'+esc(q)+'”</b>. Try shorter keyword or select All.</p></div>';
+    return '<div class="rmp47-empty"><strong>No result found</strong><p>No result found for <b>“'+esc(q)+'”</b>. Try shorter keyword or select All.</p></div>';
   }
 
   window.performSearch = function(term){
@@ -27257,7 +27590,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     const container = $("search-results-container");
     const stats = $("search-stats");
     if(!container) return;
-    container.className = "rule-list rmp46-results";
+
+    container.className = "rule-list rmp47-results";
     container.innerHTML = "";
 
     if(!q){
@@ -27279,7 +27613,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     results.sort(sortResults);
 
     if(stats){
-      stats.className = "rmp46-stats";
+      stats.className = "rmp47-stats";
       stats.innerHTML = '<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedLabel());
     }
 
@@ -27289,6 +27623,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     }
 
     const frag = document.createDocumentFragment();
+    // One card per rule/search result, flat and simple. Limit for mobile performance.
     results.slice(0,120).forEach(item => frag.appendChild(resultCard(item,q)));
     container.appendChild(frag);
     container.scrollIntoView({behavior:"smooth", block:"start"});
@@ -27311,14 +27646,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   function bind(){
     renderFilter();
 
-    // Remove the floating version chip if any old local DOM exists.
-    document.querySelectorAll(".rmp45-version-chip").forEach(el => el.remove());
-
-    // Remove v45 injected panels if present.
-    ["rmp45-home-panel","rmp45-quiz-panel","rmp45-ai-panel","rmp45-saved-panel"].forEach(id => {
-      const el = $(id);
-      if(el) el.remove();
-    });
+    // Remove any old v45 panels and version chip from DOM.
+    document.querySelectorAll(".rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel").forEach(el => el.remove());
 
     const screen = $("search-screen-input");
     const home = $("rmp27-search-input");
@@ -27328,23 +27657,23 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     const oldHomeBtn = document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
 
     [screen, home, legacy].forEach(input => {
-      if(!input || input.dataset.rmp46Bound === "1") return;
-      input.dataset.rmp46Bound = "1";
+      if(!input || input.dataset.rmp47Bound === "1") return;
+      input.dataset.rmp47Bound = "1";
       input.addEventListener("keydown", e => {
         if(e.key === "Enter"){ e.preventDefault(); input === screen ? triggerSearchFromScreen() : triggerSearch(); }
       });
       input.addEventListener("input", () => {
         syncInputs(input.value);
         if(input === screen && input.value.trim().length >= 2){
-          clearTimeout(input._rmp46Timer);
-          input._rmp46Timer = setTimeout(() => performSearch(input.value.trim()), 350);
+          clearTimeout(input._rmp47Timer);
+          input._rmp47Timer = setTimeout(() => performSearch(input.value.trim()), 350);
         }
       });
     });
 
     [homeBtn, searchBtn, oldHomeBtn].filter(Boolean).forEach(btn => {
-      if(btn.dataset.rmp46Bound === "1") return;
-      btn.dataset.rmp46Bound = "1";
+      if(btn.dataset.rmp47Bound === "1") return;
+      btn.dataset.rmp47Bound = "1";
       btn.addEventListener("click", e => {
         e.preventDefault();
         e.stopPropagation();
@@ -27354,16 +27683,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
     const tip = document.querySelector("#search .search-tip-v3");
     if(tip){
-      tip.innerHTML = 'Search exact rule number or keyword. Tap <b>Show full rule</b> only when full text is required.';
+      tip.innerHTML = 'Search exact rule number or keyword. Each rule has only two options: <b>Show full rule</b> and <b>Save</b>.';
     }
-  }
-
-  function improveAbout(){
-    // Balance known app-info/about containers without adding new heavy content.
-    ["info","app-info","about","updates"].forEach(id => {
-      const screen = $(id);
-      if(screen) screen.classList.add("rmp46-about-balanced");
-    });
   }
 
   function restore(){
@@ -27378,7 +27699,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
   function run(){
     bind();
-    improveAbout();
     restore();
   }
 
