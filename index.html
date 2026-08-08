@@ -11927,6 +11927,397 @@ body{
 </style>
 
   <!-- Stats row alignment fix v29 generated on 2026-08-08. -->
+
+<style id="rmp-mobile-compact-v30">
+/* =========================================================
+   Rule Master Pro — Mobile Compact Hierarchy v30
+   User-perspective fix:
+   - hero reduced around 25–30%
+   - useful content appears earlier
+   - CTA/credit/stats/search made compact
+   - active Home tab no longer over-dominates
+   ========================================================= */
+
+@media (max-width: 760px){
+
+  /* Less vertical weight above useful content */
+  #rmp27-mobile-home{
+    gap:10px !important;
+    padding-top:8px !important;
+  }
+
+  #home .home-body{
+    gap:10px !important;
+    padding-top:10px !important;
+    padding-bottom:calc(88px + env(safe-area-inset-bottom,0px)) !important;
+  }
+
+  /* HERO — compact but still premium */
+  .rmp27-hero{
+    padding:18px 16px 0 !important;
+    border-radius:0 0 24px 24px !important;
+    box-shadow:0 12px 26px rgba(9,41,87,.18) !important;
+  }
+
+  .rmp27-chip{
+    height:26px !important;
+    padding:0 10px !important;
+    margin-bottom:11px !important;
+    font-size:8.8px !important;
+    letter-spacing:.075em !important;
+  }
+
+  .rmp27-chip span{
+    width:7px !important;
+    height:7px !important;
+    box-shadow:0 0 0 3px rgba(57,217,138,.15) !important;
+  }
+
+  .rmp27-hero h1{
+    font-size:28px !important;
+    line-height:1.02 !important;
+    margin:0 0 4px !important;
+    letter-spacing:-.055em !important;
+  }
+
+  .rmp27-hero h2{
+    font-size:17px !important;
+    line-height:1.12 !important;
+    margin:0 0 8px !important;
+    letter-spacing:-.03em !important;
+  }
+
+  .rmp27-hero p{
+    font-size:12.2px !important;
+    line-height:1.42 !important;
+    max-width:95% !important;
+  }
+
+  .rmp27-actions{
+    margin-top:13px !important;
+    gap:8px !important;
+  }
+
+  .rmp27-actions button{
+    height:36px !important;
+    min-height:36px !important;
+    border-radius:14px !important;
+    font-size:12px !important;
+    font-weight:950 !important;
+  }
+
+  /* Credit should not compete with CTA */
+  .rmp27-credit{
+    margin-top:11px !important;
+    padding:7px 10px !important;
+    border-radius:14px !important;
+    font-size:9.8px !important;
+    line-height:1.15 !important;
+    font-weight:780 !important;
+    opacity:.92 !important;
+  }
+
+  /* Stats strip thinner and still bold */
+  .rmp27-stats,
+  .rmp21-hero-stats{
+    margin-top:12px !important;
+    min-height:58px !important;
+    height:58px !important;
+  }
+
+  .rmp27-stats div,
+  .rmp21-hero-stats div{
+    height:58px !important;
+    min-height:58px !important;
+    padding:8px 4px !important;
+    gap:5px !important;
+  }
+
+  .rmp27-stats strong,
+  .rmp21-hero-stats strong{
+    font-size:18px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+  }
+
+  .rmp27-stats div:nth-child(3) strong,
+  .rmp21-hero-stats div:nth-child(3) strong{
+    font-size:17px !important;
+  }
+
+  .rmp27-stats span,
+  .rmp21-hero-stats span{
+    font-size:8.5px !important;
+    line-height:1 !important;
+    letter-spacing:.12em !important;
+    font-weight:950 !important;
+  }
+
+  /* SEARCH — important but not bulky */
+  .rmp27-search{
+    min-height:54px !important;
+    height:54px !important;
+    padding:7px 14px !important;
+    grid-template-columns:36px minmax(0,1fr) 36px 36px !important;
+    gap:7px !important;
+    box-shadow:0 9px 20px rgba(15,23,42,.08) !important;
+  }
+
+  .rmp27-search-icon,
+  .rmp27-mic,
+  .rmp27-go{
+    width:36px !important;
+    height:36px !important;
+    border-radius:14px !important;
+  }
+
+  .rmp27-search input{
+    font-size:12.8px !important;
+    font-weight:700 !important;
+  }
+
+  .rmp27-search input::placeholder{
+    font-size:12.8px !important;
+  }
+
+  /* Quick Access moves up and cards are shorter */
+  .rmp27-section-title{
+    margin-top:0 !important;
+    padding-top:2px !important;
+  }
+
+  .rmp27-section-title span{
+    font-size:9px !important;
+    letter-spacing:.12em !important;
+  }
+
+  .rmp27-section-title b{
+    font-size:15px !important;
+  }
+
+  .rmp27-quick{
+    gap:9px !important;
+  }
+
+  .rmp27-quick button{
+    min-height:100px !important;
+    border-radius:21px !important;
+    padding:12px 12px !important;
+    box-shadow:0 7px 18px rgba(15,23,42,.055) !important;
+  }
+
+  .rmp27-quick i{
+    width:36px !important;
+    height:36px !important;
+    border-radius:15px !important;
+    font-size:16px !important;
+    margin-bottom:9px !important;
+  }
+
+  .rmp27-quick strong{
+    font-size:14px !important;
+    line-height:1.1 !important;
+  }
+
+  .rmp27-quick small{
+    margin-top:5px !important;
+    font-size:10.8px !important;
+    line-height:1.2 !important;
+  }
+
+  /* Continue/coverage cards compact */
+  .rmp27-card{
+    min-height:86px !important;
+    border-radius:21px !important;
+    padding:12px !important;
+    gap:11px !important;
+    box-shadow:0 7px 18px rgba(15,23,42,.055) !important;
+  }
+
+  .rmp27-card i{
+    flex-basis:42px !important;
+    width:42px !important;
+    height:42px !important;
+    border-radius:17px !important;
+    font-size:19px !important;
+  }
+
+  .rmp27-card span{
+    font-size:8.8px !important;
+    letter-spacing:.11em !important;
+  }
+
+  .rmp27-card strong{
+    margin-top:5px !important;
+    font-size:14px !important;
+    line-height:1.12 !important;
+  }
+
+  .rmp27-card small{
+    margin-top:4px !important;
+    font-size:10.8px !important;
+    line-height:1.22 !important;
+  }
+
+  .rmp27-card button{
+    min-width:68px !important;
+    height:34px !important;
+    border-radius:14px !important;
+    font-size:11px !important;
+  }
+
+  .rmp27-ring{
+    flex-basis:48px !important;
+    width:48px !important;
+    height:48px !important;
+  }
+
+  .rmp27-ring::before{
+    inset:6px !important;
+  }
+
+  .rmp27-ring::after{
+    font-size:10.5px !important;
+  }
+
+  /* Lower content: slightly tighter cards */
+  #home .browse-label{
+    margin-top:2px !important;
+    font-size:9px !important;
+    letter-spacing:.13em !important;
+  }
+
+  #home .manuals-grid{
+    gap:9px !important;
+  }
+
+  #home .manual-tile{
+    min-height:96px !important;
+    border-radius:21px !important;
+    padding:13px 44px 12px 66px !important;
+  }
+
+  #home .manual-tile::before{
+    left:14px !important;
+    top:14px !important;
+    width:38px !important;
+    height:38px !important;
+    border-radius:15px !important;
+    font-size:18px !important;
+  }
+
+  #home .manual-tile-name{
+    font-size:14px !important;
+  }
+
+  #home .manual-tile-sub{
+    font-size:10.8px !important;
+    margin-top:5px !important;
+  }
+
+  #home .manual-tile-meta{
+    font-size:10px !important;
+    margin-top:7px !important;
+  }
+
+  #home .home-card{
+    min-height:66px !important;
+    border-radius:21px !important;
+    padding:11px 14px !important;
+  }
+
+  #home .home-card-icon{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px !important;
+    border-radius:15px !important;
+    font-size:18px !important;
+  }
+
+  #home .hc-title{
+    font-size:14px !important;
+  }
+
+  #home .hc-subtitle{
+    font-size:10.8px !important;
+  }
+
+  /* Bottom nav: active Home less dominant */
+  .bottom-nav{
+    height:72px !important;
+    padding:5px 7px calc(5px + env(safe-area-inset-bottom,0px)) !important;
+    border-radius:22px 22px 0 0 !important;
+  }
+
+  .bottom-nav .nav-item{
+    height:60px !important;
+    border-radius:16px !important;
+    gap:3px !important;
+    font-size:9px !important;
+    padding:5px 1px !important;
+  }
+
+  .bottom-nav .nav-item i,
+  .bottom-nav .nav-item svg,
+  .bottom-nav .nav-item .rmp28-nav-icon{
+    width:19px !important;
+    height:19px !important;
+    min-width:19px !important;
+    font-size:17px !important;
+  }
+
+  .bottom-nav .nav-item.active,
+  .bottom-nav .nav-item.current,
+  .bottom-nav .nav-item[aria-current="page"],
+  .bottom-nav .nav-item:first-child{
+    border-radius:16px !important;
+    box-shadow:inset 0 0 0 1px rgba(249,115,22,.18) !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 390px){
+  .rmp27-hero h1{
+    font-size:26px !important;
+  }
+
+  .rmp27-hero h2{
+    font-size:16px !important;
+  }
+
+  .rmp27-hero p{
+    font-size:11.8px !important;
+  }
+
+  .rmp27-actions button{
+    height:34px !important;
+    font-size:11.5px !important;
+  }
+
+  .rmp27-search{
+    grid-template-columns:34px minmax(0,1fr) 34px 34px !important;
+    gap:6px !important;
+  }
+
+  .rmp27-search-icon,
+  .rmp27-mic,
+  .rmp27-go{
+    width:34px !important;
+    height:34px !important;
+  }
+
+  .rmp27-search input,
+  .rmp27-search input::placeholder{
+    font-size:12px !important;
+  }
+
+  .rmp27-quick button{
+    min-height:92px !important;
+  }
+}
+</style>
+
+  <!-- Mobile compact hierarchy v30 generated on 2026-08-08. -->
 </head>
 
 <body>
@@ -22534,6 +22925,30 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   function syncSearch(){const v=document.getElementById('rmp27-search-input'); const old=document.getElementById('global-search'); if(v&&old&&!v.dataset.v28Bound){v.dataset.v28Bound='1'; v.addEventListener('input',()=>old.value=v.value);}}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>{makeNavBalanced();syncSearch();}); else {makeNavBalanced();syncSearch();}
   setTimeout(makeNavBalanced,500); setTimeout(makeNavBalanced,1500);
+})();
+</script>
+
+
+<script id="rmp-mobile-compact-v30-script">
+(function(){
+  function clearCacheForV30(){
+    try{
+      if(!localStorage.getItem("rmp30CacheCleared")){
+        localStorage.setItem("rmp30CacheCleared","1");
+        if("serviceWorker" in navigator){
+          navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
+        }
+        if(window.caches){
+          caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+        }
+      }
+    }catch(e){}
+  }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", clearCacheForV30);
+  }else{
+    clearCacheForV30();
+  }
 })();
 </script>
 
