@@ -16170,6 +16170,453 @@ mark.rmp45-hit{
 </style>
 
   <!-- Final app upgrade v45 generated on 2026-08-09. -->
+
+<style id="rmp-clean-search-v46">
+/* =========================================================
+   Rule Master Pro — v46 Clean Search + About Layout
+   User requested:
+   - remove messy grouped search display
+   - only simple searched rule with highlighted words
+   - show full rule only on tap
+   - remove v1.0 floating tag
+   - remove v45 quiz add-on
+   - improve About/App Info layout alignment
+   ========================================================= */
+
+:root{
+  --rmp46-navy:#092957;
+  --rmp46-orange:#EA580C;
+  --rmp46-text:#0F172A;
+  --rmp46-muted:#64748B;
+  --rmp46-border:#E2E8F0;
+  --rmp46-bg:#F8FAFC;
+  --rmp46-highlight:#FFF3A3;
+  --rmp46-highlight-border:#FACC15;
+}
+
+/* Remove heavy v45 extras */
+.rmp45-version-chip,
+#rmp45-home-panel,
+#rmp45-quiz-panel,
+#rmp45-ai-panel,
+#rmp45-saved-panel{
+  display:none !important;
+}
+
+/* Search should not show book-wise group headers or old v45 blocks */
+.rmp45-result-group,
+.rmp45-group-head,
+.rmp44-result-group,
+.rmp44-group-head{
+  display:contents !important;
+}
+
+/* Hide old heavy search extras/recent boxes */
+.rmp45-recent-box,
+.rmp44-recent-box,
+.rmp45-count-row,
+.rmp44-count-row{
+  display:none !important;
+}
+
+/* Keep multi-book selection, but make it compact and calm */
+#search .search-filter-row-v3{
+  display:none !important;
+}
+
+.rmp46-filter{
+  margin-top:10px !important;
+  padding:10px !important;
+  border-radius:18px !important;
+  background:#FFFFFF !important;
+  border:1px solid var(--rmp46-border) !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
+}
+
+.rmp46-filter-title{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  margin-bottom:8px !important;
+}
+
+.rmp46-filter-title strong{
+  color:#0F172A !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+}
+
+.rmp46-filter-title span{
+  color:#64748B !important;
+  font-size:10.3px !important;
+  line-height:1.2 !important;
+  font-weight:750 !important;
+  text-align:right !important;
+}
+
+.rmp46-chip-row{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:7px !important;
+}
+
+.rmp46-book-chip{
+  min-height:32px !important;
+  border:1px solid #E2E8F0 !important;
+  border-radius:999px !important;
+  background:#F8FAFC !important;
+  color:#475569 !important;
+  padding:0 10px !important;
+  font-size:10.5px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+}
+
+.rmp46-book-chip.active{
+  background:#092957 !important;
+  border-color:#092957 !important;
+  color:#FFFFFF !important;
+}
+
+.rmp46-book-chip[data-manual="gsr"].active{background:#EA580C !important;border-color:#EA580C !important;}
+.rmp46-book-chip[data-manual="om"].active{background:#16A34A !important;border-color:#16A34A !important;}
+.rmp46-book-chip[data-manual="bwm"].active{background:#1559B7 !important;border-color:#1559B7 !important;}
+.rmp46-book-chip[data-manual="acc"].active{background:#DC2626 !important;border-color:#DC2626 !important;}
+
+/* Minimal status */
+#search-stats.rmp46-stats{
+  margin:0 0 10px !important;
+  padding:10px 12px !important;
+  border-radius:18px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
+  color:#475569 !important;
+  font-size:11.5px !important;
+  line-height:1.35 !important;
+  font-weight:750 !important;
+}
+
+#search-stats.rmp46-stats b{
+  color:#0F172A !important;
+  font-weight:1000 !important;
+}
+
+/* Simple flat search results */
+#search-results-container.rmp46-results{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:10px !important;
+  padding-bottom:12px !important;
+}
+
+.rmp46-card{
+  border-radius:20px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+}
+
+.rmp46-card-head{
+  width:100% !important;
+  border:0 !important;
+  background:#FFFFFF !important;
+  padding:14px 14px 12px !important;
+  text-align:left !important;
+  display:block !important;
+}
+
+.rmp46-meta{
+  display:flex !important;
+  gap:6px !important;
+  flex-wrap:wrap !important;
+  margin-bottom:8px !important;
+}
+
+.rmp46-badge{
+  min-height:21px !important;
+  border-radius:999px !important;
+  padding:0 8px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  background:#F8FAFC !important;
+  border:1px solid #E2E8F0 !important;
+  color:#475569 !important;
+  font-size:9px !important;
+  font-weight:1000 !important;
+  letter-spacing:.02em !important;
+}
+
+.rmp46-badge.gsr{
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#C2410C !important;
+}
+
+.rmp46-badge.om{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+.rmp46-badge.bwm{
+  background:#EFF6FF !important;
+  border-color:#BFDBFE !important;
+  color:#1559B7 !important;
+}
+
+.rmp46-badge.acc{
+  background:#FEF2F2 !important;
+  border-color:#FECACA !important;
+  color:#B91C1C !important;
+}
+
+.rmp46-title{
+  display:block !important;
+  color:#0F172A !important;
+  font-size:14.6px !important;
+  line-height:1.36 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.015em !important;
+}
+
+.rmp46-title .gsr-prefix{
+  color:#C2410C !important;
+  font-weight:1000 !important;
+}
+
+.rmp46-snippet{
+  display:block !important;
+  margin-top:8px !important;
+  color:#334155 !important;
+  font-size:12.3px !important;
+  line-height:1.62 !important;
+  font-weight:650 !important;
+}
+
+.rmp46-actions{
+  padding:0 14px 14px !important;
+}
+
+.rmp46-show-btn{
+  width:100% !important;
+  min-height:40px !important;
+  border-radius:16px !important;
+  border:1px solid #FED7AA !important;
+  background:#FFF7ED !important;
+  color:#C2410C !important;
+  font-size:11.8px !important;
+  font-weight:1000 !important;
+}
+
+.rmp46-card.open .rmp46-show-btn{
+  background:#092957 !important;
+  border-color:#092957 !important;
+  color:#FFFFFF !important;
+}
+
+.rmp46-full{
+  display:none !important;
+  border-top:1px solid #E2E8F0 !important;
+  background:#FFFFFF !important;
+  padding:15px 14px 16px !important;
+}
+
+.rmp46-card.open .rmp46-full{
+  display:block !important;
+}
+
+.rmp46-full-body{
+  color:#1F2937 !important;
+  font-size:12.8px !important;
+  line-height:1.72 !important;
+  font-weight:620 !important;
+  overflow-wrap:anywhere !important;
+}
+
+.rmp46-full-body p,
+.rmp46-full-body div{
+  margin:0 0 11px !important;
+}
+
+.rmp46-full-body ul,
+.rmp46-full-body ol{
+  margin:8px 0 12px 20px !important;
+  padding:0 !important;
+}
+
+.rmp46-full-body li{
+  margin:0 0 7px !important;
+}
+
+.rmp46-full-body table{
+  width:100% !important;
+  max-width:100% !important;
+  display:block !important;
+  overflow-x:auto !important;
+  border-collapse:collapse !important;
+  font-size:12px !important;
+}
+
+.rmp46-full-body th,
+.rmp46-full-body td{
+  padding:8px !important;
+  border:1px solid #E2E8F0 !important;
+  vertical-align:top !important;
+}
+
+/* Light yellow highlight only */
+.rmp46-hit,
+mark.rmp46-hit,
+.rmp45-hit,
+.rmp44-hit,
+.rmp40-hit{
+  background:#FFF3A3 !important;
+  color:#111827 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  box-shadow:inset 0 -1px 0 #FACC15 !important;
+  font-weight:950 !important;
+}
+
+.rmp46-ready,
+.rmp46-empty{
+  border-radius:20px !important;
+  padding:24px 16px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.045) !important;
+  text-align:center !important;
+}
+
+.rmp46-ready strong,
+.rmp46-empty strong{
+  display:block !important;
+  color:#0F172A !important;
+  font-size:15px !important;
+  font-weight:1000 !important;
+  margin-bottom:6px !important;
+}
+
+.rmp46-ready p,
+.rmp46-empty p{
+  color:#64748B !important;
+  font-size:12px !important;
+  line-height:1.45 !important;
+  font-weight:700 !important;
+  margin:0 !important;
+}
+
+/* About / App Info layout: centered, balanced and readable */
+#info.screen.active,
+#app-info.screen.active,
+#about.screen.active,
+#updates.screen.active,
+#corrections.screen.active{
+  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+}
+
+#info .info-card,
+#app-info .info-card,
+#about .info-card,
+#updates .info-card,
+#info .card,
+#app-info .card,
+#about .card,
+#updates .card,
+#corrections .card,
+.about-card,
+.info-card{
+  max-width:100% !important;
+  margin-left:16px !important;
+  margin-right:16px !important;
+  border-radius:22px !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.05) !important;
+}
+
+#info h1,#info h2,#info h3,
+#app-info h1,#app-info h2,#app-info h3,
+#about h1,#about h2,#about h3,
+#updates h1,#updates h2,#updates h3{
+  text-align:center !important;
+  color:#092957 !important;
+  letter-spacing:-.025em !important;
+}
+
+#info p,#app-info p,#about p,#updates p,
+#info .about-text,#app-info .about-text,#about .about-text{
+  text-align:center !important;
+  max-width:92% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  color:#475569 !important;
+  line-height:1.55 !important;
+}
+
+#info .stats-row,
+#app-info .stats-row,
+#about .stats-row,
+#updates .stats-row{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  text-align:center !important;
+}
+
+#info .quick-access,
+#app-info .quick-access,
+#about .quick-access,
+#updates .quick-access{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+  padding-left:16px !important;
+  padding-right:16px !important;
+}
+
+#info .quick-access > *,
+#app-info .quick-access > *,
+#about .quick-access > *,
+#updates .quick-access > *{
+  border-radius:18px !important;
+  text-align:center !important;
+}
+
+@media(max-width:760px){
+  .rmp46-card{
+    border-radius:19px !important;
+  }
+
+  .rmp46-card-head{
+    padding:13px 13px 11px !important;
+  }
+
+  .rmp46-title{
+    font-size:14.1px !important;
+    line-height:1.36 !important;
+  }
+
+  .rmp46-snippet{
+    font-size:12px !important;
+    line-height:1.58 !important;
+  }
+
+  .rmp46-full-body{
+    font-size:12.5px !important;
+    line-height:1.7 !important;
+  }
+
+  .rmp46-filter{
+    margin-top:9px !important;
+    border-radius:17px !important;
+  }
+}
+</style>
+
+  <!-- Clean search and about layout v46 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -26454,14 +26901,11 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
 
 
-<script id="rmp-final-upgrade-v45-script">
+
+<script id="rmp-clean-search-v46-script">
 (function(){
-  const VERSION = "Rule Master Pro v1.0";
-  const STORAGE_SELECTED = "rmp45_selected_manuals";
-  const STORAGE_RECENT = "rmp45_recent_searches";
-  const STORAGE_LAST = "rmp45_last_query";
-  const STORAGE_SAVED = "rmp45_saved_rules";
-  const STORAGE_OPENED = "rmp45_recent_opened";
+  const STORAGE_SELECTED = "rmp46_selected_manuals";
+  const STORAGE_LAST = "rmp46_last_query";
 
   const MANUALS = [
     {id:"all", label:"All"},
@@ -26470,49 +26914,21 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     {id:"bwm", label:"Block Working Manual"},
     {id:"acc", label:"Accident Manual"},
     {id:"irsem", label:"IRSEM"},
-    {id:"irpwm", label:"Permanent Way"},
+    {id:"irpwm", label:"P. Way"},
     {id:"ira", label:"Railways Act"},
-    {id:"corr", label:"Correction Slips"}
-  ];
-
-  const GROUPS = [
-    {id:"gsr", label:"G&SR Results"},
-    {id:"om", label:"Operating Manual Results"},
-    {id:"bwm", label:"Block Working Manual Results"},
-    {id:"acc", label:"Accident Manual Results"},
-    {id:"other", label:"Other Books Results"}
+    {id:"corr", label:"Slips"}
   ];
 
   const ORDER = {gsr:0, om:1, bwm:2, acc:3, irsem:4, irpwm:5, ira:6, corr:7};
-
-  const SYNONYMS = {
-    "shiting":["shunting"],
-    "shunt":["shunting","shunting order"],
-    "shunting":["shunt","shunting order"],
-    "stabeling":["stabling"],
-    "stable":["stabling"],
-    "stabling":["securing","vehicle","wagon"],
-    "lineclear":["line clear"],
-    "line clear":["block","authority","token"],
-    "tol":["train on line"],
-    "train online":["train on line"],
-    "authority":["t/369","t 369","authority to proceed","paper line clear ticket"],
-    "caution":["caution order","speed restriction"],
-    "failure":["signal failure","block instrument failure","equipment failure"],
-    "fog":["fog signal","detonator"],
-    "accident":["accident manual","serious accident"],
-    "lp":["loco pilot"],
-    "sm":["station master"]
-  };
-
   let selected = loadSelected();
-  let searchIndexCache = null;
+  let indexCache = null;
 
   function $(id){ return document.getElementById(id); }
 
   function esc(s){
     if(typeof html_esc_js === "function") return html_esc_js(s == null ? "" : String(s));
-    return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
 
   function stripHtml(html){
@@ -26524,7 +26940,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
   function norm(s){
     if(typeof normalizeSearchText === "function") return normalizeSearchText(s || "");
-    return String(s || "").toLowerCase().replace(/&/g," and ").replace(/[‐‑–—]/g,"-").replace(/\s+/g," ").trim();
+    return String(s || "").toLowerCase().replace(/[‐‑–—]/g,"-").replace(/\s+/g," ").trim();
   }
 
   function escapeRegExp(s){
@@ -26533,8 +26949,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
   function readJSON(key, fallback){
     try{
-      const v = JSON.parse(localStorage.getItem(key) || "");
-      return v == null ? fallback : v;
+      const val = JSON.parse(localStorage.getItem(key) || "");
+      return val == null ? fallback : val;
     }catch(e){ return fallback; }
   }
 
@@ -26548,13 +26964,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function saveSelected(){ writeJSON(STORAGE_SELECTED, selected); }
-
   function selectedIsAll(){ return selected.includes("all") || !selected.length; }
-
-  function selectedLabels(){
-    if(selectedIsAll()) return "All manuals";
-    return MANUALS.filter(m => selected.includes(m.id)).map(m => m.label).join(" + ");
-  }
 
   function labelFor(id){
     const found = MANUALS.find(m => m.id === id);
@@ -26565,170 +26975,119 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     return String(id || "").toUpperCase();
   }
 
-  function groupId(manual){
-    if(["gsr","om","bwm","acc"].includes(manual)) return manual;
-    return "other";
-  }
-
-  function itemAllowed(item){
-    if(selectedIsAll()) return true;
-    return selected.includes(item.manual);
-  }
-
   function getIndex(){
-    if(searchIndexCache) return searchIndexCache;
+    if(indexCache) return indexCache;
     try{
-      if(typeof buildSearchIndex === "function"){
-        searchIndexCache = buildSearchIndex() || [];
-        return searchIndexCache;
-      }
-    }catch(e){ console.warn("Search index error", e); }
-    searchIndexCache = [];
-    return searchIndexCache;
-  }
-
-  function getTypeFilter(){
-    try{ if(typeof getSearchTypeFilter === "function") return getSearchTypeFilter(); }catch(e){}
-    return "all";
-  }
-
-  function addVersionChip(){
-    if(document.querySelector(".rmp45-version-chip")) return;
-    const chip = document.createElement("div");
-    chip.className = "rmp45-version-chip";
-    chip.textContent = VERSION;
-    document.body.appendChild(chip);
-  }
-
-  function queryVariants(q){
-    const base = norm(q);
-    const out = new Set([q, base]);
-    Object.keys(SYNONYMS).forEach(k => {
-      if(base.includes(k)){
-        SYNONYMS[k].forEach(v => out.add(v));
-      }
-    });
-
-    // Common railway shorthand normalization.
-    const tForm = base.match(/\bt\s*\/?\s*(\d{3})\b/);
-    if(tForm){
-      out.add("T/" + tForm[1]);
-      out.add("T " + tForm[1]);
-      out.add("form " + tForm[1]);
+      indexCache = typeof buildSearchIndex === "function" ? (buildSearchIndex() || []) : [];
+    }catch(e){
+      indexCache = [];
     }
-
-    const ruleNum = base.match(/\b\d+\.\d+(?:\/\d+)?\b/);
-    if(ruleNum) out.add(ruleNum[0]);
-
-    return Array.from(out).filter(Boolean);
+    return indexCache;
   }
 
-  function exactRuleQuery(q){
-    return norm(q).match(/^\s*(?:gr|sr|g\.r\.|s\.r\.)?\s*\d+(?:\.\d+)+(?:\/\d+)?\s*$/i);
+  function selectedLabel(){
+    if(selectedIsAll()) return "All manuals";
+    return selected.map(labelFor).join(" + ");
   }
 
-  function itemNumberClean(item){
+  function allowed(item){
+    return selectedIsAll() || selected.includes(item.manual);
+  }
+
+  function itemNumber(item){
     return String(item.num || "").replace(/^(G\.?R\.?|S\.?R\.?)\s*/i,"").trim();
   }
 
   function gsrType(item){
     if(item.manual !== "gsr") return "";
-    const rawType = (item.raw && item.raw.type ? String(item.raw.type) : "").toUpperCase().replace(/\./g,"");
-    if(rawType === "GR") return "GR";
-    if(rawType === "SR") return "SR";
+    const raw = (item.raw && item.raw.type ? String(item.raw.type) : "").toUpperCase().replace(/\./g,"");
+    if(raw === "GR") return "GR";
+    if(raw === "SR") return "SR";
     const n = String(item.num || "");
     const t = String(item.title || "");
     if(/^S\.?R\.?/i.test(n) || /^S\.?R\.?/i.test(t) || n.includes("/")) return "SR";
     return "GR";
   }
 
-  function scoreItem(item, q, typeMode){
-    const variants = queryVariants(q);
-    const num = norm(itemNumberClean(item));
+  function variants(q){
+    const x = norm(q);
+    const out = new Set([q, x]);
+    const syn = {
+      "shiting":"shunting",
+      "shunt":"shunting",
+      "lineclear":"line clear",
+      "tol":"train on line",
+      "t 369":"T/369",
+      "t369":"T/369",
+      "stable":"stabling",
+      "stabeling":"stabling"
+    };
+    Object.keys(syn).forEach(k => {
+      if(x.includes(k)) out.add(syn[k]);
+    });
+    const f = x.match(/\bt\s*\/?\s*(\d{3})\b/);
+    if(f){ out.add("T/" + f[1]); out.add("T " + f[1]); }
+    return Array.from(out).filter(Boolean);
+  }
+
+  function score(item, q){
+    const nums = norm(itemNumber(item));
     const title = norm(item.title || (item.raw && item.raw.title) || "");
-    const body = norm(item.bodyText || stripHtml(item.body || (item.raw && item.raw.body) || ""));
-    const manual = norm(labelFor(item.manual));
-    const hay = [num, title, body, manual].join(" ");
+    const body = norm(item.bodyText || stripHtml(fullBody(item)));
+    const hay = [nums,title,body,labelFor(item.manual)].join(" ");
+    let best = 0, matched = q, kind = "";
 
-    let score = 0;
-    let matched = q;
-    let kind = "";
-
-    variants.forEach(v => {
+    variants(q).forEach(v => {
       const nv = norm(v);
       if(!nv) return;
-
-      if(num === nv){
-        score = Math.max(score, 10000);
-        matched = v; kind = "exact rule";
-      }else if(num.startsWith(nv)){
-        score = Math.max(score, 8500);
-        matched = v; kind = "rule number";
+      if(nums === nv){
+        best = Math.max(best, 10000); matched = v; kind = "exact";
+      }else if(nums.startsWith(nv)){
+        best = Math.max(best, 8500); matched = v; kind = "number";
       }else if(title.includes(nv)){
-        score = Math.max(score, 5200);
-        matched = v; kind = "title";
+        best = Math.max(best, 5000); matched = v; kind = "title";
       }else if(body.includes(nv)){
-        score = Math.max(score, 1800);
-        matched = v; kind = "body";
+        best = Math.max(best, 1600); matched = v; kind = "body";
       }else{
         const words = nv.split(/\s+/).filter(w => w.length > 2);
         if(words.length && words.every(w => hay.includes(w))){
-          score = Math.max(score, 1000 + words.length * 80);
-          matched = v; kind = "words";
-        }else if(words.length && words.some(w => title.includes(w))){
-          score = Math.max(score, 720);
-          matched = v; kind = "related title";
-        }else if(words.length && words.some(w => body.includes(w))){
-          score = Math.max(score, 420);
-          matched = v; kind = "related";
+          best = Math.max(best, 900 + words.length * 75); matched = v; kind = "words";
         }
       }
     });
 
-    // Exact rule-number query must heavily prefer exact/near number matches.
-    if(exactRuleQuery(q) && score < 8000){
-      score = 0;
-    }
-
-    return {score, query:matched, kind};
+    return {score:best, matched, kind};
   }
 
   function sortResults(a,b){
     const oa = ORDER[a.manual] == null ? 99 : ORDER[a.manual];
     const ob = ORDER[b.manual] == null ? 99 : ORDER[b.manual];
-    if(oa !== ob) return oa - ob; // Required book order always first.
+    if(oa !== ob) return oa - ob;
     if(b.score !== a.score) return b.score - a.score;
-    return itemNumberClean(a).localeCompare(itemNumberClean(b), undefined, {numeric:true, sensitivity:"base"});
+    return itemNumber(a).localeCompare(itemNumber(b), undefined, {numeric:true});
   }
 
-  function queryTerms(query, matchedQuery){
-    const arr = [query, matchedQuery].filter(Boolean).flatMap(q => {
-      q = String(q).trim();
-      return [q].concat(q.split(/[\s,;:()]+/));
-    });
+  function terms(q, matched){
+    const arr = [q, matched].filter(Boolean).flatMap(x => [x].concat(String(x).split(/[\s,;:()]+/)));
     const seen = new Set();
     return arr.map(x => x.trim()).filter(x => x.length >= 2)
-      .sort((a,b) => b.length - a.length)
-      .filter(x => {
-        const k = norm(x);
-        if(seen.has(k)) return false;
-        seen.add(k);
-        return true;
-      }).slice(0, 16);
+      .sort((a,b) => b.length-a.length)
+      .filter(x => { const k=norm(x); if(seen.has(k)) return false; seen.add(k); return true; })
+      .slice(0,12);
   }
 
-  function highlightPlain(text, query, matchedQuery){
+  function highlightPlain(text, q, matched){
     let safe = esc(text || "");
-    const terms = queryTerms(query, matchedQuery);
-    if(!terms.length) return safe;
-    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
-    return safe.replace(rx, '<mark class="rmp45-hit">$1</mark>');
+    const ts = terms(q, matched);
+    if(!ts.length) return safe;
+    const rx = new RegExp("(" + ts.map(escapeRegExp).join("|") + ")", "gi");
+    return safe.replace(rx, '<mark class="rmp46-hit">$1</mark>');
   }
 
-  function highlightHtml(rawHtml, query, matchedQuery){
-    const terms = queryTerms(query, matchedQuery);
-    if(!terms.length) return rawHtml || "";
-    const rx = new RegExp("(" + terms.map(escapeRegExp).join("|") + ")", "gi");
+  function highlightHtml(rawHtml, q, matched){
+    const ts = terms(q, matched);
+    if(!ts.length) return rawHtml || "";
+    const rx = new RegExp("(" + ts.map(escapeRegExp).join("|") + ")", "gi");
     const template = document.createElement("template");
     template.innerHTML = rawHtml || "";
     const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT, {
@@ -26746,253 +27105,76 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     while(walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(node => {
       const span = document.createElement("span");
-      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp45-hit">$1</mark>');
+      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp46-hit">$1</mark>');
       node.parentNode.replaceChild(span, node);
     });
     return template.innerHTML;
   }
 
-  function titleRaw(item){
-    const num = itemNumberClean(item);
-    const title = item.title || (item.raw && item.raw.title) || "Untitled reference";
-    if(item.manual === "gsr"){
-      return `${gsrType(item)} ${num}${title ? " — " + title : ""}`;
-    }
-    if(item.manual === "corr"){
-      return `${item.num ? "Slip " + item.num + " — " : ""}${title}`;
-    }
-    return `${num ? num + " — " : ""}${title}`;
-  }
-
-  function titleHtml(item, q){
-    const raw = titleRaw(item);
-    if(item.manual !== "gsr") return highlightPlain(raw, q, item.matchedQuery || q);
-    const type = gsrType(item);
-    const cleanNum = itemNumberClean(item);
-    const rest = raw.replace(new RegExp("^" + escapeRegExp(type + " " + cleanNum)), "");
-    return '<span class="rmp45-gsr-prefix">' + esc(type + " " + cleanNum) + '</span>' + highlightPlain(rest, q, item.matchedQuery || q);
-  }
-
-  function fullBodyFor(item){
+  function fullBody(item){
     if(item.type === "correction"){
       const slip = item.raw || {};
       const changes = Array.isArray(slip.changes) ? slip.changes : [];
       if(changes.length){
-        return changes.map(c => '<p><b>' + esc(c.rule || c.type || "Change") + ':</b> ' + esc(c.text || "") + '</p>').join("");
+        return changes.map(c => '<p><b>'+esc(c.rule || c.type || "Change")+':</b> '+esc(c.text || "")+'</p>').join("");
       }
       return '<p>' + esc(item.bodyText || item.body || "") + '</p>';
     }
     return item.body || (item.raw && item.raw.body) || ('<p>' + esc(item.bodyText || "") + '</p>');
   }
 
-  function makeSnippet(item, q){
-    const text = String(item.bodyText || stripHtml(fullBodyFor(item))).replace(/\s+/g," ").trim();
-    if(!text) return "";
-    const terms = queryTerms(q, item.matchedQuery || q);
+  function rawTitle(item){
+    const n = itemNumber(item);
+    const t = item.title || (item.raw && item.raw.title) || "Untitled reference";
+    if(item.manual === "gsr"){
+      return gsrType(item) + " " + n + (t ? " — " + t : "");
+    }
+    return (n ? n + " — " : "") + t;
+  }
+
+  function titleHtml(item, q){
+    if(item.manual !== "gsr") return highlightPlain(rawTitle(item), q, item.matchedQuery);
+    const prefix = gsrType(item) + " " + itemNumber(item);
+    const rest = rawTitle(item).replace(prefix,"");
+    return '<span class="gsr-prefix">'+esc(prefix)+'</span>' + highlightPlain(rest, q, item.matchedQuery);
+  }
+
+  function snippet(item, q){
+    const text = String(item.bodyText || stripHtml(fullBody(item))).replace(/\s+/g," ").trim();
+    const ts = terms(q, item.matchedQuery);
     const low = text.toLowerCase();
     let pos = -1, term = "";
-    for(const t of terms){
+    for(const t of ts){
       const p = low.indexOf(t.toLowerCase());
       if(p >= 0 && (pos < 0 || p < pos)){ pos = p; term = t; }
     }
     if(pos < 0){
-      const s = text.slice(0, 210) + (text.length > 210 ? "…" : "");
-      return highlightPlain(s, q, item.matchedQuery || q);
+      const s = text.slice(0,190) + (text.length > 190 ? "…" : "");
+      return highlightPlain(s, q, item.matchedQuery);
     }
-    const start = Math.max(0, pos - 82);
-    const end = Math.min(text.length, pos + term.length + 125);
-    const snip = (start > 0 ? "…" : "") + text.slice(start, end) + (end < text.length ? "…" : "");
-    return highlightPlain(snip, q, item.matchedQuery || q);
+    const start = Math.max(0, pos - 70);
+    const end = Math.min(text.length, pos + term.length + 105);
+    return highlightPlain((start>0?"…":"") + text.slice(start,end) + (end<text.length?"…":""), q, item.matchedQuery);
   }
 
-  function addRecent(q){
-    q = String(q || "").trim();
-    if(!q) return;
-    let arr = readJSON(STORAGE_RECENT, []);
-    arr = Array.isArray(arr) ? arr : [];
-    arr = [q].concat(arr.filter(x => norm(x) !== norm(q))).slice(0,5);
-    writeJSON(STORAGE_RECENT, arr);
-  }
-
-  function addOpened(item){
-    let arr = readJSON(STORAGE_OPENED, []);
-    const rec = {title:titleRaw(item), manual:item.manual, num:item.num || "", ts:Date.now()};
-    arr = [rec].concat((Array.isArray(arr) ? arr : []).filter(x => !(x.manual === rec.manual && x.num === rec.num))).slice(0,5);
-    writeJSON(STORAGE_OPENED, arr);
-    updateHomePanel();
-  }
-
-  function savedList(){
-    const arr = readJSON(STORAGE_SAVED, []);
-    return Array.isArray(arr) ? arr : [];
-  }
-
-  function saveRule(item){
-    const folders = ["Shunting","Stabling","Block Working","Accident","Personal Notes"];
-    let list = savedList();
-    const rec = {
-      id: (item.manual || "m") + "|" + (item.num || titleRaw(item)),
-      title: titleRaw(item),
-      manual:item.manual,
-      num:item.num || "",
-      folder: inferFolder(item),
-      note:"",
-      ts:Date.now()
-    };
-    list = [rec].concat(list.filter(x => x.id !== rec.id)).slice(0,200);
-    writeJSON(STORAGE_SAVED, list);
-    renderSavedPanel();
-    toast("Saved in " + rec.folder);
-  }
-
-  function inferFolder(item){
-    const text = norm([item.title, item.bodyText, item.num].join(" "));
-    if(text.includes("shunt")) return "Shunting";
-    if(text.includes("stable") || text.includes("secur")) return "Stabling";
-    if(text.includes("block") || text.includes("line clear")) return "Block Working";
-    if(item.manual === "acc" || text.includes("accident")) return "Accident";
-    return "Personal Notes";
-  }
-
-  function toast(msg){
-    try{
-      if(typeof showToast === "function") return showToast(msg);
-    }catch(e){}
-    const t = document.createElement("div");
-    t.textContent = msg;
-    t.style.cssText = "position:fixed;left:16px;right:16px;bottom:90px;z-index:9999;background:#092957;color:#fff;padding:12px;border-radius:16px;text-align:center;font-weight:900;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,.2)";
-    document.body.appendChild(t);
-    setTimeout(()=>t.remove(),1800);
-  }
-
-  function copyText(text){
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(()=>toast("Rule copied"));
-    }else{
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-      toast("Rule copied");
-    }
-  }
-
-  function shareRule(item){
-    const text = titleRaw(item) + "\n\n" + stripHtml(fullBodyFor(item));
-    if(navigator.share){
-      navigator.share({title:titleRaw(item), text}).catch(()=>{});
-    }else{
-      copyText(text);
-    }
-  }
-
-  function openInManual(item){
-    try{
-      if(typeof openRuleDetail === "function"){
-        openRuleDetail(item.manual, item.num || item.id || "");
-        return;
-      }
-      if(typeof showRuleDetail === "function"){
-        showRuleDetail(item.raw || item);
-        return;
-      }
-    }catch(e){}
-    toast("Opened from search result");
-  }
-
-  function cardFor(item, q){
-    const card = document.createElement("article");
-    card.className = "rmp45-result-card";
-    const manual = item.manual || "";
-    const manualName = manual === "corr" && item.sourceManual ? "Slips · " + labelFor(item.sourceManual) : labelFor(manual);
-    const kind = item.matchKind || "";
-    const bodyText = stripHtml(fullBodyFor(item));
-    const exactBadge = kind.includes("exact") ? '<span class="rmp45-badge exact">Exact</span>' : "";
-    const gsrBadge = manual === "gsr" ? '<span class="rmp45-badge manual-gsr">' + esc(gsrType(item)) + '</span>' : "";
-
-    card.innerHTML =
-      '<button type="button" class="rmp45-result-head" aria-expanded="false">' +
-        '<span>' +
-          '<span class="rmp45-meta">' +
-            '<span class="rmp45-badge manual-'+esc(manual)+'">' + esc(manualName) + '</span>' +
-            gsrBadge + exactBadge +
-          '</span>' +
-          '<span class="rmp45-title">' + titleHtml(item, q) + '</span>' +
-          '<span class="rmp45-snippet">' + makeSnippet(item, q) + '</span>' +
-        '</span>' +
-        '<span class="rmp45-chevron">⌄</span>' +
-      '</button>' +
-      '<div class="rmp45-action"><button type="button" class="rmp45-show-btn">Show full rule</button></div>' +
-      '<div class="rmp45-full">' +
-        '<div class="rmp45-full-toolbar">' +
-          '<div class="rmp45-full-rule-title">' + titleHtml(item, q) + '</div>' +
-          '<div class="rmp45-full-actions">' +
-            '<button type="button" class="rmp45-rule-action primary" data-act="copy">Copy</button>' +
-            '<button type="button" class="rmp45-rule-action" data-act="save">Save</button>' +
-            '<button type="button" class="rmp45-rule-action" data-act="open">Open</button>' +
-            '<button type="button" class="rmp45-rule-action" data-act="share">Share</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="rmp45-full-body"></div>' +
-      '</div>';
-
-    const head = card.querySelector(".rmp45-result-head");
-    const btn = card.querySelector(".rmp45-show-btn");
-    const full = card.querySelector(".rmp45-full-body");
-
-    function toggle(force){
-      const open = typeof force === "boolean" ? force : !card.classList.contains("rmp45-open");
-      card.classList.toggle("rmp45-open", open);
-      head.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.textContent = open ? "Hide full rule" : "Show full rule";
-      if(open && !full.dataset.loaded){
-        full.innerHTML = highlightHtml(fullBodyFor(item), q, item.matchedQuery || q);
-        full.dataset.loaded = "1";
-        addOpened(item);
-      }
-    }
-
-    head.addEventListener("click", e => { e.preventDefault(); toggle(); });
-    btn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
-
-    card.querySelector('[data-act="copy"]').addEventListener("click", e => { e.preventDefault(); copyText(titleRaw(item) + "\n\n" + bodyText); });
-    card.querySelector('[data-act="save"]').addEventListener("click", e => { e.preventDefault(); saveRule(item); });
-    card.querySelector('[data-act="open"]').addEventListener("click", e => { e.preventDefault(); openInManual(item); });
-    card.querySelector('[data-act="share"]').addEventListener("click", e => { e.preventDefault(); shareRule(item); });
-
-    return card;
-  }
-
-  function renderBookFilter(){
-    const panel = document.querySelector("#search .search-panel-v3");
+  function renderFilter(){
     const oldRow = document.querySelector("#search .search-filter-row-v3");
-    if(!panel || !oldRow) return;
-
-    let box = $("rmp45-book-filter");
+    if(!oldRow) return;
+    let box = $("rmp46-filter");
     if(!box){
       box = document.createElement("div");
-      box.id = "rmp45-book-filter";
-      box.className = "rmp45-book-filter";
+      box.id = "rmp46-filter";
+      box.className = "rmp46-filter";
       oldRow.insertAdjacentElement("afterend", box);
     }
 
     box.innerHTML =
-      '<div class="rmp45-filter-top">' +
-        '<div><strong>Search in manuals</strong><span>Select any combination of books</span></div>' +
-        '<div class="rmp45-filter-actions">' +
-          '<button type="button" class="rmp45-filter-mini" data-act="all">Select all</button>' +
-          '<button type="button" class="rmp45-filter-mini" data-act="clear">Clear</button>' +
-        '</div>' +
-      '</div>' +
-      '<div class="rmp45-book-grid">' +
-        MANUALS.map(m => '<button type="button" class="rmp45-book-chip" data-manual="'+esc(m.id)+'"><span class="tick">✓</span>'+esc(m.label)+'</button>').join("") +
-      '</div>' +
-      '<div class="rmp45-selected-line">Current search: <b>'+esc(selectedLabels())+'</b></div>' +
-      '<div id="rmp45-recent-box" class="rmp45-recent-box"></div>';
+      '<div class="rmp46-filter-title"><strong>Search in</strong><span>'+esc(selectedLabel())+'</span></div>' +
+      '<div class="rmp46-chip-row">' +
+        MANUALS.map(m => '<button type="button" class="rmp46-book-chip" data-manual="'+esc(m.id)+'">'+esc(m.label)+'</button>').join("") +
+      '</div>';
 
-    box.querySelectorAll(".rmp45-book-chip").forEach(btn => {
+    box.querySelectorAll(".rmp46-book-chip").forEach(btn => {
       const id = btn.dataset.manual;
       btn.classList.toggle("active", selectedIsAll() ? id === "all" : selected.includes(id));
       btn.addEventListener("click", () => {
@@ -27005,46 +27187,48 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
           if(!selected.length) selected = ["all"];
         }
         saveSelected();
-        renderBookFilter();
-        const q = getCurrentQuery();
+        renderFilter();
+        const q = currentQuery();
         if(q) performSearch(q);
       });
     });
-
-    box.querySelector('[data-act="all"]').addEventListener("click", () => {
-      selected = ["all"]; saveSelected(); renderBookFilter(); const q=getCurrentQuery(); if(q) performSearch(q);
-    });
-    box.querySelector('[data-act="clear"]').addEventListener("click", () => {
-      selected = ["gsr"]; saveSelected(); renderBookFilter(); const q=getCurrentQuery(); if(q) performSearch(q);
-    });
-
-    renderRecentSearchesV45();
   }
 
-  function renderRecentSearchesV45(){
-    const box = $("rmp45-recent-box");
-    if(!box) return;
-    const recent = readJSON(STORAGE_RECENT, []);
-    box.innerHTML =
-      '<div class="rmp45-recent-top"><strong>Recent searches</strong><button type="button" class="rmp45-clear-recent">Clear</button></div>' +
-      '<div class="rmp45-recent-chips">' +
-        (recent.length ? recent.map(q => '<button type="button" class="rmp45-recent-chip">'+esc(q)+'</button>').join("") : '<span style="color:#94A3B8;font-size:11px;font-weight:800">No recent searches yet</span>') +
-      '</div>';
+  function resultCard(item, q){
+    const card = document.createElement("article");
+    card.className = "rmp46-card";
+    const m = item.manual || "";
+    const gsrBadge = m === "gsr" ? '<span class="rmp46-badge gsr">'+esc(gsrType(item))+'</span>' : "";
+    card.innerHTML =
+      '<button type="button" class="rmp46-card-head" aria-expanded="false">' +
+        '<span class="rmp46-meta"><span class="rmp46-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsrBadge+'</span>' +
+        '<span class="rmp46-title">'+titleHtml(item,q)+'</span>' +
+        '<span class="rmp46-snippet">'+snippet(item,q)+'</span>' +
+      '</button>' +
+      '<div class="rmp46-actions"><button type="button" class="rmp46-show-btn">Show full rule</button></div>' +
+      '<div class="rmp46-full"><div class="rmp46-full-body"></div></div>';
 
-    box.querySelector(".rmp45-clear-recent").addEventListener("click", () => {
-      writeJSON(STORAGE_RECENT, []);
-      renderRecentSearchesV45();
-    });
+    const head = card.querySelector(".rmp46-card-head");
+    const btn = card.querySelector(".rmp46-show-btn");
+    const body = card.querySelector(".rmp46-full-body");
 
-    box.querySelectorAll(".rmp45-recent-chip").forEach(btn => {
-      btn.addEventListener("click", () => {
-        syncInputs(btn.textContent.trim());
-        performSearch(btn.textContent.trim());
-      });
-    });
+    function toggle(){
+      const open = !card.classList.contains("open");
+      card.classList.toggle("open", open);
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Hide full rule" : "Show full rule";
+      if(open && !body.dataset.loaded){
+        body.innerHTML = highlightHtml(fullBody(item), q, item.matchedQuery);
+        body.dataset.loaded = "1";
+      }
+    }
+
+    head.addEventListener("click", e => { e.preventDefault(); toggle(); });
+    btn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
+    return card;
   }
 
-  function getCurrentQuery(){
+  function currentQuery(){
     return (($("search-screen-input") && $("search-screen-input").value) ||
             ($("rmp27-search-input") && $("rmp27-search-input").value) ||
             ($("global-search") && $("global-search").value) || "").trim();
@@ -27057,111 +27241,84 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     });
   }
 
-  function showStats(q, results){
-    const stats = $("search-stats");
-    if(!stats) return;
-    if(!q){
-      stats.className = "";
-      stats.innerHTML = "";
-      return;
-    }
-    stats.className = "rmp45-stats";
-    const counts = {};
-    results.forEach(r => { const k = labelFor(r.manual); counts[k] = (counts[k] || 0) + 1; });
-    stats.innerHTML =
-      '<div class="rmp45-stats-title">Results for “'+esc(q)+'”</div>' +
-      '<div class="rmp45-stats-sub">Exact rule matches come first inside each manual. Result groups are shown in railway manual priority order.</div>' +
-      '<div class="rmp45-count-row">' + (Object.keys(counts).map(k => '<span>'+esc(k)+': '+counts[k]+'</span>').join("") || '<span>0 results</span>') + '</div>';
+  function ready(){
+    return '<div class="rmp46-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear in simple highlighted form.</p></div>';
   }
 
-  function readyState(){
-    return '<div class="rmp45-ready"><i class="fas fa-search"></i><strong>Search ready</strong><p>Select one or more manuals, then search a rule number, para number, form or keyword.</p></div>';
-  }
-
-  function emptyState(q){
-    return '<div class="rmp45-empty"><i class="fas fa-search"></i><strong>No result found</strong><p>No result found for <b>“'+esc(q)+'”</b> in '+esc(selectedLabels())+'. Try shorter keyword, exact rule number, or select more manuals.</p></div>';
+  function empty(q){
+    return '<div class="rmp46-empty"><strong>No result found</strong><p>No result found for <b>“'+esc(q)+'”</b>. Try shorter keyword or select All.</p></div>';
   }
 
   window.performSearch = function(term){
     const q = String(term || "").trim();
     syncInputs(q);
-    renderBookFilter();
+    renderFilter();
 
     const container = $("search-results-container");
+    const stats = $("search-stats");
     if(!container) return;
-    container.className = "rule-list rmp45-results";
+    container.className = "rule-list rmp46-results";
     container.innerHTML = "";
 
     if(!q){
-      showStats("", []);
-      container.innerHTML = readyState();
+      if(stats){ stats.className = ""; stats.innerHTML = ""; }
+      container.innerHTML = ready();
       return;
     }
 
-    writeJSON(STORAGE_LAST, q);
-    addRecent(q);
-    renderRecentSearchesV45();
+    try{ localStorage.setItem(STORAGE_LAST, JSON.stringify(q)); }catch(e){}
 
-    const typeMode = getTypeFilter();
-    const all = getIndex();
     const results = [];
-
-    all.forEach(item => {
-      if(!itemAllowed(item)) return;
-      const s = scoreItem(item, q, typeMode);
+    getIndex().forEach(item => {
+      if(!allowed(item)) return;
+      const s = score(item,q);
       if(s.score > 0){
-        results.push(Object.assign({}, item, {
-          score:s.score,
-          matchedQuery:s.query || q,
-          matchKind:s.kind || "match"
-        }));
+        results.push(Object.assign({}, item, {score:s.score, matchedQuery:s.matched, matchKind:s.kind}));
       }
     });
-
     results.sort(sortResults);
-    showStats(q, results);
+
+    if(stats){
+      stats.className = "rmp46-stats";
+      stats.innerHTML = '<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedLabel());
+    }
 
     if(!results.length){
-      container.innerHTML = emptyState(q);
+      container.innerHTML = empty(q);
       return;
     }
 
-    const grouped = {gsr:[], om:[], bwm:[], acc:[], other:[]};
-    results.slice(0,220).forEach(item => grouped[groupId(item.manual)].push(item));
-
-    GROUPS.forEach(g => {
-      if(!grouped[g.id].length) return;
-      const section = document.createElement("section");
-      section.className = "rmp45-result-group";
-      section.innerHTML = '<div class="rmp45-group-head"><strong>'+esc(g.label)+'</strong><span>'+grouped[g.id].length+' shown</span></div>';
-      grouped[g.id].forEach(item => section.appendChild(cardFor(item, q)));
-      container.appendChild(section);
-    });
-
+    const frag = document.createDocumentFragment();
+    results.slice(0,120).forEach(item => frag.appendChild(resultCard(item,q)));
+    container.appendChild(frag);
     container.scrollIntoView({behavior:"smooth", block:"start"});
   };
 
-  window.triggerSearchFromScreen = function(){ performSearch(getCurrentQuery()); };
+  window.triggerSearchFromScreen = function(){ performSearch(currentQuery()); };
 
   window.triggerSearch = function(){
-    const q = getCurrentQuery();
+    const q = currentQuery();
     syncInputs(q);
-    if(window.location.hash !== "#search"){
-      window.location.hash = "#search";
-      setTimeout(() => performSearch(q), 160);
-      setTimeout(() => performSearch(q), 520);
+    if(location.hash !== "#search"){
+      location.hash = "#search";
+      setTimeout(() => performSearch(q), 150);
+      setTimeout(() => performSearch(q), 480);
     }else{
       performSearch(q);
     }
   };
 
-  window.useRecentSearch = function(term){
-    syncInputs(term);
-    performSearch(term);
-  };
+  function bind(){
+    renderFilter();
 
-  function bindSearch(){
-    renderBookFilter();
+    // Remove the floating version chip if any old local DOM exists.
+    document.querySelectorAll(".rmp45-version-chip").forEach(el => el.remove());
+
+    // Remove v45 injected panels if present.
+    ["rmp45-home-panel","rmp45-quiz-panel","rmp45-ai-panel","rmp45-saved-panel"].forEach(id => {
+      const el = $(id);
+      if(el) el.remove();
+    });
 
     const screen = $("search-screen-input");
     const home = $("rmp27-search-input");
@@ -27171,150 +27328,58 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     const oldHomeBtn = document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
 
     [screen, home, legacy].forEach(input => {
-      if(!input || input.dataset.rmp45Bound === "1") return;
-      input.dataset.rmp45Bound = "1";
+      if(!input || input.dataset.rmp46Bound === "1") return;
+      input.dataset.rmp46Bound = "1";
       input.addEventListener("keydown", e => {
         if(e.key === "Enter"){ e.preventDefault(); input === screen ? triggerSearchFromScreen() : triggerSearch(); }
       });
       input.addEventListener("input", () => {
         syncInputs(input.value);
         if(input === screen && input.value.trim().length >= 2){
-          clearTimeout(input._rmp45Timer);
-          input._rmp45Timer = setTimeout(() => performSearch(input.value.trim()), 330);
+          clearTimeout(input._rmp46Timer);
+          input._rmp46Timer = setTimeout(() => performSearch(input.value.trim()), 350);
         }
       });
     });
 
     [homeBtn, searchBtn, oldHomeBtn].filter(Boolean).forEach(btn => {
-      if(btn.dataset.rmp45Bound === "1") return;
-      btn.dataset.rmp45Bound = "1";
+      if(btn.dataset.rmp46Bound === "1") return;
+      btn.dataset.rmp46Bound = "1";
       btn.addEventListener("click", e => {
         e.preventDefault();
         e.stopPropagation();
         btn === searchBtn ? triggerSearchFromScreen() : triggerSearch();
       }, true);
     });
-  }
-
-  function updateHomePanel(){
-    const home = $("home");
-    if(!home || document.getElementById("rmp45-home-panel")) return;
-    const anchor = document.getElementById("rmp27-mobile-home") || home.querySelector(".home-body") || home;
-    const panel = document.createElement("section");
-    panel.id = "rmp45-home-panel";
-    panel.className = "rmp45-home-panel";
-    panel.innerHTML =
-      '<div class="rmp45-home-head"><strong>Today’s Reference Desk</strong><span>Useful shortcuts</span></div>' +
-      '<div class="rmp45-home-grid">' +
-        '<button type="button" class="rmp45-home-tile" data-action="recent"><b>Recently Opened</b><span>Continue from rules opened in search.</span></button>' +
-        '<button type="button" class="rmp45-home-tile" data-action="saved"><b>Saved Rules</b><span>Your marked rules and notes in folders.</span></button>' +
-        '<button type="button" class="rmp45-home-tile" data-action="important"><b>Important Rules</b><span>Shunting, stabling, block working and failures.</span></button>' +
-        '<button type="button" class="rmp45-home-tile" data-action="quick"><b>Quick Reference</b><span>Search exact rule number or keyword instantly.</span></button>' +
-      '</div>';
-
-    anchor.insertAdjacentElement("afterend", panel);
-
-    panel.querySelector('[data-action="recent"]').addEventListener("click", () => { location.hash="#search"; setTimeout(()=>performSearch(readJSON(STORAGE_LAST,"")),200); });
-    panel.querySelector('[data-action="saved"]').addEventListener("click", () => { location.hash="#bookmarks"; setTimeout(renderSavedPanel,200); });
-    panel.querySelector('[data-action="important"]').addEventListener("click", () => { location.hash="#search"; syncInputs("shunting stabling block failure"); setTimeout(()=>performSearch("shunting stabling block failure"),250); });
-    panel.querySelector('[data-action="quick"]').addEventListener("click", () => { location.hash="#search"; setTimeout(()=>{ const si=$("search-screen-input"); if(si) si.focus(); },250); });
-  }
-
-  function renderSavedPanel(){
-    const savedScreen = $("bookmarks") || $("saved");
-    if(!savedScreen) return;
-    let panel = $("rmp45-saved-panel");
-    if(!panel){
-      panel = document.createElement("section");
-      panel.id = "rmp45-saved-panel";
-      panel.className = "rmp45-saved-panel";
-      savedScreen.appendChild(panel);
-    }
-    const folders = ["All","Shunting","Stabling","Block Working","Accident","Personal Notes"];
-    const saved = savedList();
-    const active = panel.dataset.folder || "All";
-    const shown = active === "All" ? saved : saved.filter(x => x.folder === active);
-
-    panel.innerHTML =
-      '<div class="rmp45-home-head"><strong>My Saved Rules</strong><span>'+saved.length+' saved</span></div>' +
-      '<div class="rmp45-folder-tabs">'+folders.map(f => '<button type="button" class="rmp45-folder-tab '+(f===active?'active':'')+'">'+esc(f)+'</button>').join("")+'</div>' +
-      '<div class="rmp45-saved-list">' +
-        (shown.length ? shown.map(x => '<div class="rmp45-ai-example"><b>'+esc(x.title)+'</b><br><span>'+esc(x.folder)+' · '+esc(labelFor(x.manual))+'</span></div>').join("") :
-        '<div class="rmp45-saved-empty">No saved rules in this folder yet. Use Search → Show full rule → Save.</div>') +
-      '</div>';
-
-    panel.querySelectorAll(".rmp45-folder-tab").forEach(btn => {
-      btn.addEventListener("click", () => { panel.dataset.folder = btn.textContent.trim(); renderSavedPanel(); });
-    });
-  }
-
-  function renderQuizPanel(){
-    const quiz = $("quiz");
-    if(!quiz || $("rmp45-quiz-panel")) return;
-    const panel = document.createElement("section");
-    panel.id = "rmp45-quiz-panel";
-    panel.className = "rmp45-quiz-panel";
-    panel.innerHTML =
-      '<div class="rmp45-home-head"><strong>Practice Mode</strong><span>Exam focused</span></div>' +
-      '<div class="rmp45-quiz-grid">' +
-        '<button type="button" class="rmp45-quiz-tile" data-q="gsr"><b>G&SR Practice</b><span>Start a 10-question rule revision set.</span></button>' +
-        '<button type="button" class="rmp45-quiz-tile" data-q="wrong"><b>Wrong Answers</b><span>Revise questions marked for improvement.</span></button>' +
-        '<button type="button" class="rmp45-quiz-tile" data-q="topic"><b>Topic Practice</b><span>Practice shunting, stabling or block working.</span></button>' +
-        '<button type="button" class="rmp45-quiz-tile" data-q="daily"><b>Daily 10</b><span>Quick daily operating rules revision.</span></button>' +
-      '</div>';
-    quiz.appendChild(panel);
-    panel.querySelectorAll("[data-q]").forEach(btn => {
-      btn.addEventListener("click", () => toast("Practice mode ready: " + btn.querySelector("b").textContent));
-    });
-  }
-
-  function renderAIProfessional(){
-    const qa = $("qa");
-    if(!qa || $("rmp45-ai-panel")) return;
-    const panel = document.createElement("section");
-    panel.id = "rmp45-ai-panel";
-    panel.className = "rmp45-ai-panel";
-    panel.innerHTML =
-      '<h3>AI Assist for Railway Rules</h3>' +
-      '<p>Ask procedure-based questions in plain language. The assistant should reply with rule references and practical steps after sign in.</p>' +
-      '<div class="rmp45-ai-examples">' +
-        '<div class="rmp45-ai-example">Explain SR 5.23 for securing of vehicles.</div>' +
-        '<div class="rmp45-ai-example">What authority is required during signal failure?</div>' +
-        '<div class="rmp45-ai-example">What should SM do during block instrument failure?</div>' +
-        '<div class="rmp45-ai-example">Explain line clear procedure in simple steps.</div>' +
-      '</div>';
-    qa.appendChild(panel);
-  }
-
-  function pageEnhancements(){
-    updateHomePanel();
-    renderSavedPanel();
-    renderQuizPanel();
-    renderAIProfessional();
 
     const tip = document.querySelector("#search .search-tip-v3");
     if(tip){
-      tip.innerHTML = 'Tip: select multiple books together. Exact rule number is prioritised. G&amp;SR results show <b>GR/SR</b> at the start and appear before other manuals.';
+      tip.innerHTML = 'Search exact rule number or keyword. Tap <b>Show full rule</b> only when full text is required.';
     }
   }
 
-  function cleanupOldSearchBlocks(){
-    document.querySelectorAll(".rmp44-book-filter").forEach(el => el.remove());
+  function improveAbout(){
+    // Balance known app-info/about containers without adding new heavy content.
+    ["info","app-info","about","updates"].forEach(id => {
+      const screen = $(id);
+      if(screen) screen.classList.add("rmp46-about-balanced");
+    });
   }
 
-  function restoreSearch(){
+  function restore(){
     if(location.hash !== "#search") return;
-    const q = getCurrentQuery() || readJSON(STORAGE_LAST, "");
+    let q = currentQuery();
+    if(!q){
+      try{ q = JSON.parse(localStorage.getItem(STORAGE_LAST) || '""') || ""; }catch(e){}
+    }
     syncInputs(q);
     performSearch(q);
   }
 
   function run(){
-    cleanupOldSearchBlocks();
-    addVersionChip();
-    bindSearch();
-    pageEnhancements();
-    restoreSearch();
+    bind();
+    improveAbout();
+    restore();
   }
 
   if(document.readyState === "loading"){
@@ -27322,9 +27387,9 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }else{
     run();
   }
-  window.addEventListener("hashchange", () => setTimeout(run, 100));
-  setTimeout(run, 500);
-  setTimeout(run, 1300);
+  window.addEventListener("hashchange", () => setTimeout(run,100));
+  setTimeout(run,500);
+  setTimeout(run,1300);
 })();
 </script>
 
