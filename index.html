@@ -14368,6 +14368,207 @@ mark.rmp40-hit{
 </style>
 
   <!-- Search feature repair v40 generated on 2026-08-09. -->
+
+<style id="rmp-search-results-simple-v41">
+/* =========================================================
+   Rule Master Pro — Search Results Simple v41
+   Fixes:
+   - removes "" label
+   - all search results collapsed by default
+   - simpler, smoother, easier-to-read result cards
+   ========================================================= */
+
+.rmp40-result-card{
+  border-radius:20px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+  position:relative !important;
+  margin:0 !important;
+}
+
+.rmp40-result-card::before{
+  width:4px !important;
+  background:#F47B20 !important;
+  opacity:.85 !important;
+}
+
+.rmp40-result-head{
+  padding:14px 13px 12px 17px !important;
+  gap:10px !important;
+  align-items:flex-start !important;
+}
+
+.rmp40-result-icon{
+  flex:0 0 36px !important;
+  width:36px !important;
+  height:36px !important;
+  border-radius:14px !important;
+  font-size:15px !important;
+  background:#F8FAFC !important;
+  color:#475569 !important;
+}
+
+.rmp40-result-badges{
+  margin-bottom:7px !important;
+  gap:5px !important;
+}
+
+.rmp40-badge{
+  min-height:22px !important;
+  padding:0 8px !important;
+  font-size:9px !important;
+  letter-spacing:.02em !important;
+  background:#F8FAFC !important;
+  border-color:#E2E8F0 !important;
+  color:#475569 !important;
+}
+
+.rmp40-badge.orange{
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#C2410C !important;
+}
+
+.rmp40-badge.green{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+.rmp40-result-title{
+  display:block !important;
+  color:#0F172A !important;
+  font-size:14px !important;
+  line-height:1.28 !important;
+  font-weight:950 !important;
+  letter-spacing:-.018em !important;
+}
+
+.rmp40-result-snippet{
+  margin-top:7px !important;
+  color:#475569 !important;
+  font-size:12px !important;
+  line-height:1.55 !important;
+  font-weight:650 !important;
+}
+
+.rmp40-result-chevron{
+  flex:0 0 26px !important;
+  width:26px !important;
+  height:26px !important;
+  border-radius:11px !important;
+  background:#F8FAFC !important;
+  color:#94A3B8 !important;
+  font-size:16px !important;
+}
+
+.rmp40-result-actions{
+  justify-content:flex-start !important;
+  padding:0 13px 13px 17px !important;
+}
+
+.rmp40-expand-btn{
+  min-height:34px !important;
+  border-radius:14px !important;
+  padding:0 13px !important;
+  background:#FFF7ED !important;
+  color:#C2410C !important;
+  border:1px solid #FED7AA !important;
+  box-shadow:none !important;
+  font-size:11px !important;
+  font-weight:950 !important;
+}
+
+.rmp40-open .rmp40-expand-btn{
+  background:#092957 !important;
+  color:#FFFFFF !important;
+  border-color:#092957 !important;
+}
+
+.rmp40-full{
+  padding:13px 15px 15px 17px !important;
+  background:#FAFBFC !important;
+  border-top:1px solid #E2E8F0 !important;
+}
+
+.rmp40-full-title{
+  display:none !important;
+}
+
+.rmp40-full-body{
+  color:#1F2937 !important;
+  font-size:12.8px !important;
+  line-height:1.68 !important;
+  font-weight:620 !important;
+}
+
+.rmp40-full-body p{
+  margin:0 0 9px !important;
+}
+
+.rmp40-hit,
+mark.rmp40-hit{
+  background:#FEF08A !important;
+  color:#713F12 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  font-weight:1000 !important;
+}
+
+#search-results-container.rmp40-results{
+  gap:9px !important;
+}
+
+#search-stats.rmp40-stats{
+  border-radius:20px !important;
+  padding:11px 12px !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
+}
+
+.rmp40-stats-title{
+  font-size:13px !important;
+  line-height:1.25 !important;
+}
+
+.rmp40-stats-sub{
+  font-size:10.6px !important;
+}
+
+.rmp40-stats-count{
+  min-width:46px !important;
+  border-radius:12px !important;
+  padding:6px 8px !important;
+  font-size:12px !important;
+}
+
+@media(max-width:760px){
+  .rmp40-result-card{
+    border-radius:19px !important;
+  }
+
+  .rmp40-result-head{
+    padding:13px 12px 11px 16px !important;
+  }
+
+  .rmp40-result-title{
+    font-size:13.6px !important;
+  }
+
+  .rmp40-result-snippet{
+    font-size:11.6px !important;
+    line-height:1.52 !important;
+  }
+
+  .rmp40-full-body{
+    font-size:12.4px !important;
+    line-height:1.64 !important;
+  }
+}
+</style>
+
+  <!-- Search results simple v41 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -24832,10 +25033,10 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
         '<span class="rmp40-result-chevron">⌄</span>' +
       '</button>' +
       '<div class="rmp40-result-actions">' +
-        '<button type="button" class="rmp40-expand-btn">Show full highlighted text</button>' +
+        '<button type="button" class="rmp40-expand-btn">Show full rule</button>' +
       '</div>' +
       '<div class="rmp40-full">' +
-        '<div class="rmp40-full-title">Full highlighted reference</div>' +
+        '' +
         '<div class="rmp40-full-body"></div>' +
       '</div>';
 
@@ -24848,7 +25049,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       const willOpen = typeof force === "boolean" ? force : !card.classList.contains("rmp40-open");
       card.classList.toggle("rmp40-open", willOpen);
       header.setAttribute("aria-expanded", willOpen ? "true" : "false");
-      btn.textContent = willOpen ? "Collapse" : "Show full highlighted text";
+      btn.textContent = willOpen ? "Hide full rule" : "Show full rule";
       if(willOpen && !body.dataset.loaded){
         body.innerHTML = highlightHtml(fullHtml, query, item.matchedQuery || query);
         body.dataset.loaded = "1";
@@ -24857,11 +25058,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
     header.addEventListener("click", function(e){ e.preventDefault(); openClose(); });
     btn.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); openClose(); });
-
-    // Auto-open first result so the user immediately sees expanded highlighted text.
-    if(index === 0) setTimeout(() => openClose(true), 0);
-
-    return card;
+return card;
   }
 
   function getFilter(){
@@ -25000,7 +25197,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
         '<div class="rmp40-stats-main">' +
           '<div>' +
             '<div class="rmp40-stats-title">Results for “' + esc(usedTerm) + '”</div>' +
-            '<div class="rmp40-stats-sub">Tap any result to expand. Matching words remain highlighted in the full text.</div>' +
+            '<div class="rmp40-stats-sub">Results are collapsed by default. Tap Show full rule to read the complete highlighted text.</div>' +
           '</div>' +
           '<div class="rmp40-stats-count">' + scored.length + '</div>' +
         '</div>' +
@@ -25166,6 +25363,55 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
   window.addEventListener("hashchange", () => setTimeout(run, 80));
   setTimeout(run, 400);
+  setTimeout(run, 1200);
+})();
+</script>
+
+
+<script id="rmp-search-results-simple-v41-script">
+(function(){
+  function enforceCollapsedResults(){
+    document.querySelectorAll(".rmp40-result-card.rmp40-open").forEach(card => {
+      card.classList.remove("rmp40-open");
+      const head = card.querySelector(".rmp40-result-head");
+      const btn = card.querySelector(".rmp40-expand-btn");
+      if(head) head.setAttribute("aria-expanded","false");
+      if(btn) btn.textContent = "Show full rule";
+    });
+
+    document.querySelectorAll(".rmp40-expand-btn").forEach(btn => {
+      if(btn.dataset.rmp41TextFixed === "1") return;
+      btn.dataset.rmp41TextFixed = "1";
+      if(/Show full highlighted text|Show full highlighted/i.test(btn.textContent || "")){
+        btn.textContent = "Show full rule";
+      }
+    });
+
+    document.querySelectorAll(".rmp40-full-title").forEach(el => el.remove());
+  }
+
+  function observeResults(){
+    const container = document.getElementById("search-results-container");
+    if(!container || container.dataset.rmp41Observed === "1") return;
+    container.dataset.rmp41Observed = "1";
+    const mo = new MutationObserver(() => {
+      setTimeout(enforceCollapsedResults, 30);
+    });
+    mo.observe(container, {childList:true, subtree:true});
+  }
+
+  function run(){
+    enforceCollapsedResults();
+    observeResults();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+  window.addEventListener("hashchange", () => setTimeout(run, 100));
+  setTimeout(run, 500);
   setTimeout(run, 1200);
 })();
 </script>
