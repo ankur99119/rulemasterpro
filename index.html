@@ -14885,6 +14885,47 @@ mark.rmp40-hit{
 </style>
 
   <!-- Search readable expand fix v42 generated on 2026-08-09. -->
+
+<style id="rmp-search-fullrule-v43">
+/* =========================================================
+   Rule Master Pro — Search Full Rule Fix v43
+   Fixes:
+   - Show full rule now loads complete rule text, not snippet fallback
+   - Better mobile reading spacing remains
+   ========================================================= */
+
+.rmp40-expand-btn{
+  pointer-events:auto !important;
+  touch-action:manipulation !important;
+}
+
+.rmp40-result-card.rmp40-open .rmp40-full{
+  display:block !important;
+}
+
+.rmp40-full-body{
+  min-height:44px !important;
+}
+
+/* Slightly more breathing space in expanded rule */
+.rmp40-full{
+  padding:17px 15px 18px !important;
+}
+
+.rmp40-full-body p{
+  margin-bottom:12px !important;
+}
+
+.rmp43-load-note{
+  margin:8px 0 0 !important;
+  color:#64748B !important;
+  font-size:12px !important;
+  line-height:1.45 !important;
+  font-weight:700 !important;
+}
+</style>
+
+  <!-- Search full rule fix v43 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -25367,7 +25408,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       header.setAttribute("aria-expanded", willOpen ? "true" : "false");
       btn.textContent = willOpen ? "Hide full rule" : "Show full rule";
       if(willOpen && !body.dataset.loaded){
-        body.innerHTML = highlightHtml(fullHtml, query, item.matchedQuery || query);
+        const loadedHtml = highlightHtml(fullHtml, query, item.matchedQuery || query);
+        body.innerHTML = loadedHtml;
         body.dataset.loaded = "1";
       }
     }
@@ -25685,91 +25727,68 @@ return card;
 
 
 
-<script id="rmp-search-readable-v42-script">
+
+<script id="rmp-search-fullrule-v43-script">
 (function(){
-  function cleanFullTitle(card){
-    card.querySelectorAll(".rmp40-full-title").forEach(el => el.remove());
-  }
-
-  function ensureFullBodyLoaded(card){
-    const body = card.querySelector(".rmp40-full-body");
-    const btn = card.querySelector(".rmp40-expand-btn");
-    if(!body) return true;
-
-    // v40/v41 normal path loads the body inside the original click handler.
-    // If it still stays empty because old handler failed, show a readable fallback from snippet.
-    setTimeout(function(){
-      if(card.classList.contains("rmp40-open") && !body.textContent.trim()){
-        const snippet = card.querySelector(".rmp40-result-snippet");
-        const title = card.querySelector(".rmp40-result-title");
-        body.innerHTML =
-          '<p>' + (title ? title.innerHTML : "Selected rule") + '</p>' +
-          '<p>' + (snippet ? snippet.innerHTML : "Full rule text could not be loaded from this card. Search result text is shown above.") + '</p>';
+  function cleanLabels(){
+    document.querySelectorAll(".rmp40-expand-btn").forEach(btn => {
+      if(/Show full highlighted/i.test(btn.textContent || "")){
+        btn.textContent = "Show full rule";
       }
-      cleanFullTitle(card);
-    }, 80);
-    return true;
+    });
+    document.querySelectorAll(".rmp40-full-title").forEach(el => el.remove());
   }
 
-  function setCardOpen(card, open){
-    const head = card.querySelector(".rmp40-result-head");
-    const btn = card.querySelector(".rmp40-expand-btn");
-
-    card.classList.toggle("rmp40-open", !!open);
-    if(head) head.setAttribute("aria-expanded", open ? "true" : "false");
-    if(btn) btn.textContent = open ? "Hide full rule" : "Show full rule";
-
-    if(open) ensureFullBodyLoaded(card);
+  function ensureCardsStartCollapsed(){
+    document.querySelectorAll(".rmp40-result-card").forEach(card => {
+      if(card.dataset.rmp43Init === "1") return;
+      card.dataset.rmp43Init = "1";
+      card.classList.remove("rmp40-open");
+      const head = card.querySelector(".rmp40-result-head");
+      const btn = card.querySelector(".rmp40-expand-btn");
+      if(head) head.setAttribute("aria-expanded","false");
+      if(btn) btn.textContent = "Show full rule";
+    });
   }
 
-  function rebindCard(card){
-    if(card.dataset.rmp42Bound === "1") return;
-    card.dataset.rmp42Bound = "1";
+  function watchFullRuleLoad(){
+    document.querySelectorAll(".rmp40-expand-btn").forEach(btn => {
+      if(btn.dataset.rmp43Watch === "1") return;
+      btn.dataset.rmp43Watch = "1";
 
-    cleanFullTitle(card);
-    setCardOpen(card, false);
-
-    const head = card.querySelector(".rmp40-result-head");
-    const btn = card.querySelector(".rmp40-expand-btn");
-
-    if(btn){
-      btn.textContent = "Show full rule";
-      btn.addEventListener("click", function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        const willOpen = !card.classList.contains("rmp40-open");
-        setCardOpen(card, willOpen);
-      }, true);
-    }
-
-    if(head){
-      head.addEventListener("click", function(e){
-        // Header should also open/collapse for user convenience.
-        e.preventDefault();
-        e.stopPropagation();
-        const willOpen = !card.classList.contains("rmp40-open");
-        setCardOpen(card, willOpen);
-      }, true);
-    }
-  }
-
-  function bindAllCards(){
-    document.querySelectorAll(".rmp40-result-card").forEach(rebindCard);
+      // Bubble phase only; the original v40 click handler runs first and loads actual fullHtml closure.
+      btn.addEventListener("click", function(){
+        const card = btn.closest(".rmp40-result-card");
+        setTimeout(() => {
+          if(!card) return;
+          const body = card.querySelector(".rmp40-full-body");
+          if(card.classList.contains("rmp40-open") && body && !body.textContent.trim()){
+            body.innerHTML = '<p class="rmp43-load-note">Full rule is loading. Tap Hide full rule and Show full rule once again.</p>';
+          }
+          cleanLabels();
+        }, 120);
+      }, false);
+    });
   }
 
   function observe(){
     const container = document.getElementById("search-results-container");
-    if(!container || container.dataset.rmp42Observed === "1") return;
-    container.dataset.rmp42Observed = "1";
-
-    const mo = new MutationObserver(function(){
-      setTimeout(bindAllCards, 30);
+    if(!container || container.dataset.rmp43Observed === "1") return;
+    container.dataset.rmp43Observed = "1";
+    const mo = new MutationObserver(() => {
+      setTimeout(() => {
+        cleanLabels();
+        ensureCardsStartCollapsed();
+        watchFullRuleLoad();
+      }, 40);
     });
-    mo.observe(container, {childList:true, subtree:false});
+    mo.observe(container, {childList:true, subtree:true});
   }
 
   function run(){
-    bindAllCards();
+    cleanLabels();
+    ensureCardsStartCollapsed();
+    watchFullRuleLoad();
     observe();
   }
 
@@ -25778,7 +25797,7 @@ return card;
   }else{
     run();
   }
-  window.addEventListener("hashchange", () => setTimeout(run, 120));
+  window.addEventListener("hashchange", () => setTimeout(run, 100));
   setTimeout(run, 500);
   setTimeout(run, 1300);
 })();
