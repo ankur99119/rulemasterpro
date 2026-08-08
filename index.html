@@ -13615,47 +13615,40 @@ body{
 
   <!-- Voice and percent alignment fix v35 generated on 2026-08-08. -->
 
-<style id="rmp-realtime-voice-v36">
+<!-- Realtime voice search v36 generated on 2026-08-08. -->
+
+<style id="rmp-realtime-voice-clean-v37">
 /* =========================================================
-   Rule Master Pro — Realtime Voice Search v36
-   Fixes:
-   - shows "Voice search activated..." inside search input
-   - types words live while user is speaking
-   - mic remains highlighted during listening
+   Rule Master Pro — Realtime Voice Clean v37
+   Fix:
+   - remove "old voice activation text" from search bar
+   - do not let voice status become default placeholder
+   - keep realtime typing
    ========================================================= */
 
 @media (max-width:760px){
 
-  input.rmp36-voice-active,
-  #global-search.rmp36-voice-active,
-  #rmp27-search-input.rmp36-voice-active,
-  #search-screen-input.rmp36-voice-active{
+  input.rmp37-voice-active,
+  #global-search.rmp37-voice-active,
+  #rmp27-search-input.rmp37-voice-active,
+  #search-screen-input.rmp37-voice-active{
+    background:#FFFFFF !important;
     color:#0F172A !important;
-    background:#ECFDF5 !important;
     box-shadow:inset 0 0 0 1px #86EFAC !important;
   }
 
-  input.rmp36-voice-active::placeholder,
-  #global-search.rmp36-voice-active::placeholder,
-  #rmp27-search-input.rmp36-voice-active::placeholder,
-  #search-screen-input.rmp36-voice-active::placeholder{
-    color:#16A34A !important;
-    font-style:normal !important;
-    font-weight:900 !important;
-  }
-
-  .rmp36-voice-status{
+  .rmp37-voice-status{
     position:absolute !important;
     left:16px !important;
     right:16px !important;
-    bottom:-28px !important;
-    min-height:24px !important;
+    bottom:-26px !important;
+    min-height:22px !important;
     border-radius:999px !important;
-    padding:6px 10px !important;
+    padding:5px 10px !important;
     background:#ECFDF5 !important;
     color:#047857 !important;
     border:1px solid #BBF7D0 !important;
-    font-size:10.5px !important;
+    font-size:10px !important;
     line-height:1 !important;
     font-weight:900 !important;
     text-align:center !important;
@@ -13664,7 +13657,7 @@ body{
     display:none !important;
   }
 
-  .rmp36-voice-status.show{
+  .rmp37-voice-status.show{
     display:block !important;
   }
 
@@ -13674,18 +13667,18 @@ body{
     position:relative !important;
   }
 
-  .rmp36-mic-live,
-  .rmp27-mic.rmp36-mic-live,
-  #home .voice-search-btn-v10.rmp36-mic-live,
-  #search .voice-search-btn-v10.rmp36-mic-live,
-  button[aria-label="Voice search"].rmp36-mic-live{
+  .rmp37-mic-live,
+  .rmp27-mic.rmp37-mic-live,
+  #home .voice-search-btn-v10.rmp37-mic-live,
+  #search .voice-search-btn-v10.rmp37-mic-live,
+  button[aria-label="Voice search"].rmp37-mic-live{
     background:#ECFDF5 !important;
     border-color:#86EFAC !important;
     color:#16A34A !important;
     box-shadow:0 0 0 4px rgba(22,163,74,.14), 0 8px 18px rgba(22,163,74,.16) !important;
   }
 
-  .rmp36-mic-live::after{
+  .rmp37-mic-live::after{
     content:"" !important;
     position:absolute !important;
     width:8px !important;
@@ -13699,7 +13692,7 @@ body{
 }
 </style>
 
-  <!-- Realtime voice search v36 generated on 2026-08-08. -->
+  <!-- Realtime voice clean v37 generated on 2026-08-08. -->
 </head>
 
 <body>
@@ -24691,23 +24684,39 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 </script>
 
 
-<script id="rmp-realtime-voice-v36-script">
+
+<script id="rmp-realtime-voice-clean-v37-script">
 (function(){
   const DEFAULT_PLACEHOLDER = "Search rule, para or keyword...";
+  const BAD_PLACEHOLDER_PATTERNS = [
+    "Voice search activated",
+    "Listening and typing...",
+    "Listening..."
+  ];
+
   let activeRecognition = null;
   let activeTarget = null;
   let activeButton = null;
   let finalTranscript = "";
-  let originalPlaceholder = "";
+  let originalPlaceholder = DEFAULT_PLACEHOLDER;
 
   function SpeechRecognitionCtor(){
     return window.SpeechRecognition || window.webkitSpeechRecognition || null;
   }
 
-  function visible(el){
-    if(!el) return false;
-    const style = window.getComputedStyle(el);
-    return style.display !== "none" && style.visibility !== "hidden" && el.offsetParent !== null;
+  function cleanBadPlaceholder(input){
+    if(!input) return;
+    const ph = input.getAttribute("placeholder") || "";
+    if(BAD_PLACEHOLDER_PATTERNS.some(p => ph.includes(p))){
+      input.setAttribute("placeholder", DEFAULT_PLACEHOLDER);
+    }
+  }
+
+  function cleanAllBadPlaceholders(){
+    ["global-search","rmp27-search-input","search-screen-input"].forEach(id => {
+      cleanBadPlaceholder(document.getElementById(id));
+    });
+    document.querySelectorAll("input[type='search'], input[type='text']").forEach(cleanBadPlaceholder);
   }
 
   function resolveTarget(targetId){
@@ -24725,7 +24734,6 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     }
     candidates.push(document.getElementById("global-search"));
     candidates.push(document.getElementById("search-screen-input"));
-
     return candidates.find(Boolean) || null;
   }
 
@@ -24737,16 +24745,15 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function statusHost(target){
-    if(!target) return document.body;
-    return target.closest(".rmp27-search, .search-row-v3, .home-search-card") || target.parentElement || document.body;
+    return (target && target.closest(".rmp27-search, .search-row-v3, .home-search-card")) || target?.parentElement || document.body;
   }
 
   function setStatus(target, text, show){
     const host = statusHost(target);
-    let status = host.querySelector(".rmp36-voice-status");
+    let status = host.querySelector(".rmp37-voice-status");
     if(!status){
       status = document.createElement("div");
-      status.className = "rmp36-voice-status";
+      status.className = "rmp37-voice-status";
       host.appendChild(status);
     }
     status.textContent = text || "";
@@ -24756,38 +24763,47 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   function startUI(target, btn){
     activeTarget = target;
     activeButton = btn || null;
+
+    cleanBadPlaceholder(target);
     originalPlaceholder = target.getAttribute("placeholder") || DEFAULT_PLACEHOLDER;
-    target.value = "";
-    target.setAttribute("placeholder", "Voice search activated... speak now");
-    target.classList.add("rmp36-voice-active");
-    if(btn) btn.classList.add("rmp36-mic-live", "rmp35-listening");
-    setStatus(target, "Voice search activated — speak now", true);
+
+    // Do NOT put activation text into placeholder/value.
+    // Keep normal placeholder until spoken words start appearing.
+    if(!target.value.trim()){
+      target.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
+    }
+
+    target.classList.add("rmp37-voice-active");
+    if(btn) btn.classList.add("rmp37-mic-live", "rmp35-listening");
+
+    setStatus(target, "Listening…", true);
     target.focus({preventScroll:true});
   }
 
   function updateUI(text, isInterim){
     if(!activeTarget) return;
     activeTarget.value = text;
+    activeTarget.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
     syncInputs(text, activeTarget);
     activeTarget.dispatchEvent(new Event("input", {bubbles:true}));
-    if(text.trim()){
-      setStatus(activeTarget, isInterim ? "Listening and typing..." : "Voice captured", true);
-    }
+    setStatus(activeTarget, text.trim() ? (isInterim ? "Typing live…" : "Captured") : "Listening…", true);
   }
 
   function stopUI(message){
     if(activeTarget){
-      activeTarget.classList.remove("rmp36-voice-active");
+      activeTarget.classList.remove("rmp37-voice-active");
+      cleanBadPlaceholder(activeTarget);
       if(!activeTarget.value.trim()){
         activeTarget.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
       }
       setStatus(activeTarget, message || "", !!message);
       if(message){
-        setTimeout(() => setStatus(activeTarget, "", false), 2200);
+        const t = activeTarget;
+        setTimeout(() => setStatus(t, "", false), 1800);
       }
     }
     if(activeButton){
-      activeButton.classList.remove("rmp36-mic-live", "rmp35-listening");
+      activeButton.classList.remove("rmp37-mic-live", "rmp35-listening");
     }
     activeRecognition = null;
     activeTarget = null;
@@ -24810,17 +24826,15 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     const SR = SpeechRecognitionCtor();
     const btn = (document.activeElement && document.activeElement.tagName === "BUTTON") ? document.activeElement : null;
 
-    if(!target){
-      return;
-    }
+    if(!target) return;
 
     stopExisting();
+    cleanAllBadPlaceholders();
 
     if(!SR){
       target.focus();
-      target.setAttribute("placeholder", "Voice search not supported. Please type here.");
-      setStatus(target, "Voice search is not supported in this browser. Use Chrome or phone keyboard voice typing.", true);
-      setTimeout(() => setStatus(target, "", false), 3000);
+      setStatus(target, "Voice typing not supported. Please type here.", true);
+      setTimeout(() => setStatus(target, "", false), 2500);
       return;
     }
 
@@ -24837,7 +24851,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       startUI(target, btn);
 
       recognition.onstart = function(){
-        setStatus(target, "Voice search activated — speak now", true);
+        setStatus(target, "Listening…", true);
       };
 
       recognition.onresult = function(event){
@@ -24859,21 +24873,21 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       recognition.onerror = function(event){
         const err = event && event.error ? event.error : "voice error";
         if(err === "not-allowed" || err === "service-not-allowed"){
-          stopUI("Microphone permission is blocked. Allow mic permission for this site.");
+          stopUI("Mic permission blocked.");
         }else if(err === "no-speech"){
-          stopUI("No speech detected. Tap mic and try again.");
+          stopUI("No speech detected.");
         }else if(err === "aborted"){
           stopUI("");
         }else{
-          stopUI("Voice search error: " + err);
+          stopUI("Voice error.");
         }
       };
 
       recognition.onend = function(){
         if(activeTarget && activeTarget.value.trim()){
-          stopUI("Voice typing completed");
+          stopUI("Done");
         }else{
-          stopUI("Voice search stopped");
+          stopUI("");
         }
       };
 
@@ -24881,9 +24895,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     }catch(e){
       stopUI("");
       target.focus();
-      target.setAttribute("placeholder", "Voice search unavailable. Please type here.");
-      setStatus(target, "Voice search unavailable. Please type your search.", true);
-      setTimeout(() => setStatus(target, "", false), 3000);
+      setStatus(target, "Voice unavailable. Please type here.", true);
+      setTimeout(() => setStatus(target, "", false), 2500);
     }
   };
 
@@ -24903,8 +24916,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     ].join(",");
 
     document.querySelectorAll(selector).forEach(btn => {
-      if(btn.dataset.rmp36RealtimeBound === "1") return;
-      btn.dataset.rmp36RealtimeBound = "1";
+      if(btn.dataset.rmp37RealtimeBound === "1") return;
+      btn.dataset.rmp37RealtimeBound = "1";
 
       btn.addEventListener("click", function(e){
         e.preventDefault();
@@ -24916,6 +24929,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function run(){
+    cleanAllBadPlaceholders();
     bindButtons();
   }
 
@@ -24924,9 +24938,10 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }else{
     run();
   }
-  window.addEventListener("hashchange", () => setTimeout(run, 100));
-  setTimeout(run, 400);
-  setTimeout(run, 1200);
+  window.addEventListener("hashchange", () => setTimeout(run, 80));
+  setTimeout(run, 300);
+  setTimeout(run, 900);
+  setTimeout(run, 1800);
 })();
 </script>
 
