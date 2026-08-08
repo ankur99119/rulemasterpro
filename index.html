@@ -13614,6 +13614,92 @@ body{
 </style>
 
   <!-- Voice and percent alignment fix v35 generated on 2026-08-08. -->
+
+<style id="rmp-realtime-voice-v36">
+/* =========================================================
+   Rule Master Pro — Realtime Voice Search v36
+   Fixes:
+   - shows "Voice search activated..." inside search input
+   - types words live while user is speaking
+   - mic remains highlighted during listening
+   ========================================================= */
+
+@media (max-width:760px){
+
+  input.rmp36-voice-active,
+  #global-search.rmp36-voice-active,
+  #rmp27-search-input.rmp36-voice-active,
+  #search-screen-input.rmp36-voice-active{
+    color:#0F172A !important;
+    background:#ECFDF5 !important;
+    box-shadow:inset 0 0 0 1px #86EFAC !important;
+  }
+
+  input.rmp36-voice-active::placeholder,
+  #global-search.rmp36-voice-active::placeholder,
+  #rmp27-search-input.rmp36-voice-active::placeholder,
+  #search-screen-input.rmp36-voice-active::placeholder{
+    color:#16A34A !important;
+    font-style:normal !important;
+    font-weight:900 !important;
+  }
+
+  .rmp36-voice-status{
+    position:absolute !important;
+    left:16px !important;
+    right:16px !important;
+    bottom:-28px !important;
+    min-height:24px !important;
+    border-radius:999px !important;
+    padding:6px 10px !important;
+    background:#ECFDF5 !important;
+    color:#047857 !important;
+    border:1px solid #BBF7D0 !important;
+    font-size:10.5px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    text-align:center !important;
+    box-shadow:0 8px 16px rgba(15,23,42,.08) !important;
+    z-index:10 !important;
+    display:none !important;
+  }
+
+  .rmp36-voice-status.show{
+    display:block !important;
+  }
+
+  .rmp27-search,
+  #search .search-row-v3,
+  #home .home-search-card{
+    position:relative !important;
+  }
+
+  .rmp36-mic-live,
+  .rmp27-mic.rmp36-mic-live,
+  #home .voice-search-btn-v10.rmp36-mic-live,
+  #search .voice-search-btn-v10.rmp36-mic-live,
+  button[aria-label="Voice search"].rmp36-mic-live{
+    background:#ECFDF5 !important;
+    border-color:#86EFAC !important;
+    color:#16A34A !important;
+    box-shadow:0 0 0 4px rgba(22,163,74,.14), 0 8px 18px rgba(22,163,74,.16) !important;
+  }
+
+  .rmp36-mic-live::after{
+    content:"" !important;
+    position:absolute !important;
+    width:8px !important;
+    height:8px !important;
+    right:5px !important;
+    top:5px !important;
+    border-radius:50% !important;
+    background:#22C55E !important;
+    box-shadow:0 0 0 4px rgba(34,197,94,.18) !important;
+  }
+}
+</style>
+
+  <!-- Realtime voice search v36 generated on 2026-08-08. -->
 </head>
 
 <body>
@@ -24599,6 +24685,246 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     run();
   }
   window.addEventListener("hashchange", () => setTimeout(run, 80));
+  setTimeout(run, 400);
+  setTimeout(run, 1200);
+})();
+</script>
+
+
+<script id="rmp-realtime-voice-v36-script">
+(function(){
+  const DEFAULT_PLACEHOLDER = "Search rule, para or keyword...";
+  let activeRecognition = null;
+  let activeTarget = null;
+  let activeButton = null;
+  let finalTranscript = "";
+  let originalPlaceholder = "";
+
+  function SpeechRecognitionCtor(){
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  }
+
+  function visible(el){
+    if(!el) return false;
+    const style = window.getComputedStyle(el);
+    return style.display !== "none" && style.visibility !== "hidden" && el.offsetParent !== null;
+  }
+
+  function resolveTarget(targetId){
+    if(targetId && document.getElementById(targetId)) return document.getElementById(targetId);
+
+    const hash = (location.hash || "#home").replace("#","").split("/")[0];
+    const candidates = [];
+    if(hash === "search"){
+      candidates.push(document.getElementById("search-screen-input"));
+      candidates.push(document.querySelector("#search input[type='search'], #search input[type='text']"));
+    }else{
+      candidates.push(document.getElementById("rmp27-search-input"));
+      candidates.push(document.getElementById("global-search"));
+      candidates.push(document.querySelector("#home input[type='search'], #home input[type='text']"));
+    }
+    candidates.push(document.getElementById("global-search"));
+    candidates.push(document.getElementById("search-screen-input"));
+
+    return candidates.find(Boolean) || null;
+  }
+
+  function syncInputs(value, target){
+    ["global-search","rmp27-search-input","search-screen-input"].forEach(id => {
+      const el = document.getElementById(id);
+      if(el && el !== target) el.value = value;
+    });
+  }
+
+  function statusHost(target){
+    if(!target) return document.body;
+    return target.closest(".rmp27-search, .search-row-v3, .home-search-card") || target.parentElement || document.body;
+  }
+
+  function setStatus(target, text, show){
+    const host = statusHost(target);
+    let status = host.querySelector(".rmp36-voice-status");
+    if(!status){
+      status = document.createElement("div");
+      status.className = "rmp36-voice-status";
+      host.appendChild(status);
+    }
+    status.textContent = text || "";
+    status.classList.toggle("show", !!show);
+  }
+
+  function startUI(target, btn){
+    activeTarget = target;
+    activeButton = btn || null;
+    originalPlaceholder = target.getAttribute("placeholder") || DEFAULT_PLACEHOLDER;
+    target.value = "";
+    target.setAttribute("placeholder", "Voice search activated... speak now");
+    target.classList.add("rmp36-voice-active");
+    if(btn) btn.classList.add("rmp36-mic-live", "rmp35-listening");
+    setStatus(target, "Voice search activated — speak now", true);
+    target.focus({preventScroll:true});
+  }
+
+  function updateUI(text, isInterim){
+    if(!activeTarget) return;
+    activeTarget.value = text;
+    syncInputs(text, activeTarget);
+    activeTarget.dispatchEvent(new Event("input", {bubbles:true}));
+    if(text.trim()){
+      setStatus(activeTarget, isInterim ? "Listening and typing..." : "Voice captured", true);
+    }
+  }
+
+  function stopUI(message){
+    if(activeTarget){
+      activeTarget.classList.remove("rmp36-voice-active");
+      if(!activeTarget.value.trim()){
+        activeTarget.setAttribute("placeholder", originalPlaceholder || DEFAULT_PLACEHOLDER);
+      }
+      setStatus(activeTarget, message || "", !!message);
+      if(message){
+        setTimeout(() => setStatus(activeTarget, "", false), 2200);
+      }
+    }
+    if(activeButton){
+      activeButton.classList.remove("rmp36-mic-live", "rmp35-listening");
+    }
+    activeRecognition = null;
+    activeTarget = null;
+    activeButton = null;
+    finalTranscript = "";
+  }
+
+  function stopExisting(){
+    try{
+      if(activeRecognition){
+        activeRecognition.onend = null;
+        activeRecognition.stop();
+      }
+    }catch(e){}
+    if(activeTarget || activeButton) stopUI("");
+  }
+
+  window.rmpVoiceSearch = function(targetId){
+    const target = resolveTarget(targetId);
+    const SR = SpeechRecognitionCtor();
+    const btn = (document.activeElement && document.activeElement.tagName === "BUTTON") ? document.activeElement : null;
+
+    if(!target){
+      return;
+    }
+
+    stopExisting();
+
+    if(!SR){
+      target.focus();
+      target.setAttribute("placeholder", "Voice search not supported. Please type here.");
+      setStatus(target, "Voice search is not supported in this browser. Use Chrome or phone keyboard voice typing.", true);
+      setTimeout(() => setStatus(target, "", false), 3000);
+      return;
+    }
+
+    try{
+      const recognition = new SR();
+      activeRecognition = recognition;
+      finalTranscript = "";
+
+      recognition.lang = "en-IN";
+      recognition.interimResults = true;
+      recognition.continuous = true;
+      recognition.maxAlternatives = 1;
+
+      startUI(target, btn);
+
+      recognition.onstart = function(){
+        setStatus(target, "Voice search activated — speak now", true);
+      };
+
+      recognition.onresult = function(event){
+        let interimTranscript = "";
+
+        for(let i = event.resultIndex; i < event.results.length; i++){
+          const chunk = event.results[i][0] && event.results[i][0].transcript ? event.results[i][0].transcript : "";
+          if(event.results[i].isFinal){
+            finalTranscript += chunk + " ";
+          }else{
+            interimTranscript += chunk;
+          }
+        }
+
+        const liveText = (finalTranscript + interimTranscript).replace(/\s+/g, " ").trim();
+        updateUI(liveText, !!interimTranscript);
+      };
+
+      recognition.onerror = function(event){
+        const err = event && event.error ? event.error : "voice error";
+        if(err === "not-allowed" || err === "service-not-allowed"){
+          stopUI("Microphone permission is blocked. Allow mic permission for this site.");
+        }else if(err === "no-speech"){
+          stopUI("No speech detected. Tap mic and try again.");
+        }else if(err === "aborted"){
+          stopUI("");
+        }else{
+          stopUI("Voice search error: " + err);
+        }
+      };
+
+      recognition.onend = function(){
+        if(activeTarget && activeTarget.value.trim()){
+          stopUI("Voice typing completed");
+        }else{
+          stopUI("Voice search stopped");
+        }
+      };
+
+      recognition.start();
+    }catch(e){
+      stopUI("");
+      target.focus();
+      target.setAttribute("placeholder", "Voice search unavailable. Please type here.");
+      setStatus(target, "Voice search unavailable. Please type your search.", true);
+      setTimeout(() => setStatus(target, "", false), 3000);
+    }
+  };
+
+  function targetForButton(btn){
+    return btn.getAttribute("data-voice-target") ||
+           btn.dataset.voiceTarget ||
+           (btn.closest("#search") ? "search-screen-input" : "rmp27-search-input");
+  }
+
+  function bindButtons(){
+    const selector = [
+      ".rmp27-mic",
+      "#home .voice-search-btn-v10",
+      "#search .voice-search-btn-v10",
+      "button[data-voice-target]",
+      "button[aria-label='Voice search']"
+    ].join(",");
+
+    document.querySelectorAll(selector).forEach(btn => {
+      if(btn.dataset.rmp36RealtimeBound === "1") return;
+      btn.dataset.rmp36RealtimeBound = "1";
+
+      btn.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        const target = targetForButton(btn);
+        window.rmpVoiceSearch(target);
+      }, true);
+    });
+  }
+
+  function run(){
+    bindButtons();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+  window.addEventListener("hashchange", () => setTimeout(run, 100));
   setTimeout(run, 400);
   setTimeout(run, 1200);
 })();
