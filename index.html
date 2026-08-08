@@ -13581,6 +13581,392 @@ body{
 </style>
 
   <!-- Voice search removed v38 generated on 2026-08-09. -->
+
+<style id="rmp-ui-polish-v39">
+/* =========================================================
+   Rule Master Pro — UI Polish v39
+   Fixes:
+   - Sign-in text alignment
+   - Removes weak "Quick Access / Start faster" wording
+   - Adds logical light colours to manuals/tools cards
+   - Makes lower Home screen less plain white
+   - Keeps voice search removed
+   ========================================================= */
+
+@media (max-width:760px){
+
+  :root{
+    --rmp39-edge:16px;
+    --rmp39-navy:#092957;
+    --rmp39-orange:#F47B20;
+    --rmp39-blue:#1559B7;
+    --rmp39-green:#16A34A;
+    --rmp39-purple:#7C3AED;
+    --rmp39-teal:#0F766E;
+    --rmp39-red:#DC2626;
+    --rmp39-slate:#64748B;
+    --rmp39-border:#E2E8F0;
+  }
+
+  /* ========== SIGN IN / ACCOUNT ALIGNMENT ========== */
+  body.rmp39-account-screen #back-bar,
+  body.rmp39-account-screen .back-bar,
+  body.rmp39-account-screen .breadcrumb-bar{
+    display:none !important;
+  }
+
+  #account.screen.active,
+  #login.screen.active,
+  #auth.screen.active,
+  #signin.screen.active,
+  .account-screen.active,
+  .login-screen.active,
+  .auth-screen.active{
+    box-sizing:border-box !important;
+    width:100% !important;
+    padding:22px var(--rmp39-edge) calc(96px + env(safe-area-inset-bottom,0px)) !important;
+    background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+  }
+
+  #account .auth-card,
+  #login .auth-card,
+  #auth .auth-card,
+  #signin .auth-card,
+  #account .login-card,
+  #login .login-card,
+  #auth .login-card,
+  #signin .login-card,
+  #account .card,
+  #login .card,
+  #auth .card,
+  .account-card,
+  .login-card,
+  .auth-card{
+    box-sizing:border-box !important;
+    width:100% !important;
+    margin:0 auto !important;
+    border-radius:26px !important;
+    padding:28px 20px 24px !important;
+    background:#FFFFFF !important;
+    border:1px solid var(--rmp39-border) !important;
+    box-shadow:0 12px 28px rgba(15,23,42,.07) !important;
+    text-align:center !important;
+  }
+
+  #account h1,#account h2,#account h3,
+  #login h1,#login h2,#login h3,
+  #auth h1,#auth h2,#auth h3,
+  #signin h1,#signin h2,#signin h3,
+  .login-card h1,.login-card h2,.login-card h3,
+  .auth-card h1,.auth-card h2,.auth-card h3,
+  .account-card h1,.account-card h2,.account-card h3{
+    text-align:center !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    color:var(--rmp39-navy) !important;
+    font-size:24px !important;
+    line-height:1.1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.045em !important;
+  }
+
+  #account p,#login p,#auth p,#signin p,
+  .login-card p,.auth-card p,.account-card p{
+    text-align:center !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    max-width:92% !important;
+    color:#64748B !important;
+    font-size:13px !important;
+    line-height:1.4 !important;
+    font-weight:650 !important;
+  }
+
+  #account input,#login input,#auth input,#signin input,
+  .login-card input,.auth-card input,.account-card input{
+    width:100% !important;
+    box-sizing:border-box !important;
+    height:52px !important;
+    border-radius:18px !important;
+    border:1px solid #E2E8F0 !important;
+    background:#F8FAFC !important;
+    padding:0 16px !important;
+    margin:8px 0 !important;
+    font-size:14px !important;
+    font-weight:750 !important;
+    color:#0F172A !important;
+    text-align:left !important;
+  }
+
+  #account button,#login button,#auth button,#signin button,
+  .login-card button,.auth-card button,.account-card button{
+    width:100% !important;
+    min-height:50px !important;
+    border-radius:18px !important;
+    font-size:14px !important;
+    font-weight:1000 !important;
+    text-align:center !important;
+  }
+
+  #account a,#login a,#auth a,#signin a,
+  .login-card a,.auth-card a,.account-card a{
+    font-weight:950 !important;
+    color:#EA580C !important;
+  }
+
+  /* ========== HOME SECTION WORDING ========== */
+  .rmp27-section-title,
+  .rmp21-section-head{
+    padding:0 var(--rmp39-edge) !important;
+    margin:2px 0 0 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+
+  .rmp27-section-title span,
+  .rmp21-section-head span{
+    display:none !important;
+  }
+
+  .rmp27-section-title b,
+  .rmp21-section-head strong{
+    font-size:16px !important;
+    line-height:1 !important;
+    color:#0F172A !important;
+    font-weight:1000 !important;
+    letter-spacing:-.03em !important;
+  }
+
+  .rmp27-section-title::before,
+  .rmp21-section-head::before{
+    content:"Continue with" !important;
+    color:#64748B !important;
+    font-size:10px !important;
+    line-height:1 !important;
+    font-weight:1000 !important;
+    letter-spacing:.12em !important;
+    text-transform:uppercase !important;
+  }
+
+  .rmp27-section-title b::before,
+  .rmp21-section-head strong::before{
+    content:"";
+    display:none !important;
+  }
+
+  /* Change "Start faster" text visually through JS; CSS fallback */
+  .rmp27-section-title b,
+  .rmp21-section-head strong{
+    font-size:0 !important;
+  }
+
+  .rmp27-section-title b::after,
+  .rmp21-section-head strong::after{
+    content:"Your Tools" !important;
+    font-size:16px !important;
+  }
+
+  /* ========== COLOURED QUICK CARDS ========== */
+  .rmp27-quick button,
+  .rmp21-quick-card{
+    border:1px solid rgba(226,232,240,.92) !important;
+    box-shadow:0 9px 22px rgba(15,23,42,.06) !important;
+    overflow:hidden !important;
+    position:relative !important;
+  }
+
+  .rmp27-quick button:nth-child(1),
+  .rmp21-quick-card:nth-child(1){
+    background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 70%) !important;
+  }
+
+  .rmp27-quick button:nth-child(2),
+  .rmp21-quick-card:nth-child(2){
+    background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 70%) !important;
+  }
+
+  .rmp27-quick button:nth-child(3),
+  .rmp21-quick-card:nth-child(3){
+    background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 70%) !important;
+  }
+
+  .rmp27-quick button:nth-child(4),
+  .rmp21-quick-card:nth-child(4){
+    background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 70%) !important;
+  }
+
+  .rmp27-quick button::after,
+  .rmp21-quick-card::after{
+    content:"" !important;
+    position:absolute !important;
+    right:-22px !important;
+    bottom:-22px !important;
+    width:78px !important;
+    height:78px !important;
+    border-radius:50% !important;
+    background:rgba(255,255,255,.55) !important;
+    pointer-events:none !important;
+  }
+
+  /* ========== MANUAL CARDS WITH LOGICAL LIGHT COLOURS ========== */
+  #home .manuals-grid{
+    gap:10px !important;
+  }
+
+  #home .manual-tile{
+    border:1px solid rgba(226,232,240,.92) !important;
+    box-shadow:0 9px 22px rgba(15,23,42,.06) !important;
+    overflow:hidden !important;
+    position:relative !important;
+  }
+
+  #home .manual-tile:nth-child(1){
+    background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(2){
+    background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(3){
+    background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(4){
+    background:linear-gradient(135deg,#FEF2F2 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(5){
+    background:linear-gradient(135deg,#FEFCE8 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(6){
+    background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile:nth-child(7){
+    background:linear-gradient(135deg,#ECFEFF 0%,#FFFFFF 72%) !important;
+  }
+
+  #home .manual-tile::after{
+    background:rgba(255,255,255,.68) !important;
+    box-shadow:0 8px 18px rgba(15,23,42,.055) !important;
+  }
+
+  #home .manual-tile-name{
+    color:#0F172A !important;
+    font-weight:1000 !important;
+    letter-spacing:-.025em !important;
+  }
+
+  #home .manual-tile-sub,
+  #home .manual-tile-meta{
+    color:#475569 !important;
+    font-weight:760 !important;
+  }
+
+  /* ========== TOOL CARDS WITH LOGICAL COLORS ========== */
+  #home .home-card{
+    border:1px solid rgba(226,232,240,.92) !important;
+    box-shadow:0 9px 22px rgba(15,23,42,.06) !important;
+    overflow:hidden !important;
+    position:relative !important;
+  }
+
+  #home .home-card:nth-of-type(1){
+    background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 74%) !important;
+  }
+
+  #home .home-card:nth-of-type(2){
+    background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 74%) !important;
+  }
+
+  #home .home-card:nth-of-type(3){
+    background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 74%) !important;
+  }
+
+  #home .home-card:nth-of-type(4){
+    background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 74%) !important;
+  }
+
+  #home .home-card:nth-of-type(5){
+    background:linear-gradient(135deg,#F8FAFC 0%,#FFFFFF 74%) !important;
+  }
+
+  #home .hc-title,
+  #home .home-card-title{
+    color:#0F172A !important;
+    font-weight:1000 !important;
+  }
+
+  #home .hc-subtitle,
+  #home .home-card-subtitle{
+    color:#64748B !important;
+    font-weight:720 !important;
+  }
+
+  /* ========== AI LOCKED CARD ALIGNMENT ========== */
+  #qa-locked-msg,
+  #qa-content,
+  #qa > div:not(.rmp32-page-hero){
+    text-align:center !important;
+    padding:28px 20px !important;
+  }
+
+  #qa-locked-msg h2,
+  #qa-locked-msg h3,
+  #qa-content h2,
+  #qa-content h3,
+  #qa > div:not(.rmp32-page-hero) h2,
+  #qa > div:not(.rmp32-page-hero) h3{
+    text-align:center !important;
+    color:#092957 !important;
+    font-size:22px !important;
+    line-height:1.1 !important;
+    font-weight:1000 !important;
+    letter-spacing:-.04em !important;
+  }
+
+  #qa-locked-msg p,
+  #qa-content p,
+  #qa > div:not(.rmp32-page-hero) p{
+    text-align:center !important;
+    max-width:92% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    color:#64748B !important;
+    font-size:13px !important;
+    line-height:1.45 !important;
+    font-weight:650 !important;
+  }
+
+  #qa-locked-msg button,
+  #qa-content button,
+  #qa > div:not(.rmp32-page-hero) button{
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    border-radius:18px !important;
+    min-height:48px !important;
+    font-weight:1000 !important;
+  }
+
+  /* No mic should ever reappear */
+  .rmp27-mic,
+  .voice-search-btn-v10,
+  .rmp-search-v18-mic,
+  .voice-btn,
+  .search-voice,
+  #voiceSearchBtn,
+  #voice-btn,
+  .rmp-action-voice-final{
+    display:none !important;
+  }
+}
+</style>
+
+  <!-- UI polish after voice removal v39 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -23824,6 +24210,43 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 })();
 </script>
 
+
+
+<script id="rmp-ui-polish-v39-script">
+(function(){
+  function polishHomeWords(){
+    document.querySelectorAll(".rmp27-section-title b, .rmp21-section-head strong").forEach(el=>{
+      if(/Start faster|Quick Access/i.test(el.textContent || "")){
+        el.textContent = "Your Tools";
+      }
+    });
+  }
+
+  function markAccountScreens(){
+    const hash = (location.hash || "").replace("#","").split("/")[0];
+    document.body.classList.toggle("rmp39-account-screen", ["account","login","auth","signin","profile"].includes(hash));
+  }
+
+  function removeVoiceLeftovers(){
+    document.querySelectorAll(".rmp27-mic,.voice-search-btn-v10,.rmp-search-v18-mic,.voice-btn,.search-voice,#voiceSearchBtn,#voice-btn,.rmp-action-voice-final").forEach(el=>el.remove());
+  }
+
+  function run(){
+    polishHomeWords();
+    markAccountScreens();
+    removeVoiceLeftovers();
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",run);
+  }else{
+    run();
+  }
+  window.addEventListener("hashchange",()=>setTimeout(run,50));
+  setTimeout(run,400);
+  setTimeout(run,1200);
+})();
+</script>
 
 </body>
 </html>
