@@ -15354,1701 +15354,99 @@ mark.rmp44-hit{
 
   <!-- Search logic upgrade v44 generated on 2026-08-09. -->
 
-<style id="rmp-final-upgrade-v45">
+<!-- Final app upgrade v45 generated on 2026-08-09. -->
+
+<!-- Clean search and about layout v46 generated on 2026-08-09. -->
+
+<!-- Search save only v47 generated on 2026-08-09. -->
+
+<!-- Home cleanup and search reset v48 generated on 2026-08-09. -->
+
+<!-- Home app info UI fix v49 generated on 2026-08-09. -->
+
+<!-- Final UI corrected v50 generated on 2026-08-09. -->
+
+<!-- Saved rules sync fix v51 generated on 2026-08-09. -->
+
+<style id="rmp-final-cleanup-v52">
 /* =========================================================
-   Rule Master Pro — v45 Final Upgrade
-   1. Search ranking intelligence
-   2. Better full-rule display
-   3. Better multi-book selector
-   4. Recent searches
-   5. Book-wise grouped results
-   6. Home purposeful dashboard
-   7. Saved folders
-   8. Quiz improvement panel
-   9. AI Assist professional locked page
-   10. Cleanup/versioning/performance polish
+   Rule Master Pro — v52 Final Cleanup
+   Fixes pending from review:
+   - App Info simplified and no duplicate/low-contrast hero
+   - Bottom AI/Slips icon/label duplication fixed
+   - Search cards compact + only Show full rule / Save
+   - Highlight avoids ugly split inside words where possible
+   - Saved rules render properly and old export/instruction UI hidden
+   - Home manual title clipping fixed
    ========================================================= */
 
 :root{
-  --rmp45-navy:#092957;
-  --rmp45-orange:#EA580C;
-  --rmp45-blue:#1559B7;
-  --rmp45-green:#16A34A;
-  --rmp45-red:#DC2626;
-  --rmp45-purple:#7C3AED;
-  --rmp45-teal:#0F766E;
-  --rmp45-amber:#D97706;
-  --rmp45-text:#0F172A;
-  --rmp45-muted:#64748B;
-  --rmp45-border:#E2E8F0;
-  --rmp45-bg:#F8FAFC;
-  --rmp45-hit:#FEF08A;
-}
-
-/* Version chip */
-.rmp45-version-chip{
-  position:fixed;
-  right:10px;
-  bottom:calc(76px + env(safe-area-inset-bottom,0px));
-  z-index:40;
-  min-height:25px;
-  padding:0 10px;
-  border-radius:999px;
-  background:rgba(9,41,87,.92);
-  color:#FFFFFF;
-  font-size:10px;
-  font-weight:1000;
-  display:flex;
-  align-items:center;
-  box-shadow:0 8px 22px rgba(15,23,42,.18);
-  backdrop-filter:blur(8px);
-}
-
-/* Search filter replacement */
-#search .search-filter-row-v3{
-  display:none !important;
-}
-
-.rmp45-book-filter{
-  margin-top:12px;
-  padding:12px;
-  border-radius:22px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 7px 18px rgba(15,23,42,.045);
-}
-
-.rmp45-filter-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:11px;
-}
-
-.rmp45-filter-top strong{
-  color:#0F172A;
-  font-size:13px;
-  line-height:1.1;
-  font-weight:1000;
-  letter-spacing:-.015em;
-}
-
-.rmp45-filter-top span{
-  display:block;
-  margin-top:4px;
-  color:#64748B;
-  font-size:10.6px;
-  line-height:1.25;
-  font-weight:740;
-}
-
-.rmp45-filter-actions{
-  display:flex;
-  gap:6px;
-  flex:0 0 auto;
-}
-
-.rmp45-filter-mini{
-  min-height:28px;
-  border:1px solid #E2E8F0;
-  border-radius:999px;
-  background:#F8FAFC;
-  color:#475569;
-  padding:0 9px;
-  font-size:10px;
-  font-weight:1000;
-}
-
-.rmp45-book-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.rmp45-book-chip{
-  min-height:36px;
-  border:1px solid #E2E8F0;
-  border-radius:999px;
-  background:#F8FAFC;
-  color:#475569;
-  padding:0 11px;
-  font-size:11px;
-  line-height:1;
-  font-weight:950;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  box-shadow:0 3px 9px rgba(15,23,42,.035);
-}
-
-.rmp45-book-chip .tick{
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#FFFFFF;
-  border:1px solid #CBD5E1;
-  color:transparent;
-  font-size:10px;
-  font-weight:1000;
-}
-
-.rmp45-book-chip.active{
-  color:#FFFFFF;
-  border-color:transparent;
-  box-shadow:0 8px 18px rgba(15,23,42,.12);
-}
-
-.rmp45-book-chip.active .tick{
-  color:#0F172A;
-  border-color:#FFFFFF;
-}
-
-.rmp45-book-chip[data-manual="all"].active{background:#092957;}
-.rmp45-book-chip[data-manual="gsr"].active{background:#EA580C;}
-.rmp45-book-chip[data-manual="om"].active{background:#16A34A;}
-.rmp45-book-chip[data-manual="bwm"].active{background:#1559B7;}
-.rmp45-book-chip[data-manual="acc"].active{background:#DC2626;}
-.rmp45-book-chip[data-manual="irsem"].active{background:#0F766E;}
-.rmp45-book-chip[data-manual="irpwm"].active{background:#D97706;}
-.rmp45-book-chip[data-manual="ira"].active{background:#7C3AED;}
-.rmp45-book-chip[data-manual="corr"].active{background:#9333EA;}
-
-.rmp45-selected-line{
-  margin-top:10px;
-  color:#64748B;
-  font-size:10.8px;
-  line-height:1.35;
-  font-weight:760;
-}
-
-/* Recent searches */
-.rmp45-recent-box{
-  margin-top:10px;
-  padding:10px;
-  border-radius:18px;
-  background:#F8FAFC;
-  border:1px dashed #CBD5E1;
-}
-
-.rmp45-recent-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:8px;
-}
-
-.rmp45-recent-top strong{
-  color:#475569;
-  font-size:10.5px;
-  font-weight:1000;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.rmp45-clear-recent{
-  border:0;
-  background:transparent;
-  color:#EA580C;
-  font-size:10px;
-  font-weight:1000;
-}
-
-.rmp45-recent-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-}
-
-.rmp45-recent-chip{
-  border:1px solid #E2E8F0;
-  background:#FFFFFF;
-  color:#334155;
-  min-height:28px;
-  border-radius:999px;
-  padding:0 10px;
-  font-size:10.5px;
-  font-weight:850;
-}
-
-/* Search stats and grouped results */
-#search-stats.rmp45-stats{
-  border-radius:21px !important;
-  padding:12px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 7px 18px rgba(15,23,42,.052) !important;
-}
-
-.rmp45-stats-title{
-  color:#0F172A;
-  font-size:13.8px;
-  line-height:1.25;
-  font-weight:1000;
-}
-
-.rmp45-stats-sub{
-  margin-top:5px;
-  color:#64748B;
-  font-size:10.7px;
-  line-height:1.38;
-  font-weight:720;
-}
-
-.rmp45-count-row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px;
-}
-
-.rmp45-count-row span{
-  min-height:25px;
-  border-radius:999px;
-  padding:0 8px;
-  display:inline-flex;
-  align-items:center;
-  background:#F8FAFC;
-  border:1px solid #E2E8F0;
-  color:#475569;
-  font-size:10px;
-  font-weight:900;
-}
-
-#search-results-container.rmp45-results{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:14px !important;
-}
-
-.rmp45-result-group{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.rmp45-group-head{
-  position:sticky;
-  top:0;
-  z-index:3;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  min-height:36px;
-  border-radius:16px;
-  padding:0 12px;
-  background:rgba(248,250,252,.94);
-  border:1px solid #E2E8F0;
-  backdrop-filter:blur(8px);
-}
-
-.rmp45-group-head strong{
-  color:#0F172A;
-  font-size:12px;
-  line-height:1;
-  font-weight:1000;
-  letter-spacing:.02em;
-}
-
-.rmp45-group-head span{
-  color:#64748B;
-  font-size:10px;
-  font-weight:900;
-}
-
-/* Search card */
-.rmp45-result-card{
-  border-radius:23px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 8px 20px rgba(15,23,42,.052);
-  overflow:hidden;
-}
-
-.rmp45-result-head{
-  width:100%;
-  border:0;
-  background:linear-gradient(135deg,#FFFFFF,#F8FAFC);
-  padding:15px 14px 12px;
-  display:grid;
-  grid-template-columns:1fr 30px;
-  gap:10px;
-  text-align:left;
-  cursor:pointer;
-}
-
-.rmp45-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-bottom:8px;
-}
-
-.rmp45-badge{
-  min-height:22px;
-  border-radius:999px;
-  padding:0 8px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:#F8FAFC;
-  border:1px solid #E2E8F0;
-  color:#475569;
-  font-size:9px;
-  font-weight:1000;
-  letter-spacing:.02em;
-}
-
-.rmp45-badge.manual-gsr{background:#FFF7ED;border-color:#FED7AA;color:#C2410C;}
-.rmp45-badge.manual-om{background:#ECFDF5;border-color:#BBF7D0;color:#047857;}
-.rmp45-badge.manual-bwm{background:#EFF6FF;border-color:#BFDBFE;color:#1559B7;}
-.rmp45-badge.manual-acc{background:#FEF2F2;border-color:#FECACA;color:#B91C1C;}
-.rmp45-badge.manual-irsem{background:#ECFEFF;border-color:#A5F3FC;color:#0F766E;}
-.rmp45-badge.manual-irpwm{background:#FEFCE8;border-color:#FEF08A;color:#A16207;}
-.rmp45-badge.manual-ira{background:#F5F3FF;border-color:#DDD6FE;color:#6D28D9;}
-.rmp45-badge.manual-corr{background:#FAF5FF;border-color:#E9D5FF;color:#9333EA;}
-.rmp45-badge.exact{background:#092957;border-color:#092957;color:#FFFFFF;}
-
-.rmp45-title{
-  display:block;
-  color:#0F172A;
-  font-size:14.8px;
-  line-height:1.35;
-  font-weight:1000;
-  letter-spacing:-.018em;
-}
-
-.rmp45-title .rmp45-gsr-prefix{
-  color:#C2410C;
-  font-weight:1000;
-}
-
-.rmp45-snippet{
-  margin-top:9px;
-  color:#334155;
-  font-size:12.45px;
-  line-height:1.64;
-  font-weight:650;
-}
-
-.rmp45-chevron{
-  width:30px;
-  height:30px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  color:#64748B;
-  font-size:17px;
-  font-weight:1000;
-  transition:transform .18s ease;
-}
-
-.rmp45-open .rmp45-chevron{
-  transform:rotate(180deg);
-  background:#FFF7ED;
-  border-color:#FED7AA;
-  color:#EA580C;
-}
-
-.rmp45-action{
-  padding:0 14px 14px;
-}
-
-.rmp45-show-btn{
-  width:100%;
-  min-height:41px;
-  border-radius:16px;
-  border:1px solid #FED7AA;
-  background:#FFF7ED;
-  color:#C2410C;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:11.8px;
-  font-weight:1000;
-}
-
-.rmp45-open .rmp45-show-btn{
-  background:#092957;
-  border-color:#092957;
-  color:#FFFFFF;
-}
-
-.rmp45-full{
-  display:none;
-  border-top:1px solid #E2E8F0;
-  background:#FFFFFF;
-}
-
-.rmp45-open .rmp45-full{
-  display:block;
-}
-
-.rmp45-full-toolbar{
-  position:sticky;
-  top:0;
-  z-index:2;
-  padding:12px 12px 10px;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid #E2E8F0;
-  backdrop-filter:blur(10px);
-}
-
-.rmp45-full-rule-title{
-  color:#0F172A;
-  font-size:13.5px;
-  line-height:1.32;
-  font-weight:1000;
-  margin-bottom:9px;
-}
-
-.rmp45-full-actions{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:7px;
-}
-
-.rmp45-rule-action{
-  min-height:33px;
-  border-radius:12px;
-  border:1px solid #E2E8F0;
-  background:#F8FAFC;
-  color:#334155;
-  font-size:10px;
-  font-weight:950;
-}
-
-.rmp45-rule-action.primary{
-  background:#FFF7ED;
-  border-color:#FED7AA;
-  color:#C2410C;
-}
-
-.rmp45-full-body{
-  padding:15px;
-  color:#1F2937;
-  font-size:12.9px;
-  line-height:1.72;
-  font-weight:620;
-  overflow-wrap:anywhere;
-}
-
-.rmp45-full-body p,
-.rmp45-full-body div{
-  margin:0 0 11px;
-}
-
-.rmp45-full-body ul,
-.rmp45-full-body ol{
-  margin:8px 0 12px 20px;
-  padding:0;
-}
-
-.rmp45-full-body li{
-  margin:0 0 7px;
-  line-height:1.68;
-}
-
-.rmp45-full-body table{
-  width:100%;
-  max-width:100%;
-  display:block;
-  overflow-x:auto;
-  border-collapse:collapse;
-  font-size:12px;
-}
-
-.rmp45-full-body th,
-.rmp45-full-body td{
-  padding:8px;
-  border:1px solid #E2E8F0;
-  vertical-align:top;
-}
-
-.rmp45-hit,
-mark.rmp45-hit{
-  background:linear-gradient(180deg,#FEF9C3,#FDE68A);
-  color:#713F12;
-  border-radius:4px;
-  padding:0 2px;
-  font-weight:1000;
-}
-
-.rmp45-ready,
-.rmp45-empty{
-  border-radius:22px;
-  padding:28px 18px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 8px 20px rgba(15,23,42,.052);
-  text-align:center;
-}
-
-.rmp45-ready i,
-.rmp45-empty i{
-  display:block;
-  font-size:36px;
-  color:#CBD5E1;
-  margin-bottom:10px;
-}
-
-.rmp45-ready strong,
-.rmp45-empty strong{
-  display:block;
-  color:#0F172A;
-  font-size:15px;
-  line-height:1.25;
-  font-weight:1000;
-  margin-bottom:6px;
-}
-
-.rmp45-ready p,
-.rmp45-empty p{
-  color:#64748B;
-  font-size:12.4px;
-  line-height:1.45;
-  font-weight:700;
-}
-
-/* Home purposeful dashboard */
-.rmp45-home-panel{
-  margin:14px 16px 0;
-  padding:13px;
-  border-radius:24px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 9px 22px rgba(15,23,42,.055);
-}
-
-.rmp45-home-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:11px;
-}
-
-.rmp45-home-head strong{
-  color:#0F172A;
-  font-size:15px;
-  line-height:1.1;
-  font-weight:1000;
-  letter-spacing:-.025em;
-}
-
-.rmp45-home-head span{
-  color:#64748B;
-  font-size:10.5px;
-  font-weight:850;
-}
-
-.rmp45-home-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-}
-
-.rmp45-home-tile{
-  border:1px solid #E2E8F0;
-  border-radius:19px;
-  background:#F8FAFC;
-  padding:12px;
-  min-height:76px;
-  text-align:left;
-}
-
-.rmp45-home-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF);}
-.rmp45-home-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF);}
-.rmp45-home-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF);}
-.rmp45-home-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF);}
-
-.rmp45-home-tile b{
-  display:block;
-  color:#0F172A;
-  font-size:12.5px;
-  line-height:1.2;
-  font-weight:1000;
-  margin-bottom:5px;
-}
-
-.rmp45-home-tile span{
-  display:block;
-  color:#64748B;
-  font-size:10.5px;
-  line-height:1.35;
-  font-weight:720;
-}
-
-/* Saved folders */
-.rmp45-saved-panel{
-  margin:14px 16px 95px;
-  padding:13px;
-  border-radius:24px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 9px 22px rgba(15,23,42,.055);
-}
-
-.rmp45-folder-tabs{
-  display:flex;
-  gap:7px;
-  overflow-x:auto;
-  padding-bottom:4px;
-}
-
-.rmp45-folder-tab{
-  flex:0 0 auto;
-  min-height:34px;
-  border-radius:999px;
-  border:1px solid #E2E8F0;
-  background:#F8FAFC;
-  color:#475569;
-  padding:0 11px;
-  font-size:11px;
-  font-weight:950;
-}
-
-.rmp45-folder-tab.active{
-  background:#092957;
-  border-color:#092957;
-  color:#FFFFFF;
-}
-
-.rmp45-saved-list{
-  margin-top:11px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.rmp45-saved-empty{
-  padding:18px 12px;
-  border-radius:18px;
-  background:#F8FAFC;
-  color:#64748B;
-  font-size:12px;
-  line-height:1.45;
-  font-weight:700;
-  text-align:center;
-}
-
-/* Quiz improvements */
-.rmp45-quiz-panel{
-  margin:14px 16px 95px;
-  padding:14px;
-  border-radius:24px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 9px 22px rgba(15,23,42,.055);
-}
-
-.rmp45-quiz-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-  margin-top:11px;
-}
-
-.rmp45-quiz-tile{
-  border:1px solid #E2E8F0;
-  border-radius:19px;
-  background:linear-gradient(135deg,#F5F3FF,#FFFFFF);
-  min-height:88px;
-  padding:12px;
-  text-align:left;
-}
-
-.rmp45-quiz-tile b{
-  display:block;
-  color:#0F172A;
-  font-size:12.5px;
-  line-height:1.25;
-  font-weight:1000;
-  margin-bottom:6px;
-}
-
-.rmp45-quiz-tile span{
-  color:#64748B;
-  font-size:10.5px;
-  line-height:1.35;
-  font-weight:720;
-}
-
-/* AI Assist professional page */
-.rmp45-ai-panel{
-  margin:14px 16px 95px;
-  padding:15px;
-  border-radius:26px;
-  background:#FFFFFF;
-  border:1px solid #E2E8F0;
-  box-shadow:0 10px 24px rgba(15,23,42,.06);
-}
-
-.rmp45-ai-panel h3{
-  margin:0 0 7px;
-  color:#0F172A;
-  font-size:18px;
-  line-height:1.12;
-  font-weight:1000;
-  letter-spacing:-.035em;
-}
-
-.rmp45-ai-panel p{
-  margin:0 0 12px;
-  color:#64748B;
-  font-size:12.4px;
-  line-height:1.5;
-  font-weight:700;
-}
-
-.rmp45-ai-examples{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.rmp45-ai-example{
-  border:1px solid #E2E8F0;
-  border-radius:17px;
-  background:#F8FAFC;
-  padding:11px;
-  color:#334155;
-  font-size:11.7px;
-  line-height:1.45;
-  font-weight:800;
-}
-
+  --rmp52-navy:#092957;
+  --rmp52-orange:#EA580C;
+  --rmp52-green:#16A34A;
+  --rmp52-blue:#1559B7;
+  --rmp52-teal:#0891B2;
+  --rmp52-purple:#7C3AED;
+  --rmp52-border:#E2E8F0;
+  --rmp52-text:#0F172A;
+  --rmp52-muted:#64748B;
+  --rmp52-bg:#F8FAFC;
+  --rmp52-hit:#FFF4A8;
+}
+
+/* ---------- HOME MANUAL CARDS: no clipped first letters ---------- */
 @media(max-width:760px){
-  .rmp45-version-chip{
-    bottom:calc(80px + env(safe-area-inset-bottom,0px));
-    right:8px;
-    font-size:9.5px;
-  }
-
-  .rmp45-book-filter{
-    border-radius:20px;
-    padding:11px;
-  }
-
-  .rmp45-book-chip{
-    min-height:35px;
-    padding:0 10px;
-    font-size:10.8px;
-  }
-
-  .rmp45-result-card{
-    border-radius:21px;
-  }
-
-  .rmp45-result-head{
-    padding:14px 13px 11px;
-  }
-
-  .rmp45-title{
-    font-size:14.2px;
-  }
-
-  .rmp45-snippet{
-    font-size:12px;
-  }
-
-  .rmp45-full-body{
-    font-size:12.6px;
-    padding:14px;
-  }
-
-  .rmp45-full-actions{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
-</style>
-
-  <!-- Final app upgrade v45 generated on 2026-08-09. -->
-
-<style id="rmp-clean-search-v46">
-/* =========================================================
-   Rule Master Pro — v46 Clean Search + About Layout
-   User requested:
-   - remove messy grouped search display
-   - only simple searched rule with highlighted words
-   - show full rule only on tap
-   - remove v1.0 floating tag
-   - remove v45 quiz add-on
-   - improve About/App Info layout alignment
-   ========================================================= */
-
-:root{
-  --rmp46-navy:#092957;
-  --rmp46-orange:#EA580C;
-  --rmp46-text:#0F172A;
-  --rmp46-muted:#64748B;
-  --rmp46-border:#E2E8F0;
-  --rmp46-bg:#F8FAFC;
-  --rmp46-highlight:#FFF3A3;
-  --rmp46-highlight-border:#FACC15;
-}
-
-/* Remove heavy v45 extras */
-.rmp45-version-chip,
-#rmp45-home-panel,
-#rmp45-quiz-panel,
-#rmp45-ai-panel,
-#rmp45-saved-panel{
-  display:none !important;
-}
-
-/* Search should not show book-wise group headers or old v45 blocks */
-.rmp45-result-group,
-.rmp45-group-head,
-.rmp44-result-group,
-.rmp44-group-head{
-  display:contents !important;
-}
-
-/* Hide old heavy search extras/recent boxes */
-.rmp45-recent-box,
-.rmp44-recent-box,
-.rmp45-count-row,
-.rmp44-count-row{
-  display:none !important;
-}
-
-/* Keep multi-book selection, but make it compact and calm */
-#search .search-filter-row-v3{
-  display:none !important;
-}
-
-.rmp46-filter{
-  margin-top:10px !important;
-  padding:10px !important;
-  border-radius:18px !important;
-  background:#FFFFFF !important;
-  border:1px solid var(--rmp46-border) !important;
-  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
-}
-
-.rmp46-filter-title{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:space-between !important;
-  gap:10px !important;
-  margin-bottom:8px !important;
-}
-
-.rmp46-filter-title strong{
-  color:#0F172A !important;
-  font-size:12px !important;
-  line-height:1 !important;
-  font-weight:1000 !important;
-}
-
-.rmp46-filter-title span{
-  color:#64748B !important;
-  font-size:10.3px !important;
-  line-height:1.2 !important;
-  font-weight:750 !important;
-  text-align:right !important;
-}
-
-.rmp46-chip-row{
-  display:flex !important;
-  flex-wrap:wrap !important;
-  gap:7px !important;
-}
-
-.rmp46-book-chip{
-  min-height:32px !important;
-  border:1px solid #E2E8F0 !important;
-  border-radius:999px !important;
-  background:#F8FAFC !important;
-  color:#475569 !important;
-  padding:0 10px !important;
-  font-size:10.5px !important;
-  line-height:1 !important;
-  font-weight:900 !important;
-}
-
-.rmp46-book-chip.active{
-  background:#092957 !important;
-  border-color:#092957 !important;
-  color:#FFFFFF !important;
-}
-
-.rmp46-book-chip[data-manual="gsr"].active{background:#EA580C !important;border-color:#EA580C !important;}
-.rmp46-book-chip[data-manual="om"].active{background:#16A34A !important;border-color:#16A34A !important;}
-.rmp46-book-chip[data-manual="bwm"].active{background:#1559B7 !important;border-color:#1559B7 !important;}
-.rmp46-book-chip[data-manual="acc"].active{background:#DC2626 !important;border-color:#DC2626 !important;}
-
-/* Minimal status */
-#search-stats.rmp46-stats{
-  margin:0 0 10px !important;
-  padding:10px 12px !important;
-  border-radius:18px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
-  color:#475569 !important;
-  font-size:11.5px !important;
-  line-height:1.35 !important;
-  font-weight:750 !important;
-}
-
-#search-stats.rmp46-stats b{
-  color:#0F172A !important;
-  font-weight:1000 !important;
-}
-
-/* Simple flat search results */
-#search-results-container.rmp46-results{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:10px !important;
-  padding-bottom:12px !important;
-}
-
-.rmp46-card{
-  border-radius:20px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
-  overflow:hidden !important;
-}
-
-.rmp46-card-head{
-  width:100% !important;
-  border:0 !important;
-  background:#FFFFFF !important;
-  padding:14px 14px 12px !important;
-  text-align:left !important;
-  display:block !important;
-}
-
-.rmp46-meta{
-  display:flex !important;
-  gap:6px !important;
-  flex-wrap:wrap !important;
-  margin-bottom:8px !important;
-}
-
-.rmp46-badge{
-  min-height:21px !important;
-  border-radius:999px !important;
-  padding:0 8px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  background:#F8FAFC !important;
-  border:1px solid #E2E8F0 !important;
-  color:#475569 !important;
-  font-size:9px !important;
-  font-weight:1000 !important;
-  letter-spacing:.02em !important;
-}
-
-.rmp46-badge.gsr{
-  background:#FFF7ED !important;
-  border-color:#FED7AA !important;
-  color:#C2410C !important;
-}
-
-.rmp46-badge.om{
-  background:#ECFDF5 !important;
-  border-color:#BBF7D0 !important;
-  color:#047857 !important;
-}
-
-.rmp46-badge.bwm{
-  background:#EFF6FF !important;
-  border-color:#BFDBFE !important;
-  color:#1559B7 !important;
-}
-
-.rmp46-badge.acc{
-  background:#FEF2F2 !important;
-  border-color:#FECACA !important;
-  color:#B91C1C !important;
-}
-
-.rmp46-title{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:14.6px !important;
-  line-height:1.36 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.015em !important;
-}
-
-.rmp46-title .gsr-prefix{
-  color:#C2410C !important;
-  font-weight:1000 !important;
-}
-
-.rmp46-snippet{
-  display:block !important;
-  margin-top:8px !important;
-  color:#334155 !important;
-  font-size:12.3px !important;
-  line-height:1.62 !important;
-  font-weight:650 !important;
-}
-
-.rmp46-actions{
-  padding:0 14px 14px !important;
-}
-
-.rmp46-show-btn{
-  width:100% !important;
-  min-height:40px !important;
-  border-radius:16px !important;
-  border:1px solid #FED7AA !important;
-  background:#FFF7ED !important;
-  color:#C2410C !important;
-  font-size:11.8px !important;
-  font-weight:1000 !important;
-}
-
-.rmp46-card.open .rmp46-show-btn{
-  background:#092957 !important;
-  border-color:#092957 !important;
-  color:#FFFFFF !important;
-}
-
-.rmp46-full{
-  display:none !important;
-  border-top:1px solid #E2E8F0 !important;
-  background:#FFFFFF !important;
-  padding:15px 14px 16px !important;
-}
-
-.rmp46-card.open .rmp46-full{
-  display:block !important;
-}
-
-.rmp46-full-body{
-  color:#1F2937 !important;
-  font-size:12.8px !important;
-  line-height:1.72 !important;
-  font-weight:620 !important;
-  overflow-wrap:anywhere !important;
-}
-
-.rmp46-full-body p,
-.rmp46-full-body div{
-  margin:0 0 11px !important;
-}
-
-.rmp46-full-body ul,
-.rmp46-full-body ol{
-  margin:8px 0 12px 20px !important;
-  padding:0 !important;
-}
-
-.rmp46-full-body li{
-  margin:0 0 7px !important;
-}
-
-.rmp46-full-body table{
-  width:100% !important;
-  max-width:100% !important;
-  display:block !important;
-  overflow-x:auto !important;
-  border-collapse:collapse !important;
-  font-size:12px !important;
-}
-
-.rmp46-full-body th,
-.rmp46-full-body td{
-  padding:8px !important;
-  border:1px solid #E2E8F0 !important;
-  vertical-align:top !important;
-}
-
-/* Light yellow highlight only */
-.rmp46-hit,
-mark.rmp46-hit,
-.rmp45-hit,
-.rmp44-hit,
-.rmp40-hit{
-  background:#FFF3A3 !important;
-  color:#111827 !important;
-  border-radius:4px !important;
-  padding:0 2px !important;
-  box-shadow:inset 0 -1px 0 #FACC15 !important;
-  font-weight:950 !important;
-}
-
-.rmp46-ready,
-.rmp46-empty{
-  border-radius:20px !important;
-  padding:24px 16px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 6px 16px rgba(15,23,42,.045) !important;
-  text-align:center !important;
-}
-
-.rmp46-ready strong,
-.rmp46-empty strong{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:15px !important;
-  font-weight:1000 !important;
-  margin-bottom:6px !important;
-}
-
-.rmp46-ready p,
-.rmp46-empty p{
-  color:#64748B !important;
-  font-size:12px !important;
-  line-height:1.45 !important;
-  font-weight:700 !important;
-  margin:0 !important;
-}
-
-/* About / App Info layout: centered, balanced and readable */
-#info.screen.active,
-#app-info.screen.active,
-#about.screen.active,
-#updates.screen.active,
-#corrections.screen.active{
-  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
-}
-
-#info .info-card,
-#app-info .info-card,
-#about .info-card,
-#updates .info-card,
-#info .card,
-#app-info .card,
-#about .card,
-#updates .card,
-#corrections .card,
-.about-card,
-.info-card{
-  max-width:100% !important;
-  margin-left:16px !important;
-  margin-right:16px !important;
-  border-radius:22px !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 7px 18px rgba(15,23,42,.05) !important;
-}
-
-#info h1,#info h2,#info h3,
-#app-info h1,#app-info h2,#app-info h3,
-#about h1,#about h2,#about h3,
-#updates h1,#updates h2,#updates h3{
-  text-align:center !important;
-  color:#092957 !important;
-  letter-spacing:-.025em !important;
-}
-
-#info p,#app-info p,#about p,#updates p,
-#info .about-text,#app-info .about-text,#about .about-text{
-  text-align:center !important;
-  max-width:92% !important;
-  margin-left:auto !important;
-  margin-right:auto !important;
-  color:#475569 !important;
-  line-height:1.55 !important;
-}
-
-#info .stats-row,
-#app-info .stats-row,
-#about .stats-row,
-#updates .stats-row{
-  display:grid !important;
-  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-  text-align:center !important;
-}
-
-#info .quick-access,
-#app-info .quick-access,
-#about .quick-access,
-#updates .quick-access{
-  display:grid !important;
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:10px !important;
-  padding-left:16px !important;
-  padding-right:16px !important;
-}
-
-#info .quick-access > *,
-#app-info .quick-access > *,
-#about .quick-access > *,
-#updates .quick-access > *{
-  border-radius:18px !important;
-  text-align:center !important;
-}
-
-@media(max-width:760px){
-  .rmp46-card{
-    border-radius:19px !important;
-  }
-
-  .rmp46-card-head{
-    padding:13px 13px 11px !important;
-  }
-
-  .rmp46-title{
-    font-size:14.1px !important;
-    line-height:1.36 !important;
-  }
-
-  .rmp46-snippet{
-    font-size:12px !important;
-    line-height:1.58 !important;
-  }
-
-  .rmp46-full-body{
-    font-size:12.5px !important;
-    line-height:1.7 !important;
-  }
-
-  .rmp46-filter{
-    margin-top:9px !important;
-    border-radius:17px !important;
-  }
-}
-</style>
-
-  <!-- Clean search and about layout v46 generated on 2026-08-09. -->
-
-<style id="rmp-search-save-only-v47">
-/* =========================================================
-   Rule Master Pro — v47 Search Save Only
-   User requirement:
-   - No Copy / Open / Share in search result
-   - Only two options: Show full rule and Save
-   - One clean card per searched rule
-   - Expanded area should show complete rule body
-   ========================================================= */
-
-/* hard-hide any older full-rule toolbars/actions */
-.rmp45-full-toolbar,
-.rmp45-full-actions,
-.rmp45-rule-action,
-.rmp44-full-toolbar,
-.rmp44-full-actions,
-.rmp40-full-title{
-  display:none !important;
-}
-
-/* clean one-card layout */
-#search-results-container.rmp47-results{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:11px !important;
-  padding-bottom:14px !important;
-}
-
-.rmp47-card{
-  border-radius:20px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 6px 16px rgba(15,23,42,.055) !important;
-  overflow:hidden !important;
-}
-
-.rmp47-head{
-  border:0 !important;
-  background:#FFFFFF !important;
-  display:block !important;
-  width:100% !important;
-  padding:14px 14px 12px !important;
-  text-align:left !important;
-}
-
-.rmp47-meta{
-  display:flex !important;
-  gap:6px !important;
-  flex-wrap:wrap !important;
-  margin-bottom:8px !important;
-}
-
-.rmp47-badge{
-  min-height:21px !important;
-  border-radius:999px !important;
-  padding:0 8px !important;
-  display:inline-flex !important;
-  align-items:center !important;
-  background:#F8FAFC !important;
-  border:1px solid #E2E8F0 !important;
-  color:#475569 !important;
-  font-size:9px !important;
-  font-weight:1000 !important;
-  letter-spacing:.02em !important;
-}
-
-.rmp47-badge.gsr{
-  background:#FFF7ED !important;
-  border-color:#FED7AA !important;
-  color:#C2410C !important;
-}
-
-.rmp47-badge.om{
-  background:#ECFDF5 !important;
-  border-color:#BBF7D0 !important;
-  color:#047857 !important;
-}
-
-.rmp47-badge.bwm{
-  background:#EFF6FF !important;
-  border-color:#BFDBFE !important;
-  color:#1559B7 !important;
-}
-
-.rmp47-badge.acc{
-  background:#FEF2F2 !important;
-  border-color:#FECACA !important;
-  color:#B91C1C !important;
-}
-
-.rmp47-title{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:14.7px !important;
-  line-height:1.36 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.015em !important;
-}
-
-.rmp47-title .gsr-prefix{
-  color:#C2410C !important;
-  font-weight:1000 !important;
-}
-
-.rmp47-snippet{
-  display:block !important;
-  margin-top:8px !important;
-  color:#334155 !important;
-  font-size:12.25px !important;
-  line-height:1.6 !important;
-  font-weight:650 !important;
-}
-
-/* only two buttons */
-.rmp47-actions{
-  display:grid !important;
-  grid-template-columns:1fr 1fr !important;
-  gap:9px !important;
-  padding:0 14px 14px !important;
-}
-
-.rmp47-show-btn,
-.rmp47-save-btn{
-  min-height:40px !important;
-  border-radius:16px !important;
-  font-size:11.8px !important;
-  font-weight:1000 !important;
-  border:1px solid #E2E8F0 !important;
-}
-
-.rmp47-show-btn{
-  background:#FFF7ED !important;
-  color:#C2410C !important;
-  border-color:#FED7AA !important;
-}
-
-.rmp47-save-btn{
-  background:#F8FAFC !important;
-  color:#092957 !important;
-  border-color:#DCE4EF !important;
-}
-
-.rmp47-card.open .rmp47-show-btn{
-  background:#092957 !important;
-  color:#FFFFFF !important;
-  border-color:#092957 !important;
-}
-
-.rmp47-save-btn.saved{
-  background:#ECFDF5 !important;
-  color:#047857 !important;
-  border-color:#BBF7D0 !important;
-}
-
-.rmp47-full{
-  display:none !important;
-  border-top:1px solid #E2E8F0 !important;
-  background:#FFFFFF !important;
-  padding:15px 14px 16px !important;
-}
-
-.rmp47-card.open .rmp47-full{
-  display:block !important;
-}
-
-.rmp47-full-body{
-  color:#1F2937 !important;
-  font-size:12.8px !important;
-  line-height:1.72 !important;
-  font-weight:620 !important;
-  overflow-wrap:anywhere !important;
-}
-
-.rmp47-full-body p,
-.rmp47-full-body div{
-  margin:0 0 11px !important;
-}
-
-.rmp47-full-body ul,
-.rmp47-full-body ol{
-  margin:8px 0 12px 20px !important;
-  padding:0 !important;
-}
-
-.rmp47-full-body li{
-  margin:0 0 7px !important;
-}
-
-.rmp47-full-body table{
-  width:100% !important;
-  max-width:100% !important;
-  display:block !important;
-  overflow-x:auto !important;
-  border-collapse:collapse !important;
-  font-size:12px !important;
-}
-
-.rmp47-full-body th,
-.rmp47-full-body td{
-  padding:8px !important;
-  border:1px solid #E2E8F0 !important;
-  vertical-align:top !important;
-}
-
-/* light yellow highlight only */
-.rmp47-hit,
-mark.rmp47-hit,
-.rmp46-hit,
-.rmp45-hit,
-.rmp44-hit,
-.rmp40-hit{
-  background:#FFF3A3 !important;
-  color:#111827 !important;
-  border-radius:4px !important;
-  padding:0 2px !important;
-  box-shadow:inset 0 -1px 0 #FACC15 !important;
-  font-weight:950 !important;
-}
-
-#search-stats.rmp47-stats{
-  margin:0 0 10px !important;
-  padding:10px 12px !important;
-  border-radius:18px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
-  color:#475569 !important;
-  font-size:11.5px !important;
-  line-height:1.35 !important;
-  font-weight:750 !important;
-}
-
-#search-stats.rmp47-stats b{
-  color:#0F172A !important;
-  font-weight:1000 !important;
-}
-
-.rmp47-ready,
-.rmp47-empty{
-  border-radius:20px !important;
-  padding:24px 16px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 6px 16px rgba(15,23,42,.045) !important;
-  text-align:center !important;
-}
-
-.rmp47-ready strong,
-.rmp47-empty strong{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:15px !important;
-  font-weight:1000 !important;
-  margin-bottom:6px !important;
-}
-
-.rmp47-ready p,
-.rmp47-empty p{
-  color:#64748B !important;
-  font-size:12px !important;
-  line-height:1.45 !important;
-  font-weight:700 !important;
-  margin:0 !important;
-}
-
-@media(max-width:760px){
-  .rmp47-card{
-    border-radius:19px !important;
-  }
-
-  .rmp47-head{
-    padding:13px 13px 11px !important;
-  }
-
-  .rmp47-title{
-    font-size:14.1px !important;
-    line-height:1.36 !important;
-  }
-
-  .rmp47-snippet{
-    font-size:12px !important;
-    line-height:1.58 !important;
-  }
-
-  .rmp47-full-body{
-    font-size:12.5px !important;
-    line-height:1.7 !important;
-  }
-
-  .rmp47-actions{
-    gap:8px !important;
-    padding:0 13px 13px !important;
-  }
-}
-</style>
-
-  <!-- Search save only v47 generated on 2026-08-09. -->
-
-<style id="rmp-home-clean-search-reset-v48">
-/* v48 Home Cleanup + Search Reset */
-:root{--rmp48-navy:#092957;--rmp48-orange:#EA580C;--rmp48-border:#E2E8F0;--rmp48-muted:#64748B;}
-
-/* Remove section wording below search */
-.rmp27-section-title,.rmp21-section-head{display:none!important;}
-.rmp27-section-title::before,.rmp21-section-head::before,.rmp27-section-title b::after,.rmp21-section-head strong::after{content:""!important;display:none!important;}
-
-/* Home manual cards: remove explanatory subtitle, keep manual name and count/meta */
-#home .manual-tile-sub,#home .manual-subtitle,#home .manual-desc,#home .manual-description,#home .book-subtitle,#home .book-desc,#home .rmp-manual-sub,#home .rmp-book-sub,#home .manual-sub,#home .book-sub{display:none!important;}
-#home .manual-tile-name,#home .manual-title,#home .book-title,#home .rmp-manual-title,#home .rmp-book-title{margin-bottom:6px!important;color:#0F172A!important;font-weight:1000!important;letter-spacing:-.02em!important;}
-#home .manual-tile-meta,#home .manual-meta,#home .book-meta,#home .rmp-manual-meta,#home .rmp-book-meta{color:#64748B!important;font-size:11.3px!important;line-height:1.35!important;font-weight:800!important;}
-
-/* Hide check update controls anywhere in App Info/Updates */
-button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i],a[id*="check" i][id*="update" i],a[class*="check" i][class*="update" i],.check-update,.check-updates,.check-for-update,.check-for-updates,#check-update,#check-updates,#checkForUpdate,#checkForUpdates,[data-action="check-update"],[data-action="check-updates"],[data-tab="check-update"],[data-tab="check-updates"]{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-
-/* App Info/About layout balance */
-#info.screen.active,#app-info.screen.active,#about.screen.active,#updates.screen.active{background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%)!important;}
-#info .card,#app-info .card,#about .card,#updates .card,#info .info-card,#app-info .info-card,#about .info-card,#updates .info-card,.about-card,.info-card{margin-left:16px!important;margin-right:16px!important;border-radius:22px!important;border:1px solid #E2E8F0!important;box-shadow:0 7px 18px rgba(15,23,42,.05)!important;text-align:center!important;}
-#info h1,#info h2,#info h3,#app-info h1,#app-info h2,#app-info h3,#about h1,#about h2,#about h3,#updates h1,#updates h2,#updates h3{text-align:center!important;color:#092957!important;letter-spacing:-.025em!important;}
-#info p,#app-info p,#about p,#updates p,#info li,#app-info li,#about li,#updates li{color:#475569!important;line-height:1.55!important;}
-.rmp48-info-summary{padding:18px 16px!important;}
-.rmp48-info-summary p{max-width:94%!important;margin-left:auto!important;margin-right:auto!important;}
-
-/* Remove old v45 cached panels/tag if any */
-.rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel{display:none!important;}
-</style>
-
-  <!-- Home cleanup and search reset v48 generated on 2026-08-09. -->
-
-<style id="rmp-home-appinfo-fix-v49">
-/* =========================================================
-   Rule Master Pro — v49 Home + App Info UI Fix
-   - App Info click no longer blank
-   - 2.8% ring aligned
-   - Saved bottom icon aligned
-   - Quiz and AI have distinct colours
-   - Home tiles improved with larger, coloured visuals
-   - App Info removes Check for Update controls
-   ========================================================= */
-
-/* ---------- Home quick cards: bigger, coloured, more useful ---------- */
-@media(max-width:760px){
-  .rmp27-quick{
+  #home .manuals-grid{
     gap:12px !important;
   }
 
-  .rmp27-quick button{
-    min-height:132px !important;
-    border-radius:28px !important;
-    padding:16px 15px !important;
-    border:1px solid rgba(226,232,240,.95) !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.075) !important;
+  #home .manual-tile,
+  #home .manual-card,
+  #home .book-card,
+  #home [class*="manual"][class*="tile"],
+  #home [class*="manual"][class*="card"]{
+    box-sizing:border-box !important;
+    width:100% !important;
+    overflow:visible !important;
+    border-radius:26px !important;
+    padding:17px 56px 17px 76px !important;
+    min-height:102px !important;
     position:relative !important;
-    overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    text-align:left !important;
+    transform:none !important;
+    margin-left:0 !important;
   }
 
-  .rmp27-quick button::after{
-    content:"" !important;
-    position:absolute !important;
-    right:-28px !important;
-    bottom:-30px !important;
-    width:92px !important;
-    height:92px !important;
-    border-radius:50% !important;
-    background:rgba(255,255,255,.55) !important;
-    pointer-events:none !important;
+  #home .manual-tile::before,
+  #home .manual-card::before,
+  #home .book-card::before{
+    left:18px !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
   }
-
-  .rmp27-quick button:nth-child(1){
-    background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 68%) !important;
-  }
-  .rmp27-quick button:nth-child(2){
-    background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 68%) !important;
-  }
-  .rmp27-quick button:nth-child(3){
-    background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 68%) !important;
-  }
-  .rmp27-quick button:nth-child(4){
-    background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 68%) !important;
-  }
-
-  .rmp27-quick i{
-    width:48px !important;
-    height:48px !important;
-    border-radius:20px !important;
-    margin-bottom:13px !important;
-    font-size:21px !important;
-    box-shadow:0 8px 18px rgba(15,23,42,.06) !important;
-  }
-
-  .rmp27-quick strong{
-    font-size:17px !important;
-    line-height:1.12 !important;
-    letter-spacing:-.025em !important;
-  }
-
-  .rmp27-quick small{
-    margin-top:7px !important;
-    font-size:12.2px !important;
-    line-height:1.32 !important;
-    color:#475569 !important;
-    font-weight:760 !important;
-  }
-
-  /* Manual tiles: cleaner, more colourful, no explanatory subtitle */
-  #home .manual-tile{
-    min-height:104px !important;
-    padding:17px 18px !important;
-    border-radius:28px !important;
-    border:1px solid rgba(226,232,240,.95) !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.07) !important;
-    overflow:hidden !important;
-    position:relative !important;
-  }
-
-  #home .manual-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(4){background:linear-gradient(135deg,#FEF2F2 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(5){background:linear-gradient(135deg,#FEFCE8 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(6){background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 72%) !important;}
-  #home .manual-tile:nth-child(7){background:linear-gradient(135deg,#ECFEFF 0%,#FFFFFF 72%) !important;}
 
   #home .manual-tile-name,
   #home .manual-title,
-  #home .book-title{
-    font-size:18px !important;
-    line-height:1.15 !important;
+  #home .book-title,
+  #home [class*="manual"][class*="name"],
+  #home [class*="manual"][class*="title"]{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 0 8px !important;
+    padding:0 !important;
+    transform:none !important;
+    text-indent:0 !important;
+    white-space:normal !important;
+    overflow:visible !important;
     color:#0F172A !important;
+    font-size:18px !important;
+    line-height:1.18 !important;
     font-weight:1000 !important;
-    letter-spacing:-.03em !important;
-    margin-bottom:8px !important;
+    letter-spacing:-.025em !important;
   }
 
   #home .manual-tile-sub,
@@ -17062,61 +15460,34 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   #home .manual-tile-meta,
   #home .manual-meta,
   #home .book-meta{
+    display:block !important;
     color:#475569 !important;
     font-size:12px !important;
     line-height:1.35 !important;
-    font-weight:820 !important;
+    font-weight:800 !important;
+    white-space:normal !important;
   }
 
-  /* Tools cards: bigger, coloured, better visuals */
-  #home .home-card{
-    min-height:98px !important;
-    border-radius:27px !important;
-    padding:17px 18px !important;
-    border:1px solid rgba(226,232,240,.95) !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.07) !important;
-    overflow:hidden !important;
-    position:relative !important;
+  /* Better but stable home tiles */
+  .rmp27-quick button{
+    min-height:120px !important;
+    border-radius:25px !important;
+    padding:15px !important;
+    box-shadow:0 8px 20px rgba(15,23,42,.065) !important;
   }
 
-  #home .home-card::after{
-    content:"" !important;
-    position:absolute !important;
-    right:-28px !important;
-    bottom:-32px !important;
-    width:95px !important;
-    height:95px !important;
-    border-radius:50% !important;
-    background:rgba(255,255,255,.52) !important;
-    pointer-events:none !important;
+  .rmp27-quick strong{
+    font-size:16px !important;
+    line-height:1.15 !important;
   }
 
-  #home .home-card:nth-of-type(1){background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 74%) !important;}
-  #home .home-card:nth-of-type(2){background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 74%) !important;}
-  #home .home-card:nth-of-type(3){background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 74%) !important;}
-  #home .home-card:nth-of-type(4){background:linear-gradient(135deg,#EEF2FF 0%,#FFFFFF 74%) !important;}
-  #home .home-card:nth-of-type(5){background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 74%) !important;}
-
-  #home .hc-title,
-  #home .home-card-title{
-    font-size:17px !important;
-    line-height:1.14 !important;
-    font-weight:1000 !important;
-    color:#0F172A !important;
-    letter-spacing:-.025em !important;
-  }
-
-  #home .hc-subtitle,
-  #home .home-card-subtitle{
-    margin-top:5px !important;
-    font-size:12px !important;
+  .rmp27-quick small{
+    font-size:11.8px !important;
     line-height:1.35 !important;
-    color:#475569 !important;
-    font-weight:760 !important;
   }
 }
 
-/* ---------- 2.8% coverage ring alignment fix ---------- */
+/* ---------- 2.8% RING CENTERING ---------- */
 .rmp27-ring,
 .rmp21-progress-ring,
 .rmp20-progress-ring{
@@ -17125,9 +15496,9 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   align-items:center !important;
   justify-content:center !important;
   text-align:center !important;
-  line-height:1 !important;
   color:transparent !important;
   font-size:0 !important;
+  line-height:1 !important;
   overflow:hidden !important;
 }
 
@@ -17135,8 +15506,8 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   content:"" !important;
   position:absolute !important;
   inset:7px !important;
-  background:#FFFFFF !important;
   border-radius:50% !important;
+  background:#FFFFFF !important;
   z-index:1 !important;
 }
 
@@ -17152,10 +15523,9 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   font-size:12px !important;
   font-weight:1000 !important;
   letter-spacing:-.02em !important;
-  transform:none !important;
 }
 
-/* ---------- Bottom nav alignment + distinct Quiz/AI colours ---------- */
+/* ---------- BOTTOM NAV FINAL CLEANUP ---------- */
 .bottom-nav{
   display:grid !important;
   grid-template-columns:repeat(6,minmax(0,1fr)) !important;
@@ -17170,11 +15540,12 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   align-items:center !important;
   justify-content:center !important;
   gap:5px !important;
+  padding:4px 2px !important;
   text-align:center !important;
   line-height:1 !important;
-  padding:4px 2px !important;
 }
 
+.bottom-nav .nav-item .rmp52-nav-icon,
 .bottom-nav .nav-item i,
 .bottom-nav .nav-item svg,
 .bottom-nav .nav-item .rmp28-nav-icon{
@@ -17188,17 +15559,12 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   margin:0 auto !important;
   font-size:20px !important;
   line-height:1 !important;
+  font-weight:900 !important;
   transform:none !important;
 }
 
-#nav-bookmarks i,
-#nav-bookmarks svg,
-#nav-bookmarks .rmp28-nav-icon{
-  transform:translateY(0) !important;
-  margin-top:0 !important;
-}
-
-.bottom-nav .nav-item span{
+.bottom-nav .nav-item span.rmp52-nav-label,
+.bottom-nav .nav-item > span:not(.rmp52-nav-icon):not(.rmp28-nav-icon){
   display:block !important;
   width:100% !important;
   text-align:center !important;
@@ -17208,202 +15574,530 @@ button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i
   white-space:nowrap !important;
 }
 
-/* Base unique colours */
-#nav-quiz i,
-#nav-quiz svg,
-#nav-quiz .rmp28-nav-icon{ color:#7C3AED !important; }
-
-#nav-qa i,
-#nav-qa svg,
-#nav-qa .rmp28-nav-icon{ color:#0891B2 !important; }
-
-/* Active unique colours */
-#nav-quiz.active,
-#nav-quiz.rmp32-active{
-  background:#F5F3FF !important;
-  color:#6D28D9 !important;
-  border-color:#DDD6FE !important;
-}
+#nav-qa .rmp52-nav-icon{color:#0891B2 !important;}
+#nav-corrections .rmp52-nav-icon{color:#64748B !important;}
+#nav-quiz .rmp52-nav-icon, #nav-quiz i{color:#7C3AED !important;}
 
 #nav-qa.active,
 #nav-qa.rmp32-active{
   background:#ECFEFF !important;
-  color:#0F766E !important;
   border-color:#A5F3FC !important;
+  color:#0F766E !important;
 }
 
-#nav-quiz.active i,
-#nav-quiz.rmp32-active i{ color:#7C3AED !important; }
-
-#nav-qa.active i,
-#nav-qa.rmp32-active i{ color:#0891B2 !important; }
-
-/* ---------- App Info page: never blank, centered layout ---------- */
-#about.screen{
-  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+#nav-quiz.active,
+#nav-quiz.rmp32-active{
+  background:#F5F3FF !important;
+  border-color:#DDD6FE !important;
+  color:#6D28D9 !important;
 }
 
-#rmp-about-container{
-  display:grid !important;
-  gap:14px !important;
-  padding:16px 16px calc(110px + env(safe-area-inset-bottom,0px)) !important;
+/* ---------- SIMPLE SEARCH RESULTS ---------- */
+#search-results-container.rmp52-results{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:9px !important;
+  padding-bottom:14px !important;
 }
 
-.rmp49-info-hero{
-  border-radius:28px !important;
-  padding:22px 18px !important;
-  background:
-    radial-gradient(circle at 90% 8%, rgba(255,255,255,.22), transparent 28%),
-    linear-gradient(135deg,#092957 0%,#1559B7 55%,#F47B20 100%) !important;
-  color:#FFFFFF !important;
-  box-shadow:0 16px 34px rgba(15,23,42,.16) !important;
-  text-align:center !important;
+#search-stats.rmp52-stats{
+  margin:0 0 9px !important;
+  padding:9px 11px !important;
+  border-radius:17px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 4px 12px rgba(15,23,42,.04) !important;
+  color:#475569 !important;
+  font-size:11.3px !important;
+  line-height:1.35 !important;
+  font-weight:750 !important;
+}
+
+#search-stats.rmp52-stats b{
+  color:#0F172A !important;
+  font-weight:1000 !important;
+}
+
+.rmp52-card{
+  border-radius:18px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
   overflow:hidden !important;
 }
 
-.rmp49-info-hero small{
+.rmp52-head{
+  width:100% !important;
+  border:0 !important;
+  background:#FFFFFF !important;
+  display:block !important;
+  text-align:left !important;
+  padding:12px 12px 10px !important;
+}
+
+.rmp52-meta{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:5px !important;
+  margin-bottom:7px !important;
+}
+
+.rmp52-badge{
+  min-height:20px !important;
+  border-radius:999px !important;
+  padding:0 7px !important;
   display:inline-flex !important;
   align-items:center !important;
-  justify-content:center !important;
-  min-height:28px !important;
-  border-radius:999px !important;
-  padding:0 12px !important;
-  background:rgba(255,255,255,.16) !important;
-  border:1px solid rgba(255,255,255,.26) !important;
-  font-size:10px !important;
-  font-weight:1000 !important;
-  letter-spacing:.09em !important;
-  text-transform:uppercase !important;
-}
-
-.rmp49-info-hero h2{
-  margin:13px 0 8px !important;
-  color:#FFFFFF !important;
-  font-size:25px !important;
-  line-height:1.08 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.045em !important;
-}
-
-.rmp49-info-hero p{
-  margin:0 auto !important;
-  max-width:92% !important;
-  color:rgba(255,255,255,.92) !important;
-  font-size:12.8px !important;
-  line-height:1.55 !important;
-  font-weight:720 !important;
-}
-
-.rmp49-info-card{
-  border-radius:24px !important;
-  padding:16px !important;
-  background:#FFFFFF !important;
+  background:#F8FAFC !important;
   border:1px solid #E2E8F0 !important;
-  box-shadow:0 8px 20px rgba(15,23,42,.055) !important;
-  text-align:center !important;
-}
-
-.rmp49-info-card h3{
-  margin:0 0 8px !important;
-  color:#092957 !important;
-  font-size:17px !important;
-  line-height:1.15 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.025em !important;
-}
-
-.rmp49-info-card p{
-  margin:0 auto !important;
-  max-width:94% !important;
   color:#475569 !important;
-  font-size:12.4px !important;
-  line-height:1.55 !important;
-  font-weight:700 !important;
-}
-
-.rmp49-info-grid{
-  display:grid !important;
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:10px !important;
-}
-
-.rmp49-info-tile{
-  min-height:92px !important;
-  border-radius:20px !important;
-  padding:13px !important;
-  background:#F8FAFC !important;
-  border:1px solid #E2E8F0 !important;
-  text-align:center !important;
-}
-
-.rmp49-info-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF) !important;}
-.rmp49-info-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF) !important;}
-.rmp49-info-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF) !important;}
-.rmp49-info-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF) !important;}
-
-.rmp49-info-tile b{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:15px !important;
-  line-height:1.15 !important;
+  font-size:8.8px !important;
   font-weight:1000 !important;
-  margin-bottom:5px !important;
 }
 
-.rmp49-info-tile span{
-  display:block !important;
-  color:#64748B !important;
-  font-size:11px !important;
-  line-height:1.35 !important;
-  font-weight:720 !important;
+.rmp52-badge.gsr{
+  background:#FFF7ED !important;
+  border-color:#FED7AA !important;
+  color:#C2410C !important;
 }
-
-.rmp49-manual-list{
-  display:grid !important;
-  gap:8px !important;
+.rmp52-badge.om{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
 }
-
-.rmp49-manual-row{
-  display:flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  padding:11px !important;
-  border-radius:18px !important;
-  background:#F8FAFC !important;
-  border:1px solid #E2E8F0 !important;
-  text-align:left !important;
-}
-
-.rmp49-manual-row i{
-  width:38px !important;
-  height:38px !important;
-  border-radius:15px !important;
-  display:grid !important;
-  place-items:center !important;
+.rmp52-badge.bwm{
   background:#EFF6FF !important;
-  font-style:normal !important;
-  font-size:18px !important;
-  flex:0 0 auto !important;
+  border-color:#BFDBFE !important;
+  color:#1559B7 !important;
+}
+.rmp52-badge.acc{
+  background:#FEF2F2 !important;
+  border-color:#FECACA !important;
+  color:#B91C1C !important;
 }
 
-.rmp49-manual-row strong{
+.rmp52-title{
   display:block !important;
   color:#0F172A !important;
-  font-size:13px !important;
-  line-height:1.2 !important;
+  font-size:13.8px !important;
+  line-height:1.34 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.012em !important;
+}
+
+.rmp52-title .gsr-prefix{
+  color:#C2410C !important;
   font-weight:1000 !important;
 }
 
-.rmp49-manual-row span{
+.rmp52-snippet{
   display:block !important;
-  color:#64748B !important;
-  font-size:10.8px !important;
-  line-height:1.35 !important;
-  font-weight:720 !important;
+  margin-top:7px !important;
+  color:#334155 !important;
+  font-size:11.8px !important;
+  line-height:1.55 !important;
+  font-weight:650 !important;
 }
 
-/* hide all old update-check controls even if old app info renders */
-.rmp-info-actions-v1,
+.rmp52-actions{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+  padding:0 12px 12px !important;
+}
+
+.rmp52-show-btn,
+.rmp52-save-btn{
+  min-height:37px !important;
+  border-radius:15px !important;
+  font-size:11.3px !important;
+  font-weight:1000 !important;
+}
+
+.rmp52-show-btn{
+  background:#FFF7ED !important;
+  border:1px solid #FED7AA !important;
+  color:#C2410C !important;
+}
+
+.rmp52-save-btn{
+  background:#F8FAFC !important;
+  border:1px solid #E2E8F0 !important;
+  color:#092957 !important;
+}
+
+.rmp52-save-btn.saved{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+.rmp52-card.open .rmp52-show-btn{
+  background:#092957 !important;
+  border-color:#092957 !important;
+  color:#FFFFFF !important;
+}
+
+.rmp52-full{
+  display:none !important;
+  border-top:1px solid #E2E8F0 !important;
+  background:#FFFFFF !important;
+  padding:13px 12px 14px !important;
+}
+
+.rmp52-card.open .rmp52-full{
+  display:block !important;
+}
+
+.rmp52-full-body{
+  color:#1F2937 !important;
+  font-size:12.3px !important;
+  line-height:1.68 !important;
+  font-weight:620 !important;
+  overflow-wrap:anywhere !important;
+}
+
+.rmp52-full-body p,
+.rmp52-full-body div{
+  margin:0 0 10px !important;
+}
+
+.rmp52-full-body table{
+  width:100% !important;
+  max-width:100% !important;
+  display:block !important;
+  overflow-x:auto !important;
+  border-collapse:collapse !important;
+  font-size:12px !important;
+}
+
+.rmp52-full-body th,
+.rmp52-full-body td{
+  padding:8px !important;
+  border:1px solid #E2E8F0 !important;
+}
+
+.rmp52-hit,
+mark.rmp52-hit{
+  background:#FFF4A8 !important;
+  color:#111827 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  box-shadow:inset 0 -1px 0 #FACC15 !important;
+  font-weight:950 !important;
+}
+
+/* ---------- SAVED TAB CLEAN ---------- */
+#rmp52-saved-panel{
+  margin:14px 16px calc(96px + env(safe-area-inset-bottom,0px));
+  padding:14px;
+  border-radius:24px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  box-shadow:0 9px 22px rgba(15,23,42,.055);
+}
+
+.rmp52-saved-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.rmp52-saved-head h3{
+  margin:0;
+  color:#0F172A;
+  font-size:20px;
+  line-height:1.12;
+  font-weight:1000;
+  letter-spacing:-.035em;
+}
+
+.rmp52-saved-head span{
+  display:block;
+  margin-top:5px;
+  color:#64748B;
+  font-size:11.5px;
+  line-height:1.35;
+  font-weight:720;
+}
+
+.rmp52-count{
+  min-height:30px;
+  border-radius:999px;
+  padding:0 10px;
+  display:inline-flex;
+  align-items:center;
+  background:#ECFDF5;
+  border:1px solid #BBF7D0;
+  color:#047857;
+  font-size:11px;
+  font-weight:1000;
+}
+
+.rmp52-folder-row{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-bottom:10px;
+}
+
+.rmp52-folder-btn{
+  flex:0 0 auto;
+  min-height:34px;
+  border-radius:999px;
+  border:1px solid #E2E8F0;
+  background:#F8FAFC;
+  color:#475569;
+  padding:0 12px;
+  font-size:11px;
+  font-weight:950;
+}
+
+.rmp52-folder-btn.active{
+  background:#092957;
+  border-color:#092957;
+  color:#FFFFFF;
+}
+
+.rmp52-saved-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.rmp52-empty{
+  min-height:165px;
+  border-radius:21px;
+  background:linear-gradient(135deg,#F8FAFC,#FFFFFF);
+  border:1px dashed #CBD5E1;
+  display:grid;
+  place-items:center;
+  padding:24px 18px;
+  text-align:center;
+}
+
+.rmp52-empty strong{
+  display:block;
+  color:#0F172A;
+  font-size:17px;
+  font-weight:1000;
+  margin-bottom:6px;
+}
+
+.rmp52-empty p{
+  margin:0 auto;
+  max-width:90%;
+  color:#64748B;
+  font-size:12.5px;
+  line-height:1.45;
+  font-weight:720;
+}
+
+.rmp52-saved-card{
+  border-radius:18px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  box-shadow:0 5px 14px rgba(15,23,42,.04);
+  overflow:hidden;
+}
+
+.rmp52-saved-card-head{
+  padding:12px;
+}
+
+.rmp52-saved-title{
+  display:block;
+  color:#0F172A;
+  font-size:13.8px;
+  line-height:1.34;
+  font-weight:1000;
+}
+
+.rmp52-saved-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding:0 12px 12px;
+}
+
+.rmp52-saved-show,
+.rmp52-saved-remove{
+  min-height:36px;
+  border-radius:14px;
+  font-size:11.3px;
+  font-weight:1000;
+}
+
+.rmp52-saved-show{
+  border:1px solid #FED7AA;
+  background:#FFF7ED;
+  color:#C2410C;
+}
+
+.rmp52-saved-remove{
+  border:1px solid #E2E8F0;
+  background:#F8FAFC;
+  color:#475569;
+}
+
+.rmp52-saved-full{
+  display:none;
+  border-top:1px solid #E2E8F0;
+  padding:13px 12px;
+  color:#1F2937;
+  font-size:12.2px;
+  line-height:1.65;
+}
+
+.rmp52-saved-card.open .rmp52-saved-full{
+  display:block;
+}
+
+body.rmp52-saved-active #bookmarks > *:not(.rmp32-page-hero):not(#rmp52-saved-panel),
+body.rmp52-saved-active #bookmarks .export-saved,
+body.rmp52-saved-active #bookmarks [class*="export" i]{
+  display:none !important;
+}
+
+/* ---------- APP INFO CLEAN AND SIMPLE ---------- */
+body.rmp52-appinfo #about{
+  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+}
+
+body.rmp52-appinfo #back-bar,
+body.rmp52-appinfo .back-bar,
+body.rmp52-appinfo .breadcrumb-bar{
+  display:none !important;
+}
+
+#rmp52-about{
+  padding:18px 16px calc(104px + env(safe-area-inset-bottom,0px));
+  display:grid;
+  gap:12px;
+}
+
+.rmp52-about-card{
+  border-radius:23px;
+  padding:16px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  box-shadow:0 8px 20px rgba(15,23,42,.055);
+  text-align:center;
+}
+
+.rmp52-about-card.primary{
+  background:linear-gradient(135deg,#FFFFFF,#F8FAFC);
+}
+
+.rmp52-about-card h2,
+.rmp52-about-card h3{
+  margin:0 0 8px;
+  color:#092957;
+  font-size:21px;
+  line-height:1.12;
+  font-weight:1000;
+  letter-spacing:-.035em;
+}
+
+.rmp52-about-card h3{
+  font-size:17px;
+}
+
+.rmp52-about-card p{
+  margin:0 auto;
+  max-width:94%;
+  color:#475569;
+  font-size:12.4px;
+  line-height:1.55;
+  font-weight:700;
+}
+
+.rmp52-about-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+
+.rmp52-about-tile{
+  min-height:80px;
+  border-radius:19px;
+  padding:13px;
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  text-align:center;
+  box-shadow:0 6px 16px rgba(15,23,42,.045);
+}
+
+.rmp52-about-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF);}
+.rmp52-about-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF);}
+.rmp52-about-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF);}
+.rmp52-about-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF);}
+
+.rmp52-about-tile b{
+  display:block;
+  color:#0F172A;
+  font-size:19px;
+  line-height:1.1;
+  font-weight:1000;
+  margin-bottom:6px;
+}
+
+.rmp52-about-tile span{
+  display:block;
+  color:#64748B;
+  font-size:11px;
+  line-height:1.35;
+  font-weight:720;
+}
+
+.rmp52-manual-list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+}
+
+.rmp52-manual-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-radius:17px;
+  background:#F8FAFC;
+  border:1px solid #E2E8F0;
+  text-align:left;
+}
+
+.rmp52-manual-row i{
+  width:34px;
+  height:34px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#EFF6FF;
+  font-style:normal;
+  font-size:16px;
+  flex:0 0 auto;
+}
+
+.rmp52-manual-row strong{
+  display:block;
+  color:#0F172A;
+  font-size:12.4px;
+  line-height:1.25;
+  font-weight:1000;
+}
+
+.rmp52-manual-row span{
+  display:block;
+  color:#64748B;
+  font-size:10.5px;
+  line-height:1.3;
+  font-weight:700;
+}
+
+/* hide update checks everywhere */
 button[onclick*="rmpCheckForUpdates"],
 button[id*="check"][id*="update" i],
 button[class*="check"][class*="update" i],
@@ -17427,470 +16121,7 @@ a[class*="check"][class*="update" i],
 }
 </style>
 
-  <!-- Home app info UI fix v49 generated on 2026-08-09. -->
-
-<style id="rmp-final-ui-corrected-v50">
-/* =========================================================
-   Rule Master Pro — v50 Final UI Correction
-   Fixes from screenshots:
-   1. Home manual titles clipped under icon
-   2. App Info duplicated / breadcrumb says Home / hero contrast poor
-   3. Bottom nav AI + Slips oversized text icons
-   4. Saved icon alignment
-   5. 2.8% coverage ring alignment
-   6. Home tiles more stable, colourful and readable
-   ========================================================= */
-
-/* ---------- HARD FIX: Manual card title clipping ---------- */
-@media(max-width:760px){
-  #home .manuals-grid{
-    grid-template-columns:1fr !important;
-    gap:12px !important;
-    padding-left:0 !important;
-    padding-right:0 !important;
-    overflow:visible !important;
-  }
-
-  #home .manual-tile{
-    box-sizing:border-box !important;
-    width:100% !important;
-    min-height:112px !important;
-    border-radius:27px !important;
-    /* very important: icon is ::before at left, so text must start after icon */
-    padding:18px 64px 18px 86px !important;
-    display:block !important;
-    position:relative !important;
-    overflow:hidden !important;
-    border:1px solid rgba(226,232,240,.95) !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.07) !important;
-  }
-
-  #home .manual-tile::before{
-    left:20px !important;
-    top:50% !important;
-    transform:translateY(-50%) !important;
-    width:46px !important;
-    height:46px !important;
-    border-radius:18px !important;
-    display:grid !important;
-    place-items:center !important;
-    z-index:1 !important;
-    font-size:22px !important;
-  }
-
-  #home .manual-tile::after{
-    right:18px !important;
-    top:50% !important;
-    transform:translateY(-50%) !important;
-    width:34px !important;
-    height:34px !important;
-    border-radius:15px !important;
-    z-index:1 !important;
-  }
-
-  #home .manual-tile-name,
-  #home .manual-title,
-  #home .book-title{
-    display:block !important;
-    position:relative !important;
-    z-index:2 !important;
-    margin:0 0 10px 0 !important;
-    padding:0 !important;
-    left:auto !important;
-    right:auto !important;
-    transform:none !important;
-    color:#0F172A !important;
-    font-size:18px !important;
-    line-height:1.18 !important;
-    font-weight:1000 !important;
-    letter-spacing:-.025em !important;
-    white-space:normal !important;
-    overflow:visible !important;
-    text-overflow:clip !important;
-    max-width:none !important;
-  }
-
-  #home .manual-tile-meta,
-  #home .manual-meta,
-  #home .book-meta{
-    display:block !important;
-    position:relative !important;
-    z-index:2 !important;
-    margin:0 !important;
-    padding:0 !important;
-    left:auto !important;
-    transform:none !important;
-    color:#475569 !important;
-    font-size:12px !important;
-    line-height:1.35 !important;
-    font-weight:820 !important;
-    white-space:normal !important;
-    overflow:visible !important;
-  }
-
-  #home .manual-tile-sub,
-  #home .manual-subtitle,
-  #home .manual-desc,
-  #home .book-subtitle,
-  #home .book-desc{
-    display:none !important;
-  }
-
-  #home .gsr-tile{background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 76%) !important;}
-  #home .om-tile{background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 76%) !important;}
-  #home .bwm-tile{background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 76%) !important;}
-  #home .acc-tile{background:linear-gradient(135deg,#FEF2F2 0%,#FFFFFF 76%) !important;}
-  #home .ira-tile{background:linear-gradient(135deg,#FEFCE8 0%,#FFFFFF 76%) !important;}
-  #home .irsem-tile{background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 76%) !important;}
-  #home .irpwm-tile{background:linear-gradient(135deg,#ECFEFF 0%,#FFFFFF 76%) !important;}
-}
-
-/* ---------- Home quick/tool tiles stable but better ---------- */
-@media(max-width:760px){
-  .rmp27-quick{
-    gap:12px !important;
-  }
-  .rmp27-quick button{
-    min-height:122px !important;
-    border-radius:26px !important;
-    padding:16px 14px !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.07) !important;
-  }
-  .rmp27-quick i{
-    width:46px !important;
-    height:46px !important;
-    border-radius:19px !important;
-    margin-bottom:12px !important;
-  }
-  .rmp27-quick strong{
-    font-size:16px !important;
-    line-height:1.15 !important;
-    font-weight:1000 !important;
-  }
-  .rmp27-quick small{
-    margin-top:6px !important;
-    font-size:11.8px !important;
-    line-height:1.33 !important;
-    font-weight:760 !important;
-    color:#475569 !important;
-  }
-  .rmp27-quick button:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF 70%) !important;}
-  .rmp27-quick button:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF 70%) !important;}
-  .rmp27-quick button:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF 70%) !important;}
-  .rmp27-quick button:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF 70%) !important;}
-
-  #home .home-card{
-    min-height:92px !important;
-    border-radius:26px !important;
-    padding:16px 18px !important;
-    box-shadow:0 10px 24px rgba(15,23,42,.07) !important;
-  }
-  #home .home-card-icon{
-    width:48px !important;
-    height:48px !important;
-    flex:0 0 48px !important;
-    border-radius:19px !important;
-  }
-  #home .hc-title,
-  #home .home-card-title{
-    font-size:17px !important;
-    line-height:1.15 !important;
-    font-weight:1000 !important;
-  }
-  #home .hc-subtitle,
-  #home .home-card-subtitle{
-    margin-top:5px !important;
-    font-size:12px !important;
-    line-height:1.34 !important;
-    font-weight:760 !important;
-    color:#475569 !important;
-  }
-}
-
-/* ---------- 2.8% coverage ring hard alignment ---------- */
-.rmp27-ring,
-.rmp21-progress-ring,
-.rmp20-progress-ring{
-  position:relative !important;
-  display:grid !important;
-  place-items:center !important;
-  text-align:center !important;
-  line-height:1 !important;
-  overflow:hidden !important;
-  color:transparent !important;
-  font-size:0 !important;
-}
-.rmp27-ring > *,
-.rmp21-progress-ring > *,
-.rmp20-progress-ring > *{
-  position:absolute !important;
-  inset:0 !important;
-  display:grid !important;
-  place-items:center !important;
-  margin:0 !important;
-  transform:none !important;
-  text-align:center !important;
-}
-.rmp27-ring::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:7px !important;
-  background:#FFFFFF !important;
-  border-radius:50% !important;
-  z-index:1 !important;
-}
-.rmp27-ring::after{
-  content:"2.8%" !important;
-  position:absolute !important;
-  inset:0 !important;
-  z-index:3 !important;
-  display:grid !important;
-  place-items:center !important;
-  color:#0F172A !important;
-  font-size:12px !important;
-  line-height:1 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.02em !important;
-  transform:none !important;
-}
-
-/* ---------- Bottom nav: fix AI/Slips icons and Saved alignment ---------- */
-.bottom-nav{
-  display:grid !important;
-  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
-  align-items:center !important;
-  justify-items:stretch !important;
-}
-.bottom-nav .nav-item{
-  min-width:0 !important;
-  height:62px !important;
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:5px !important;
-  text-align:center !important;
-  line-height:1 !important;
-  padding:4px 2px !important;
-  overflow:hidden !important;
-}
-.bottom-nav .nav-item i,
-.bottom-nav .nav-item svg,
-.bottom-nav .nav-item .rmp28-nav-icon,
-.bottom-nav .nav-item .rmp50-nav-icon{
-  width:24px !important;
-  height:24px !important;
-  min-width:24px !important;
-  min-height:24px !important;
-  display:grid !important;
-  place-items:center !important;
-  margin:0 auto !important;
-  padding:0 !important;
-  font-size:20px !important;
-  line-height:1 !important;
-  transform:none !important;
-  overflow:hidden !important;
-  font-weight:900 !important;
-}
-.bottom-nav .nav-item span:not(.rmp28-nav-icon):not(.rmp50-nav-icon){
-  display:block !important;
-  width:100% !important;
-  text-align:center !important;
-  font-size:10.5px !important;
-  line-height:1 !important;
-  font-weight:900 !important;
-  white-space:nowrap !important;
-}
-#nav-bookmarks i,
-#nav-bookmarks svg,
-#nav-bookmarks .rmp28-nav-icon,
-#nav-bookmarks .rmp50-nav-icon{
-  transform:none !important;
-  margin:0 auto !important;
-  align-self:center !important;
-}
-#nav-quiz i,
-#nav-quiz svg,
-#nav-quiz .rmp28-nav-icon,
-#nav-quiz .rmp50-nav-icon{color:#7C3AED !important;}
-#nav-qa i,
-#nav-qa svg,
-#nav-qa .rmp28-nav-icon,
-#nav-qa .rmp50-nav-icon{color:#0891B2 !important;}
-#nav-quiz.active,
-#nav-quiz.rmp32-active{background:#F5F3FF !important;color:#6D28D9 !important;border-color:#DDD6FE !important;}
-#nav-qa.active,
-#nav-qa.rmp32-active{background:#ECFEFF !important;color:#0F766E !important;border-color:#A5F3FC !important;}
-
-/* ---------- App Info page: no duplicate, no breadcrumb, no dark unreadable hero ---------- */
-body.rmp50-appinfo #back-bar,
-body.rmp50-appinfo .back-bar,
-body.rmp50-appinfo .breadcrumb-bar,
-body.rmp50-appinfo .rmp48-info-summary,
-body.rmp50-appinfo .rmp49-info-card:not(.rmp50-keep),
-body.rmp50-appinfo .rmp49-info-hero{
-  display:none !important;
-}
-#about.screen{
-  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
-}
-#about #rmp-about-container{
-  display:grid !important;
-  gap:12px !important;
-  padding:16px 16px calc(108px + env(safe-area-inset-bottom,0px)) !important;
-}
-.rmp50-info-hero{
-  border-radius:28px !important;
-  padding:22px 18px !important;
-  background:linear-gradient(135deg,#092957 0%,#1559B7 58%,#F47B20 100%) !important;
-  color:#FFFFFF !important;
-  text-align:center !important;
-  box-shadow:0 16px 34px rgba(15,23,42,.16) !important;
-}
-.rmp50-info-hero small{
-  display:inline-flex !important;
-  min-height:28px !important;
-  align-items:center !important;
-  justify-content:center !important;
-  border-radius:999px !important;
-  padding:0 12px !important;
-  background:rgba(255,255,255,.18) !important;
-  border:1px solid rgba(255,255,255,.30) !important;
-  color:#FFFFFF !important;
-  font-size:10px !important;
-  font-weight:1000 !important;
-  letter-spacing:.09em !important;
-  text-transform:uppercase !important;
-}
-.rmp50-info-hero h2{
-  margin:13px 0 8px !important;
-  color:#FFFFFF !important;
-  font-size:25px !important;
-  line-height:1.08 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.045em !important;
-}
-.rmp50-info-hero p{
-  margin:0 auto !important;
-  max-width:94% !important;
-  color:rgba(255,255,255,.94) !important;
-  font-size:12.8px !important;
-  line-height:1.55 !important;
-  font-weight:720 !important;
-}
-.rmp50-info-card{
-  border-radius:24px !important;
-  padding:16px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  box-shadow:0 8px 20px rgba(15,23,42,.055) !important;
-  text-align:center !important;
-}
-.rmp50-info-card h3{
-  margin:0 0 8px !important;
-  color:#092957 !important;
-  font-size:17px !important;
-  line-height:1.15 !important;
-  font-weight:1000 !important;
-  letter-spacing:-.025em !important;
-}
-.rmp50-info-card p{
-  margin:0 auto !important;
-  max-width:95% !important;
-  color:#475569 !important;
-  font-size:12.3px !important;
-  line-height:1.55 !important;
-  font-weight:700 !important;
-}
-.rmp50-info-grid{
-  display:grid !important;
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:10px !important;
-}
-.rmp50-info-tile{
-  min-height:82px !important;
-  border-radius:20px !important;
-  padding:13px !important;
-  background:#FFFFFF !important;
-  border:1px solid #E2E8F0 !important;
-  text-align:center !important;
-}
-.rmp50-info-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF) !important;}
-.rmp50-info-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF) !important;}
-.rmp50-info-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF) !important;}
-.rmp50-info-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF) !important;}
-.rmp50-info-tile b{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:18px !important;
-  line-height:1.1 !important;
-  font-weight:1000 !important;
-  margin-bottom:5px !important;
-}
-.rmp50-info-tile span{
-  display:block !important;
-  color:#64748B !important;
-  font-size:10.8px !important;
-  line-height:1.35 !important;
-  font-weight:730 !important;
-}
-.rmp50-manual-list{
-  display:grid !important;
-  gap:8px !important;
-}
-.rmp50-manual-row{
-  display:flex !important;
-  align-items:center !important;
-  gap:10px !important;
-  padding:10px !important;
-  border-radius:18px !important;
-  background:#F8FAFC !important;
-  border:1px solid #E2E8F0 !important;
-  text-align:left !important;
-}
-.rmp50-manual-row i{
-  width:36px !important;
-  height:36px !important;
-  border-radius:14px !important;
-  display:grid !important;
-  place-items:center !important;
-  background:#EFF6FF !important;
-  font-style:normal !important;
-  font-size:17px !important;
-  flex:0 0 auto !important;
-}
-.rmp50-manual-row strong{
-  display:block !important;
-  color:#0F172A !important;
-  font-size:12.8px !important;
-  line-height:1.2 !important;
-  font-weight:1000 !important;
-}
-.rmp50-manual-row span{
-  display:block !important;
-  color:#64748B !important;
-  font-size:10.6px !important;
-  line-height:1.32 !important;
-  font-weight:720 !important;
-}
-
-/* hide all check/update controls */
-.rmp-info-actions-v1,
-button[onclick*="rmpCheckForUpdates"],
-button[id*="check" i][id*="update" i],
-button[class*="check" i][class*="update" i],
-a[id*="check" i][id*="update" i],
-a[class*="check" i][class*="update" i],
-.check-update,.check-updates,.check-for-update,.check-for-updates,
-#check-update,#check-updates,#checkForUpdate,#checkForUpdates,
-[data-action="check-update"],[data-action="check-updates"],[data-tab="check-update"],[data-tab="check-updates"]{
-  display:none !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-}
-</style>
-
-  <!-- Final UI corrected v50 generated on 2026-08-09. -->
+  <!-- Final cleanup v52 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -28177,12 +26408,11 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
 
 
-<script id="rmp-search-save-only-v47-script">
-(function(){
-  const STORAGE_SELECTED = "rmp47_selected_manuals";
-  const STORAGE_LAST = "rmp47_last_query";
-  const STORAGE_SAVED = "rmp47_saved_rules";
 
+<script id="rmp-final-cleanup-v52-script">
+(function(){
+  const SAVE_KEYS = ["rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules","rmp45_saved_rules","savedRules","bookmarks","rmp_saved_rules"];
+  const STORAGE_SELECTED = "rmp52_selected_manuals";
   const MANUALS = [
     {id:"all", label:"All"},
     {id:"gsr", label:"G&SR"},
@@ -28194,732 +26424,436 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     {id:"ira", label:"Railways Act"},
     {id:"corr", label:"Slips"}
   ];
-
   const ORDER = {gsr:0, om:1, bwm:2, acc:3, irsem:4, irpwm:5, ira:6, corr:7};
   let selected = loadSelected();
   let indexCache = null;
+  let activeFolder = "All";
 
   function $(id){ return document.getElementById(id); }
 
   function esc(s){
     if(typeof html_esc_js === "function") return html_esc_js(s == null ? "" : String(s));
-    return String(s == null ? "" : s)
-      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
-
   function stripHtml(html){
     if(typeof stripHtmlForSearch === "function") return stripHtmlForSearch(html || "");
-    const div = document.createElement("div");
-    div.innerHTML = html || "";
+    const div=document.createElement("div");
+    div.innerHTML=html || "";
     return (div.textContent || div.innerText || "").replace(/\s+/g," ").trim();
   }
-
   function norm(s){
     if(typeof normalizeSearchText === "function") return normalizeSearchText(s || "");
     return String(s || "").toLowerCase().replace(/[‐‑–—]/g,"-").replace(/\s+/g," ").trim();
   }
-
-  function escapeRegExp(s){
-    return String(s || "").replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-  }
-
-  function readJSON(key, fallback){
-    try{
-      const val = JSON.parse(localStorage.getItem(key) || "");
-      return val == null ? fallback : val;
-    }catch(e){ return fallback; }
-  }
-
-  function writeJSON(key, val){
-    try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
-  }
+  function escapeRegExp(s){ return String(s || "").replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+  function readJSON(key,fallback){ try{ const v=JSON.parse(localStorage.getItem(key)||""); return v==null?fallback:v; }catch(e){ return fallback; } }
+  function writeJSON(key,val){ try{ localStorage.setItem(key,JSON.stringify(val)); }catch(e){} }
 
   function loadSelected(){
-    const arr = readJSON(STORAGE_SELECTED, ["all"]);
-    return Array.isArray(arr) && arr.length ? arr : ["all"];
+    const arr=readJSON(STORAGE_SELECTED,["all"]);
+    return Array.isArray(arr)&&arr.length?arr:["all"];
   }
-
-  function saveSelected(){ writeJSON(STORAGE_SELECTED, selected); }
+  function saveSelected(){ writeJSON(STORAGE_SELECTED,selected); }
   function selectedIsAll(){ return selected.includes("all") || !selected.length; }
-
   function labelFor(id){
-    const found = MANUALS.find(m => m.id === id);
-    if(found) return found.label;
-    try{
-      if(typeof SEARCH_MANUAL_LABELS !== "undefined") return SEARCH_MANUAL_LABELS[id] || String(id || "").toUpperCase();
-    }catch(e){}
-    return String(id || "").toUpperCase();
+    const m=MANUALS.find(x=>x.id===id);
+    if(m) return m.label;
+    try{ if(typeof SEARCH_MANUAL_LABELS!=="undefined") return SEARCH_MANUAL_LABELS[id] || String(id||"").toUpperCase(); }catch(e){}
+    return String(id||"").toUpperCase();
   }
-
-  function selectedLabel(){
-    if(selectedIsAll()) return "All manuals";
-    return selected.map(labelFor).join(" + ");
-  }
-
+  function selectedLabel(){ return selectedIsAll() ? "All manuals" : selected.map(labelFor).join(" + "); }
   function getIndex(){
     if(indexCache) return indexCache;
-    try{ indexCache = typeof buildSearchIndex === "function" ? (buildSearchIndex() || []) : []; }
-    catch(e){ indexCache = []; }
+    try{ indexCache = typeof buildSearchIndex==="function" ? (buildSearchIndex() || []) : []; }catch(e){ indexCache=[]; }
     return indexCache;
   }
-
-  function allowed(item){
-    return selectedIsAll() || selected.includes(item.manual);
-  }
-
-  function itemNumber(item){
-    return String(item.num || "").replace(/^(G\.?R\.?|S\.?R\.?)\s*/i,"").trim();
-  }
-
+  function allowed(item){ return selectedIsAll() || selected.includes(item.manual); }
+  function itemNumber(item){ return String(item.num || "").replace(/^(G\.?R\.?|S\.?R\.?)\s*/i,"").trim(); }
   function gsrType(item){
-    if(item.manual !== "gsr") return "";
-    const raw = (item.raw && item.raw.type ? String(item.raw.type) : "").toUpperCase().replace(/\./g,"");
-    if(raw === "GR") return "GR";
-    if(raw === "SR") return "SR";
-    const n = String(item.num || "");
-    const t = String(item.title || "");
-    if(/^S\.?R\.?/i.test(n) || /^S\.?R\.?/i.test(t) || n.includes("/")) return "SR";
+    if(item.manual!=="gsr") return "";
+    const raw=(item.raw&&item.raw.type?String(item.raw.type):"").toUpperCase().replace(/\./g,"");
+    if(raw==="GR") return "GR";
+    if(raw==="SR") return "SR";
+    const n=String(item.num||""), t=String(item.title||"");
+    if(/^S\.?R\.?/i.test(n)||/^S\.?R\.?/i.test(t)||n.includes("/")) return "SR";
     return "GR";
   }
-
   function variants(q){
-    const x = norm(q);
-    const out = new Set([q, x]);
-    const syn = {
-      "shiting":"shunting",
-      "shunt":"shunting",
-      "lineclear":"line clear",
-      "tol":"train on line",
-      "t 369":"T/369",
-      "t369":"T/369",
-      "stable":"stabling",
-      "stabeling":"stabling"
-    };
-    Object.keys(syn).forEach(k => { if(x.includes(k)) out.add(syn[k]); });
-    const f = x.match(/\bt\s*\/?\s*(\d{3})\b/);
-    if(f){ out.add("T/" + f[1]); out.add("T " + f[1]); }
+    const x=norm(q), out=new Set([q,x]);
+    const syn={shiting:"shunting",shunt:"shunting",lineclear:"line clear",tol:"train on line","t 369":"T/369",t369:"T/369",stable:"stabling",stabeling:"stabling"};
+    Object.keys(syn).forEach(k=>{ if(x.includes(k)) out.add(syn[k]); });
+    const f=x.match(/\bt\s*\/?\s*(\d{3})\b/); if(f){ out.add("T/"+f[1]); out.add("T "+f[1]); }
     return Array.from(out).filter(Boolean);
   }
-
   function fullBody(item){
-    // Full body source priority. This prevents showing only snippet when complete HTML exists.
-    if(item.type === "correction"){
-      const slip = item.raw || {};
-      const changes = Array.isArray(slip.changes) ? slip.changes : [];
-      if(changes.length){
-        return changes.map(c => '<p><b>'+esc(c.rule || c.type || "Change")+':</b> '+esc(c.text || "")+'</p>').join("");
-      }
-      return '<p>' + esc(item.bodyText || item.body || "") + '</p>';
+    if(item.type==="correction"){
+      const slip=item.raw||{}, changes=Array.isArray(slip.changes)?slip.changes:[];
+      if(changes.length) return changes.map(c=>'<p><b>'+esc(c.rule||c.type||"Change")+':</b> '+esc(c.text||"")+'</p>').join("");
+      return '<p>'+esc(item.bodyText||item.body||"")+'</p>';
     }
-
     if(item.body && String(item.body).trim()) return item.body;
     if(item.raw && item.raw.body && String(item.raw.body).trim()) return item.raw.body;
-
-    // fallback only when no HTML exists in index
-    return '<p>' + esc(item.bodyText || "") + '</p>';
+    return '<p>'+esc(item.bodyText||"")+'</p>';
   }
-
-  function score(item, q){
-    const nums = norm(itemNumber(item));
-    const title = norm(item.title || (item.raw && item.raw.title) || "");
-    const body = norm(item.bodyText || stripHtml(fullBody(item)));
-    const hay = [nums,title,body,labelFor(item.manual)].join(" ");
-    let best = 0, matched = q, kind = "";
-
-    variants(q).forEach(v => {
-      const nv = norm(v);
-      if(!nv) return;
-      if(nums === nv){
-        best = Math.max(best, 10000); matched = v; kind = "exact";
-      }else if(nums.startsWith(nv)){
-        best = Math.max(best, 8500); matched = v; kind = "number";
-      }else if(title.includes(nv)){
-        best = Math.max(best, 5000); matched = v; kind = "title";
-      }else if(body.includes(nv)){
-        best = Math.max(best, 1600); matched = v; kind = "body";
-      }else{
-        const words = nv.split(/\s+/).filter(w => w.length > 2);
-        if(words.length && words.every(w => hay.includes(w))){
-          best = Math.max(best, 900 + words.length * 75); matched = v; kind = "words";
-        }
+  function score(item,q){
+    const nums=norm(itemNumber(item));
+    const title=norm(item.title || (item.raw&&item.raw.title) || "");
+    const body=norm(item.bodyText || stripHtml(fullBody(item)));
+    const hay=[nums,title,body,labelFor(item.manual)].join(" ");
+    let best=0, matched=q, kind="";
+    variants(q).forEach(v=>{
+      const nv=norm(v); if(!nv) return;
+      if(nums===nv){ best=Math.max(best,10000); matched=v; kind="exact"; }
+      else if(nums.startsWith(nv)){ best=Math.max(best,8500); matched=v; kind="number"; }
+      else if(title.includes(nv)){ best=Math.max(best,5000); matched=v; kind="title"; }
+      else if(body.includes(nv)){ best=Math.max(best,1600); matched=v; kind="body"; }
+      else{
+        const words=nv.split(/\s+/).filter(w=>w.length>2);
+        if(words.length && words.every(w=>hay.includes(w))){ best=Math.max(best,900+words.length*75); matched=v; kind="words"; }
       }
     });
-
     return {score:best, matched, kind};
   }
-
   function sortResults(a,b){
-    const oa = ORDER[a.manual] == null ? 99 : ORDER[a.manual];
-    const ob = ORDER[b.manual] == null ? 99 : ORDER[b.manual];
-    if(oa !== ob) return oa - ob;
-    if(b.score !== a.score) return b.score - a.score;
-    return itemNumber(a).localeCompare(itemNumber(b), undefined, {numeric:true});
+    const oa=ORDER[a.manual]==null?99:ORDER[a.manual], ob=ORDER[b.manual]==null?99:ORDER[b.manual];
+    if(oa!==ob) return oa-ob;
+    if(b.score!==a.score) return b.score-a.score;
+    return itemNumber(a).localeCompare(itemNumber(b),undefined,{numeric:true});
   }
 
-  function terms(q, matched){
-    const arr = [q, matched].filter(Boolean).flatMap(x => [x].concat(String(x).split(/[\s,;:()]+/)));
-    const seen = new Set();
-    return arr.map(x => x.trim()).filter(x => x.length >= 2)
-      .sort((a,b) => b.length-a.length)
-      .filter(x => { const k=norm(x); if(seen.has(k)) return false; seen.add(k); return true; })
+  function queryTerms(q,matched){
+    const arr=[q,matched].filter(Boolean).flatMap(x=>[String(x)].concat(String(x).split(/[\s,;:()]+/)));
+    const seen=new Set();
+    return arr.map(x=>x.trim()).filter(x=>x.length>=2)
+      .sort((a,b)=>b.length-a.length)
+      .filter(x=>{ const k=norm(x); if(seen.has(k)) return false; seen.add(k); return true; })
       .slice(0,12);
   }
-
-  function highlightPlain(text, q, matched){
-    let safe = esc(text || "");
-    const ts = terms(q, matched);
-    if(!ts.length) return safe;
-    const rx = new RegExp("(" + ts.map(escapeRegExp).join("|") + ")", "gi");
-    return safe.replace(rx, '<mark class="rmp47-hit">$1</mark>');
+  function isAlphaNum(ch){ return /[A-Za-z0-9]/.test(ch||""); }
+  function highlightEscapedText(safeText, q, matched){
+    // Highlight with word-boundary preference to avoid ugly de + parting split.
+    let src=safeText;
+    const terms=queryTerms(q,matched).filter(Boolean);
+    terms.forEach(term=>{
+      const rx=new RegExp(escapeRegExp(esc(term)),"gi");
+      src=src.replace(rx,(m,offset,full)=>{
+        const before=full[offset-1] || "";
+        const after=full[offset+m.length] || "";
+        const termIsWord=/^[A-Za-z]+$/.test(m);
+        if(termIsWord && (isAlphaNum(before) || isAlphaNum(after))) return m;
+        return '<mark class="rmp52-hit">'+m+'</mark>';
+      });
+    });
+    return src;
   }
-
-  function highlightHtml(rawHtml, q, matched){
-    const ts = terms(q, matched);
-    if(!ts.length) return rawHtml || "";
-    const rx = new RegExp("(" + ts.map(escapeRegExp).join("|") + ")", "gi");
-    const template = document.createElement("template");
-    template.innerHTML = rawHtml || "";
-    const walker = document.createTreeWalker(template.content, NodeFilter.SHOW_TEXT, {
-      acceptNode: function(node){
+  function highlightPlain(text,q,matched){ return highlightEscapedText(esc(text||""),q,matched); }
+  function highlightHtml(rawHtml,q,matched){
+    const template=document.createElement("template");
+    template.innerHTML=rawHtml || "";
+    const terms=queryTerms(q,matched);
+    if(!terms.length) return template.innerHTML;
+    const walker=document.createTreeWalker(template.content,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(node){
         if(!node.nodeValue) return NodeFilter.FILTER_REJECT;
-        rx.lastIndex = 0;
-        if(!rx.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
-        rx.lastIndex = 0;
-        const p = node.parentElement;
+        const p=node.parentElement;
         if(!p || /^(SCRIPT|STYLE|TEXTAREA|INPUT|MARK|BUTTON)$/i.test(p.tagName)) return NodeFilter.FILTER_REJECT;
-        return NodeFilter.FILTER_ACCEPT;
+        return terms.some(t=>node.nodeValue.toLowerCase().includes(t.toLowerCase())) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       }
     });
-    const nodes = [];
-    while(walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach(node => {
-      const span = document.createElement("span");
-      span.innerHTML = esc(node.nodeValue).replace(rx, '<mark class="rmp47-hit">$1</mark>');
-      node.parentNode.replaceChild(span, node);
+    const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node=>{
+      const span=document.createElement("span");
+      span.innerHTML=highlightEscapedText(esc(node.nodeValue),q,matched);
+      node.parentNode.replaceChild(span,node);
     });
     return template.innerHTML;
   }
-
   function rawTitle(item){
-    const n = itemNumber(item);
-    const t = item.title || (item.raw && item.raw.title) || "Untitled reference";
-    if(item.manual === "gsr") return gsrType(item) + " " + n + (t ? " — " + t : "");
-    return (n ? n + " — " : "") + t;
+    const n=itemNumber(item), t=item.title || (item.raw&&item.raw.title) || "Untitled reference";
+    if(item.manual==="gsr") return gsrType(item)+" "+n+(t?" — "+t:"");
+    return (n?n+" — ":"")+t;
   }
-
-  function titleHtml(item, q){
-    if(item.manual !== "gsr") return highlightPlain(rawTitle(item), q, item.matchedQuery);
-    const prefix = gsrType(item) + " " + itemNumber(item);
-    const rest = rawTitle(item).replace(prefix,"");
-    return '<span class="gsr-prefix">'+esc(prefix)+'</span>' + highlightPlain(rest, q, item.matchedQuery);
+  function titleHtml(item,q){
+    if(item.manual!=="gsr") return highlightPlain(rawTitle(item),q,item.matchedQuery);
+    const prefix=gsrType(item)+" "+itemNumber(item);
+    const rest=rawTitle(item).replace(prefix,"");
+    return '<span class="gsr-prefix">'+esc(prefix)+'</span>'+highlightPlain(rest,q,item.matchedQuery);
   }
-
-  function snippet(item, q){
-    const text = String(item.bodyText || stripHtml(fullBody(item))).replace(/\s+/g," ").trim();
-    const ts = terms(q, item.matchedQuery);
-    const low = text.toLowerCase();
-    let pos = -1, term = "";
+  function snippet(item,q){
+    const text=String(item.bodyText || stripHtml(fullBody(item))).replace(/\s+/g," ").trim();
+    const ts=queryTerms(q,item.matchedQuery);
+    const low=text.toLowerCase();
+    let pos=-1, term="";
     for(const t of ts){
-      const p = low.indexOf(t.toLowerCase());
-      if(p >= 0 && (pos < 0 || p < pos)){ pos = p; term = t; }
+      const p=low.indexOf(t.toLowerCase());
+      if(p>=0 && (pos<0 || p<pos)){ pos=p; term=t; }
     }
-    if(pos < 0){
-      const s = text.slice(0,165) + (text.length > 165 ? "…" : "");
-      return highlightPlain(s, q, item.matchedQuery);
-    }
-    const start = Math.max(0, pos - 55);
-    const end = Math.min(text.length, pos + term.length + 80);
-    return highlightPlain((start>0?"…":"") + text.slice(start,end) + (end<text.length?"…":""), q, item.matchedQuery);
+    if(pos<0){ const s=text.slice(0,150)+(text.length>150?"…":""); return highlightPlain(s,q,item.matchedQuery); }
+    const start=Math.max(0,pos-50), end=Math.min(text.length,pos+term.length+75);
+    return highlightPlain((start>0?"…":"")+text.slice(start,end)+(end<text.length?"…":""),q,item.matchedQuery);
   }
 
-  function savedId(item){
-    return (item.manual || "") + "|" + (item.num || "") + "|" + (item.title || "");
+  function savedIdFromItem(item){ return (item.manual||"")+"|"+(item.num||"")+"|"+(item.title||rawTitle(item)); }
+  function inferFolder(text,manual){
+    text=String(text||"").toLowerCase();
+    if(text.includes("shunt")) return "Shunting";
+    if(text.includes("block")||text.includes("line clear")) return "Operations";
+    if(manual==="acc"||text.includes("accident")||text.includes("safety")||text.includes("secur")) return "Safety";
+    return "General";
   }
-
-  function isSaved(item){
-    const list = readJSON(STORAGE_SAVED, []);
-    return Array.isArray(list) && list.some(x => x.id === savedId(item));
+  function normalizeSaved(raw){
+    if(!raw) return null;
+    const title=raw.title||raw.name||raw.ruleTitle||"Saved rule";
+    const manual=raw.manual||raw.source||raw.book||"";
+    const num=raw.num||raw.ruleNo||raw.para||"";
+    const body=raw.body||raw.fullText||raw.text||raw.content||"";
+    return {id:String(raw.id || (manual+"|"+num+"|"+title)), title:String(title), manual:String(manual), num:String(num), body:String(body), folder:String(raw.folder||inferFolder(title+" "+body,manual)), ts:raw.ts||raw.savedAt||Date.now()};
   }
-
-  function saveRule(item, btn){
-    const list = readJSON(STORAGE_SAVED, []);
-    const arr = Array.isArray(list) ? list : [];
-    const rec = {
-      id:savedId(item),
-      manual:item.manual || "",
-      num:item.num || "",
-      title:rawTitle(item),
-      body:stripHtml(fullBody(item)).slice(0,1000),
-      ts:Date.now()
-    };
-    const next = [rec].concat(arr.filter(x => x.id !== rec.id)).slice(0,200);
-    writeJSON(STORAGE_SAVED, next);
-    btn.classList.add("saved");
-    btn.textContent = "Saved";
-  }
-
-  function renderFilter(){
-    const oldRow = document.querySelector("#search .search-filter-row-v3");
-    if(!oldRow) return;
-    let box = $("rmp46-filter");
-    if(!box){
-      box = document.createElement("div");
-      box.id = "rmp46-filter";
-      box.className = "rmp46-filter";
-      oldRow.insertAdjacentElement("afterend", box);
-    }
-
-    box.innerHTML =
-      '<div class="rmp46-filter-title"><strong>Search in</strong><span>'+esc(selectedLabel())+'</span></div>' +
-      '<div class="rmp46-chip-row">' +
-        MANUALS.map(m => '<button type="button" class="rmp46-book-chip" data-manual="'+esc(m.id)+'">'+esc(m.label)+'</button>').join("") +
-      '</div>';
-
-    box.querySelectorAll(".rmp46-book-chip").forEach(btn => {
-      const id = btn.dataset.manual;
-      btn.classList.toggle("active", selectedIsAll() ? id === "all" : selected.includes(id));
-      btn.addEventListener("click", () => {
-        if(id === "all"){
-          selected = ["all"];
-        }else{
-          selected = selected.filter(x => x !== "all");
-          if(selected.includes(id)) selected = selected.filter(x => x !== id);
-          else selected.push(id);
-          if(!selected.length) selected = ["all"];
-        }
-        saveSelected();
-        renderFilter();
-        const q = currentQuery();
-        if(q) performSearch(q);
-      });
+  function allSaved(){
+    const map=new Map();
+    SAVE_KEYS.forEach(k=>{
+      const arr=readJSON(k,[]);
+      if(Array.isArray(arr)) arr.forEach(x=>{ const n=normalizeSaved(x); if(n && n.id && !map.has(n.id)) map.set(n.id,n); });
     });
+    return Array.from(map.values()).sort((a,b)=>(b.ts||0)-(a.ts||0));
   }
-
-  function resultCard(item, q){
-    const card = document.createElement("article");
-    card.className = "rmp47-card";
-    const m = item.manual || "";
-    const gsrBadge = m === "gsr" ? '<span class="rmp47-badge gsr">'+esc(gsrType(item))+'</span>' : "";
-    card.innerHTML =
-      '<button type="button" class="rmp47-head" aria-expanded="false">' +
-        '<span class="rmp47-meta"><span class="rmp47-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsrBadge+'</span>' +
-        '<span class="rmp47-title">'+titleHtml(item,q)+'</span>' +
-        '<span class="rmp47-snippet">'+snippet(item,q)+'</span>' +
-      '</button>' +
-      '<div class="rmp47-actions">' +
-        '<button type="button" class="rmp47-show-btn">Show full rule</button>' +
-        '<button type="button" class="rmp47-save-btn">'+(isSaved(item) ? "Saved" : "Save")+'</button>' +
-      '</div>' +
-      '<div class="rmp47-full"><div class="rmp47-full-body"></div></div>';
-
-    const head = card.querySelector(".rmp47-head");
-    const showBtn = card.querySelector(".rmp47-show-btn");
-    const saveBtn = card.querySelector(".rmp47-save-btn");
-    const body = card.querySelector(".rmp47-full-body");
-
-    if(isSaved(item)) saveBtn.classList.add("saved");
-
-    function toggle(){
-      const open = !card.classList.contains("open");
-      card.classList.toggle("open", open);
-      head.setAttribute("aria-expanded", open ? "true" : "false");
-      showBtn.textContent = open ? "Hide full rule" : "Show full rule";
-      if(open && !body.dataset.loaded){
-        const full = fullBody(item);
-        body.innerHTML = highlightHtml(full, q, item.matchedQuery);
-        body.dataset.loaded = "1";
-      }
-    }
-
-    head.addEventListener("click", e => { e.preventDefault(); toggle(); });
-    showBtn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); toggle(); });
-    saveBtn.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); saveRule(item, saveBtn); });
-    return card;
+  function persistSaved(list){
+    ["rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules"].forEach(k=>writeJSON(k,list));
+  }
+  function isSaved(item){
+    const id=savedIdFromItem(item);
+    return allSaved().some(x=>x.id===id);
+  }
+  function saveRule(item,btn){
+    const rec={id:savedIdFromItem(item), title:rawTitle(item), manual:item.manual||"", num:item.num||"", body:stripHtml(fullBody(item)), folder:inferFolder(rawTitle(item)+" "+stripHtml(fullBody(item)),item.manual), ts:Date.now()};
+    const next=[rec].concat(allSaved().filter(x=>x.id!==rec.id)).slice(0,250);
+    persistSaved(next);
+    if(btn){ btn.classList.add("saved"); btn.textContent="Saved"; }
+    renderSaved();
   }
 
   function currentQuery(){
-    return (($("search-screen-input") && $("search-screen-input").value) ||
-            ($("rmp27-search-input") && $("rmp27-search-input").value) ||
-            ($("global-search") && $("global-search").value) || "").trim();
+    return (($("search-screen-input")&&$("search-screen-input").value)||($("rmp27-search-input")&&$("rmp27-search-input").value)||($("global-search")&&$("global-search").value)||"").trim();
   }
-
   function syncInputs(q){
-    ["search-screen-input","rmp27-search-input","global-search"].forEach(id => {
-      const el = $(id);
-      if(el) el.value = q;
+    ["search-screen-input","rmp27-search-input","global-search"].forEach(id=>{ const el=$(id); if(el) el.value=q; });
+  }
+  function clearSearch(){
+    syncInputs("");
+    ["rmp_search_last_query_v40","rmp44_last_query","rmp45_last_query","rmp46_last_query","rmp47_last_query","rmp48_last_query"].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
+    const stats=$("search-stats"); if(stats){ stats.className=""; stats.innerHTML=""; }
+    const c=$("search-results-container");
+    if(c){ c.className="rule-list rmp52-results"; c.innerHTML='<div class="rmp52-card"><div class="rmp52-head"><span class="rmp52-title">Search ready</span><span class="rmp52-snippet">Type rule number, para number or keyword. Each result will have only Show full rule and Save.</span></div></div>'; }
+  }
+  function renderFilter(){
+    const oldRow=document.querySelector("#search .search-filter-row-v3");
+    if(!oldRow) return;
+    let box=$("rmp52-filter");
+    if(!box){ box=document.createElement("div"); box.id="rmp52-filter"; box.className="rmp46-filter"; oldRow.insertAdjacentElement("afterend",box); }
+    box.innerHTML='<div class="rmp46-filter-title"><strong>Search in</strong><span>'+esc(selectedIsAll()?"All manuals":selected.map(labelFor).join(" + "))+'</span></div><div class="rmp46-chip-row">'+
+      MANUALS.map(m=>'<button type="button" class="rmp46-book-chip '+((selectedIsAll()?m.id==="all":selected.includes(m.id))?"active":"")+'" data-manual="'+esc(m.id)+'">'+esc(m.label)+'</button>').join("")+'</div>';
+    box.querySelectorAll(".rmp46-book-chip").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        const id=btn.dataset.manual;
+        if(id==="all") selected=["all"];
+        else{
+          selected=selected.filter(x=>x!=="all");
+          if(selected.includes(id)) selected=selected.filter(x=>x!==id); else selected.push(id);
+          if(!selected.length) selected=["all"];
+        }
+        saveSelected(); renderFilter(); const q=currentQuery(); if(q) performSearch(q);
+      });
     });
   }
-
-  function ready(){
-    return '<div class="rmp47-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear as simple rule cards.</p></div>';
-  }
-
-  function empty(q){
-    return '<div class="rmp47-empty"><strong>No result found</strong><p>No result found for <b>“'+esc(q)+'”</b>. Try shorter keyword or select All.</p></div>';
-  }
-
-  window.performSearch = function(term){
-    const q = String(term || "").trim();
-    syncInputs(q);
-    renderFilter();
-
-    const container = $("search-results-container");
-    const stats = $("search-stats");
-    if(!container) return;
-
-    container.className = "rule-list rmp47-results";
-    container.innerHTML = "";
-
-    if(!q){
-      if(stats){ stats.className = ""; stats.innerHTML = ""; }
-      container.innerHTML = ready();
-      return;
+  function cardFor(item,q){
+    const card=document.createElement("article");
+    card.className="rmp52-card";
+    const m=item.manual||"";
+    const gsr=m==="gsr"?'<span class="rmp52-badge gsr">'+esc(gsrType(item))+'</span>':"";
+    card.innerHTML='<button type="button" class="rmp52-head" aria-expanded="false">'+
+      '<span class="rmp52-meta"><span class="rmp52-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsr+'</span>'+
+      '<span class="rmp52-title">'+titleHtml(item,q)+'</span>'+
+      '<span class="rmp52-snippet">'+snippet(item,q)+'</span></button>'+
+      '<div class="rmp52-actions"><button type="button" class="rmp52-show-btn">Show full rule</button><button type="button" class="rmp52-save-btn '+(isSaved(item)?"saved":"")+'">'+(isSaved(item)?"Saved":"Save")+'</button></div>'+
+      '<div class="rmp52-full"><div class="rmp52-full-body"></div></div>';
+    const head=card.querySelector(".rmp52-head"), show=card.querySelector(".rmp52-show-btn"), save=card.querySelector(".rmp52-save-btn"), body=card.querySelector(".rmp52-full-body");
+    function toggle(){
+      const open=!card.classList.contains("open");
+      card.classList.toggle("open",open);
+      head.setAttribute("aria-expanded",open?"true":"false");
+      show.textContent=open?"Hide full rule":"Show full rule";
+      if(open && !body.dataset.loaded){ body.innerHTML=highlightHtml(fullBody(item),q,item.matchedQuery); body.dataset.loaded="1"; }
     }
-
-    try{ localStorage.setItem(STORAGE_LAST, JSON.stringify(q)); }catch(e){}
-
-    const results = [];
-    getIndex().forEach(item => {
+    head.addEventListener("click",e=>{e.preventDefault();toggle();});
+    show.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();toggle();});
+    save.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveRule(item,save);});
+    return card;
+  }
+  window.performSearch=function(term){
+    const q=String(term||"").trim(); syncInputs(q); renderFilter();
+    const container=$("search-results-container"), stats=$("search-stats"); if(!container) return;
+    container.className="rule-list rmp52-results"; container.innerHTML="";
+    if(!q){ clearSearch(); return; }
+    const results=[];
+    getIndex().forEach(item=>{
       if(!allowed(item)) return;
-      const s = score(item,q);
-      if(s.score > 0){
-        results.push(Object.assign({}, item, {score:s.score, matchedQuery:s.matched, matchKind:s.kind}));
-      }
+      const s=score(item,q);
+      if(s.score>0) results.push(Object.assign({},item,{score:s.score,matchedQuery:s.matched,matchKind:s.kind}));
     });
     results.sort(sortResults);
-
-    if(stats){
-      stats.className = "rmp47-stats";
-      stats.innerHTML = '<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedLabel());
-    }
-
-    if(!results.length){
-      container.innerHTML = empty(q);
-      return;
-    }
-
-    const frag = document.createDocumentFragment();
-    // One card per rule/search result, flat and simple. Limit for mobile performance.
-    results.slice(0,120).forEach(item => frag.appendChild(resultCard(item,q)));
+    if(stats){ stats.className="rmp52-stats"; stats.innerHTML='<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedIsAll()?"All manuals":selected.map(labelFor).join(" + ")); }
+    if(!results.length){ container.innerHTML='<div class="rmp52-card"><div class="rmp52-head"><span class="rmp52-title">No result found</span><span class="rmp52-snippet">Try shorter keyword or select All manuals.</span></div></div>'; return; }
+    const frag=document.createDocumentFragment();
+    results.slice(0,120).forEach(item=>frag.appendChild(cardFor(item,q)));
     container.appendChild(frag);
-    container.scrollIntoView({behavior:"smooth", block:"start"});
+    container.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+  window.triggerSearchFromScreen=function(){ performSearch(currentQuery()); };
+  window.triggerSearch=function(){
+    const q=currentQuery(); syncInputs(q);
+    if(location.hash!=="#search"){ location.hash="#search"; setTimeout(()=>performSearch(q),150); setTimeout(()=>performSearch(q),480); }
+    else performSearch(q);
   };
 
-  window.triggerSearchFromScreen = function(){ performSearch(currentQuery()); };
-
-  window.triggerSearch = function(){
-    const q = currentQuery();
-    syncInputs(q);
-    if(location.hash !== "#search"){
-      location.hash = "#search";
-      setTimeout(() => performSearch(q), 150);
-      setTimeout(() => performSearch(q), 480);
-    }else{
-      performSearch(q);
-    }
-  };
-
-  function bind(){
-    renderFilter();
-
-    // Remove any old v45 panels and version chip from DOM.
-    document.querySelectorAll(".rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel").forEach(el => el.remove());
-
-    const screen = $("search-screen-input");
-    const home = $("rmp27-search-input");
-    const legacy = $("global-search");
-    const homeBtn = document.querySelector(".rmp27-go");
-    const searchBtn = document.querySelector("#search .search-btn-v3");
-    const oldHomeBtn = document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
-
-    [screen, home, legacy].forEach(input => {
-      if(!input || input.dataset.rmp47Bound === "1") return;
-      input.dataset.rmp47Bound = "1";
-      input.addEventListener("keydown", e => {
-        if(e.key === "Enter"){ e.preventDefault(); input === screen ? triggerSearchFromScreen() : triggerSearch(); }
-      });
-      input.addEventListener("input", () => {
-        syncInputs(input.value);
-        if(input === screen && input.value.trim().length >= 2){
-          clearTimeout(input._rmp47Timer);
-          input._rmp47Timer = setTimeout(() => performSearch(input.value.trim()), 350);
-        }
-      });
-    });
-
-    [homeBtn, searchBtn, oldHomeBtn].filter(Boolean).forEach(btn => {
-      if(btn.dataset.rmp47Bound === "1") return;
-      btn.dataset.rmp47Bound = "1";
-      btn.addEventListener("click", e => {
-        e.preventDefault();
-        e.stopPropagation();
-        btn === searchBtn ? triggerSearchFromScreen() : triggerSearch();
-      }, true);
-    });
-
-    const tip = document.querySelector("#search .search-tip-v3");
-    if(tip){
-      tip.innerHTML = 'Search exact rule number or keyword. Each rule has only two options: <b>Show full rule</b> and <b>Save</b>.';
-    }
-  }
-
-  function restore(){
-    if(location.hash !== "#search") return;
-    let q = currentQuery();
-    if(!q){
-      try{ q = JSON.parse(localStorage.getItem(STORAGE_LAST) || '""') || ""; }catch(e){}
-    }
-    syncInputs(q);
-    performSearch(q);
-  }
-
-  function run(){
-    bind();
-    restore();
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", run);
-  }else{
-    run();
-  }
-  window.addEventListener("hashchange", () => setTimeout(run,100));
-  setTimeout(run,500);
-  setTimeout(run,1300);
-})();
-</script>
-
-
-<script id="rmp-home-clean-search-reset-v48-script">
-(function(){
-  const LAST_KEYS=['rmp_search_last_query_v40','rmp44_last_query','rmp45_last_query','rmp46_last_query','rmp47_last_query','rmp48_last_query'];
-  function $(id){return document.getElementById(id);}
-  function clearOldLastSearch(){LAST_KEYS.forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});}
-  function setVal(id,v){const el=$(id); if(el) el.value=v;}
-  function clearSearchUI(){
-    clearOldLastSearch();
-    setVal('search-screen-input',''); setVal('rmp27-search-input',''); setVal('global-search','');
-    const stats=$('search-stats'); if(stats){stats.className=''; stats.innerHTML='';}
-    const c=$('search-results-container');
-    if(c){c.className='rule-list rmp47-results'; c.innerHTML='<div class="rmp47-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear as simple rule cards.</p></div>';}
-  }
-  function hideExactHomePhrases(){
-    const phrases=new Set(['Rules and Subsidiary Instructions','Rules & Subsidiary Instructions','Operating reference','Block working reference','Accident and safety reference','Legal sections reference','Signal engineering reference','Permanent way reference','Your Tools','Start faster']);
-    document.querySelectorAll('#home *').forEach(el=>{const t=(el.textContent||'').trim(); if(phrases.has(t)) el.style.display='none';});
-  }
-  function updateHomeInfoCard(){
-    document.querySelectorAll('#home .home-card,#home [class*="card"],#home button,#home a').forEach(el=>{
-      const t=(el.textContent||'');
-      if(/App Info\s*&\s*Updates/i.test(t) || /App Info/i.test(t) && /manuals|offline|summary|updates/i.test(t)){
-        const title=el.querySelector('.hc-title,.home-card-title,[class*="title"]');
-        const sub=el.querySelector('.hc-subtitle,.home-card-subtitle,[class*="subtitle"],[class*="sub"]');
-        if(title) title.textContent='App Info';
-        if(sub) sub.textContent='Manuals, data source and app details';
-      }
+  function renderSaved(){
+    const screen=$("bookmarks") || $("saved"); if(!screen) return;
+    const active=(location.hash==="#bookmarks" || location.hash==="#saved");
+    document.body.classList.toggle("rmp52-saved-active",active);
+    let panel=$("rmp52-saved-panel");
+    if(!panel){ panel=document.createElement("section"); panel.id="rmp52-saved-panel"; const hero=screen.querySelector(".rmp32-page-hero"); if(hero) hero.insertAdjacentElement("afterend",panel); else screen.appendChild(panel); }
+    const saved=allSaved();
+    const folders=["All","General","Operations","Safety","Shunting"];
+    if(!folders.includes(activeFolder)) activeFolder="All";
+    const shown=activeFolder==="All"?saved:saved.filter(x=>x.folder===activeFolder);
+    panel.innerHTML='<div class="rmp52-saved-head"><div><h3>Saved Rules</h3><span>Rules saved from Search will appear here.</span></div><div class="rmp52-count">'+saved.length+' saved</div></div>'+
+      '<div class="rmp52-folder-row">'+folders.map(f=>'<button type="button" class="rmp52-folder-btn '+(f===activeFolder?"active":"")+'" data-folder="'+esc(f)+'">'+esc(f)+' '+(f==="All"?saved.length:saved.filter(x=>x.folder===f).length)+'</button>').join("")+'</div>'+
+      '<div class="rmp52-saved-list">'+(shown.length?shown.map(savedCardHtml).join(""):'<div class="rmp52-empty"><div><strong>No saved rules yet.</strong><p>Save any rule from Search to see it here.</p></div></div>')+'</div>';
+    panel.querySelectorAll(".rmp52-folder-btn").forEach(b=>b.addEventListener("click",()=>{activeFolder=b.dataset.folder||"All";renderSaved();}));
+    panel.querySelectorAll(".rmp52-saved-card").forEach(card=>{
+      const id=card.dataset.id, show=card.querySelector(".rmp52-saved-show"), rem=card.querySelector(".rmp52-saved-remove");
+      show.addEventListener("click",()=>{ const open=!card.classList.contains("open"); card.classList.toggle("open",open); show.textContent=open?"Hide full rule":"Show full rule"; });
+      rem.addEventListener("click",()=>{ persistSaved(allSaved().filter(x=>x.id!==id)); renderSaved(); });
     });
   }
-  function hideCheckUpdates(){
-    document.querySelectorAll('button,a,div,span').forEach(el=>{
-      const txt=(el.textContent||'').trim();
-      const attr=((el.id||'')+' '+(el.className||'')+' '+(el.getAttribute('data-action')||'')+' '+(el.getAttribute('data-tab')||'')).toLowerCase();
-      if(/check\s+(for\s+)?updates?/i.test(txt) || attr.includes('check-update') || attr.includes('checkupdates')) el.style.display='none';
-    });
-  }
-  function improveAppInfo(){
-    const screen=$('info')||$('app-info')||$('about')||$('updates');
-    if(screen && !screen.querySelector('.rmp48-info-summary')){
-      const s=document.createElement('section');
-      s.className='info-card rmp48-info-summary';
-      s.innerHTML='<h3>Rule Master Pro</h3><p>A clean railway rule reference app for reading manuals, searching rules, saving useful references and revising important operating content.</p><p><b>Included manuals:</b> G&SR, Operating Manual, Block Working Manual, Accident Manual, Railways Act, IRSEM and IRPWM.</p>';
-      const hero=screen.querySelector('.rmp32-page-hero');
-      if(hero) hero.insertAdjacentElement('afterend',s); else screen.insertBefore(s,screen.firstChild);
-    }
-  }
-  function removeCachedPanels(){document.querySelectorAll('.rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel').forEach(el=>el.remove());}
-  function run(){
-    removeCachedPanels(); hideExactHomePhrases(); updateHomeInfoCard(); hideCheckUpdates(); improveAppInfo(); clearOldLastSearch();
-    if(location.hash==='#search') clearSearchUI(); else {setVal('search-screen-input','');setVal('rmp27-search-input','');setVal('global-search','');}
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
-  window.addEventListener('hashchange',()=>setTimeout(run,100));
-  setTimeout(run,500); setTimeout(run,1400);
-})();
-</script>
-
-
-
-<script id="rmp-final-ui-corrected-v50-script">
-(function(){
-  function setText(el, text){ if(el) el.textContent = text; }
-
-  function cleanHomeManuals(){
-    const phrases = [
-      "Rules and Subsidiary Instructions","Rules & Subsidiary Instructions","Rules and subsidiary instructions",
-      "Operating reference","Block working reference","Accident and safety reference",
-      "Legal sections reference","Signal engineering reference","Permanent way reference"
-    ];
-    document.querySelectorAll("#home *").forEach(el => {
-      const txt = (el.textContent || "").trim();
-      if(phrases.includes(txt)) el.style.display = "none";
-    });
+  function savedCardHtml(x){
+    return '<article class="rmp52-saved-card" data-id="'+esc(x.id)+'"><div class="rmp52-saved-card-head"><span class="rmp52-meta"><span class="rmp52-badge '+esc(x.manual)+'">'+esc(labelFor(x.manual))+'</span><span class="rmp52-badge">'+esc(x.folder)+'</span></span><span class="rmp52-saved-title">'+esc(x.title)+'</span></div><div class="rmp52-saved-actions"><button type="button" class="rmp52-saved-show">Show full rule</button><button type="button" class="rmp52-saved-remove">Remove</button></div><div class="rmp52-saved-full">'+esc(x.body || "Full text was not stored with this saved item. Save it again from Search.")+'</div></article>';
   }
 
-  function updateHomeTiles(){
-    const quick = document.querySelectorAll(".rmp27-quick button, .rmp21-quick-card");
-    const labels = [
-      ["Smart Search","Find rules by number or keyword"],
-      ["Manual Library","Open full railway manuals"],
-      ["Saved Rules","Your important references"],
-      ["Correction Slips","Latest rule changes"]
-    ];
-    quick.forEach((btn,i)=>{
-      const strong = btn.querySelector("strong");
-      const small = btn.querySelector("small");
-      if(labels[i]){ setText(strong, labels[i][0]); setText(small, labels[i][1]); }
-    });
+  function renderAppInfo(){
+    const about=$("about"); if(!about) return;
+    document.body.classList.add("rmp52-appinfo");
+    about.innerHTML='<div id="rmp52-about">'+
+      '<section class="rmp52-about-card primary"><h2>Rule Master Pro</h2><p>Simple railway rule reference app for manuals, search, saved rules and exam revision.</p></section>'+
+      '<section class="rmp52-about-grid"><div class="rmp52-about-tile"><b>7</b><span>Manuals</span></div><div class="rmp52-about-tile"><b>3,188</b><span>Searchable topics</span></div><div class="rmp52-about-tile"><b>3,800</b><span>MCQ questions</span></div><div class="rmp52-about-tile"><b>Offline</b><span>After loading</span></div></section>'+
+      '<section class="rmp52-about-card"><h3>Manuals Included</h3><div class="rmp52-manual-list">'+
+        '<div class="rmp52-manual-row"><i>📘</i><div><strong>G&SR Reprinted Edition 2025</strong><span>General and Subsidiary Rules</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>📗</i><div><strong>Operating Manual 2016</strong><span>Operating procedures and references</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>📙</i><div><strong>Block Working Manual NR</strong><span>Block working rules and instructions</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>📕</i><div><strong>Accident Manual NR 2008</strong><span>Accident and safety reference</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>📒</i><div><strong>IRSEM Version 3.0</strong><span>Signal engineering manual</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>📔</i><div><strong>IRPWM 2024</strong><span>Permanent way manual</span></div></div>'+
+        '<div class="rmp52-manual-row"><i>⚖️</i><div><strong>Railways Act 1989</strong><span>Legal sections and provisions</span></div></div>'+
+      '</div></section>'+
+      '<section class="rmp52-about-card"><h3>Disclaimer</h3><p>This app is for reference and study. For operational decisions, always refer to official railway publications, correction slips and competent authority instructions.</p></section>'+
+      '</div>';
+    const sub=$("header-subtitle"); if(sub) sub.textContent="App Info";
+  }
 
-    // Home App Info card text + route.
-    document.querySelectorAll("#home .home-card, #home button, #home a").forEach(el => {
-      const txt = (el.textContent || "").replace(/\s+/g," ").trim();
+  function cleanHome(){
+    const phrases=new Set(["Rules and Subsidiary Instructions","Rules & Subsidiary Instructions","Rules and subsidiary instructions","Operating reference","Block working reference","Accident and safety reference","Legal sections reference","Signal engineering reference","Permanent way reference","Your Tools","Start faster"]);
+    document.querySelectorAll("#home *").forEach(el=>{ const t=(el.textContent||"").trim(); if(phrases.has(t)) el.style.display="none"; });
+    const quick=document.querySelectorAll(".rmp27-quick button, .rmp21-quick-card");
+    const labels=[["Smart Search","Find rules by number or keyword"],["Manual Library","Open full railway manuals"],["Saved Rules","Your important references"],["Correction Slips","Latest rule changes"]];
+    quick.forEach((b,i)=>{ const st=b.querySelector("strong"), sm=b.querySelector("small"); if(labels[i]){ if(st) st.textContent=labels[i][0]; if(sm) sm.textContent=labels[i][1]; } });
+    document.querySelectorAll("#home .home-card,#home button,#home a").forEach(el=>{
+      const txt=(el.textContent||"").replace(/\s+/g," ").trim();
       if(/App Info|Version, manuals|offline status|QA summary/i.test(txt)){
-        const title = el.querySelector(".hc-title,.home-card-title,strong,[class*='title']");
-        const sub = el.querySelector(".hc-subtitle,.home-card-subtitle,small,[class*='subtitle'],[class*='sub']");
-        setText(title, "App Info");
-        setText(sub, "Manuals, source and app details");
-        el.onclick = function(ev){
-          ev.preventDefault(); ev.stopPropagation();
-          if(typeof navigateTo === "function") navigateTo("about");
-          else window.location.hash = "#about";
-          setTimeout(renderAppInfo, 50);
-        };
+        const title=el.querySelector(".hc-title,.home-card-title,strong,[class*='title']");
+        const sub=el.querySelector(".hc-subtitle,.home-card-subtitle,small,[class*='subtitle'],[class*='sub']");
+        if(title) title.textContent="App Info";
+        if(sub) sub.textContent="Manuals, source and app details";
+        el.onclick=function(e){e.preventDefault();e.stopPropagation(); if(typeof navigateTo==="function") navigateTo("about"); else location.hash="#about"; setTimeout(renderAppInfo,50);};
       }
     });
   }
 
   function fixBottomNav(){
-    const mappings = [
-      ["nav-qa", "✦", "AI"],
-      ["nav-corrections", "▣", "Slips"]
-    ];
-    mappings.forEach(([id, icon, label]) => {
-      const item = document.getElementById(id);
-      if(!item) return;
-      let iconEl = item.querySelector(".rmp28-nav-icon,.rmp50-nav-icon,i,svg");
-      if(!iconEl){
-        iconEl = document.createElement("span");
-        item.insertBefore(iconEl, item.firstChild);
-      }
-      if(iconEl.tagName.toLowerCase() === "svg"){
-        const span = document.createElement("span");
-        span.className = "rmp50-nav-icon";
-        span.textContent = icon;
-        iconEl.replaceWith(span);
-        iconEl = span;
-      }else{
-        iconEl.className = "rmp50-nav-icon";
-        iconEl.textContent = icon;
-      }
-      let labelEl = Array.from(item.querySelectorAll("span")).find(s => !s.classList.contains("rmp28-nav-icon") && !s.classList.contains("rmp50-nav-icon"));
-      if(!labelEl){
-        labelEl = document.createElement("span");
-        item.appendChild(labelEl);
-      }
-      labelEl.textContent = label;
+    const setup=(id,icon,label)=>{
+      const item=$(id); if(!item) return;
+      item.innerHTML='<span class="rmp52-nav-icon">'+icon+'</span><span class="rmp52-nav-label">'+label+'</span>';
+    };
+    setup("nav-qa","✦","AI");
+    setup("nav-corrections","▣","Slips");
+  }
+
+  function hideCheckUpdates(){
+    document.querySelectorAll("button,a,div,span").forEach(el=>{
+      const txt=(el.textContent||"").trim();
+      const attr=((el.id||"")+" "+(el.className||"")+" "+(el.getAttribute("onclick")||"")+" "+(el.getAttribute("data-action")||"")+" "+(el.getAttribute("data-tab")||"")).toLowerCase();
+      if(/check\s+(for\s+)?updates?/i.test(txt)||attr.includes("rmpcheckforupdates")||attr.includes("check-update")||attr.includes("checkupdates")) el.style.display="none";
     });
   }
 
-  function removeDuplicateAppInfo(){
-    document.querySelectorAll(".rmp48-info-summary").forEach(el => el.remove());
-    document.querySelectorAll("#about .rmp49-info-hero, #about .rmp49-info-card, #about .rmp49-info-grid").forEach(el => el.remove());
-    document.querySelectorAll("button,a,div,span").forEach(el => {
-      const txt = (el.textContent || "").trim();
-      const attr = ((el.id||"")+" "+(el.className||"")+" "+(el.getAttribute("onclick")||"")+" "+(el.getAttribute("data-action")||"")+" "+(el.getAttribute("data-tab")||"")).toLowerCase();
-      if(/check\s+for\s+updates?/i.test(txt) || /check\s+updates?/i.test(txt) || attr.includes("rmpcheckforupdates") || attr.includes("check-update") || attr.includes("checkupdates")){
-        el.style.display = "none";
-      }
+  function bindSearch(){
+    renderFilter();
+    const screen=$("search-screen-input"), home=$("rmp27-search-input"), legacy=$("global-search");
+    [screen,home,legacy].forEach(input=>{
+      if(!input || input.dataset.rmp52Bound==="1") return;
+      input.dataset.rmp52Bound="1";
+      input.addEventListener("keydown",e=>{ if(e.key==="Enter"){e.preventDefault(); input===screen?triggerSearchFromScreen():triggerSearch();} });
+      input.addEventListener("input",()=>{ syncInputs(input.value); if(input===screen && input.value.trim().length>=2){ clearTimeout(input._rmp52Timer); input._rmp52Timer=setTimeout(()=>performSearch(input.value.trim()),350); } if(input===screen && !input.value.trim()) clearSearch(); });
     });
+    const homeBtn=document.querySelector(".rmp27-go"), searchBtn=document.querySelector("#search .search-btn-v3"), oldHome=document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
+    [homeBtn,searchBtn,oldHome].filter(Boolean).forEach(btn=>{
+      if(btn.dataset.rmp52Bound==="1") return;
+      btn.dataset.rmp52Bound="1";
+      btn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation(); btn===searchBtn?triggerSearchFromScreen():triggerSearch();},true);
+    });
+    const tip=document.querySelector("#search .search-tip-v3");
+    if(tip) tip.innerHTML='Search exact rule number or keyword. Each result has only <b>Show full rule</b> and <b>Save</b>.';
   }
 
-  function renderAppInfo(){
-    const about = document.getElementById("about");
-    const container = document.getElementById("rmp-about-container");
-    if(!about || !container) return;
-    document.body.classList.add("rmp50-appinfo");
-    removeDuplicateAppInfo();
-
-    container.innerHTML =
-      '<section class="rmp50-info-hero">' +
-        '<small>Railway Reference App</small>' +
-        '<h2>Rule Master Pro</h2>' +
-        '<p>Clean mobile reference for railway manuals, searchable rules, correction slips, bookmarks and exam revision.</p>' +
-      '</section>' +
-      '<section class="rmp50-info-grid">' +
-        '<div class="rmp50-info-tile"><b>7</b><span>Manuals and references</span></div>' +
-        '<div class="rmp50-info-tile"><b>3,188</b><span>Searchable topics</span></div>' +
-        '<div class="rmp50-info-tile"><b>3,800</b><span>MCQ practice questions</span></div>' +
-        '<div class="rmp50-info-tile"><b>Offline</b><span>Works after loading</span></div>' +
-      '</section>' +
-      '<section class="rmp50-info-card">' +
-        '<h3>Manuals Included</h3>' +
-        '<div class="rmp50-manual-list">' +
-          '<div class="rmp50-manual-row"><i>📘</i><div><strong>G&SR Reprinted Edition 2025</strong><span>General and Subsidiary Rules</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>📗</i><div><strong>Operating Manual 2016</strong><span>Operating procedures and references</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>📙</i><div><strong>Block Working Manual NR</strong><span>Block working rules and instructions</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>📕</i><div><strong>Accident Manual NR 2008</strong><span>Accident and safety reference</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>📒</i><div><strong>IRSEM Version 3.0</strong><span>Signal engineering manual</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>📔</i><div><strong>IRPWM 2024</strong><span>Permanent way manual</span></div></div>' +
-          '<div class="rmp50-manual-row"><i>⚖️</i><div><strong>Railways Act 1989</strong><span>Legal sections and provisions</span></div></div>' +
-        '</div>' +
-      '</section>' +
-      '<section class="rmp50-info-card">' +
-        '<h3>Disclaimer</h3>' +
-        '<p>This app is for reference and study. For operational decisions, always refer to official railway publications, current correction slips and competent authority instructions.</p>' +
-      '</section>';
-
-    const sub = document.getElementById("header-subtitle");
-    if(sub) sub.textContent = "App Info";
-  }
-
-  function routeFix(){
-    const route = (window.location.hash || "#home").replace("#","").split("/")[0];
-    document.body.classList.toggle("rmp50-appinfo", route === "about" || route === "info" || route === "app-info" || route === "updates");
-    if(route === "about" || route === "info" || route === "app-info" || route === "updates"){
-      if(route !== "about") window.location.hash = "#about";
-      setTimeout(renderAppInfo, 30);
-    }else{
-      removeDuplicateAppInfo();
+  function routeCleanup(){
+    const route=(location.hash||"#home").replace("#","").split("/")[0];
+    document.body.classList.toggle("rmp52-appinfo", route==="about" || route==="info" || route==="app-info" || route==="updates");
+    document.body.classList.toggle("rmp52-saved-active", route==="bookmarks" || route==="saved");
+    if(route==="about" || route==="info" || route==="app-info" || route==="updates"){
+      if(route!=="about") location.hash="#about";
+      setTimeout(renderAppInfo,20);
     }
+    if(route==="search") clearSearch();
+    renderSaved();
   }
 
   function wrapRouter(){
-    if(window.__rmp50RouteWrapped) return;
-    window.__rmp50RouteWrapped = true;
-    const oldNavigate = window.navigateTo;
-    if(typeof oldNavigate === "function"){
-      window.navigateTo = function(screen){
-        if(screen === "info" || screen === "app-info" || screen === "updates") screen = "about";
-        const res = oldNavigate.apply(this, arguments.length ? [screen] : arguments);
-        setTimeout(run, 40);
+    if(window.__rmp52Wrapped) return;
+    window.__rmp52Wrapped=true;
+    const oldNav=window.navigateTo;
+    if(typeof oldNav==="function"){
+      window.navigateTo=function(screen){
+        if(screen==="info" || screen==="app-info" || screen==="updates") screen="about";
+        const res=oldNav.apply(this,[screen]);
+        setTimeout(run,60);
         return res;
       };
     }
-    window.renderRmpAbout = renderAppInfo;
+    window.renderRmpAbout=renderAppInfo;
   }
 
   function run(){
     wrapRouter();
-    cleanHomeManuals();
-    updateHomeTiles();
+    hideCheckUpdates();
+    cleanHome();
     fixBottomNav();
-    routeFix();
+    bindSearch();
+    routeCleanup();
   }
 
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",run);
   else run();
-  window.addEventListener("hashchange", () => setTimeout(run, 70));
-  setTimeout(run, 300);
-  setTimeout(run, 900);
-  setTimeout(run, 1800);
+  window.addEventListener("hashchange",()=>setTimeout(run,90));
+  setTimeout(run,400);
+  setTimeout(run,1200);
 })();
 </script>
 
