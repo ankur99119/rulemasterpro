@@ -15354,140 +15354,65 @@ mark.rmp44-hit{
 
   <!-- Search logic upgrade v44 generated on 2026-08-09. -->
 
-<!-- Final app upgrade v45 generated on 2026-08-09. -->
-
-<!-- Clean search and about layout v46 generated on 2026-08-09. -->
-
-<!-- Search save only v47 generated on 2026-08-09. -->
-
-<!-- Home cleanup and search reset v48 generated on 2026-08-09. -->
-
-<!-- Home app info UI fix v49 generated on 2026-08-09. -->
-
-<!-- Final UI corrected v50 generated on 2026-08-09. -->
-
-<!-- Saved rules sync fix v51 generated on 2026-08-09. -->
-
-<style id="rmp-final-cleanup-v52">
+<style id="rmp-stable-restored-v54">
 /* =========================================================
-   Rule Master Pro — v52 Final Cleanup
-   Fixes pending from review:
-   - App Info simplified and no duplicate/low-contrast hero
-   - Bottom AI/Slips icon/label duplication fixed
-   - Search cards compact + only Show full rule / Save
-   - Highlight avoids ugly split inside words where possible
-   - Saved rules render properly and old export/instruction UI hidden
-   - Home manual title clipping fixed
+   Rule Master Pro — v54 Stable Restored
+   Base rollback + controlled fixes only.
+   No replacement of original Home manual section.
    ========================================================= */
 
 :root{
-  --rmp52-navy:#092957;
-  --rmp52-orange:#EA580C;
-  --rmp52-green:#16A34A;
-  --rmp52-blue:#1559B7;
-  --rmp52-teal:#0891B2;
-  --rmp52-purple:#7C3AED;
-  --rmp52-border:#E2E8F0;
-  --rmp52-text:#0F172A;
-  --rmp52-muted:#64748B;
-  --rmp52-bg:#F8FAFC;
-  --rmp52-hit:#FFF4A8;
+  --rmp54-navy:#092957;
+  --rmp54-orange:#EA580C;
+  --rmp54-green:#16A34A;
+  --rmp54-blue:#1559B7;
+  --rmp54-teal:#0891B2;
+  --rmp54-purple:#7C3AED;
+  --rmp54-border:#E2E8F0;
+  --rmp54-text:#0F172A;
+  --rmp54-muted:#64748B;
+  --rmp54-bg:#F8FAFC;
+  --rmp54-hit:#FFF4A8;
 }
 
-/* ---------- HOME MANUAL CARDS: no clipped first letters ---------- */
-@media(max-width:760px){
-  #home .manuals-grid{
-    gap:12px !important;
-  }
-
-  #home .manual-tile,
-  #home .manual-card,
-  #home .book-card,
-  #home [class*="manual"][class*="tile"],
-  #home [class*="manual"][class*="card"]{
-    box-sizing:border-box !important;
-    width:100% !important;
-    overflow:visible !important;
-    border-radius:26px !important;
-    padding:17px 56px 17px 76px !important;
-    min-height:102px !important;
-    position:relative !important;
-    display:flex !important;
-    flex-direction:column !important;
-    justify-content:center !important;
-    text-align:left !important;
-    transform:none !important;
-    margin-left:0 !important;
-  }
-
-  #home .manual-tile::before,
-  #home .manual-card::before,
-  #home .book-card::before{
-    left:18px !important;
-    top:50% !important;
-    transform:translateY(-50%) !important;
-  }
-
-  #home .manual-tile-name,
-  #home .manual-title,
-  #home .book-title,
-  #home [class*="manual"][class*="name"],
-  #home [class*="manual"][class*="title"]{
-    display:block !important;
-    width:100% !important;
-    max-width:100% !important;
-    margin:0 0 8px !important;
-    padding:0 !important;
-    transform:none !important;
-    text-indent:0 !important;
-    white-space:normal !important;
-    overflow:visible !important;
-    color:#0F172A !important;
-    font-size:18px !important;
-    line-height:1.18 !important;
-    font-weight:1000 !important;
-    letter-spacing:-.025em !important;
-  }
-
-  #home .manual-tile-sub,
-  #home .manual-subtitle,
-  #home .manual-desc,
-  #home .book-subtitle,
-  #home .book-desc{
-    display:none !important;
-  }
-
-  #home .manual-tile-meta,
-  #home .manual-meta,
-  #home .book-meta{
-    display:block !important;
-    color:#475569 !important;
-    font-size:12px !important;
-    line-height:1.35 !important;
-    font-weight:800 !important;
-    white-space:normal !important;
-  }
-
-  /* Better but stable home tiles */
-  .rmp27-quick button{
-    min-height:120px !important;
-    border-radius:25px !important;
-    padding:15px !important;
-    box-shadow:0 8px 20px rgba(15,23,42,.065) !important;
-  }
-
-  .rmp27-quick strong{
-    font-size:16px !important;
-    line-height:1.15 !important;
-  }
-
-  .rmp27-quick small{
-    font-size:11.8px !important;
-    line-height:1.35 !important;
-  }
+/* -------------------- HOME: keep original manual cards, only clean text safely -------------------- */
+#home .manual-tile-sub,
+#home .manual-subtitle,
+#home .manual-desc,
+#home .manual-description,
+#home .book-subtitle,
+#home .book-desc,
+#home .rmp-manual-sub,
+#home .rmp-book-sub{
+  display:none !important;
 }
 
-/* ---------- 2.8% RING CENTERING ---------- */
+/* Do NOT transform home manual layout. Only protect against clipping. */
+#home .manual-tile,
+#home .manual-card,
+#home .book-card{
+  overflow:visible !important;
+}
+
+#home .manual-tile-name,
+#home .manual-title,
+#home .book-title,
+#home .rmp-manual-title,
+#home .rmp-book-title{
+  overflow:visible !important;
+  white-space:normal !important;
+  text-overflow:clip !important;
+  text-indent:0 !important;
+  transform:none !important;
+}
+
+/* Remove weak section label "Your Tools" but do not remove cards. */
+#home .rmp27-section-title,
+#home .rmp21-section-head{
+  display:none !important;
+}
+
+/* Keep 2.8 ring centered, without disturbing surrounding card. */
 .rmp27-ring,
 .rmp21-progress-ring,
 .rmp20-progress-ring{
@@ -15522,10 +15447,9 @@ mark.rmp44-hit{
   color:#0F172A !important;
   font-size:12px !important;
   font-weight:1000 !important;
-  letter-spacing:-.02em !important;
 }
 
-/* ---------- BOTTOM NAV FINAL CLEANUP ---------- */
+/* -------------------- BOTTOM NAV: stable icon + one label -------------------- */
 .bottom-nav{
   display:grid !important;
   grid-template-columns:repeat(6,minmax(0,1fr)) !important;
@@ -15545,7 +15469,7 @@ mark.rmp44-hit{
   line-height:1 !important;
 }
 
-.bottom-nav .nav-item .rmp52-nav-icon,
+.bottom-nav .nav-item .rmp54-nav-icon,
 .bottom-nav .nav-item i,
 .bottom-nav .nav-item svg,
 .bottom-nav .nav-item .rmp28-nav-icon{
@@ -15559,12 +15483,11 @@ mark.rmp44-hit{
   margin:0 auto !important;
   font-size:20px !important;
   line-height:1 !important;
-  font-weight:900 !important;
   transform:none !important;
 }
 
-.bottom-nav .nav-item span.rmp52-nav-label,
-.bottom-nav .nav-item > span:not(.rmp52-nav-icon):not(.rmp28-nav-icon){
+.bottom-nav .nav-item .rmp54-nav-label,
+.bottom-nav .nav-item > span:not(.rmp54-nav-icon):not(.rmp28-nav-icon){
   display:block !important;
   width:100% !important;
   text-align:center !important;
@@ -15574,33 +15497,111 @@ mark.rmp44-hit{
   white-space:nowrap !important;
 }
 
-#nav-qa .rmp52-nav-icon{color:#0891B2 !important;}
-#nav-corrections .rmp52-nav-icon{color:#64748B !important;}
-#nav-quiz .rmp52-nav-icon, #nav-quiz i{color:#7C3AED !important;}
+#nav-qa .rmp54-nav-icon{ color:#0891B2 !important; }
+#nav-corrections .rmp54-nav-icon{ color:#64748B !important; }
+#nav-quiz i,
+#nav-quiz svg,
+#nav-quiz .rmp28-nav-icon{ color:#7C3AED !important; }
 
-#nav-qa.active,
-#nav-qa.rmp32-active{
-  background:#ECFEFF !important;
-  border-color:#A5F3FC !important;
-  color:#0F766E !important;
+/* -------------------- SEARCH: clean one filter and simple cards -------------------- */
+
+/* Hide old filter rows, old recent chips, and old voice controls/remnants. */
+#search .search-filter-row-v3,
+#search .recent-searches-row,
+#search .voice-search-note,
+#search .voice-search-btn-v10,
+#search .rmp27-mic,
+#search button[data-voice-target],
+#search button[aria-label="Voice search"],
+#home button[data-voice-target],
+#home .voice-search-btn-v10,
+#home .rmp27-mic,
+#search [data-voice-target]{
+  display:none !important;
 }
 
-#nav-quiz.active,
-#nav-quiz.rmp32-active{
-  background:#F5F3FF !important;
-  border-color:#DDD6FE !important;
-  color:#6D28D9 !important;
+/* Hide "Voice" label chips in search hero without removing whole hero. */
+#search .rmp32-page-hero button,
+#search .rmp32-page-hero .hero-tag,
+#search .rmp32-page-hero .hero-chip,
+#search .rmp32-page-hero .hero-pill{
+  text-transform:none !important;
+}
+#search .rmp32-page-hero button:nth-of-type(3),
+#search .rmp32-page-hero .hero-tag:nth-of-type(3),
+#search .rmp32-page-hero .hero-chip:nth-of-type(3),
+#search .rmp32-page-hero .hero-pill:nth-of-type(3){
+  display:none !important;
 }
 
-/* ---------- SIMPLE SEARCH RESULTS ---------- */
-#search-results-container.rmp52-results{
+#rmp54-search-filter{
+  margin-top:11px !important;
+  padding:10px !important;
+  border-radius:19px !important;
+  background:#FFFFFF !important;
+  border:1px solid #E2E8F0 !important;
+  box-shadow:0 6px 16px rgba(15,23,42,.045) !important;
+}
+
+.rmp54-filter-top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  margin-bottom:8px !important;
+}
+
+.rmp54-filter-top strong{
+  color:#0F172A !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+}
+
+.rmp54-filter-top span{
+  color:#64748B !important;
+  font-size:10.4px !important;
+  line-height:1.2 !important;
+  font-weight:750 !important;
+  text-align:right !important;
+}
+
+.rmp54-filter-chips{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:7px !important;
+}
+
+.rmp54-filter-chip{
+  min-height:32px !important;
+  border-radius:999px !important;
+  border:1px solid #E2E8F0 !important;
+  background:#F8FAFC !important;
+  color:#475569 !important;
+  padding:0 10px !important;
+  font-size:10.5px !important;
+  font-weight:900 !important;
+}
+
+.rmp54-filter-chip.active{
+  background:#092957 !important;
+  border-color:#092957 !important;
+  color:#FFFFFF !important;
+}
+
+.rmp54-filter-chip[data-manual="gsr"].active{
+  background:#EA580C !important;
+  border-color:#EA580C !important;
+}
+
+#search-results-container.rmp54-results{
   display:flex !important;
   flex-direction:column !important;
   gap:9px !important;
   padding-bottom:14px !important;
 }
 
-#search-stats.rmp52-stats{
+#search-stats.rmp54-stats{
   margin:0 0 9px !important;
   padding:9px 11px !important;
   border-radius:17px !important;
@@ -15613,12 +15614,12 @@ mark.rmp44-hit{
   font-weight:750 !important;
 }
 
-#search-stats.rmp52-stats b{
+#search-stats.rmp54-stats b{
   color:#0F172A !important;
   font-weight:1000 !important;
 }
 
-.rmp52-card{
+.rmp54-card{
   border-radius:18px !important;
   background:#FFFFFF !important;
   border:1px solid #E2E8F0 !important;
@@ -15626,7 +15627,7 @@ mark.rmp44-hit{
   overflow:hidden !important;
 }
 
-.rmp52-head{
+.rmp54-head{
   width:100% !important;
   border:0 !important;
   background:#FFFFFF !important;
@@ -15635,14 +15636,14 @@ mark.rmp44-hit{
   padding:12px 12px 10px !important;
 }
 
-.rmp52-meta{
+.rmp54-meta{
   display:flex !important;
   flex-wrap:wrap !important;
   gap:5px !important;
   margin-bottom:7px !important;
 }
 
-.rmp52-badge{
+.rmp54-badge{
   min-height:20px !important;
   border-radius:999px !important;
   padding:0 7px !important;
@@ -15655,28 +15656,28 @@ mark.rmp44-hit{
   font-weight:1000 !important;
 }
 
-.rmp52-badge.gsr{
+.rmp54-badge.gsr{
   background:#FFF7ED !important;
   border-color:#FED7AA !important;
   color:#C2410C !important;
 }
-.rmp52-badge.om{
+.rmp54-badge.om{
   background:#ECFDF5 !important;
   border-color:#BBF7D0 !important;
   color:#047857 !important;
 }
-.rmp52-badge.bwm{
+.rmp54-badge.bwm{
   background:#EFF6FF !important;
   border-color:#BFDBFE !important;
   color:#1559B7 !important;
 }
-.rmp52-badge.acc{
+.rmp54-badge.acc{
   background:#FEF2F2 !important;
   border-color:#FECACA !important;
   color:#B91C1C !important;
 }
 
-.rmp52-title{
+.rmp54-title{
   display:block !important;
   color:#0F172A !important;
   font-size:13.8px !important;
@@ -15685,12 +15686,12 @@ mark.rmp44-hit{
   letter-spacing:-.012em !important;
 }
 
-.rmp52-title .gsr-prefix{
+.rmp54-title .gsr-prefix{
   color:#C2410C !important;
   font-weight:1000 !important;
 }
 
-.rmp52-snippet{
+.rmp54-snippet{
   display:block !important;
   margin-top:7px !important;
   color:#334155 !important;
@@ -15699,57 +15700,57 @@ mark.rmp44-hit{
   font-weight:650 !important;
 }
 
-.rmp52-actions{
+.rmp54-actions{
   display:grid !important;
   grid-template-columns:1fr 1fr !important;
   gap:8px !important;
   padding:0 12px 12px !important;
 }
 
-.rmp52-show-btn,
-.rmp52-save-btn{
-  min-height:37px !important;
-  border-radius:15px !important;
+.rmp54-show-btn,
+.rmp54-save-btn{
+  min-height:36px !important;
+  border-radius:14px !important;
   font-size:11.3px !important;
   font-weight:1000 !important;
 }
 
-.rmp52-show-btn{
+.rmp54-show-btn{
   background:#FFF7ED !important;
   border:1px solid #FED7AA !important;
   color:#C2410C !important;
 }
 
-.rmp52-save-btn{
+.rmp54-save-btn{
   background:#F8FAFC !important;
   border:1px solid #E2E8F0 !important;
   color:#092957 !important;
 }
 
-.rmp52-save-btn.saved{
+.rmp54-save-btn.saved{
   background:#ECFDF5 !important;
   border-color:#BBF7D0 !important;
   color:#047857 !important;
 }
 
-.rmp52-card.open .rmp52-show-btn{
+.rmp54-card.open .rmp54-show-btn{
   background:#092957 !important;
   border-color:#092957 !important;
   color:#FFFFFF !important;
 }
 
-.rmp52-full{
+.rmp54-full{
   display:none !important;
   border-top:1px solid #E2E8F0 !important;
   background:#FFFFFF !important;
   padding:13px 12px 14px !important;
 }
 
-.rmp52-card.open .rmp52-full{
+.rmp54-card.open .rmp54-full{
   display:block !important;
 }
 
-.rmp52-full-body{
+.rmp54-full-body{
   color:#1F2937 !important;
   font-size:12.3px !important;
   line-height:1.68 !important;
@@ -15757,12 +15758,12 @@ mark.rmp44-hit{
   overflow-wrap:anywhere !important;
 }
 
-.rmp52-full-body p,
-.rmp52-full-body div{
+.rmp54-full-body p,
+.rmp54-full-body div{
   margin:0 0 10px !important;
 }
 
-.rmp52-full-body table{
+.rmp54-full-body table{
   width:100% !important;
   max-width:100% !important;
   display:block !important;
@@ -15771,14 +15772,14 @@ mark.rmp44-hit{
   font-size:12px !important;
 }
 
-.rmp52-full-body th,
-.rmp52-full-body td{
+.rmp54-full-body th,
+.rmp54-full-body td{
   padding:8px !important;
   border:1px solid #E2E8F0 !important;
 }
 
-.rmp52-hit,
-mark.rmp52-hit{
+.rmp54-hit,
+mark.rmp54-hit{
   background:#FFF4A8 !important;
   color:#111827 !important;
   border-radius:4px !important;
@@ -15787,8 +15788,8 @@ mark.rmp52-hit{
   font-weight:950 !important;
 }
 
-/* ---------- SAVED TAB CLEAN ---------- */
-#rmp52-saved-panel{
+/* -------------------- SAVED: clean renderer, hide old export only under Saved route -------------------- */
+#rmp54-saved-panel{
   margin:14px 16px calc(96px + env(safe-area-inset-bottom,0px));
   padding:14px;
   border-radius:24px;
@@ -15797,7 +15798,7 @@ mark.rmp52-hit{
   box-shadow:0 9px 22px rgba(15,23,42,.055);
 }
 
-.rmp52-saved-head{
+.rmp54-saved-head{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
@@ -15805,7 +15806,7 @@ mark.rmp52-hit{
   margin-bottom:12px;
 }
 
-.rmp52-saved-head h3{
+.rmp54-saved-head h3{
   margin:0;
   color:#0F172A;
   font-size:20px;
@@ -15814,7 +15815,7 @@ mark.rmp52-hit{
   letter-spacing:-.035em;
 }
 
-.rmp52-saved-head span{
+.rmp54-saved-head span{
   display:block;
   margin-top:5px;
   color:#64748B;
@@ -15823,7 +15824,7 @@ mark.rmp52-hit{
   font-weight:720;
 }
 
-.rmp52-count{
+.rmp54-count{
   min-height:30px;
   border-radius:999px;
   padding:0 10px;
@@ -15836,14 +15837,14 @@ mark.rmp52-hit{
   font-weight:1000;
 }
 
-.rmp52-folder-row{
+.rmp54-folder-row{
   display:flex;
   gap:7px;
   overflow-x:auto;
   padding-bottom:10px;
 }
 
-.rmp52-folder-btn{
+.rmp54-folder-btn{
   flex:0 0 auto;
   min-height:34px;
   border-radius:999px;
@@ -15855,19 +15856,19 @@ mark.rmp52-hit{
   font-weight:950;
 }
 
-.rmp52-folder-btn.active{
+.rmp54-folder-btn.active{
   background:#092957;
   border-color:#092957;
   color:#FFFFFF;
 }
 
-.rmp52-saved-list{
+.rmp54-saved-list{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
 
-.rmp52-empty{
+.rmp54-empty{
   min-height:165px;
   border-radius:21px;
   background:linear-gradient(135deg,#F8FAFC,#FFFFFF);
@@ -15878,7 +15879,7 @@ mark.rmp52-hit{
   text-align:center;
 }
 
-.rmp52-empty strong{
+.rmp54-empty strong{
   display:block;
   color:#0F172A;
   font-size:17px;
@@ -15886,7 +15887,7 @@ mark.rmp52-hit{
   margin-bottom:6px;
 }
 
-.rmp52-empty p{
+.rmp54-empty p{
   margin:0 auto;
   max-width:90%;
   color:#64748B;
@@ -15895,7 +15896,7 @@ mark.rmp52-hit{
   font-weight:720;
 }
 
-.rmp52-saved-card{
+.rmp54-saved-card{
   border-radius:18px;
   background:#FFFFFF;
   border:1px solid #E2E8F0;
@@ -15903,11 +15904,11 @@ mark.rmp52-hit{
   overflow:hidden;
 }
 
-.rmp52-saved-card-head{
+.rmp54-saved-card-head{
   padding:12px;
 }
 
-.rmp52-saved-title{
+.rmp54-saved-title{
   display:block;
   color:#0F172A;
   font-size:13.8px;
@@ -15915,34 +15916,34 @@ mark.rmp52-hit{
   font-weight:1000;
 }
 
-.rmp52-saved-actions{
+.rmp54-saved-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
   padding:0 12px 12px;
 }
 
-.rmp52-saved-show,
-.rmp52-saved-remove{
+.rmp54-saved-show,
+.rmp54-saved-remove{
   min-height:36px;
   border-radius:14px;
   font-size:11.3px;
   font-weight:1000;
 }
 
-.rmp52-saved-show{
+.rmp54-saved-show{
   border:1px solid #FED7AA;
   background:#FFF7ED;
   color:#C2410C;
 }
 
-.rmp52-saved-remove{
+.rmp54-saved-remove{
   border:1px solid #E2E8F0;
   background:#F8FAFC;
   color:#475569;
 }
 
-.rmp52-saved-full{
+.rmp54-saved-full{
   display:none;
   border-top:1px solid #E2E8F0;
   padding:13px 12px;
@@ -15951,114 +15952,108 @@ mark.rmp52-hit{
   line-height:1.65;
 }
 
-.rmp52-saved-card.open .rmp52-saved-full{
+.rmp54-saved-card.open .rmp54-saved-full{
   display:block;
 }
 
-body.rmp52-saved-active #bookmarks > *:not(.rmp32-page-hero):not(#rmp52-saved-panel),
-body.rmp52-saved-active #bookmarks .export-saved,
-body.rmp52-saved-active #bookmarks [class*="export" i]{
+body.rmp54-saved-active #bookmarks > *:not(.rmp32-page-hero):not(#rmp54-saved-panel),
+body.rmp54-saved-active #bookmarks .export-saved,
+body.rmp54-saved-active #bookmarks [class*="export" i]{
   display:none !important;
 }
 
-/* ---------- APP INFO CLEAN AND SIMPLE ---------- */
-body.rmp52-appinfo #about{
+/* -------------------- APP INFO: one compact page -------------------- */
+body.rmp54-appinfo #about{
   background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
 }
 
-body.rmp52-appinfo #back-bar,
-body.rmp52-appinfo .back-bar,
-body.rmp52-appinfo .breadcrumb-bar{
+body.rmp54-appinfo #back-bar,
+body.rmp54-appinfo .back-bar,
+body.rmp54-appinfo .breadcrumb-bar{
   display:none !important;
 }
 
-#rmp52-about{
-  padding:18px 16px calc(104px + env(safe-area-inset-bottom,0px));
+#rmp54-about{
+  padding:16px 16px calc(104px + env(safe-area-inset-bottom,0px));
   display:grid;
   gap:12px;
 }
 
-.rmp52-about-card{
-  border-radius:23px;
-  padding:16px;
+.rmp54-about-card{
+  border-radius:22px;
+  padding:15px;
   background:#FFFFFF;
   border:1px solid #E2E8F0;
-  box-shadow:0 8px 20px rgba(15,23,42,.055);
+  box-shadow:0 7px 18px rgba(15,23,42,.052);
   text-align:center;
 }
 
-.rmp52-about-card.primary{
-  background:linear-gradient(135deg,#FFFFFF,#F8FAFC);
-}
-
-.rmp52-about-card h2,
-.rmp52-about-card h3{
+.rmp54-about-card h2,
+.rmp54-about-card h3{
   margin:0 0 8px;
   color:#092957;
-  font-size:21px;
+  font-size:20px;
   line-height:1.12;
   font-weight:1000;
   letter-spacing:-.035em;
 }
 
-.rmp52-about-card h3{
-  font-size:17px;
-}
+.rmp54-about-card h3{ font-size:17px; }
 
-.rmp52-about-card p{
+.rmp54-about-card p{
   margin:0 auto;
   max-width:94%;
   color:#475569;
-  font-size:12.4px;
-  line-height:1.55;
+  font-size:12.3px;
+  line-height:1.52;
   font-weight:700;
 }
 
-.rmp52-about-grid{
+.rmp54-about-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:9px;
 }
 
-.rmp52-about-tile{
-  min-height:80px;
-  border-radius:19px;
-  padding:13px;
+.rmp54-about-tile{
+  min-height:76px;
+  border-radius:18px;
+  padding:12px;
   background:#FFFFFF;
   border:1px solid #E2E8F0;
+  box-shadow:0 6px 16px rgba(15,23,42,.04);
   text-align:center;
-  box-shadow:0 6px 16px rgba(15,23,42,.045);
 }
 
-.rmp52-about-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF);}
-.rmp52-about-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF);}
-.rmp52-about-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF);}
-.rmp52-about-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF);}
+.rmp54-about-tile:nth-child(1){background:linear-gradient(135deg,#FFF7ED,#FFFFFF);}
+.rmp54-about-tile:nth-child(2){background:linear-gradient(135deg,#EFF6FF,#FFFFFF);}
+.rmp54-about-tile:nth-child(3){background:linear-gradient(135deg,#ECFDF5,#FFFFFF);}
+.rmp54-about-tile:nth-child(4){background:linear-gradient(135deg,#F5F3FF,#FFFFFF);}
 
-.rmp52-about-tile b{
+.rmp54-about-tile b{
   display:block;
   color:#0F172A;
-  font-size:19px;
+  font-size:18px;
   line-height:1.1;
   font-weight:1000;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
-.rmp52-about-tile span{
+.rmp54-about-tile span{
   display:block;
   color:#64748B;
-  font-size:11px;
-  line-height:1.35;
+  font-size:10.8px;
+  line-height:1.32;
   font-weight:720;
 }
 
-.rmp52-manual-list{
+.rmp54-manual-list{
   display:grid;
   gap:8px;
   margin-top:10px;
 }
 
-.rmp52-manual-row{
+.rmp54-about-row{
   display:flex;
   align-items:center;
   gap:10px;
@@ -16069,7 +16064,7 @@ body.rmp52-appinfo .breadcrumb-bar{
   text-align:left;
 }
 
-.rmp52-manual-row i{
+.rmp54-about-row i{
   width:34px;
   height:34px;
   border-radius:14px;
@@ -16081,7 +16076,7 @@ body.rmp52-appinfo .breadcrumb-bar{
   flex:0 0 auto;
 }
 
-.rmp52-manual-row strong{
+.rmp54-about-row strong{
   display:block;
   color:#0F172A;
   font-size:12.4px;
@@ -16089,7 +16084,7 @@ body.rmp52-appinfo .breadcrumb-bar{
   font-weight:1000;
 }
 
-.rmp52-manual-row span{
+.rmp54-about-row span{
   display:block;
   color:#64748B;
   font-size:10.5px;
@@ -16097,7 +16092,7 @@ body.rmp52-appinfo .breadcrumb-bar{
   font-weight:700;
 }
 
-/* hide update checks everywhere */
+/* Check update hidden everywhere */
 button[onclick*="rmpCheckForUpdates"],
 button[id*="check"][id*="update" i],
 button[class*="check"][class*="update" i],
@@ -16121,7 +16116,7 @@ a[class*="check"][class*="update" i],
 }
 </style>
 
-  <!-- Final cleanup v52 generated on 2026-08-09. -->
+  <!-- Stable restored v54 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -16507,8 +16502,8 @@ a[class*="check"][class*="update" i],
           <div class="home-card" onclick="window.location.hash='#about'">
             <div class="home-card-icon">ℹ️</div>
             <div class="hc-text">
-              <div class="hc-title">App Info</div>
-              <div class="hc-subtitle">Manuals, data source and app details</div>
+              <div class="hc-title">App Info & Updates</div>
+              <div class="hc-subtitle">Version, manuals, offline status and QA summary</div>
             </div>
             <i class="fas fa-chevron-right" style="color:var(--text-muted);opacity:0.4"></i>
           </div>
@@ -26406,25 +26401,23 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
 
 
-
-
-
-<script id="rmp-final-cleanup-v52-script">
+<script id="rmp-stable-restored-v54-script">
 (function(){
-  const SAVE_KEYS = ["rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules","rmp45_saved_rules","savedRules","bookmarks","rmp_saved_rules"];
-  const STORAGE_SELECTED = "rmp52_selected_manuals";
+  const SAVE_KEYS = ["rmp54_saved_rules","rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules","rmp45_saved_rules","savedRules","bookmarks","rmp_saved_rules"];
+  const STORAGE_SELECTED = "rmp54_selected_manuals";
   const MANUALS = [
     {id:"all", label:"All"},
     {id:"gsr", label:"G&SR"},
-    {id:"om", label:"Operating Manual"},
-    {id:"bwm", label:"Block Working Manual"},
-    {id:"acc", label:"Accident Manual"},
+    {id:"om", label:"OM"},
+    {id:"bwm", label:"BWM"},
+    {id:"acc", label:"Accident"},
     {id:"irsem", label:"IRSEM"},
     {id:"irpwm", label:"P. Way"},
-    {id:"ira", label:"Railways Act"},
+    {id:"ira", label:"Act"},
     {id:"corr", label:"Slips"}
   ];
   const ORDER = {gsr:0, om:1, bwm:2, acc:3, irsem:4, irpwm:5, ira:6, corr:7};
+
   let selected = loadSelected();
   let indexCache = null;
   let activeFolder = "All";
@@ -26437,8 +26430,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
   function stripHtml(html){
     if(typeof stripHtmlForSearch === "function") return stripHtmlForSearch(html || "");
-    const div=document.createElement("div");
-    div.innerHTML=html || "";
+    const div = document.createElement("div");
+    div.innerHTML = html || "";
     return (div.textContent || div.innerText || "").replace(/\s+/g," ").trim();
   }
   function norm(s){
@@ -26462,31 +26455,34 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     return String(id||"").toUpperCase();
   }
   function selectedLabel(){ return selectedIsAll() ? "All manuals" : selected.map(labelFor).join(" + "); }
+
   function getIndex(){
     if(indexCache) return indexCache;
-    try{ indexCache = typeof buildSearchIndex==="function" ? (buildSearchIndex() || []) : []; }catch(e){ indexCache=[]; }
+    try{ indexCache = typeof buildSearchIndex === "function" ? (buildSearchIndex() || []) : []; }
+    catch(e){ indexCache = []; }
     return indexCache;
   }
   function allowed(item){ return selectedIsAll() || selected.includes(item.manual); }
   function itemNumber(item){ return String(item.num || "").replace(/^(G\.?R\.?|S\.?R\.?)\s*/i,"").trim(); }
   function gsrType(item){
-    if(item.manual!=="gsr") return "";
+    if(item.manual !== "gsr") return "";
     const raw=(item.raw&&item.raw.type?String(item.raw.type):"").toUpperCase().replace(/\./g,"");
     if(raw==="GR") return "GR";
     if(raw==="SR") return "SR";
     const n=String(item.num||""), t=String(item.title||"");
-    if(/^S\.?R\.?/i.test(n)||/^S\.?R\.?/i.test(t)||n.includes("/")) return "SR";
+    if(/^S\.?R\.?/i.test(n) || /^S\.?R\.?/i.test(t) || n.includes("/")) return "SR";
     return "GR";
   }
   function variants(q){
     const x=norm(q), out=new Set([q,x]);
     const syn={shiting:"shunting",shunt:"shunting",lineclear:"line clear",tol:"train on line","t 369":"T/369",t369:"T/369",stable:"stabling",stabeling:"stabling"};
     Object.keys(syn).forEach(k=>{ if(x.includes(k)) out.add(syn[k]); });
-    const f=x.match(/\bt\s*\/?\s*(\d{3})\b/); if(f){ out.add("T/"+f[1]); out.add("T "+f[1]); }
+    const f=x.match(/\bt\s*\/?\s*(\d{3})\b/);
+    if(f){ out.add("T/"+f[1]); out.add("T "+f[1]); }
     return Array.from(out).filter(Boolean);
   }
   function fullBody(item){
-    if(item.type==="correction"){
+    if(item.type === "correction"){
       const slip=item.raw||{}, changes=Array.isArray(slip.changes)?slip.changes:[];
       if(changes.length) return changes.map(c=>'<p><b>'+esc(c.rule||c.type||"Change")+':</b> '+esc(c.text||"")+'</p>').join("");
       return '<p>'+esc(item.bodyText||item.body||"")+'</p>';
@@ -26530,8 +26526,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       .slice(0,12);
   }
   function isAlphaNum(ch){ return /[A-Za-z0-9]/.test(ch||""); }
-  function highlightEscapedText(safeText, q, matched){
-    // Highlight with word-boundary preference to avoid ugly de + parting split.
+  function highlightEscapedText(safeText,q,matched){
     let src=safeText;
     const terms=queryTerms(q,matched).filter(Boolean);
     terms.forEach(term=>{
@@ -26539,9 +26534,9 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       src=src.replace(rx,(m,offset,full)=>{
         const before=full[offset-1] || "";
         const after=full[offset+m.length] || "";
-        const termIsWord=/^[A-Za-z]+$/.test(m);
-        if(termIsWord && (isAlphaNum(before) || isAlphaNum(after))) return m;
-        return '<mark class="rmp52-hit">'+m+'</mark>';
+        const wordOnly=/^[A-Za-z]+$/.test(m);
+        if(wordOnly && (isAlphaNum(before) || isAlphaNum(after))) return m;
+        return '<mark class="rmp54-hit">'+m+'</mark>';
       });
     });
     return src;
@@ -26618,7 +26613,7 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     return Array.from(map.values()).sort((a,b)=>(b.ts||0)-(a.ts||0));
   }
   function persistSaved(list){
-    ["rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules"].forEach(k=>writeJSON(k,list));
+    ["rmp54_saved_rules","rmp52_saved_rules","rmp51_saved_rules","rmp48_saved_rules","rmp47_saved_rules"].forEach(k=>writeJSON(k,list));
   }
   function isSaved(item){
     const id=savedIdFromItem(item);
@@ -26643,16 +26638,22 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     ["rmp_search_last_query_v40","rmp44_last_query","rmp45_last_query","rmp46_last_query","rmp47_last_query","rmp48_last_query"].forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});
     const stats=$("search-stats"); if(stats){ stats.className=""; stats.innerHTML=""; }
     const c=$("search-results-container");
-    if(c){ c.className="rule-list rmp52-results"; c.innerHTML='<div class="rmp52-card"><div class="rmp52-head"><span class="rmp52-title">Search ready</span><span class="rmp52-snippet">Type rule number, para number or keyword. Each result will have only Show full rule and Save.</span></div></div>'; }
+    if(c){ c.className="rule-list rmp54-results"; c.innerHTML='<div class="rmp54-card"><div class="rmp54-head"><span class="rmp54-title">Search ready</span><span class="rmp54-snippet">Type rule number, para number or keyword. Each result will have only Show full rule and Save.</span></div></div>'; }
   }
   function renderFilter(){
+    const panel=document.querySelector("#search .search-panel-v3");
     const oldRow=document.querySelector("#search .search-filter-row-v3");
-    if(!oldRow) return;
-    let box=$("rmp52-filter");
-    if(!box){ box=document.createElement("div"); box.id="rmp52-filter"; box.className="rmp46-filter"; oldRow.insertAdjacentElement("afterend",box); }
-    box.innerHTML='<div class="rmp46-filter-title"><strong>Search in</strong><span>'+esc(selectedIsAll()?"All manuals":selected.map(labelFor).join(" + "))+'</span></div><div class="rmp46-chip-row">'+
-      MANUALS.map(m=>'<button type="button" class="rmp46-book-chip '+((selectedIsAll()?m.id==="all":selected.includes(m.id))?"active":"")+'" data-manual="'+esc(m.id)+'">'+esc(m.label)+'</button>').join("")+'</div>';
-    box.querySelectorAll(".rmp46-book-chip").forEach(btn=>{
+    if(!panel) return;
+    let box=$("rmp54-search-filter");
+    if(!box){
+      box=document.createElement("div");
+      box.id="rmp54-search-filter";
+      if(oldRow) oldRow.insertAdjacentElement("afterend", box);
+      else panel.appendChild(box);
+    }
+    box.innerHTML='<div class="rmp54-filter-top"><strong>Search in</strong><span>'+esc(selectedLabel())+'</span></div><div class="rmp54-filter-chips">'+
+      MANUALS.map(m=>'<button type="button" class="rmp54-filter-chip '+((selectedIsAll()?m.id==="all":selected.includes(m.id))?"active":"")+'" data-manual="'+esc(m.id)+'">'+esc(m.label)+'</button>').join("")+'</div>';
+    box.querySelectorAll(".rmp54-filter-chip").forEach(btn=>{
       btn.addEventListener("click",()=>{
         const id=btn.dataset.manual;
         if(id==="all") selected=["all"];
@@ -26667,16 +26668,16 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
   function cardFor(item,q){
     const card=document.createElement("article");
-    card.className="rmp52-card";
+    card.className="rmp54-card";
     const m=item.manual||"";
-    const gsr=m==="gsr"?'<span class="rmp52-badge gsr">'+esc(gsrType(item))+'</span>':"";
-    card.innerHTML='<button type="button" class="rmp52-head" aria-expanded="false">'+
-      '<span class="rmp52-meta"><span class="rmp52-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsr+'</span>'+
-      '<span class="rmp52-title">'+titleHtml(item,q)+'</span>'+
-      '<span class="rmp52-snippet">'+snippet(item,q)+'</span></button>'+
-      '<div class="rmp52-actions"><button type="button" class="rmp52-show-btn">Show full rule</button><button type="button" class="rmp52-save-btn '+(isSaved(item)?"saved":"")+'">'+(isSaved(item)?"Saved":"Save")+'</button></div>'+
-      '<div class="rmp52-full"><div class="rmp52-full-body"></div></div>';
-    const head=card.querySelector(".rmp52-head"), show=card.querySelector(".rmp52-show-btn"), save=card.querySelector(".rmp52-save-btn"), body=card.querySelector(".rmp52-full-body");
+    const gsr=m==="gsr"?'<span class="rmp54-badge gsr">'+esc(gsrType(item))+'</span>':"";
+    card.innerHTML='<button type="button" class="rmp54-head" aria-expanded="false">'+
+      '<span class="rmp54-meta"><span class="rmp54-badge '+esc(m)+'">'+esc(labelFor(m))+'</span>'+gsr+'</span>'+
+      '<span class="rmp54-title">'+titleHtml(item,q)+'</span>'+
+      '<span class="rmp54-snippet">'+snippet(item,q)+'</span></button>'+
+      '<div class="rmp54-actions"><button type="button" class="rmp54-show-btn">Show full rule</button><button type="button" class="rmp54-save-btn '+(isSaved(item)?"saved":"")+'">'+(isSaved(item)?"Saved":"Save")+'</button></div>'+
+      '<div class="rmp54-full"><div class="rmp54-full-body"></div></div>';
+    const head=card.querySelector(".rmp54-head"), show=card.querySelector(".rmp54-show-btn"), save=card.querySelector(".rmp54-save-btn"), body=card.querySelector(".rmp54-full-body");
     function toggle(){
       const open=!card.classList.contains("open");
       card.classList.toggle("open",open);
@@ -26689,10 +26690,15 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
     save.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();saveRule(item,save);});
     return card;
   }
+
   window.performSearch=function(term){
-    const q=String(term||"").trim(); syncInputs(q); renderFilter();
-    const container=$("search-results-container"), stats=$("search-stats"); if(!container) return;
-    container.className="rule-list rmp52-results"; container.innerHTML="";
+    const q=String(term||"").trim();
+    syncInputs(q);
+    renderFilter();
+    const container=$("search-results-container"), stats=$("search-stats");
+    if(!container) return;
+    container.className="rule-list rmp54-results";
+    container.innerHTML="";
     if(!q){ clearSearch(); return; }
     const results=[];
     getIndex().forEach(item=>{
@@ -26701,8 +26707,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
       if(s.score>0) results.push(Object.assign({},item,{score:s.score,matchedQuery:s.matched,matchKind:s.kind}));
     });
     results.sort(sortResults);
-    if(stats){ stats.className="rmp52-stats"; stats.innerHTML='<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedIsAll()?"All manuals":selected.map(labelFor).join(" + ")); }
-    if(!results.length){ container.innerHTML='<div class="rmp52-card"><div class="rmp52-head"><span class="rmp52-title">No result found</span><span class="rmp52-snippet">Try shorter keyword or select All manuals.</span></div></div>'; return; }
+    if(stats){ stats.className="rmp54-stats"; stats.innerHTML='<b>'+results.length+'</b> results for <b>“'+esc(q)+'”</b> in '+esc(selectedLabel()); }
+    if(!results.length){ container.innerHTML='<div class="rmp54-card"><div class="rmp54-head"><span class="rmp54-title">No result found</span><span class="rmp54-snippet">Try shorter keyword or select All manuals.</span></div></div>'; return; }
     const frag=document.createDocumentFragment();
     results.slice(0,120).forEach(item=>frag.appendChild(cardFor(item,q)));
     container.appendChild(frag);
@@ -26710,103 +26716,131 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   };
   window.triggerSearchFromScreen=function(){ performSearch(currentQuery()); };
   window.triggerSearch=function(){
-    const q=currentQuery(); syncInputs(q);
+    const q=currentQuery();
+    syncInputs(q);
     if(location.hash!=="#search"){ location.hash="#search"; setTimeout(()=>performSearch(q),150); setTimeout(()=>performSearch(q),480); }
     else performSearch(q);
   };
 
   function renderSaved(){
-    const screen=$("bookmarks") || $("saved"); if(!screen) return;
-    const active=(location.hash==="#bookmarks" || location.hash==="#saved");
-    document.body.classList.toggle("rmp52-saved-active",active);
-    let panel=$("rmp52-saved-panel");
-    if(!panel){ panel=document.createElement("section"); panel.id="rmp52-saved-panel"; const hero=screen.querySelector(".rmp32-page-hero"); if(hero) hero.insertAdjacentElement("afterend",panel); else screen.appendChild(panel); }
+    const screen=$("bookmarks") || $("saved");
+    if(!screen) return;
+    const route=(location.hash||"").replace("#","").split("/")[0];
+    const active=(route==="bookmarks" || route==="saved");
+    document.body.classList.toggle("rmp54-saved-active",active);
+    let panel=$("rmp54-saved-panel");
+    if(!panel){
+      panel=document.createElement("section");
+      panel.id="rmp54-saved-panel";
+      const hero=screen.querySelector(".rmp32-page-hero");
+      if(hero) hero.insertAdjacentElement("afterend",panel);
+      else screen.appendChild(panel);
+    }
     const saved=allSaved();
     const folders=["All","General","Operations","Safety","Shunting"];
     if(!folders.includes(activeFolder)) activeFolder="All";
     const shown=activeFolder==="All"?saved:saved.filter(x=>x.folder===activeFolder);
-    panel.innerHTML='<div class="rmp52-saved-head"><div><h3>Saved Rules</h3><span>Rules saved from Search will appear here.</span></div><div class="rmp52-count">'+saved.length+' saved</div></div>'+
-      '<div class="rmp52-folder-row">'+folders.map(f=>'<button type="button" class="rmp52-folder-btn '+(f===activeFolder?"active":"")+'" data-folder="'+esc(f)+'">'+esc(f)+' '+(f==="All"?saved.length:saved.filter(x=>x.folder===f).length)+'</button>').join("")+'</div>'+
-      '<div class="rmp52-saved-list">'+(shown.length?shown.map(savedCardHtml).join(""):'<div class="rmp52-empty"><div><strong>No saved rules yet.</strong><p>Save any rule from Search to see it here.</p></div></div>')+'</div>';
-    panel.querySelectorAll(".rmp52-folder-btn").forEach(b=>b.addEventListener("click",()=>{activeFolder=b.dataset.folder||"All";renderSaved();}));
-    panel.querySelectorAll(".rmp52-saved-card").forEach(card=>{
-      const id=card.dataset.id, show=card.querySelector(".rmp52-saved-show"), rem=card.querySelector(".rmp52-saved-remove");
+    panel.innerHTML='<div class="rmp54-saved-head"><div><h3>Saved Rules</h3><span>Rules saved from Search will appear here.</span></div><div class="rmp54-count">'+saved.length+' saved</div></div>'+
+      '<div class="rmp54-folder-row">'+folders.map(f=>'<button type="button" class="rmp54-folder-btn '+(f===activeFolder?"active":"")+'" data-folder="'+esc(f)+'">'+esc(f)+' '+(f==="All"?saved.length:saved.filter(x=>x.folder===f).length)+'</button>').join("")+'</div>'+
+      '<div class="rmp54-saved-list">'+(shown.length?shown.map(savedCardHtml).join(""):'<div class="rmp54-empty"><div><strong>No saved rules yet.</strong><p>Save any rule from Search to see it here.</p></div></div>')+'</div>';
+    panel.querySelectorAll(".rmp54-folder-btn").forEach(b=>b.addEventListener("click",()=>{activeFolder=b.dataset.folder||"All";renderSaved();}));
+    panel.querySelectorAll(".rmp54-saved-card").forEach(card=>{
+      const id=card.dataset.id, show=card.querySelector(".rmp54-saved-show"), rem=card.querySelector(".rmp54-saved-remove");
       show.addEventListener("click",()=>{ const open=!card.classList.contains("open"); card.classList.toggle("open",open); show.textContent=open?"Hide full rule":"Show full rule"; });
       rem.addEventListener("click",()=>{ persistSaved(allSaved().filter(x=>x.id!==id)); renderSaved(); });
     });
   }
   function savedCardHtml(x){
-    return '<article class="rmp52-saved-card" data-id="'+esc(x.id)+'"><div class="rmp52-saved-card-head"><span class="rmp52-meta"><span class="rmp52-badge '+esc(x.manual)+'">'+esc(labelFor(x.manual))+'</span><span class="rmp52-badge">'+esc(x.folder)+'</span></span><span class="rmp52-saved-title">'+esc(x.title)+'</span></div><div class="rmp52-saved-actions"><button type="button" class="rmp52-saved-show">Show full rule</button><button type="button" class="rmp52-saved-remove">Remove</button></div><div class="rmp52-saved-full">'+esc(x.body || "Full text was not stored with this saved item. Save it again from Search.")+'</div></article>';
+    return '<article class="rmp54-saved-card" data-id="'+esc(x.id)+'"><div class="rmp54-saved-card-head"><span class="rmp54-meta"><span class="rmp54-badge '+esc(x.manual)+'">'+esc(labelFor(x.manual))+'</span><span class="rmp54-badge">'+esc(x.folder)+'</span></span><span class="rmp54-saved-title">'+esc(x.title)+'</span></div><div class="rmp54-saved-actions"><button type="button" class="rmp54-saved-show">Show full rule</button><button type="button" class="rmp54-saved-remove">Remove</button></div><div class="rmp54-saved-full">'+esc(x.body || "Full text was not stored with this saved item. Save it again from Search.")+'</div></article>';
   }
 
   function renderAppInfo(){
-    const about=$("about"); if(!about) return;
-    document.body.classList.add("rmp52-appinfo");
-    about.innerHTML='<div id="rmp52-about">'+
-      '<section class="rmp52-about-card primary"><h2>Rule Master Pro</h2><p>Simple railway rule reference app for manuals, search, saved rules and exam revision.</p></section>'+
-      '<section class="rmp52-about-grid"><div class="rmp52-about-tile"><b>7</b><span>Manuals</span></div><div class="rmp52-about-tile"><b>3,188</b><span>Searchable topics</span></div><div class="rmp52-about-tile"><b>3,800</b><span>MCQ questions</span></div><div class="rmp52-about-tile"><b>Offline</b><span>After loading</span></div></section>'+
-      '<section class="rmp52-about-card"><h3>Manuals Included</h3><div class="rmp52-manual-list">'+
-        '<div class="rmp52-manual-row"><i>📘</i><div><strong>G&SR Reprinted Edition 2025</strong><span>General and Subsidiary Rules</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>📗</i><div><strong>Operating Manual 2016</strong><span>Operating procedures and references</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>📙</i><div><strong>Block Working Manual NR</strong><span>Block working rules and instructions</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>📕</i><div><strong>Accident Manual NR 2008</strong><span>Accident and safety reference</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>📒</i><div><strong>IRSEM Version 3.0</strong><span>Signal engineering manual</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>📔</i><div><strong>IRPWM 2024</strong><span>Permanent way manual</span></div></div>'+
-        '<div class="rmp52-manual-row"><i>⚖️</i><div><strong>Railways Act 1989</strong><span>Legal sections and provisions</span></div></div>'+
+    const about=$("about");
+    if(!about) return;
+    document.body.classList.add("rmp54-appinfo");
+    about.innerHTML='<div id="rmp54-about">'+
+      '<section class="rmp54-about-card"><h2>Rule Master Pro</h2><p>Simple railway rule reference app for manuals, search, saved rules and exam revision.</p></section>'+
+      '<section class="rmp54-about-grid"><div class="rmp54-about-tile"><b>7</b><span>Manuals</span></div><div class="rmp54-about-tile"><b>3,188</b><span>Searchable topics</span></div><div class="rmp54-about-tile"><b>3,800</b><span>MCQ questions</span></div><div class="rmp54-about-tile"><b>Offline</b><span>After loading</span></div></section>'+
+      '<section class="rmp54-about-card"><h3>Manuals Included</h3><div class="rmp54-manual-list">'+
+        '<div class="rmp54-about-row"><i>📘</i><div><strong>G&SR Reprinted Edition 2025</strong><span>General and Subsidiary Rules</span></div></div>'+
+        '<div class="rmp54-about-row"><i>📗</i><div><strong>Operating Manual 2016</strong><span>Operating procedures and references</span></div></div>'+
+        '<div class="rmp54-about-row"><i>📙</i><div><strong>Block Working Manual NR</strong><span>Block working rules and instructions</span></div></div>'+
+        '<div class="rmp54-about-row"><i>📕</i><div><strong>Accident Manual NR 2008</strong><span>Accident and safety reference</span></div></div>'+
+        '<div class="rmp54-about-row"><i>📒</i><div><strong>IRSEM Version 3.0</strong><span>Signal engineering manual</span></div></div>'+
+        '<div class="rmp54-about-row"><i>📔</i><div><strong>IRPWM 2024</strong><span>Permanent way manual</span></div></div>'+
+        '<div class="rmp54-about-row"><i>⚖️</i><div><strong>Railways Act 1989</strong><span>Legal sections and provisions</span></div></div>'+
       '</div></section>'+
-      '<section class="rmp52-about-card"><h3>Disclaimer</h3><p>This app is for reference and study. For operational decisions, always refer to official railway publications, correction slips and competent authority instructions.</p></section>'+
+      '<section class="rmp54-about-card"><h3>Disclaimer</h3><p>This app is for reference and study. For operational decisions, always refer to official railway publications, correction slips and competent authority instructions.</p></section>'+
       '</div>';
-    const sub=$("header-subtitle"); if(sub) sub.textContent="App Info";
+    const sub=$("header-subtitle");
+    if(sub) sub.textContent="App Info";
   }
 
   function cleanHome(){
-    const phrases=new Set(["Rules and Subsidiary Instructions","Rules & Subsidiary Instructions","Rules and subsidiary instructions","Operating reference","Block working reference","Accident and safety reference","Legal sections reference","Signal engineering reference","Permanent way reference","Your Tools","Start faster"]);
-    document.querySelectorAll("#home *").forEach(el=>{ const t=(el.textContent||"").trim(); if(phrases.has(t)) el.style.display="none"; });
-    const quick=document.querySelectorAll(".rmp27-quick button, .rmp21-quick-card");
-    const labels=[["Smart Search","Find rules by number or keyword"],["Manual Library","Open full railway manuals"],["Saved Rules","Your important references"],["Correction Slips","Latest rule changes"]];
-    quick.forEach((b,i)=>{ const st=b.querySelector("strong"), sm=b.querySelector("small"); if(labels[i]){ if(st) st.textContent=labels[i][0]; if(sm) sm.textContent=labels[i][1]; } });
-    document.querySelectorAll("#home .home-card,#home button,#home a").forEach(el=>{
+    // Text-only hide exact phrases, not containers.
+    const phrases=new Set(["Rules and Subsidiary Instructions","Rules & Subsidiary Instructions","Operating reference","Block working reference","Accident and safety reference","Legal sections reference","Signal engineering reference","Permanent way reference","Your Tools","Start faster"]);
+    document.querySelectorAll("#home *").forEach(el=>{
+      const t=(el.textContent||"").trim();
+      if(phrases.has(t)) el.style.display="none";
+    });
+    // App Info home card click fix, without replacing cards.
+    document.querySelectorAll("#home button,#home a,#home .home-card").forEach(el=>{
       const txt=(el.textContent||"").replace(/\s+/g," ").trim();
       if(/App Info|Version, manuals|offline status|QA summary/i.test(txt)){
         const title=el.querySelector(".hc-title,.home-card-title,strong,[class*='title']");
         const sub=el.querySelector(".hc-subtitle,.home-card-subtitle,small,[class*='subtitle'],[class*='sub']");
         if(title) title.textContent="App Info";
         if(sub) sub.textContent="Manuals, source and app details";
-        el.onclick=function(e){e.preventDefault();e.stopPropagation(); if(typeof navigateTo==="function") navigateTo("about"); else location.hash="#about"; setTimeout(renderAppInfo,50);};
+        el.onclick=function(e){e.preventDefault();e.stopPropagation(); navigateSafe("about"); setTimeout(renderAppInfo,50);};
       }
     });
   }
 
   function fixBottomNav(){
-    const setup=(id,icon,label)=>{
-      const item=$(id); if(!item) return;
-      item.innerHTML='<span class="rmp52-nav-icon">'+icon+'</span><span class="rmp52-nav-label">'+label+'</span>';
+    const set=(id,icon,label,target)=>{
+      const item=$(id);
+      if(!item) return;
+      if(item.dataset.rmp54Nav!=="1"){
+        item.dataset.rmp54Nav="1";
+        item.innerHTML='<span class="rmp54-nav-icon">'+esc(icon)+'</span><span class="rmp54-nav-label">'+esc(label)+'</span>';
+        item.addEventListener("click",function(e){e.preventDefault(); if(target) navigateSafe(target);},true);
+      }
     };
-    setup("nav-qa","✦","AI");
-    setup("nav-corrections","▣","Slips");
+    set("nav-qa","✦","AI","qa");
+    set("nav-corrections","▣","Slips","corrections");
   }
 
   function hideCheckUpdates(){
     document.querySelectorAll("button,a,div,span").forEach(el=>{
       const txt=(el.textContent||"").trim();
       const attr=((el.id||"")+" "+(el.className||"")+" "+(el.getAttribute("onclick")||"")+" "+(el.getAttribute("data-action")||"")+" "+(el.getAttribute("data-tab")||"")).toLowerCase();
-      if(/check\s+(for\s+)?updates?/i.test(txt)||attr.includes("rmpcheckforupdates")||attr.includes("check-update")||attr.includes("checkupdates")) el.style.display="none";
+      if(/check\s+(for\s+)?updates?/i.test(txt) || attr.includes("rmpcheckforupdates") || attr.includes("check-update") || attr.includes("checkupdates")) el.style.display="none";
     });
+  }
+
+  function navigateSafe(screen){
+    if(screen==="info" || screen==="app-info" || screen==="updates") screen="about";
+    if(typeof navigateTo==="function") navigateTo(screen);
+    else location.hash="#"+screen;
   }
 
   function bindSearch(){
     renderFilter();
     const screen=$("search-screen-input"), home=$("rmp27-search-input"), legacy=$("global-search");
     [screen,home,legacy].forEach(input=>{
-      if(!input || input.dataset.rmp52Bound==="1") return;
-      input.dataset.rmp52Bound="1";
+      if(!input || input.dataset.rmp54Bound==="1") return;
+      input.dataset.rmp54Bound="1";
       input.addEventListener("keydown",e=>{ if(e.key==="Enter"){e.preventDefault(); input===screen?triggerSearchFromScreen():triggerSearch();} });
-      input.addEventListener("input",()=>{ syncInputs(input.value); if(input===screen && input.value.trim().length>=2){ clearTimeout(input._rmp52Timer); input._rmp52Timer=setTimeout(()=>performSearch(input.value.trim()),350); } if(input===screen && !input.value.trim()) clearSearch(); });
+      input.addEventListener("input",()=>{
+        syncInputs(input.value);
+        if(input===screen && input.value.trim().length>=2){ clearTimeout(input._rmp54Timer); input._rmp54Timer=setTimeout(()=>performSearch(input.value.trim()),350); }
+        if(input===screen && !input.value.trim()) clearSearch();
+      });
     });
     const homeBtn=document.querySelector(".rmp27-go"), searchBtn=document.querySelector("#search .search-btn-v3"), oldHome=document.querySelector('#home .home-search-card button[onclick="triggerSearch()"]');
     [homeBtn,searchBtn,oldHome].filter(Boolean).forEach(btn=>{
-      if(btn.dataset.rmp52Bound==="1") return;
-      btn.dataset.rmp52Bound="1";
+      if(btn.dataset.rmp54Bound==="1") return;
+      btn.dataset.rmp54Bound="1";
       btn.addEventListener("click",e=>{e.preventDefault();e.stopPropagation(); btn===searchBtn?triggerSearchFromScreen():triggerSearch();},true);
     });
     const tip=document.querySelector("#search .search-tip-v3");
@@ -26814,10 +26848,10 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function routeCleanup(){
-    const route=(location.hash||"#home").replace("#","").split("/")[0];
-    document.body.classList.toggle("rmp52-appinfo", route==="about" || route==="info" || route==="app-info" || route==="updates");
-    document.body.classList.toggle("rmp52-saved-active", route==="bookmarks" || route==="saved");
-    if(route==="about" || route==="info" || route==="app-info" || route==="updates"){
+    const route=(location.hash||"#home").replace("#","").split("/")[0] || "home";
+    document.body.classList.toggle("rmp54-appinfo", ["about","info","app-info","updates"].includes(route));
+    document.body.classList.toggle("rmp54-saved-active", ["bookmarks","saved"].includes(route));
+    if(["about","info","app-info","updates"].includes(route)){
       if(route!=="about") location.hash="#about";
       setTimeout(renderAppInfo,20);
     }
@@ -26826,8 +26860,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 
   function wrapRouter(){
-    if(window.__rmp52Wrapped) return;
-    window.__rmp52Wrapped=true;
+    if(window.__rmp54Wrapped) return;
+    window.__rmp54Wrapped=true;
     const oldNav=window.navigateTo;
     if(typeof oldNav==="function"){
       window.navigateTo=function(screen){
@@ -26842,8 +26876,8 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
 
   function run(){
     wrapRouter();
-    hideCheckUpdates();
     cleanHome();
+    hideCheckUpdates();
     fixBottomNav();
     bindSearch();
     routeCleanup();
