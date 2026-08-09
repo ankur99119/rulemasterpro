@@ -8105,6 +8105,1365 @@ table.gsr-audit-table-v7 tbody tr:hover td{background:#fef3c7}
 }
 </style>
 
+
+<style id="rmp-home-aesthetic-v56">
+/* =========================================================
+   Rule Master Pro — v56 Home Aesthetic Upgrade
+   Scope: HOME PAGE VISUALS ONLY.
+   No search/save/bookmark/manual-data/route JS logic changed.
+   ========================================================= */
+
+:root{
+  --rmp56-ink:#0F172A;
+  --rmp56-muted:#64748B;
+  --rmp56-border:#E2E8F0;
+  --rmp56-card:#FFFFFF;
+  --rmp56-orange:#EA580C;
+  --rmp56-navy:#092957;
+  --rmp56-shadow:0 12px 30px rgba(15,23,42,.08);
+  --rmp56-soft-shadow:0 7px 18px rgba(15,23,42,.055);
+}
+
+/* Home canvas */
+#home.home-screen{
+  background:
+    radial-gradient(circle at 10% 0%, rgba(234,88,12,.10), transparent 28%),
+    radial-gradient(circle at 95% 14%, rgba(37,99,235,.10), transparent 32%),
+    linear-gradient(180deg,#F8FAFC 0%,#EEF4FA 100%) !important;
+}
+
+#home .home-body{
+  width:100% !important;
+  max-width:1120px !important;
+  margin:0 auto !important;
+  box-sizing:border-box !important;
+  padding:14px 16px calc(112px + env(safe-area-inset-bottom,0px)) !important;
+}
+
+/* Hero: same content, cleaner premium treatment */
+#home .hero-section.rmp-hero-classic-v4{
+  position:relative !important;
+  overflow:hidden !important;
+  margin:0 0 8px !important;
+  padding:24px 16px 20px !important;
+  border-radius:0 0 30px 30px !important;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255,255,255,.18), transparent 28%),
+    radial-gradient(circle at 88% 0%, rgba(255,255,255,.16), transparent 24%),
+    linear-gradient(135deg,#08295D 0%,#1559B7 52%,#F47B20 100%) !important;
+  box-shadow:0 18px 40px rgba(8,41,93,.18) !important;
+  border:0 !important;
+}
+
+#home .hero-section.rmp-hero-classic-v4::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 44%) !important;
+  pointer-events:none !important;
+}
+
+#home .rmp-hero-title-block,
+#home .rmp-hero-train-window,
+#home .rmp-hero-manual-shortcuts{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+#home .rmp-hero-title-line,
+#home .rmp-hero-title-line span,
+#home .rmp-hero-subtitle-line{
+  color:#FFFFFF !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.22) !important;
+}
+
+#home .rmp-hero-subtitle-line{
+  opacity:.95 !important;
+}
+
+#home .rmp-hero-train-window{
+  border-radius:24px !important;
+  background:rgba(255,255,255,.12) !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 10px 26px rgba(0,0,0,.10) !important;
+  backdrop-filter:blur(10px) !important;
+}
+
+#home .rmp-hero-manual-shortcuts{
+  gap:8px !important;
+  margin-top:14px !important;
+}
+
+#home .rmp-hero-manual-shortcuts button{
+  border-radius:999px !important;
+  border:1px solid rgba(255,255,255,.26) !important;
+  background:rgba(255,255,255,.14) !important;
+  color:#FFFFFF !important;
+  font-weight:900 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18) !important;
+  backdrop-filter:blur(8px) !important;
+}
+
+/* Search card: keep exact original inputs/buttons, just make it look cleaner */
+#home .home-search-card{
+  border-radius:24px !important;
+  padding:9px 9px 9px 16px !important;
+  min-height:58px !important;
+  border:1px solid rgba(226,232,240,.98) !important;
+  background:rgba(255,255,255,.94) !important;
+  box-shadow:var(--rmp56-shadow) !important;
+  backdrop-filter:blur(10px) !important;
+  gap:8px !important;
+  margin-top:14px !important;
+  margin-bottom:18px !important;
+}
+
+#home .home-search-card:focus-within{
+  border-color:rgba(234,88,12,.55) !important;
+  box-shadow:0 0 0 4px rgba(234,88,12,.12), var(--rmp56-shadow) !important;
+}
+
+#home .home-search-card > i{
+  color:var(--rmp56-orange) !important;
+  font-size:17px !important;
+}
+
+#home #global-search{
+  color:var(--rmp56-ink) !important;
+  font-weight:700 !important;
+}
+
+#home #global-search::placeholder{
+  color:#94A3B8 !important;
+  font-weight:650 !important;
+}
+
+#home .home-search-card button:last-child{
+  min-width:46px !important;
+  border-radius:16px !important;
+  background:linear-gradient(135deg,#F97316,#EA580C) !important;
+  box-shadow:0 8px 18px rgba(234,88,12,.24) !important;
+}
+
+/* Section labels */
+#home .browse-label{
+  display:flex !important;
+  align-items:center !important;
+  gap:10px !important;
+  margin:18px 0 11px !important;
+  padding:0 !important;
+  color:#475569 !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+  letter-spacing:.13em !important;
+  text-transform:uppercase !important;
+}
+
+#home .browse-label::after{
+  content:"" !important;
+  display:block !important;
+  height:1px !important;
+  flex:1 !important;
+  background:linear-gradient(90deg,#CBD5E1,transparent) !important;
+}
+
+/* Manual tiles: original cards preserved; only visuals improved */
+#home .manuals-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+  margin-bottom:4px !important;
+}
+
+#home .manual-tile{
+  box-sizing:border-box !important;
+  position:relative !important;
+  isolation:isolate !important;
+  min-height:118px !important;
+  padding:16px 14px !important;
+  border-radius:24px !important;
+  border:1px solid rgba(226,232,240,.8) !important;
+  box-shadow:var(--rmp56-soft-shadow) !important;
+  overflow:hidden !important;
+  transform:none !important;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease !important;
+}
+
+#home .manual-tile::before{
+  content:"" !important;
+  position:absolute !important;
+  right:-24px !important;
+  bottom:-28px !important;
+  width:84px !important;
+  height:84px !important;
+  border-radius:50% !important;
+  background:rgba(255,255,255,.50) !important;
+  z-index:-1 !important;
+}
+
+#home .manual-tile:active{
+  transform:scale(.985) !important;
+}
+
+#home .manual-tile-name{
+  display:block !important;
+  color:var(--rmp56-ink) !important;
+  font-size:16.4px !important;
+  line-height:1.15 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.025em !important;
+  margin:0 0 7px !important;
+  overflow:visible !important;
+  white-space:normal !important;
+  text-overflow:clip !important;
+}
+
+#home .manual-tile-sub{
+  display:block !important;
+  color:#475569 !important;
+  font-size:11.6px !important;
+  line-height:1.34 !important;
+  font-weight:760 !important;
+  opacity:.95 !important;
+  margin:0 !important;
+  flex:1 1 auto !important;
+}
+
+#home .manual-tile-meta{
+  display:block !important;
+  color:#334155 !important;
+  font-size:11px !important;
+  line-height:1.35 !important;
+  font-weight:900 !important;
+  opacity:.86 !important;
+  margin-top:10px !important;
+}
+
+#home .gsr-tile{background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 78%) !important;border-color:#FED7AA !important;}
+#home .om-tile{background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 78%) !important;border-color:#BBF7D0 !important;}
+#home .bwm-tile{background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 78%) !important;border-color:#BFDBFE !important;}
+#home .acc-tile{background:linear-gradient(135deg,#FEF2F2 0%,#FFFFFF 78%) !important;border-color:#FECACA !important;}
+#home .ira-tile{background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 78%) !important;border-color:#DDD6FE !important;}
+#home .irsem-tile{background:linear-gradient(135deg,#ECFEFF 0%,#FFFFFF 78%) !important;border-color:#A5F3FC !important;}
+#home .irpwm-tile{background:linear-gradient(135deg,#FEFCE8 0%,#FFFFFF 78%) !important;border-color:#FEF08A !important;}
+
+/* Tool cards: bring back icons and improve cards without changing links */
+#home .home-card{
+  min-height:78px !important;
+  border-radius:24px !important;
+  padding:14px 15px !important;
+  border:1px solid rgba(226,232,240,.95) !important;
+  background:rgba(255,255,255,.94) !important;
+  box-shadow:var(--rmp56-soft-shadow) !important;
+  gap:13px !important;
+  margin-bottom:11px !important;
+  overflow:hidden !important;
+}
+
+#home .home-card::before{
+  width:4px !important;
+  opacity:1 !important;
+  background:linear-gradient(180deg,#F97316,#EA580C) !important;
+}
+
+#home .home-card:nth-of-type(1){background:linear-gradient(135deg,#FFF7ED 0%,#FFFFFF 80%) !important;}
+#home .home-card:nth-of-type(2){background:linear-gradient(135deg,#ECFDF5 0%,#FFFFFF 80%) !important;}
+#home .home-card:nth-of-type(3){background:linear-gradient(135deg,#F5F3FF 0%,#FFFFFF 80%) !important;}
+#home .home-card:nth-of-type(4){background:linear-gradient(135deg,#ECFEFF 0%,#FFFFFF 80%) !important;}
+#home .home-card:nth-of-type(5){background:linear-gradient(135deg,#EFF6FF 0%,#FFFFFF 80%) !important;}
+
+#home .home-card-icon{
+  display:grid !important;
+  place-items:center !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  border-radius:18px !important;
+  background:rgba(255,255,255,.72) !important;
+  box-shadow:0 8px 18px rgba(15,23,42,.055) !important;
+  font-size:22px !important;
+  line-height:1 !important;
+}
+
+#home .hc-text{
+  min-width:0 !important;
+}
+
+#home .hc-title{
+  color:var(--rmp56-ink) !important;
+  font-size:15.4px !important;
+  line-height:1.15 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.015em !important;
+}
+
+#home .hc-subtitle{
+  margin-top:4px !important;
+  color:#64748B !important;
+  font-size:11.4px !important;
+  line-height:1.35 !important;
+  font-weight:720 !important;
+}
+
+#home .new-badge{
+  border-radius:999px !important;
+  background:#EA580C !important;
+  color:#FFFFFF !important;
+  box-shadow:0 8px 18px rgba(234,88,12,.18) !important;
+}
+
+@media (min-width:720px){
+  #home .manuals-grid{grid-template-columns:repeat(4,minmax(0,1fr)) !important;}
+  #home .irpwm-tile{grid-column:auto !important;}
+}
+
+@media (max-width:390px){
+  #home .home-body{padding-left:12px !important;padding-right:12px !important;}
+  #home .manuals-grid{gap:10px !important;}
+  #home .manual-tile{min-height:112px !important;padding:14px 12px !important;border-radius:22px !important;}
+  #home .manual-tile-name{font-size:15.3px !important;}
+  #home .manual-tile-sub{font-size:10.8px !important;}
+  #home .manual-tile-meta{font-size:10.3px !important;}
+  #home .home-card{border-radius:22px !important;}
+}
+</style>
+
+  <!-- Home aesthetic visual-only v56 generated on 2026-08-09. -->
+
+<style id="rmp-reading-saved-polish-v57">
+/* =========================================================
+   Rule Master Pro — v57 Reading + Saved Visual Polish
+   CSS ONLY. No JavaScript logic changed.
+   Focus:
+   - Reading/rule/para typography
+   - Saved tab card/folder/note visuals
+   - Mobile table readability
+   - Bookmark/save button visual clarity
+   - Bottom nav alignment safety
+   - App Info polish where existing markup exists
+   ========================================================= */
+
+:root{
+  --rmp57-navy:#092957;
+  --rmp57-orange:#EA580C;
+  --rmp57-green:#16A34A;
+  --rmp57-blue:#1559B7;
+  --rmp57-purple:#7C3AED;
+  --rmp57-teal:#0891B2;
+  --rmp57-ink:#0F172A;
+  --rmp57-muted:#64748B;
+  --rmp57-soft:#F8FAFC;
+  --rmp57-border:#E2E8F0;
+  --rmp57-shadow:0 10px 26px rgba(15,23,42,.07);
+}
+
+/* -------------------- UNIVERSAL MOBILE POLISH -------------------- */
+@media(max-width:760px){
+  body{
+    -webkit-text-size-adjust:100%;
+  }
+
+  .screen,
+  main.screen{
+    scroll-padding-bottom:96px;
+  }
+
+  button,
+  .action-btn,
+  .primary-btn,
+  .secondary-btn{
+    -webkit-tap-highlight-color:transparent;
+  }
+}
+
+/* -------------------- READING / RULE / PARA TYPOGRAPHY -------------------- */
+
+/* Main reading containers */
+#content,
+#manual-content,
+#rule-content,
+#para-content,
+#chapter-content,
+.content-area,
+.reader-content,
+.manual-reader,
+.rule-detail,
+.para-detail,
+.chapter-detail,
+#content-container,
+#content-list{
+  color:var(--rmp57-ink);
+}
+
+/* Page title/header areas */
+#content .page-title,
+#content h1,
+#content h2,
+#manual-content h1,
+#manual-content h2,
+#rule-content h1,
+#rule-content h2,
+#para-content h1,
+#para-content h2,
+.content-area h1,
+.content-area h2,
+.reader-content h1,
+.reader-content h2,
+.chapter-title,
+.rule-title,
+.para-title,
+#content-chapter-title{
+  color:var(--rmp57-navy) !important;
+  font-weight:1000 !important;
+  letter-spacing:-.035em !important;
+  line-height:1.14 !important;
+}
+
+/* Rule/para card surfaces */
+.rule-card,
+.para-card,
+.content-card,
+.chapter-card,
+.manual-card,
+.rmp-rule-card,
+.rmp-para-card,
+.rmp-content-card,
+.card.rule,
+.card.para,
+#content-list .card,
+#content-container .card{
+  border:1px solid var(--rmp57-border) !important;
+  border-radius:22px !important;
+  background:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+}
+
+/* Card inner body text */
+.rule-body,
+.para-body,
+.content-body,
+.manual-body,
+.rmp-rule-body,
+.rmp-para-body,
+.rmp-content-body,
+.rule-text,
+.para-text,
+.reader-body,
+#content-list .card-body,
+#content-container .card-body,
+#rule-content p,
+#para-content p,
+.content-area p,
+.reader-content p{
+  color:#1F2937 !important;
+  font-size:14.2px !important;
+  line-height:1.72 !important;
+  font-weight:560 !important;
+  letter-spacing:.002em !important;
+}
+
+/* Keep body readable inside cards but not huge on dense lists */
+@media(max-width:760px){
+  .rule-body,
+  .para-body,
+  .content-body,
+  .manual-body,
+  .rmp-rule-body,
+  .rmp-para-body,
+  .rmp-content-body,
+  .rule-text,
+  .para-text,
+  .reader-body,
+  #content-list .card-body,
+  #content-container .card-body{
+    font-size:13.4px !important;
+    line-height:1.68 !important;
+  }
+}
+
+/* Rule/para numbers and badges */
+.rule-num,
+.para-num,
+.rule-number,
+.para-number,
+.rmp-rule-num,
+.rmp-para-num,
+.badge,
+.chip,
+.tag{
+  border-radius:999px;
+}
+
+.rule-num,
+.para-num,
+.rule-number,
+.para-number,
+.rmp-rule-num,
+.rmp-para-num{
+  display:inline-flex !important;
+  align-items:center !important;
+  min-height:24px !important;
+  padding:0 10px !important;
+  background:#FFF7ED !important;
+  border:1px solid #FED7AA !important;
+  color:#C2410C !important;
+  font-size:11px !important;
+  font-weight:1000 !important;
+}
+
+/* Better spacing in opened/read view */
+.rule-detail,
+.para-detail,
+.reader-content,
+.content-area,
+#rule-content,
+#para-content{
+  padding-bottom:calc(96px + env(safe-area-inset-bottom,0px)) !important;
+}
+
+.rule-detail p + p,
+.para-detail p + p,
+.reader-content p + p,
+.content-area p + p{
+  margin-top:10px !important;
+}
+
+/* Lists in content */
+.rule-body ul,
+.rule-body ol,
+.para-body ul,
+.para-body ol,
+.content-body ul,
+.content-body ol,
+.reader-content ul,
+.reader-content ol{
+  padding-left:22px !important;
+  margin:10px 0 12px !important;
+}
+
+.rule-body li,
+.para-body li,
+.content-body li,
+.reader-content li{
+  margin:6px 0 !important;
+  line-height:1.62 !important;
+}
+
+/* -------------------- MOBILE TABLE READABILITY -------------------- */
+.rule-body table,
+.para-body table,
+.content-body table,
+.manual-body table,
+.reader-content table,
+.content-area table,
+#rule-content table,
+#para-content table,
+#content table,
+table{
+  border-collapse:separate !important;
+  border-spacing:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  border:1px solid var(--rmp57-border) !important;
+  border-radius:16px !important;
+  overflow:hidden !important;
+  background:#FFFFFF !important;
+}
+
+.rule-body th,
+.para-body th,
+.content-body th,
+.manual-body th,
+.reader-content th,
+.content-area th,
+#rule-content th,
+#para-content th,
+#content th,
+table th{
+  background:#F8FAFC !important;
+  color:#0F172A !important;
+  font-size:11.5px !important;
+  line-height:1.35 !important;
+  font-weight:1000 !important;
+  padding:10px !important;
+  border-bottom:1px solid var(--rmp57-border) !important;
+}
+
+.rule-body td,
+.para-body td,
+.content-body td,
+.manual-body td,
+.reader-content td,
+.content-area td,
+#rule-content td,
+#para-content td,
+#content td,
+table td{
+  color:#334155 !important;
+  font-size:12px !important;
+  line-height:1.48 !important;
+  font-weight:600 !important;
+  padding:10px !important;
+  border-bottom:1px solid #EDF2F7 !important;
+  vertical-align:top !important;
+}
+
+@media(max-width:760px){
+  .rule-body table,
+  .para-body table,
+  .content-body table,
+  .manual-body table,
+  .reader-content table,
+  .content-area table,
+  #rule-content table,
+  #para-content table,
+  #content table,
+  table{
+    display:block !important;
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+    white-space:normal !important;
+    scrollbar-width:thin;
+  }
+
+  .rule-body th,
+  .para-body th,
+  .content-body th,
+  .manual-body th,
+  .reader-content th,
+  .content-area th,
+  #rule-content th,
+  #para-content th,
+  #content th,
+  table th,
+  .rule-body td,
+  .para-body td,
+  .content-body td,
+  .manual-body td,
+  .reader-content td,
+  .content-area td,
+  #rule-content td,
+  #para-content td,
+  #content td,
+  table td{
+    min-width:96px !important;
+    font-size:11.5px !important;
+    padding:9px !important;
+  }
+}
+
+/* -------------------- BOOKMARK / SAVE BUTTON VISUALS ONLY -------------------- */
+.bookmark-btn,
+.save-btn,
+.action-btn.bookmark,
+.action-btn.save,
+button[onclick*="toggleBookmark"],
+button[onclick*="toggleParaBookmark"],
+.rmp-save-btn,
+.rmp-bookmark-btn{
+  border-radius:999px !important;
+  font-weight:950 !important;
+  min-height:38px !important;
+  box-shadow:none !important;
+}
+
+.bookmark-btn.active,
+.save-btn.active,
+.bookmarked,
+button.bookmarked,
+.action-btn.active,
+.rmp-save-btn.active,
+.rmp-bookmark-btn.active{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+/* -------------------- SAVED / BOOKMARKS PAGE VISUAL POLISH -------------------- */
+#bookmarks{
+  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+}
+
+/* Preserve original saved logic/classes; polish only */
+.rmp-bookmark-toolbar,
+.rmp-bm-v2{
+  margin:14px 16px 12px !important;
+  padding:14px !important;
+  border-radius:24px !important;
+  background:#FFFFFF !important;
+  border:1px solid var(--rmp57-border) !important;
+  box-shadow:var(--rmp57-shadow) !important;
+}
+
+.rmp-bookmark-toolbar-top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  margin-bottom:11px !important;
+}
+
+.rmp-bookmark-toolbar-title{
+  color:var(--rmp57-ink) !important;
+  font-size:18px !important;
+  line-height:1.15 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.03em !important;
+}
+
+#rmp-export-bookmarks-v3,
+.rmp-chip-btn{
+  min-height:34px !important;
+  border-radius:999px !important;
+  border:1px solid #D7E3F2 !important;
+  background:#F8FAFC !important;
+  color:var(--rmp57-navy) !important;
+  font-size:11px !important;
+  font-weight:950 !important;
+  padding:0 12px !important;
+}
+
+.rmp-bookmark-folders{
+  display:flex !important;
+  gap:7px !important;
+  overflow-x:auto !important;
+  padding:1px 0 8px !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+
+.rmp-bm-folder-chip{
+  flex:0 0 auto !important;
+  min-height:34px !important;
+  border-radius:999px !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#F8FAFC !important;
+  color:#475569 !important;
+  padding:0 12px !important;
+  font-size:11px !important;
+  font-weight:950 !important;
+}
+
+.rmp-bm-folder-chip.active{
+  background:var(--rmp57-navy) !important;
+  border-color:var(--rmp57-navy) !important;
+  color:#FFFFFF !important;
+  box-shadow:0 7px 16px rgba(9,41,87,.16) !important;
+}
+
+.rmp-bookmark-export-status{
+  border-radius:16px !important;
+  background:#F8FAFC !important;
+  border:1px dashed #CBD5E1 !important;
+  color:#64748B !important;
+  font-size:11.4px !important;
+  line-height:1.42 !important;
+  font-weight:700 !important;
+  padding:10px 11px !important;
+}
+
+/* Saved cards */
+.rmp-saved-card-v3{
+  margin:10px 16px !important;
+  border-radius:22px !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#FFFFFF !important;
+  box-shadow:0 8px 20px rgba(15,23,42,.055) !important;
+  overflow:hidden !important;
+}
+
+.rmp-saved-summary-v3{
+  width:100% !important;
+  border:0 !important;
+  background:linear-gradient(135deg,#FFFFFF,#F8FAFC) !important;
+  padding:14px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  text-align:left !important;
+}
+
+.rmp-saved-title-wrap-v3{
+  min-width:0 !important;
+  display:block !important;
+}
+
+.rmp-saved-badges-v3{
+  display:flex !important;
+  gap:6px !important;
+  flex-wrap:wrap !important;
+  margin-bottom:7px !important;
+}
+
+.rmp-saved-badge-v3{
+  min-height:21px !important;
+  border-radius:999px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  padding:0 8px !important;
+  background:#F8FAFC !important;
+  border:1px solid var(--rmp57-border) !important;
+  color:#475569 !important;
+  font-size:9.5px !important;
+  font-weight:1000 !important;
+}
+
+.rmp-saved-badge-v3.saved{
+  background:#ECFDF5 !important;
+  border-color:#BBF7D0 !important;
+  color:#047857 !important;
+}
+
+.rmp-saved-title-v3{
+  display:block !important;
+  color:var(--rmp57-ink) !important;
+  font-size:14.2px !important;
+  line-height:1.34 !important;
+  font-weight:1000 !important;
+  letter-spacing:-.012em !important;
+}
+
+.rmp-saved-sub-v3{
+  display:block !important;
+  margin-top:5px !important;
+  color:#64748B !important;
+  font-size:11.2px !important;
+  line-height:1.3 !important;
+  font-weight:720 !important;
+}
+
+.rmp-saved-chevron-v3{
+  width:32px !important;
+  height:32px !important;
+  flex:0 0 auto !important;
+  border-radius:14px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:#FFFFFF !important;
+  border:1px solid var(--rmp57-border) !important;
+  color:#64748B !important;
+  font-weight:1000 !important;
+}
+
+.rmp-saved-details-v3,
+.rmp-saved-body-v3{
+  background:#FFFFFF !important;
+  border-top:1px solid var(--rmp57-border) !important;
+  padding:13px 14px !important;
+  color:#1F2937 !important;
+  font-size:12.8px !important;
+  line-height:1.68 !important;
+}
+
+.rmp-saved-details-v3 label{
+  display:block !important;
+  margin:0 0 5px !important;
+  color:#64748B !important;
+  font-size:10.5px !important;
+  font-weight:1000 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.06em !important;
+}
+
+.rmp-saved-folder-v3,
+.rmp-saved-note-v3,
+.rmp-saved-details-v3 select,
+.rmp-saved-details-v3 textarea{
+  width:100% !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#F8FAFC !important;
+  border-radius:15px !important;
+  color:#0F172A !important;
+  font-size:12.5px !important;
+  font-weight:700 !important;
+  padding:10px 11px !important;
+  outline:none !important;
+}
+
+.rmp-saved-folder-v3:focus,
+.rmp-saved-note-v3:focus,
+.rmp-saved-details-v3 select:focus,
+.rmp-saved-details-v3 textarea:focus{
+  border-color:#93C5FD !important;
+  box-shadow:0 0 0 3px rgba(59,130,246,.12) !important;
+}
+
+.rmp-saved-actions-v3{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+  margin-top:10px !important;
+}
+
+.rmp-saved-actions-v3 button,
+.rmp-remove-saved-v3,
+.rmp-copy-saved-v3{
+  min-height:36px !important;
+  border-radius:14px !important;
+  font-size:11px !important;
+  font-weight:950 !important;
+}
+
+/* Empty states */
+#bookmarks .empty-state,
+#search .empty-state,
+.empty-state{
+  border-radius:24px !important;
+  background:#FFFFFF !important;
+  border:1px dashed #CBD5E1 !important;
+  box-shadow:0 8px 20px rgba(15,23,42,.04) !important;
+  margin:14px 16px !important;
+  padding:28px 18px !important;
+}
+
+.empty-state i{
+  opacity:.55 !important;
+}
+
+/* -------------------- SEARCH VISUAL POLISH ONLY, ORIGINAL LOGIC PRESERVED -------------------- */
+.search-results .rule-card,
+#search-results-container .rule-card,
+#search-results-container .para-card,
+#search-results-container .search-result-card{
+  border-radius:20px !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.052) !important;
+}
+
+.search-stats-box-v3{
+  border-radius:18px !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#FFFFFF !important;
+  box-shadow:0 5px 14px rgba(15,23,42,.045) !important;
+}
+
+.rmp-search-hit,
+mark{
+  background:#FFF4A8 !important;
+  color:#111827 !important;
+  border-radius:4px !important;
+  padding:0 2px !important;
+  box-shadow:inset 0 -1px 0 #FACC15 !important;
+}
+
+/* -------------------- BOTTOM NAV ALIGNMENT SAFETY -------------------- */
+.bottom-nav{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  align-items:center !important;
+}
+
+.bottom-nav .nav-item{
+  min-width:0 !important;
+  height:60px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+  padding:4px 2px !important;
+  text-align:center !important;
+  line-height:1 !important;
+}
+
+.bottom-nav .nav-item i,
+.bottom-nav .nav-item svg,
+.bottom-nav .nav-item .rmp28-nav-icon{
+  width:23px !important;
+  height:23px !important;
+  min-width:23px !important;
+  min-height:23px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:0 auto !important;
+  font-size:20px !important;
+  line-height:1 !important;
+  transform:none !important;
+}
+
+.bottom-nav .nav-item span{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+  font-size:10.5px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  white-space:nowrap !important;
+}
+
+/* -------------------- APP INFO EXISTING PAGE POLISH -------------------- */
+#about,
+#info{
+  background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%) !important;
+}
+
+#about .card,
+#about .info-card,
+#about .app-info-card,
+#about section,
+#info .card,
+#info .info-card,
+#info .app-info-card,
+#info section{
+  border-radius:22px !important;
+  border:1px solid var(--rmp57-border) !important;
+  background:#FFFFFF !important;
+  box-shadow:0 7px 18px rgba(15,23,42,.052) !important;
+}
+
+#about h1,
+#about h2,
+#about h3,
+#info h1,
+#info h2,
+#info h3{
+  color:var(--rmp57-navy) !important;
+  font-weight:1000 !important;
+  letter-spacing:-.03em !important;
+}
+
+/* -------------------- DARK MODE SAFETY -------------------- */
+body.dark-mode .rmp-bookmark-toolbar,
+body.dark-mode .rmp-saved-card-v3,
+body.dark-mode .rule-card,
+body.dark-mode .para-card,
+body.dark-mode .content-card,
+body.dark-mode .empty-state,
+body.dark-mode #about .card,
+body.dark-mode #info .card{
+  background:#111827 !important;
+  border-color:#334155 !important;
+  color:#E5E7EB !important;
+}
+
+body.dark-mode .rule-body,
+body.dark-mode .para-body,
+body.dark-mode .content-body,
+body.dark-mode .reader-content,
+body.dark-mode .rmp-saved-details-v3,
+body.dark-mode .rmp-saved-body-v3{
+  color:#E5E7EB !important;
+}
+
+body.dark-mode .rmp-saved-title-v3,
+body.dark-mode .rmp-bookmark-toolbar-title,
+body.dark-mode #about h1,
+body.dark-mode #about h2,
+body.dark-mode #about h3{
+  color:#F8FAFC !important;
+}
+
+body.dark-mode .rmp-saved-sub-v3,
+body.dark-mode .rmp-bookmark-export-status{
+  color:#CBD5E1 !important;
+}
+</style>
+
+
+<style id="rmp-page-heroes-v58">
+/* =========================================================
+   Rule Master Pro — v58 Page Heroes
+   Visual layer only. Existing search/save/bookmark/manual logic untouched.
+   Adds/restyles coloured hero sections for major app pages.
+   ========================================================= */
+
+:root{
+  --rmp58-navy:#092957;
+  --rmp58-orange:#EA580C;
+  --rmp58-blue:#1559B7;
+  --rmp58-green:#16A34A;
+  --rmp58-purple:#7C3AED;
+  --rmp58-red:#DC2626;
+  --rmp58-teal:#0891B2;
+  --rmp58-slate:#475569;
+  --rmp58-border:#E2E8F0;
+}
+
+/* Shared hero style */
+.rmp58-page-hero{
+  position:relative;
+  isolation:isolate;
+  margin:14px 16px 14px;
+  padding:18px 17px 17px;
+  border-radius:28px;
+  color:#FFFFFF;
+  overflow:hidden;
+  box-shadow:0 14px 34px rgba(15,23,42,.16);
+  border:1px solid rgba(255,255,255,.22);
+}
+
+.rmp58-page-hero::before{
+  content:"";
+  position:absolute;
+  inset:-40% -12% auto auto;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  z-index:-1;
+}
+
+.rmp58-page-hero::after{
+  content:"";
+  position:absolute;
+  right:-28px;
+  bottom:-45px;
+  width:145px;
+  height:145px;
+  border-radius:40px;
+  background:rgba(255,255,255,.11);
+  transform:rotate(22deg);
+  z-index:-1;
+}
+
+.rmp58-page-hero .rmp58-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:24px;
+  padding:0 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(8px);
+  color:#FFFFFF;
+  font-size:10.5px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.rmp58-page-hero h2{
+  margin:11px 0 6px;
+  color:#FFFFFF !important;
+  font-size:24px;
+  line-height:1.08;
+  font-weight:1000;
+  letter-spacing:-.045em;
+}
+
+.rmp58-page-hero p{
+  margin:0;
+  max-width:92%;
+  color:rgba(255,255,255,.86) !important;
+  font-size:12.7px;
+  line-height:1.45;
+  font-weight:720;
+}
+
+.rmp58-hero-row{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:13px;
+}
+
+.rmp58-hero-chip{
+  min-height:27px;
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:0 10px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.2);
+  color:#FFFFFF;
+  font-size:10.5px;
+  font-weight:900;
+}
+
+/* Screen-specific gradients */
+.rmp58-hero-home{background:linear-gradient(135deg,#092957 0%,#1559B7 52%,#EA580C 130%);}
+.rmp58-hero-search{background:linear-gradient(135deg,#0F766E 0%,#0891B2 58%,#1559B7 125%);}
+.rmp58-hero-bookmarks{background:linear-gradient(135deg,#064E3B 0%,#16A34A 58%,#0F766E 125%);}
+.rmp58-hero-quiz{background:linear-gradient(135deg,#4C1D95 0%,#7C3AED 58%,#1559B7 125%);}
+.rmp58-hero-qa{background:linear-gradient(135deg,#164E63 0%,#0891B2 55%,#06B6D4 125%);}
+.rmp58-hero-corrections{background:linear-gradient(135deg,#9A3412 0%,#EA580C 55%,#DC2626 125%);}
+.rmp58-hero-manual{background:linear-gradient(135deg,#1E3A8A 0%,#1559B7 58%,#092957 125%);}
+.rmp58-hero-about{background:linear-gradient(135deg,#334155 0%,#092957 58%,#1559B7 125%);}
+.rmp58-hero-act{background:linear-gradient(135deg,#374151 0%,#6B7280 55%,#092957 125%);}
+.rmp58-hero-accident{background:linear-gradient(135deg,#7F1D1D 0%,#DC2626 55%,#EA580C 125%);}
+.rmp58-hero-bwm{background:linear-gradient(135deg,#1E40AF 0%,#1559B7 55%,#0891B2 125%);}
+.rmp58-hero-om{background:linear-gradient(135deg,#065F46 0%,#16A34A 55%,#0891B2 125%);}
+.rmp58-hero-gsr{background:linear-gradient(135deg,#9A3412 0%,#EA580C 55%,#092957 125%);}
+.rmp58-hero-irsem{background:linear-gradient(135deg,#581C87 0%,#7C3AED 55%,#1559B7 125%);}
+.rmp58-hero-irpwm{background:linear-gradient(135deg,#854D0E 0%,#CA8A04 55%,#EA580C 125%);}
+
+/* Do not show duplicate heroes if the app already has older page hero. We polish existing hero too. */
+.rmp32-page-hero,
+.page-hero,
+.screen-hero,
+.hero-section{
+  border-radius:28px !important;
+  box-shadow:0 14px 34px rgba(15,23,42,.14) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+}
+
+/* When our hero is inserted before an existing hero, soften older one so page does not feel repeated. */
+.rmp58-page-hero + .rmp32-page-hero,
+.rmp58-page-hero + .page-hero,
+.rmp58-page-hero + .screen-hero,
+.rmp58-page-hero + .hero-section{
+  margin-top:-4px !important;
+}
+
+/* Ensure main page starts below hero cleanly */
+.screen > .rmp58-page-hero:first-child,
+main > .rmp58-page-hero:first-child{
+  margin-top:12px;
+}
+
+/* Home: when v56 hero already exists, only enhance it and avoid double hero */
+#home .rmp58-page-hero{
+  margin-bottom:13px;
+}
+
+/* Light/dark readability */
+body.dark-mode .rmp58-page-hero{
+  box-shadow:0 14px 34px rgba(0,0,0,.34);
+}
+
+@media(max-width:760px){
+  .rmp58-page-hero{
+    margin:12px 14px 13px;
+    padding:17px 15px 16px;
+    border-radius:26px;
+  }
+  .rmp58-page-hero h2{
+    font-size:22px;
+  }
+  .rmp58-page-hero p{
+    font-size:12.4px;
+  }
+}
+</style>
+
+
+<style id="rmp-v58-hero-width-only-v63">
+/* =========================================================
+   Rule Master Pro — v63 from v58
+   ONLY requested changes:
+   1. Remove page hero from Home.
+   2. Make all other v58 page hero sections full screen width
+      with safe inner padding and no left/right clipping.
+   No search/save/bookmark/manual logic changed.
+   ========================================================= */
+
+/* Home must have no injected v58 page hero */
+#home > .rmp58-page-hero,
+#home .rmp58-page-hero[data-rmp58-route="home"]{
+  display:none !important;
+}
+
+/* Non-home heroes: full viewport width, but content remains safely inside */
+.screen:not(#home) > .rmp58-page-hero,
+main.screen:not(#home) > .rmp58-page-hero{
+  width:100vw !important;
+  max-width:100vw !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:calc(50% - 50vw) !important;
+  margin-top:0 !important;
+  margin-bottom:16px !important;
+  box-sizing:border-box !important;
+  border-left:0 !important;
+  border-right:0 !important;
+  border-radius:0 0 28px 28px !important;
+  padding:20px max(18px, env(safe-area-inset-left)) 18px max(18px, env(safe-area-inset-right)) !important;
+  overflow:hidden !important;
+}
+
+/* Reset any accidental negative/offset position inside hero */
+.screen:not(#home) > .rmp58-page-hero *,
+main.screen:not(#home) > .rmp58-page-hero *{
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+
+.screen:not(#home) > .rmp58-page-hero .rmp58-kicker,
+main.screen:not(#home) > .rmp58-page-hero .rmp58-kicker,
+.screen:not(#home) > .rmp58-page-hero h2,
+main.screen:not(#home) > .rmp58-page-hero h2,
+.screen:not(#home) > .rmp58-page-hero p,
+main.screen:not(#home) > .rmp58-page-hero p,
+.screen:not(#home) > .rmp58-page-hero .rmp58-hero-row,
+main.screen:not(#home) > .rmp58-page-hero .rmp58-hero-row{
+  margin-left:0 !important;
+  transform:none !important;
+  position:relative !important;
+  left:auto !important;
+  right:auto !important;
+}
+
+.screen:not(#home) > .rmp58-page-hero h2,
+main.screen:not(#home) > .rmp58-page-hero h2{
+  color:#FFFFFF !important;
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  line-height:1.08 !important;
+  font-size:24px !important;
+}
+
+.screen:not(#home) > .rmp58-page-hero p,
+main.screen:not(#home) > .rmp58-page-hero p{
+  color:rgba(255,255,255,.88) !important;
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  line-height:1.42 !important;
+  font-size:12.5px !important;
+}
+
+.screen:not(#home) > .rmp58-page-hero .rmp58-hero-row,
+main.screen:not(#home) > .rmp58-page-hero .rmp58-hero-row{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:7px !important;
+  overflow:visible !important;
+}
+
+.screen:not(#home) > .rmp58-page-hero .rmp58-hero-chip,
+main.screen:not(#home) > .rmp58-page-hero .rmp58-hero-chip{
+  flex:0 0 auto !important;
+  white-space:nowrap !important;
+}
+
+/* Mobile */
+@media(max-width:760px){
+  .screen:not(#home) > .rmp58-page-hero,
+  main.screen:not(#home) > .rmp58-page-hero{
+    border-radius:0 0 24px 24px !important;
+    padding:18px 16px 16px 16px !important;
+    margin-bottom:14px !important;
+  }
+
+  .screen:not(#home) > .rmp58-page-hero h2,
+  main.screen:not(#home) > .rmp58-page-hero h2{
+    font-size:22px !important;
+  }
+
+  .screen:not(#home) > .rmp58-page-hero p,
+  main.screen:not(#home) > .rmp58-page-hero p{
+    font-size:12.2px !important;
+  }
+
+  .screen:not(#home) > .rmp58-page-hero .rmp58-kicker,
+  main.screen:not(#home) > .rmp58-page-hero .rmp58-kicker{
+    font-size:9.8px !important;
+  }
+
+  .screen:not(#home) > .rmp58-page-hero .rmp58-hero-chip,
+  main.screen:not(#home) > .rmp58-page-hero .rmp58-hero-chip{
+    font-size:10px !important;
+    min-height:25px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -19822,6 +21181,238 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   }
 }
 </style>
+
+
+<script id="rmp-page-heroes-v58-script">
+(function(){
+  const heroMap = {
+    home: {
+      cls:"rmp58-hero-home",
+      kicker:"Dashboard",
+      title:"Rule Master Pro",
+      text:"Fast railway manual reference with search, saved rules and exam revision.",
+      chips:["7 Manuals","Offline Ready","Delhi Division"]
+    },
+    search: {
+      cls:"rmp58-hero-search",
+      kicker:"Smart Search",
+      title:"Search Manuals",
+      text:"Find rule numbers, paras, keywords and correction references quickly.",
+      chips:["Manual Filter","Recent Searches","Suggestions"]
+    },
+    bookmarks: {
+      cls:"rmp58-hero-bookmarks",
+      kicker:"Saved",
+      title:"Saved Rules & Notes",
+      text:"Your bookmarked rules, folder-wise references and notes in one place.",
+      chips:["Folders","Notes","Export"]
+    },
+    quiz: {
+      cls:"rmp58-hero-quiz",
+      kicker:"Practice",
+      title:"MCQ Quiz",
+      text:"Revise important rules and manual references through practice questions.",
+      chips:["Mock Practice","Revision","Progress"]
+    },
+    qa: {
+      cls:"rmp58-hero-qa",
+      kicker:"AI Assist",
+      title:"Ask Rule Master",
+      text:"Use AI assistance for study support while keeping official manuals as reference.",
+      chips:["Study Help","Manual Based","Daily Limit"]
+    },
+    corrections: {
+      cls:"rmp58-hero-corrections",
+      kicker:"Updates",
+      title:"Correction Slips",
+      text:"Important rule changes and correction slip references arranged for quick access.",
+      chips:["Latest Changes","Rule Updates","Reference"]
+    },
+    about: {
+      cls:"rmp58-hero-about",
+      kicker:"Information",
+      title:"App Info",
+      text:"Manuals included, app details, offline support and important disclaimer.",
+      chips:["Version","Manuals","Disclaimer"]
+    },
+    gsr: {
+      cls:"rmp58-hero-gsr",
+      kicker:"Manual",
+      title:"G&SR",
+      text:"General and Subsidiary Rules with chapters, appendices and searchable rule references.",
+      chips:["GR","SR","Appendices"]
+    },
+    om: {
+      cls:"rmp58-hero-om",
+      kicker:"Manual",
+      title:"Operating Manual",
+      text:"Operating instructions, procedures and paras arranged for reference.",
+      chips:["Chapters","Paras","Annexures"]
+    },
+    bwm: {
+      cls:"rmp58-hero-bwm",
+      kicker:"Manual",
+      title:"Block Working Manual",
+      text:"Block working procedures and instructions for operational reference.",
+      chips:["Block Rules","Forms","Procedures"]
+    },
+    acc: {
+      cls:"rmp58-hero-accident",
+      kicker:"Manual",
+      title:"Accident Manual",
+      text:"Accident, safety and reporting references arranged for quick reading.",
+      chips:["Safety","Reports","Appendices"]
+    },
+    ira: {
+      cls:"rmp58-hero-act",
+      kicker:"Manual",
+      title:"Railways Act 1989",
+      text:"Important legal sections and provisions for study and reference.",
+      chips:["Sections","Legal","Reference"]
+    },
+    irsem: {
+      cls:"rmp58-hero-irsem",
+      kicker:"Manual",
+      title:"IRSEM",
+      text:"Signal engineering manual references arranged for quick access.",
+      chips:["S&T","Chapters","Paras"]
+    },
+    irpwm: {
+      cls:"rmp58-hero-irpwm",
+      kicker:"Manual",
+      title:"IRPWM",
+      text:"Permanent way manual references for engineering study and field reference.",
+      chips:["P. Way","Track","Paras"]
+    }
+  };
+
+  const routeAliases = {
+    saved:"bookmarks",
+    info:"about",
+    "app-info":"about",
+    updates:"about",
+    accident:"acc",
+    railwaysact:"ira",
+    railways_act:"ira",
+    railways_act_1989:"ira",
+    operating:"om",
+    "operating-manual":"om",
+    "block-working":"bwm",
+    "block-working-manual":"bwm"
+  };
+
+  function esc(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;");
+  }
+
+  function routeName(){
+    const raw = (location.hash || "#home").replace("#","").split("/")[0] || "home";
+    return routeAliases[raw] || raw;
+  }
+
+  function findScreen(route){
+    return document.getElementById(route) ||
+           document.querySelector('main.screen.active') ||
+           document.querySelector('.screen.active') ||
+           document.querySelector('main.screen:not([hidden])') ||
+           document.querySelector('.screen:not([hidden])');
+  }
+
+  function heroHtml(cfg, route){
+    return '<section class="rmp58-page-hero '+esc(cfg.cls)+'" data-rmp58-route="'+esc(route)+'">' +
+      '<span class="rmp58-kicker">'+esc(cfg.kicker)+'</span>' +
+      '<h2>'+esc(cfg.title)+'</h2>' +
+      '<p>'+esc(cfg.text)+'</p>' +
+      '<div class="rmp58-hero-row">' + (cfg.chips || []).map(c => '<span class="rmp58-hero-chip">'+esc(c)+'</span>').join("") + '</div>' +
+      '</section>';
+  }
+
+  function hasVisibleExistingHero(screen){
+    if(!screen) return false;
+    const existing = screen.querySelector(':scope > .rmp58-page-hero');
+    return !!existing;
+  }
+
+  function placeHero(route){
+    const cfg = heroMap[route];
+    if(!cfg) return;
+    const screen = findScreen(route);
+    if(!screen) return;
+
+    // Remove wrong route hero from this screen, keep correct one.
+    screen.querySelectorAll(':scope > .rmp58-page-hero').forEach(h => {
+      if(h.getAttribute('data-rmp58-route') !== route) h.remove();
+    });
+
+    if(hasVisibleExistingHero(screen)) return;
+
+    const html = heroHtml(cfg, route);
+    const first = screen.firstElementChild;
+
+    // Do not insert above app shell global headers. Put as first content inside screen.
+    if(first){
+      first.insertAdjacentHTML("beforebegin", html);
+    }else{
+      screen.insertAdjacentHTML("afterbegin", html);
+    }
+  }
+
+  function polishExistingPageHeroes(){
+    document.querySelectorAll('.rmp32-page-hero,.page-hero,.screen-hero,.hero-section').forEach(hero => {
+      if(hero.dataset.rmp58Polished === "1") return;
+      hero.dataset.rmp58Polished = "1";
+      // Only add a class for styling; do not change text or behavior.
+      hero.classList.add("rmp58-existing-polished");
+    });
+  }
+
+  function run(){
+    polishExistingPageHeroes();
+    placeHero(routeName());
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+
+  window.addEventListener("hashchange", () => setTimeout(run, 90));
+  setTimeout(run, 350);
+  setTimeout(run, 1000);
+})();
+</script>
+
+
+<script id="rmp-v58-hero-width-only-v63-script">
+(function(){
+  function removeHomeHero(){
+    var home = document.getElementById("home");
+    if(!home) return;
+    home.querySelectorAll(':scope > .rmp58-page-hero, .rmp58-page-hero[data-rmp58-route="home"]').forEach(function(el){
+      el.remove();
+    });
+  }
+
+  function run(){
+    removeHomeHero();
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    run();
+  }
+
+  window.addEventListener("hashchange", function(){
+    setTimeout(removeHomeHero, 80);
+  });
+
+  setTimeout(removeHomeHero, 300);
+  setTimeout(removeHomeHero, 1000);
+})();
+</script>
 
 </body>
 </html>
