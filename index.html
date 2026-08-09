@@ -16915,6 +16915,36 @@ mark.rmp47-hit,
 </style>
 
   <!-- Search save only v47 generated on 2026-08-09. -->
+
+<style id="rmp-home-clean-search-reset-v48">
+/* v48 Home Cleanup + Search Reset */
+:root{--rmp48-navy:#092957;--rmp48-orange:#EA580C;--rmp48-border:#E2E8F0;--rmp48-muted:#64748B;}
+
+/* Remove section wording below search */
+.rmp27-section-title,.rmp21-section-head{display:none!important;}
+.rmp27-section-title::before,.rmp21-section-head::before,.rmp27-section-title b::after,.rmp21-section-head strong::after{content:""!important;display:none!important;}
+
+/* Home manual cards: remove explanatory subtitle, keep manual name and count/meta */
+#home .manual-tile-sub,#home .manual-subtitle,#home .manual-desc,#home .manual-description,#home .book-subtitle,#home .book-desc,#home .rmp-manual-sub,#home .rmp-book-sub,#home .manual-sub,#home .book-sub{display:none!important;}
+#home .manual-tile-name,#home .manual-title,#home .book-title,#home .rmp-manual-title,#home .rmp-book-title{margin-bottom:6px!important;color:#0F172A!important;font-weight:1000!important;letter-spacing:-.02em!important;}
+#home .manual-tile-meta,#home .manual-meta,#home .book-meta,#home .rmp-manual-meta,#home .rmp-book-meta{color:#64748B!important;font-size:11.3px!important;line-height:1.35!important;font-weight:800!important;}
+
+/* Hide check update controls anywhere in App Info/Updates */
+button[id*="check" i][id*="update" i],button[class*="check" i][class*="update" i],a[id*="check" i][id*="update" i],a[class*="check" i][class*="update" i],.check-update,.check-updates,.check-for-update,.check-for-updates,#check-update,#check-updates,#checkForUpdate,#checkForUpdates,[data-action="check-update"],[data-action="check-updates"],[data-tab="check-update"],[data-tab="check-updates"]{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+
+/* App Info/About layout balance */
+#info.screen.active,#app-info.screen.active,#about.screen.active,#updates.screen.active{background:linear-gradient(180deg,#F8FAFC 0%,#EEF3F8 100%)!important;}
+#info .card,#app-info .card,#about .card,#updates .card,#info .info-card,#app-info .info-card,#about .info-card,#updates .info-card,.about-card,.info-card{margin-left:16px!important;margin-right:16px!important;border-radius:22px!important;border:1px solid #E2E8F0!important;box-shadow:0 7px 18px rgba(15,23,42,.05)!important;text-align:center!important;}
+#info h1,#info h2,#info h3,#app-info h1,#app-info h2,#app-info h3,#about h1,#about h2,#about h3,#updates h1,#updates h2,#updates h3{text-align:center!important;color:#092957!important;letter-spacing:-.025em!important;}
+#info p,#app-info p,#about p,#updates p,#info li,#app-info li,#about li,#updates li{color:#475569!important;line-height:1.55!important;}
+.rmp48-info-summary{padding:18px 16px!important;}
+.rmp48-info-summary p{max-width:94%!important;margin-left:auto!important;margin-right:auto!important;}
+
+/* Remove old v45 cached panels/tag if any */
+.rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel{display:none!important;}
+</style>
+
+  <!-- Home cleanup and search reset v48 generated on 2026-08-09. -->
 </head>
 
 <body>
@@ -17300,8 +17330,8 @@ mark.rmp47-hit,
           <div class="home-card" onclick="window.location.hash='#about'">
             <div class="home-card-icon">ℹ️</div>
             <div class="hc-text">
-              <div class="hc-title">App Info & Updates</div>
-              <div class="hc-subtitle">Version, manuals, offline status and QA summary</div>
+              <div class="hc-title">App Info</div>
+              <div class="hc-subtitle">Manuals, data source and app details</div>
             </div>
             <i class="fas fa-chevron-right" style="color:var(--text-muted);opacity:0.4"></i>
           </div>
@@ -27710,6 +27740,63 @@ function progressStats(){ var ids = allReadableIds(); var st = statsForIds(ids);
   window.addEventListener("hashchange", () => setTimeout(run,100));
   setTimeout(run,500);
   setTimeout(run,1300);
+})();
+</script>
+
+
+<script id="rmp-home-clean-search-reset-v48-script">
+(function(){
+  const LAST_KEYS=['rmp_search_last_query_v40','rmp44_last_query','rmp45_last_query','rmp46_last_query','rmp47_last_query','rmp48_last_query'];
+  function $(id){return document.getElementById(id);}
+  function clearOldLastSearch(){LAST_KEYS.forEach(k=>{try{localStorage.removeItem(k);}catch(e){}});}
+  function setVal(id,v){const el=$(id); if(el) el.value=v;}
+  function clearSearchUI(){
+    clearOldLastSearch();
+    setVal('search-screen-input',''); setVal('rmp27-search-input',''); setVal('global-search','');
+    const stats=$('search-stats'); if(stats){stats.className=''; stats.innerHTML='';}
+    const c=$('search-results-container');
+    if(c){c.className='rule-list rmp47-results'; c.innerHTML='<div class="rmp47-ready"><strong>Search ready</strong><p>Type rule number, para number or keyword. Results will appear as simple rule cards.</p></div>';}
+  }
+  function hideExactHomePhrases(){
+    const phrases=new Set(['Rules and Subsidiary Instructions','Rules & Subsidiary Instructions','Operating reference','Block working reference','Accident and safety reference','Legal sections reference','Signal engineering reference','Permanent way reference','Your Tools','Start faster']);
+    document.querySelectorAll('#home *').forEach(el=>{const t=(el.textContent||'').trim(); if(phrases.has(t)) el.style.display='none';});
+  }
+  function updateHomeInfoCard(){
+    document.querySelectorAll('#home .home-card,#home [class*="card"],#home button,#home a').forEach(el=>{
+      const t=(el.textContent||'');
+      if(/App Info\s*&\s*Updates/i.test(t) || /App Info/i.test(t) && /manuals|offline|summary|updates/i.test(t)){
+        const title=el.querySelector('.hc-title,.home-card-title,[class*="title"]');
+        const sub=el.querySelector('.hc-subtitle,.home-card-subtitle,[class*="subtitle"],[class*="sub"]');
+        if(title) title.textContent='App Info';
+        if(sub) sub.textContent='Manuals, data source and app details';
+      }
+    });
+  }
+  function hideCheckUpdates(){
+    document.querySelectorAll('button,a,div,span').forEach(el=>{
+      const txt=(el.textContent||'').trim();
+      const attr=((el.id||'')+' '+(el.className||'')+' '+(el.getAttribute('data-action')||'')+' '+(el.getAttribute('data-tab')||'')).toLowerCase();
+      if(/check\s+(for\s+)?updates?/i.test(txt) || attr.includes('check-update') || attr.includes('checkupdates')) el.style.display='none';
+    });
+  }
+  function improveAppInfo(){
+    const screen=$('info')||$('app-info')||$('about')||$('updates');
+    if(screen && !screen.querySelector('.rmp48-info-summary')){
+      const s=document.createElement('section');
+      s.className='info-card rmp48-info-summary';
+      s.innerHTML='<h3>Rule Master Pro</h3><p>A clean railway rule reference app for reading manuals, searching rules, saving useful references and revising important operating content.</p><p><b>Included manuals:</b> G&SR, Operating Manual, Block Working Manual, Accident Manual, Railways Act, IRSEM and IRPWM.</p>';
+      const hero=screen.querySelector('.rmp32-page-hero');
+      if(hero) hero.insertAdjacentElement('afterend',s); else screen.insertBefore(s,screen.firstChild);
+    }
+  }
+  function removeCachedPanels(){document.querySelectorAll('.rmp45-version-chip,#rmp45-home-panel,#rmp45-quiz-panel,#rmp45-ai-panel,#rmp45-saved-panel').forEach(el=>el.remove());}
+  function run(){
+    removeCachedPanels(); hideExactHomePhrases(); updateHomeInfoCard(); hideCheckUpdates(); improveAppInfo(); clearOldLastSearch();
+    if(location.hash==='#search') clearSearchUI(); else {setVal('search-screen-input','');setVal('rmp27-search-input','');setVal('global-search','');}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  window.addEventListener('hashchange',()=>setTimeout(run,100));
+  setTimeout(run,500); setTimeout(run,1400);
 })();
 </script>
 
