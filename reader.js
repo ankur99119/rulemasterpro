@@ -286,9 +286,6 @@
     r.setAttribute('data-read-serif', prefs.serif ? '1' : '0');
     r.setAttribute('data-read-width', prefs.width);
     writeJSON(PREF_KEY, prefs);
-    // The book has to re-paginate when the type changes: at a larger size the
-    // same chapter is more pages, and the reader must not lose their place.
-    document.dispatchEvent(new CustomEvent('rmp:reader-prefs'));
   }
 
   window.rmpReaderPrefs = {
