@@ -6,3 +6,10 @@
   Cache-Control: public, max-age=31536000, immutable
 /manifest.webmanifest
   Content-Type: application/manifest+json
+
+# Manual data. Deliberately no-cache at the HTTP layer: the service worker keeps
+# these in CacheStorage and only re-fetches when DATA_VERSION in sw.js is bumped.
+# A long HTTP cache here would let a stale copy survive that bump.
+/data/*
+  Cache-Control: no-cache
+  Content-Type: application/javascript; charset=utf-8
