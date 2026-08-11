@@ -1512,35 +1512,122 @@
        a reader who never opens the controls. */
     :root { --read-size: 15px; --read-leading: 1.75; --read-measure: 100%; }
 
+    /* Every text node inside a rule body, not just the paragraph classes I knew
+       about. The manuals each brought their own — .acc-para, .sem-para,
+       .om-subhead, .acc-list-item — and each sets its own font-size, so naming
+       them one by one left most of the text ignoring the reader's choice.
+       Headings and table cells are scaled proportionally rather than flattened
+       to the same size, so structure survives. */
     .rule-text-content,
-    .rule-text-content .acc-para,
-    .rule-text-content .sem-para,
-    .rule-text-content .para-text {
+    .rule-text-content p,
+    .rule-text-content div,
+    .rule-text-content li,
+    .rule-text-content span {
       font-size: var(--read-size) !important;
       line-height: var(--read-leading) !important;
     }
+    .rule-text-content .acc-subhead,
+    .rule-text-content .om-subhead,
+    .rule-text-content .om-table-title,
+    .rule-text-content h1, .rule-text-content h2,
+    .rule-text-content h3, .rule-text-content h4 {
+      font-size: calc(var(--read-size) * 1.02) !important;
+    }
+    .rule-text-content table,
+    .rule-text-content th,
+    .rule-text-content td {
+      font-size: calc(var(--read-size) * 0.88) !important;
+      line-height: 1.5 !important;
+    }
 
-    [data-read-serif="1"] .rule-text-content { font-family: Georgia, 'Times New Roman', serif; }
+    [data-read-serif="1"] .rule-text-content,
+    [data-read-serif="1"] .rule-text-content * {
+      font-family: Georgia, 'Times New Roman', serif !important;
+    }
+    [data-read-serif="0"] .rule-text-content,
+    [data-read-serif="0"] .rule-text-content * {
+      font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif !important;
+    }
     [data-read-width="wide"]   { --read-measure: 100%; }
     [data-read-width="normal"] { --read-measure: 68ch; }
     [data-read-width="narrow"] { --read-measure: 54ch; }
     .rule-text-content { max-width: var(--read-measure); }
 
-    /* Sepia and night. Applied at the root so cards, chrome and figures agree.
-       Figure canvases are left alone — inverting a signal diagram would change
-       what the colours mean, and in this manual the colours are the content. */
+    /* Sepia and night.
+       Setting the theme variables alone did nothing: this stylesheet hardcodes
+       a background in 82 places with !important and reads a variable in only 23,
+       so `.rule-card{background:#fff}` and `.rule-card.expanded .rule-body{
+       background:#fff !important}` simply won.  The surfaces therefore have to
+       be named and forced.  Figure canvases are deliberately excluded — the
+       colours in a signal diagram carry the meaning, and inverting them would
+       change what the drawing says. */
     [data-read-theme="sepia"] {
       --bg-deep: #F4ECD8; --bg-raised: #EFE5CC; --bg-card: #FAF3E3;
       --text-main: #3B2F1E; --text-soft: #5A4A33; --text-muted: #8A7657;
       --border: #DDCFB0;
+      --rt-page: #F4ECD8; --rt-card: #FAF3E3; --rt-ink: #3B2F1E;
+      --rt-ink-soft: #5A4A33; --rt-line: #E2D5B8;
     }
     [data-read-theme="night"] {
       --bg-deep: #0E1116; --bg-raised: #161B22; --bg-card: #1A2029;
       --text-main: #E6EDF3; --text-soft: #C2CBD6; --text-muted: #8B98A8;
       --border: #2A323D;
+      --rt-page: #0E1116; --rt-card: #171D26; --rt-ink: #E6EDF3;
+      --rt-ink-soft: #C2CBD6; --rt-line: #2A323D;
     }
-    [data-read-theme="night"] .rmp-table { background: #1A2029; color: #E6EDF3; }
-    [data-read-theme="night"] .rmp-table th { background: #222b36; }
+
+    [data-read-theme="sepia"] body, [data-read-theme="night"] body,
+    [data-read-theme="sepia"] #app, [data-read-theme="night"] #app,
+    [data-read-theme="sepia"] .app-content, [data-read-theme="night"] .app-content,
+    [data-read-theme="sepia"] .screen, [data-read-theme="night"] .screen {
+      background: var(--rt-page) !important;
+      color: var(--rt-ink) !important;
+    }
+
+    [data-read-theme="sepia"] .rule-card, [data-read-theme="night"] .rule-card,
+    [data-read-theme="sepia"] .rule-card .rule-body,
+    [data-read-theme="night"] .rule-card .rule-body,
+    [data-read-theme="sepia"] .rule-card.expanded .rule-body,
+    [data-read-theme="night"] .rule-card.expanded .rule-body,
+    [data-read-theme="sepia"] .chapter-card, [data-read-theme="night"] .chapter-card,
+    [data-read-theme="sepia"] .rmp-lib-card, [data-read-theme="night"] .rmp-lib-card {
+      background: var(--rt-card) !important;
+      border-color: var(--rt-line) !important;
+    }
+
+    [data-read-theme="sepia"] .rule-text-content,
+    [data-read-theme="night"] .rule-text-content,
+    [data-read-theme="sepia"] .rule-text-content *,
+    [data-read-theme="night"] .rule-text-content *,
+    [data-read-theme="sepia"] .para-card-title, [data-read-theme="night"] .para-card-title,
+    [data-read-theme="sepia"] .rule-name, [data-read-theme="night"] .rule-name {
+      color: var(--rt-ink) !important;
+    }
+
+    /* Coloured callouts keep their accent but lose the light fill, which would
+       otherwise stay bright white against a dark page. */
+    [data-read-theme="night"] .rule-text-content .acc-subhead,
+    [data-read-theme="night"] .rule-text-content .om-subhead,
+    [data-read-theme="night"] .rule-text-content .om-table-block,
+    [data-read-theme="night"] .rule-text-content .om-table-title,
+    [data-read-theme="night"] .rule-text-content .om-figure-note {
+      background: #1F2733 !important;
+      border-color: #2F3A48 !important;
+    }
+
+    [data-read-theme="night"] .rmp-table,
+    [data-read-theme="night"] .rmp-tbl { background: #171D26 !important; color: #E6EDF3 !important; }
+    [data-read-theme="night"] .rmp-table th { background: #222B36 !important; }
+    [data-read-theme="night"] .rmp-table td,
+    [data-read-theme="night"] .rmp-table th { border-color: #2A323D !important; }
+    [data-read-theme="sepia"] .rmp-table { background: #FAF3E3 !important; }
+    [data-read-theme="sepia"] .rmp-table th { background: #EFE5CC !important; }
+
+    /* Highlights need a darker fill on a dark page or they glare. */
+    [data-read-theme="night"] .rmp-hl-y { background: #55420E; color: #FDE68A; }
+    [data-read-theme="night"] .rmp-hl-g { background: #0C4535; color: #A7F3D0; }
+    [data-read-theme="night"] .rmp-hl-b { background: #14315E; color: #BFDBFE; }
+    [data-read-theme="night"] .rmp-hl-p { background: #4E1533; color: #FBCFE8; }
 
     /* Highlights. Text colour is pinned so a highlight stays readable in night
        mode, where the surrounding text is near-white on near-black. */
@@ -1658,6 +1745,68 @@
       white-space: pre-wrap; }
 
     .rmp-hi-auto-wait { padding: 11px; font-size: 12px; color: var(--text-muted); }
+
+    /* ── CONTINUOUS READING VIEW ─────────────────────────────────────────
+       A full-screen column of text. Deliberately plain: no card edges, no
+       shadows, no chevrons, nothing to tap. Just the rule number, the heading
+       and the prose, with generous margins. */
+    .rmp-read-open {
+      display: flex; align-items: baseline; gap: 8px; width: 100%;
+      margin: 0 0 12px; padding: 13px 16px; border-radius: 12px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg-card);
+      font-family: inherit; text-align: left;
+    }
+    .rmp-read-open span { font-size: 13.5px; font-weight: 700; color: var(--text-main); }
+    .rmp-read-open em { font-style: normal; font-size: 11px; color: var(--text-muted); }
+    .rmp-read-open::after { content: '→'; margin-left: auto; color: var(--text-muted); }
+
+    .rmp-read {
+      position: fixed; inset: 0; z-index: 9600;
+      background: var(--rt-page, #FCFCFA);
+      display: flex; flex-direction: column;
+    }
+    .rmp-read-bar {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      padding: 10px 12px calc(10px + env(safe-area-inset-top, 0px));
+      border-bottom: 1px solid var(--rt-line, var(--border));
+    }
+    .rmp-read-title {
+      flex: 1; min-width: 0; font-size: 12.5px; font-weight: 700;
+      color: var(--rt-ink-soft, var(--text-soft));
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .rmp-read-close, .rmp-read-aa {
+      flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--rt-line, var(--border)); cursor: pointer;
+      background: transparent; color: var(--rt-ink, var(--text-main));
+      font-size: 14px; font-weight: 700;
+    }
+    .rmp-read-progress { height: 2px; background: var(--rt-line, var(--border)); flex-shrink: 0; }
+    .rmp-read-progress i { display: block; height: 100%; width: 0; background: #2563EB; }
+
+    .rmp-read-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .rmp-read-flow {
+      max-width: var(--read-measure, 68ch); margin: 0 auto;
+      padding: 26px 20px calc(80px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .rmp-read-para { margin: 0 0 34px; }
+    .rmp-read-num {
+      font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 5px;
+    }
+    .rmp-read-h {
+      margin: 0 0 9px; font-size: calc(var(--read-size) * 1.12);
+      line-height: 1.35; font-weight: 700; color: var(--rt-ink, var(--text-main));
+    }
+    .rmp-read-body { padding: 0 !important; border: 0 !important; background: none !important; }
+    .rmp-read-body p { margin: 0 0 var(--read-size); }
+
+    /* The page behind must not scroll while the reader is open, and the app's
+       floating buttons must not sit on top of it. */
+    [data-reading="1"] .rmp-aa,
+    [data-reading="1"] .bottom-nav,
+    [data-reading="1"] .rmp-hint { display: none !important; }
 
     /* First-run hint. Highlighting has no affordance of its own — you have to
        already know you can select text — so this says it once. */
@@ -10426,6 +10575,7 @@ table.rmp-table tr:nth-child(even) td{background:var(--bg-deep)}
   <script src="reader.js"></script>
   <script src="home.js"></script>
   <script src="hindi.js"></script>
+  <script src="read.js"></script>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 

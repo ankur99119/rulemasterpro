@@ -149,8 +149,17 @@
     bar.appendChild(copy);
 
     document.body.appendChild(bar);
-    var top = rect.top + window.scrollY - bar.offsetHeight - 10;
-    if (top < window.scrollY + 8) top = rect.bottom + window.scrollY + 10;
+
+    /* Below the selection by default. Chrome on Android puts its own
+     * Copy / Share bar directly above the selected text, and the first version
+     * of this sat in exactly that spot — the two overlapped and the colour dots
+     * were unreachable. Above is used only when there is no room below. */
+    var below = rect.bottom + window.scrollY + 12;
+    var above = rect.top + window.scrollY - bar.offsetHeight - 12;
+    var viewportBottom = window.scrollY + window.innerHeight;
+    var top = (below + bar.offsetHeight + 70 < viewportBottom) ? below : above;
+    if (top < window.scrollY + 8) top = below;
+
     var left = rect.left + window.scrollX + (rect.width / 2) - (bar.offsetWidth / 2);
     left = Math.max(8, Math.min(left, window.innerWidth - bar.offsetWidth - 8));
     bar.style.top = top + 'px';
@@ -196,8 +205,23 @@
       });
     }
 
+    /* Driven from selectionchange, not mouseup/touchend.
+     *
+     * On Android a long press selects a word and raises Chrome's own
+     * Copy / Share / Select all bar, and no touchend lands on the paragraph —
+     * so the highlight toolbar never appeared on a phone, which is where this
+     * app is actually used. selectionchange fires in every case, on both touch
+     * and mouse, and is debounced here because it fires continuously while the
+     * selection handles are being dragged.
+     *
+     * The native bar still appears; ours sits below it. Both work. */
+    var selTimer = null;
+    function onSelectionChange() {
+      clearTimeout(selTimer);
+      selTimer = setTimeout(onSelect, 220);
+    }
+    document.addEventListener('selectionchange', onSelectionChange);
     host.addEventListener('mouseup', function () { setTimeout(onSelect, 0); });
-    host.addEventListener('touchend', function () { setTimeout(onSelect, 0); });
 
     if (!host.dataset.originalHtml) host.dataset.originalHtml = host.innerHTML;
     paint(host, window.rmpHighlights.for(manual, num));
