@@ -7,7 +7,7 @@
  * inside index.html, so editing one line of CSS forced every user to re-download
  * all of it. Now a shell update re-fetches ~700KB and leaves the data cache alone.
  */
-const SHELL_VERSION = 'shell-v13';
+const SHELL_VERSION = 'shell-v12';
 const DATA_VERSION  = 'data-v9';
 
 const SHELL_CACHE = 'rmp-' + SHELL_VERSION;
