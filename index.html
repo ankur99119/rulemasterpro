@@ -1747,6 +1747,49 @@
 
     .rmp-hi-auto-wait { padding: 11px; font-size: 12px; color: var(--text-muted); }
 
+    /* Amended rule text. Green when the whole rule was substituted and what you
+       are reading IS the new wording; amber when only part was amended and the
+       printed text above still stands apart from the change quoted. */
+    .rmp-amd {
+      margin: 0 0 12px; border-radius: 11px; overflow: hidden;
+      border: 1px solid #A7F3D0; background: #F0FDF4;
+    }
+    .rmp-amd-part { border-color: #FDE68A; background: #FFFBEB; }
+    .rmp-amd-head {
+      display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+      padding: 8px 11px; font-size: 11px; font-weight: 800;
+      background: #D1FAE5; color: #065F46;
+      letter-spacing: .02em;
+    }
+    .rmp-amd-part .rmp-amd-head { background: #FEF3C7; color: #78350F; }
+    .rmp-amd-head span { font-weight: 600; opacity: .8; font-size: 10.5px; }
+    .rmp-amd-text {
+      padding: 11px; font-size: var(--read-size); line-height: var(--read-leading);
+      color: #111827; white-space: normal;
+    }
+    [data-read-theme="night"] .rmp-amd { background: #0C2A1E; border-color: #14532D; }
+    [data-read-theme="night"] .rmp-amd-part { background: #2A2312; border-color: #423616; }
+    [data-read-theme="night"] .rmp-amd-text { color: #E6EDF3 !important; }
+
+    .rmp-amd-old { margin: 0 0 12px; }
+    .rmp-amd-old summary {
+      cursor: pointer; font-size: 11px; font-weight: 700; color: var(--text-muted);
+      padding: 7px 10px; border: 1px dashed var(--border); border-radius: 9px;
+      list-style: none;
+    }
+    .rmp-amd-old summary::-webkit-details-marker { display: none; }
+    .rmp-amd-old summary::before { content: '▸ '; }
+    .rmp-amd-old[open] summary::before { content: '▾ '; }
+    .rmp-amd-oldbody {
+      margin-top: 8px; padding: 10px; border-radius: 9px;
+      background: var(--bg-raised); opacity: .72;
+    }
+    .rmp-amd-oldbody::before {
+      content: 'Superseded — kept for reference only';
+      display: block; margin-bottom: 7px; font-size: 10px; font-weight: 800;
+      letter-spacing: .06em; text-transform: uppercase; color: #991B1B;
+    }
+
     /* Delhi Division safety portal — the one link on the home screen.
        The overlay, the seven section cards and the iframe that went with them
        are gone; only this remains. */
@@ -11591,7 +11634,7 @@ function renderRmpPdfScreen(path) {
       titleDisplay = hasTitle
         ? `<span class="para-card-title">${html_esc_js(para.title)}</span>`
         : `<span class="para-card-title-empty">General provision</span>`;
-      bodyHtml = para.body || '<p class="para-text">–</p>';
+      bodyHtml = rmpApplyAmendments(manualType, para.num, para.body || '<p class="para-text">–</p>');
 
       // Many paras in BWM, OM, IRPWM and IRSEM have no heading in the printed
       // manual. The original extraction invented one by taking the first ~65
@@ -11746,7 +11789,7 @@ function renderRmpPdfScreen(path) {
       card.setAttribute('data-id', 'gsr-' + String(rule.num || '').trim());
 
       let titleText = rule.title;
-      let bodyText = rule.body;
+      let bodyText = rmpApplyAmendments('gsr', rule.num, rule.body);
 
       if (highlightTerm) {
         const snippet = extractSnippet(rule.body, highlightTerm);
@@ -13163,11 +13206,106 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
       return idx[key] || [];
     }
 
+    /* ── AMENDMENTS APPLIED TO THE RULE TEXT ─────────────────────────────
+     *
+     * A correction slip that substitutes a rule makes the printed text wrong.
+     * Showing the superseded wording to a Station Master is the most dangerous
+     * thing this app could do, so an amended rule now renders the amended text.
+     *
+     * The whole question is HOW MUCH a slip replaces, and getting that wrong
+     * would corrupt the manual. Compare two slips:
+     *
+     *   "SR 16.03/4 — DELETED and SUBSTITUTED"     replaces the entire rule
+     *   "GR 3.08(4)(C) — DELETED and SUBSTITUTED"  replaces one sub-clause of it
+     *
+     * Rule 3.08 is several pages describing every stop signal. Replacing all of
+     * it with the text of sub-clause (4)(C) would delete most of the chapter.
+     * Of the 21 slip targets that resolve to a real rule, only 6 are whole-rule
+     * substitutions; the rest name a sub-clause, a renumbering, or a new
+     * sub-rule added beneath an unchanged parent.
+     *
+     * So the reference is parsed, not guessed. Only when the slip names exactly
+     * the rule number — no trailing (i), (A), (4)(C) or " 7" — is the body
+     * replaced. Everything else is appended as a clearly marked amendment
+     * beside the original. The superseded text is never thrown away; it stays
+     * one tap behind "Show the superseded text", because a reader checking what
+     * changed needs it.
+     */
+    function rmpSlipRef(change) {
+      // The part of the rule field before the dash: "SR 4.65/1(i) — SUBSTITUTED"
+      return String((change && change.rule) || '').split(/[—–-]\s/)[0].trim();
+    }
+
+    function rmpIsWholeRule(change, ruleNum) {
+      var ref = rmpSlipRef(change);
+      // strip the GR/SR/USR/Para/Section prefix, leaving the number as written
+      var bare = ref.replace(/^\s*(G\.?R\.?|S\.?R\.?|U\.?S\.?R\.?|Para(graph)?|Section)\s*/i, '').trim();
+      if (!bare) return false;
+      // anything after the plain number means a sub-clause was amended
+      if (normalizeCorrTarget(bare) !== normalizeCorrTarget(ruleNum)) return false;
+      if (/[\(\)]/.test(bare)) return false;
+      if (/\s\d/.test(bare)) return false;
+      return true;
+    }
+
+    function rmpAmendmentsFor(manual, num) {
+      var links = getCorrectionLinksFor(manual, num);
+      var whole = null, partial = [];
+      links.forEach(function (l) {
+        var t = String(l.change && l.change.type || '').toLowerCase();
+        if ((t === 'sub' || t === 'del') && rmpIsWholeRule(l.change, num)) {
+          // Later slips supersede earlier ones.
+          if (!whole || String(l.slip.num) > String(whole.slip.num)) whole = l;
+        } else {
+          partial.push(l);
+        }
+      });
+      return { whole: whole, partial: partial };
+    }
+
+    function rmpSlipLabel(l) {
+      var n = String(l.slip && l.slip.num || '').replace(/^(Slip|CS)\s*/i, '');
+      return 'Correction Slip No. ' + n;
+    }
+
+    function rmpAmendBlock(l, kind) {
+      var txt = String(l.change && l.change.text || '');
+      var deleted = String(l.change && l.change.type || '') === 'del';
+      return '<div class="rmp-amd rmp-amd-' + kind + '">' +
+        '<div class="rmp-amd-head">' +
+          (kind === 'whole'
+            ? (deleted ? 'Deleted by ' : 'Text below is as amended — ') + html_esc_js(rmpSlipLabel(l))
+            : 'Amended in part by ' + html_esc_js(rmpSlipLabel(l))) +
+          '<span>· ' + html_esc_js(String(l.slip.date || '').split('·')[0].trim()) + '</span>' +
+        '</div>' +
+        '<div class="rmp-amd-text">' + html_esc_js(txt).replace(/\n/g, '<br>') + '</div>' +
+      '</div>';
+    }
+
+    /* Returns the HTML to render for a rule body, amendments applied. */
+    function rmpApplyAmendments(manual, num, originalHtml) {
+      var a;
+      try { a = rmpAmendmentsFor(manual, num); } catch (e) { return originalHtml; }
+      if (!a.whole && !a.partial.length) return originalHtml;
+
+      var out = '';
+      if (a.whole) {
+        out += rmpAmendBlock(a.whole, 'whole');
+        out += '<details class="rmp-amd-old"><summary>Show the superseded text</summary>' +
+               '<div class="rmp-amd-oldbody">' + (originalHtml || '') + '</div></details>';
+      } else {
+        out += originalHtml || '';
+      }
+      a.partial.forEach(function (l) { out += rmpAmendBlock(l, 'part'); });
+      return out;
+    }
+
     function correctionBadgeHtml(manual, num) {
       var links = getCorrectionLinksFor(manual, num);
       if (!links.length) return '';
       return links.map(function(l) {
-        var text = 'Updated by ' + (l.slip && l.slip.num ? l.slip.num : 'Correction Slip');
+        var n = String(l.slip && l.slip.num || '').replace(/^(Slip|CS)\s*/i, '');
+        var text = n ? 'Updated via Correction Slip No. ' + n : 'Updated by Correction Slip';
         return '<button type="button" class="corr-link-badge" onclick="event.stopPropagation();openCorrectionSlip(\'' + html_esc_js(l.sourceManual || manual) + '\',\'' + html_esc_js(l.slip && l.slip.num || '') + '\')">↗ ' + html_esc_js(text) + '</button>';
       }).join('');
     }
