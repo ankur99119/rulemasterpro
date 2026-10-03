@@ -1639,7 +1639,7 @@
     .rmp-hl-p { background: #FCE7F3; color: #9D174D; }
 
     .rmp-hlbar {
-      position: absolute; z-index: 9000; display: flex; align-items: center; gap: 7px;
+      position: absolute; z-index: 9800; display: flex; align-items: center; gap: 7px;
       padding: 7px 9px; border-radius: 11px; background: #111827;
       box-shadow: 0 6px 22px rgba(0,0,0,.32);
     }
@@ -1654,7 +1654,8 @@
     /* Reading settings. Anchored to the bottom on a phone so it sits under the
        thumb, and floated on a wide screen where the bottom edge is far away. */
     .rmp-rc {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9500;
+      /* Above the book (9600), because Aa is opened from inside it. */
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 9700;
       background: var(--bg-card); border-top: 1px solid var(--border);
       border-radius: 18px 18px 0 0; padding: 14px 16px 22px;
       box-shadow: 0 -10px 34px rgba(0,0,0,.22);
@@ -1746,64 +1747,188 @@
 
     .rmp-hi-auto-wait { padding: 11px; font-size: 12px; color: var(--text-muted); }
 
-    /* ── CONTINUOUS READING VIEW ─────────────────────────────────────────
-       A full-screen column of text. Deliberately plain: no card edges, no
-       shadows, no chevrons, nothing to tap. Just the rule number, the heading
-       and the prose, with generous margins. */
-    .rmp-read-open {
+    /* ── DIVISION SAFETY PORTAL ──────────────────────────────────────────
+       The division's Google Site, framed inside the app. */
+    .slip-pdf-link {
+      display: inline-block; margin-top: 12px; padding: 9px 13px; border-radius: 9px;
+      background: var(--bg-raised); border: 1px solid var(--border);
+      color: var(--text-main); text-decoration: none; font-size: 12px; font-weight: 700;
+    }
+
+    .rmp-sf-entry {
+      display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 12px;
+      padding: 14px 14px 14px 16px; border-radius: 14px; cursor: pointer; text-align: left;
+      border: 1px solid var(--border); background: var(--bg-card); font-family: inherit;
+    }
+    .rmp-sf-entry-ic { font-size: 20px; flex-shrink: 0; }
+    .rmp-sf-entry-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .rmp-sf-entry-txt b { font-size: 13.5px; font-weight: 700; color: var(--text-main); }
+    .rmp-sf-entry-txt em { font-style: normal; font-size: 11px; color: var(--text-muted); }
+    .rmp-sf-entry-go { margin-left: auto; color: var(--text-muted); font-size: 18px; }
+
+    .rmp-sf {
+      position: fixed; inset: 0; z-index: 9600; display: flex; flex-direction: column;
+      background: var(--bg-deep);
+    }
+    .rmp-sf-head {
+      flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px;
+      border-bottom: 1px solid var(--border); background: var(--bg-card);
+    }
+    .rmp-sf-title {
+      flex: 1; min-width: 0; font-size: 13px; font-weight: 700; color: var(--text-main);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .rmp-sf-back, .rmp-sf-x {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      border: 1px solid var(--border); background: transparent; color: var(--text-main);
+      font-size: 16px; line-height: 1;
+    }
+    .rmp-sf-stage { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+    .rmp-sf-intro { padding: 18px 16px 4px; }
+    .rmp-sf-intro h2 { margin: 0 0 6px; font-size: 17px; color: var(--text-main); }
+    .rmp-sf-intro p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.6; color: var(--text-soft); }
+    .rmp-sf-warn {
+      padding: 9px 11px; border-radius: 9px; background: #FEF3C7; color: #78350F !important;
+      font-size: 11.5px !important; border: 1px solid #FDE68A;
+    }
+
+    .rmp-sf-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px; padding: 12px 16px 4px;
+    }
+    .rmp-sf-card {
+      display: flex; flex-direction: column; gap: 3px; padding: 14px 12px;
+      border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card);
+      cursor: pointer; text-align: left; font-family: inherit;
+    }
+    .rmp-sf-ic { font-size: 19px; }
+    .rmp-sf-hi { font-size: 12.5px; font-weight: 700; color: var(--text-main); }
+    .rmp-sf-en { font-size: 10.5px; color: var(--text-muted); }
+
+    .rmp-sf-whole {
+      display: block; margin: 14px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+      padding: 12px; border-radius: 11px; text-align: center; text-decoration: none;
+      border: 1px dashed var(--border); color: var(--text-soft); font-size: 12px;
+    }
+
+    .rmp-sf-frame { width: 100%; height: 100%; border: 0; opacity: 0; transition: opacity .2s; }
+    .rmp-sf-frame.is-ready { opacity: 1; }
+    .rmp-sf-stage:has(.rmp-sf-frame) { overflow: hidden; }
+    .rmp-sf-loading { padding: 22px 16px; font-size: 12.5px; color: var(--text-muted); }
+    .rmp-sf-fallback { padding: 22px 18px; }
+    .rmp-sf-fallback p { font-size: 13px; line-height: 1.65; color: var(--text-soft); margin: 0 0 10px; }
+    .rmp-sf-ext {
+      display: inline-block; margin-top: 6px; padding: 11px 15px; border-radius: 10px;
+      background: #1D4ED8; color: #fff; text-decoration: none; font-size: 12.5px; font-weight: 700;
+    }
+
+    /* ── THE BOOK ────────────────────────────────────────────────────────
+       Real pages, turned sideways, laid out by CSS multi-column. The first
+       version of this was a scrolling column and it read like a web page —
+       which is the whole difference. Nothing here scrolls: `overflow:hidden`
+       on the stage is load-bearing, not decoration.
+
+       Paper is warm off-white rather than #fff. Text is justified with
+       hyphenation, which is what makes a column of prose look set rather than
+       typed, and serif by default because that is what a manual is printed in. */
+    .rmp-bk-open {
       display: flex; align-items: baseline; gap: 8px; width: 100%;
       margin: 0 0 12px; padding: 13px 16px; border-radius: 12px; cursor: pointer;
       border: 1px solid var(--border); background: var(--bg-card);
       font-family: inherit; text-align: left;
     }
-    .rmp-read-open span { font-size: 13.5px; font-weight: 700; color: var(--text-main); }
-    .rmp-read-open em { font-style: normal; font-size: 11px; color: var(--text-muted); }
-    .rmp-read-open::after { content: '→'; margin-left: auto; color: var(--text-muted); }
+    .rmp-bk-open span { font-size: 13.5px; font-weight: 700; color: var(--text-main); }
+    .rmp-bk-open em { font-style: normal; font-size: 11px; color: var(--text-muted); }
+    .rmp-bk-open::after { content: '→'; margin-left: auto; color: var(--text-muted); }
 
-    .rmp-read {
+    .rmp-bk {
       position: fixed; inset: 0; z-index: 9600;
-      background: var(--rt-page, #FCFCFA);
       display: flex; flex-direction: column;
+      background: #FBF7EF;
+      color: #1F1B16;
     }
-    .rmp-read-bar {
-      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-      padding: 10px 12px calc(10px + env(safe-area-inset-top, 0px));
-      border-bottom: 1px solid var(--rt-line, var(--border));
-    }
-    .rmp-read-title {
-      flex: 1; min-width: 0; font-size: 12.5px; font-weight: 700;
-      color: var(--rt-ink-soft, var(--text-soft));
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .rmp-read-close, .rmp-read-aa {
-      flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
-      border: 1px solid var(--rt-line, var(--border)); cursor: pointer;
-      background: transparent; color: var(--rt-ink, var(--text-main));
-      font-size: 14px; font-weight: 700;
-    }
-    .rmp-read-progress { height: 2px; background: var(--rt-line, var(--border)); flex-shrink: 0; }
-    .rmp-read-progress i { display: block; height: 100%; width: 0; background: #2563EB; }
+    [data-read-theme="sepia"] .rmp-bk { background: #F4ECD8; color: #3B2F1E; }
+    [data-read-theme="night"] .rmp-bk { background: #12151A; color: #DDE3EA; }
 
-    .rmp-read-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .rmp-read-flow {
-      max-width: var(--read-measure, 68ch); margin: 0 auto;
-      padding: 26px 20px calc(80px + env(safe-area-inset-bottom, 0px));
+    .rmp-bk-head {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: calc(9px + env(safe-area-inset-top, 0px)) 14px 9px;
+    }
+    .rmp-bk-running {
+      flex: 1; min-width: 0; text-align: center;
+      font-size: 11px; letter-spacing: .11em; text-transform: uppercase;
+      opacity: .5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .rmp-bk-x, .rmp-bk-aa {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      border: 0; background: transparent; cursor: pointer;
+      color: currentColor; opacity: .55; font-size: 14px; font-weight: 700;
     }
 
-    .rmp-read-para { margin: 0 0 34px; }
-    .rmp-read-num {
-      font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 5px;
+    /* The page itself. overflow:hidden is what makes this a book. */
+    .rmp-bk-stage {
+      flex: 1; position: relative; overflow: hidden;
+      margin: 0 auto; width: 100%; max-width: 760px;
+      padding: 4px 26px 0;
+      box-sizing: border-box;
     }
-    .rmp-read-h {
-      margin: 0 0 9px; font-size: calc(var(--read-size) * 1.12);
-      line-height: 1.35; font-weight: 700; color: var(--rt-ink, var(--text-main));
+    .rmp-bk-flow {
+      column-fill: auto;
+      will-change: transform;
+      -webkit-hyphens: auto; hyphens: auto;
     }
-    .rmp-read-body { padding: 0 !important; border: 0 !important; background: none !important; }
-    .rmp-read-body p { margin: 0 0 var(--read-size); }
 
-    /* The page behind must not scroll while the reader is open, and the app's
-       floating buttons must not sit on top of it. */
+    .rmp-bk-para { break-inside: auto; margin: 0 0 1.6em; }
+    .rmp-bk-num {
+      margin: 0 0 .15em; font-size: .72em; letter-spacing: .1em;
+      font-variant-numeric: tabular-nums; opacity: .45; font-weight: 700;
+    }
+    .rmp-bk-h {
+      margin: 0 0 .5em; font-size: 1.04em; line-height: 1.3; font-weight: 700;
+      break-after: avoid;
+    }
+
+    /* Body copy. The reader's size and leading drive it; justification and
+       hyphenation are what make it look like a printed page. */
+    .rmp-bk-body, .rmp-bk-body * {
+      background: none !important; border: 0 !important; padding: 0 !important;
+      color: inherit !important;
+      font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif !important;
+      font-size: var(--read-size) !important;
+      line-height: var(--read-leading) !important;
+    }
+    [data-read-serif="0"] .rmp-bk-body, [data-read-serif="0"] .rmp-bk-body * {
+      font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif !important;
+    }
+    .rmp-bk-body p, .rmp-bk-body div {
+      margin: 0 0 .55em !important;
+      text-align: justify; text-justify: inter-word;
+      orphans: 2; widows: 2;
+    }
+    .rmp-bk-body table, .rmp-bk-body th, .rmp-bk-body td {
+      font-size: calc(var(--read-size) * .82) !important;
+      line-height: 1.45 !important; text-align: left;
+    }
+    .rmp-bk-body .rmp-table { background: transparent !important; }
+
+    /* Figures and tables must not be split across a page boundary. */
+    .rmp-bk-para .rmp-figures, .rmp-bk-para .rmp-tables,
+    .rmp-bk-para .rmp-fig, .rmp-bk-para .rmp-tbl,
+    .rmp-bk-para .rmp-hi-auto { break-inside: avoid; margin: .7em 0; }
+
+    .rmp-bk-foot {
+      flex-shrink: 0; padding: 8px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+    }
+    .rmp-bk-prog { height: 2px; background: currentColor; opacity: .12; border-radius: 2px; }
+    .rmp-bk-prog i { display: block; height: 100%; width: 0; background: currentColor; opacity: 1; }
+    .rmp-bk-folio {
+      margin-top: 7px; text-align: center; font-size: 11px;
+      letter-spacing: .06em; opacity: .45; font-variant-numeric: tabular-nums;
+    }
+
+    /* Nothing of the app shows through while the book is open. */
     [data-reading="1"] .rmp-aa,
     [data-reading="1"] .bottom-nav,
     [data-reading="1"] .rmp-hint { display: none !important; }
@@ -10576,6 +10701,7 @@ table.rmp-table tr:nth-child(even) td{background:var(--bg-deep)}
   <script src="home.js"></script>
   <script src="hindi.js"></script>
   <script src="read.js"></script>
+  <script src="safety.js"></script>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 
@@ -13134,8 +13260,17 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
         // G&SR uses GR/SR/USR rule numbers such as 4.65/6, 16.08/1, 9.12/2(A).
         var re = /(?:\b(?:G\.?R\.?|S\.?R\.?|U\.?S\.?R\.?|GR|SR|USR)\s*)?([0-9]{1,2}\.[0-9]{2}(?:\/[0-9A-Za-z]+)?(?:\([A-Za-z0-9]+\))?)/gi;
         var m;
-        while ((m = re.exec(ruleText)) !== null) add(m[1], m[1]);
-        if (!out.length) while ((m = re.exec(hay)) !== null) add(m[1], m[1]);
+        // Also index the bare rule number when the slip names a sub-clause.
+        // Amendment Slip 05 amends "GR 3.08(4)(C)"; the rule in the book is
+        // numbered 3.08, so indexing only "3.08(4)" left the slip orphaned —
+        // it appeared in the Correction Slips tab but no rule showed a badge.
+        function addWithBase(v) {
+          add(v, v);
+          var base = String(v).replace(/\([A-Za-z0-9]+\)\s*$/, '');
+          if (base && base !== v) add(base, base);
+        }
+        while ((m = re.exec(ruleText)) !== null) addWithBase(m[1]);
+        if (!out.length) while ((m = re.exec(hay)) !== null) addWithBase(m[1]);
         return out;
       }
 
@@ -13368,7 +13503,16 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
         out += '<span class="slip-num">' + html_esc_js(slip.num) + '</span>';
         out += '<div><div class="slip-title">' + html_esc_js(slip.title) + '</div>';
         out += '<div class="slip-date">' + html_esc_js(slip.date) + '</div></div></div>';
-        out += '<div class="slip-body">' + body + '</div></div>';
+        // A slip that ships with its scanned original gets a link to it. Slip 05
+        // replaces a signal aspect diagram, and no amount of prose substitutes
+        // for seeing the drawing as issued.
+        if (slip.pdf) {
+          out += '<div class="slip-body">' + body +
+                 '<a class="slip-pdf-link" href="' + html_esc_js(slip.pdf) + '" target="_blank" rel="noopener">' +
+                 'View the original signed slip (PDF)</a></div></div>';
+        } else {
+          out += '<div class="slip-body">' + body + '</div></div>';
+        }
       }
       list.innerHTML = out;
     }
@@ -13883,6 +14027,32 @@ FORMAT: Bold only rule numbers. No headings. No summary. Length matches complexi
             rule: 'SR 4.20/2 — NEW (added under GR 4.20)',
             type: 'add',
             text: 'SR 4.20/2: Driving any type of Locomotive/Multiple Unit/DMU/MEMU/EMU/Self Propelled vehicle or similar type of train:\n\nIf a Loco Pilot has not worked on any type of locomotive, multiple unit, DMU, EMU, MEMU, self propelled vehicle, or similar train for a period of six months or more, he/she shall be accompanied by a certified Loco Inspector on footplate duty during the first trip.\n\nUpon satisfactory performance and assessment, the competency certificate shall be renewed by the Sr.DEE (OP)/Sr.DME (P).\n\nIf the CLI is not satisfied with the Loco Pilot performance or confidence during the footplate assessment, the observation period may be extended further with the approval of the Sr.DEE (OP)/Sr.DME (P).'
+          }
+        ]
+      },
+      {
+        num: 'Slip 05',
+        title: 'Amendment Slip No. 05 dated 02.09.2026',
+        date: '02 September 2026 · Issued by Principal Chief Operations Manager, Northern Railway',
+        pdf: 'slips/gsr-slip-05-2026.pdf',
+        changes: [
+          {
+            rule: 'GR 3.08(4)(C) — DELETED and SUBSTITUTED',
+            type: 'sub',
+            text: '(C) Colour light Stop signal in Multiple Four-Aspect Signalling Territory:\n\n"ON" position — Aspect: Stop. Indication: Stop dead.\n\n"OFF" position, three aspects:\n\n1. Caution — one yellow light. Proceed and be prepared to stop at the next stop signal.\n\n2. Attention — two yellow lights. Proceed and be prepared to pass next signal at such restricted speed as may be by special instructions.\n\n3. Proceed — one green light. Proceed.\n\nThe amendment replaces the aspect diagram printed at GR 3.08(4)(C). Open the original slip to see the signal drawing exactly as issued.'
+          }
+        ]
+      },
+      {
+        num: 'Slip 06',
+        title: 'Amendment Slip No. 06 dated 16.09.2026',
+        date: '16 September 2026 · Issued by Principal Chief Operations Manager, Northern Railway',
+        pdf: 'slips/gsr-slip-06-2026.pdf',
+        changes: [
+          {
+            rule: 'SR 16.03/4 — DELETED and SUBSTITUTED',
+            type: 'sub',
+            text: 'SR 16.03/4: In case of level crossing gate not protected by gate signal, irrespective of being Open to road traffic (OTRT) or Close to road traffic (CTRT), the following procedure shall be followed for opening and closing of gates:\n\n1. Opening of Level Crossing gate:\n\n(a) After ensuring the tail board/lamps of all trains for which the private numbers had earlier been exchanged for closure of gate, the gateman will take authorization from the controlling station master under exchange of private number for opening the gate.\n\n(b) The controlling station master shall authorize the gateman to open the gate with exchange of private numbers after ensuring there being no train in the section, yet to pass the gate.\n\n(c) Before opening of Level Crossing Gate, the gateman shall fix the banner flag/red lamp in the direction of train on both Up and Down or multiple lines.\n\n2. Closing of Level Crossing Gates:\n\n(a) For closure of gate, the station master shall inform the gateman attached to its station about each and every train (train number and direction etc.) to be dispatched in the section under exchange of Private number.\n\n(b) The gateman shall close the gate against the road traffic and remove the banner flag/red lamp. The gateman shall inform the station master about the closure of gate under exchange of private number.'
           }
         ]
       }
