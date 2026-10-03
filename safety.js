@@ -4,12 +4,16 @@
  * the JPO, divisional safety circulars, safety drives, headquarters and
  * Railway Board circulars.
  *
- * The site is loaded in a frame so it reads as part of the app rather than a
- * jump out to a browser. Google Sites is not guaranteed to allow framing, and
- * a blocked frame fails silently — it just stays blank, which would look like
- * the app was broken. So every section is opened with a watchdog: if the frame
- * has not reported a load within a few seconds, the section is offered as an
- * external link instead, with the reason stated.
+ * The first version framed the site inside the app. That does not work:
+ * Google Sites sends X-Frame-Options, so every section showed "sites.google.com
+ * refused to connect". The watchdog meant to catch that never fired either,
+ * because the browser raises `load` on Google's own refusal page — so the frame
+ * looked like it had loaded successfully while showing an error.
+ *
+ * There is no way around it from this side; whether a page may be framed is the
+ * other server's decision. So the sections open in the browser instead, which
+ * is reliable, and the screen says that is what the buttons do rather than
+ * pretending otherwise.
  *
  * This is the one part of the app that cannot work offline. The manuals are on
  * the device; these circulars live on Google's servers and are updated there.
@@ -49,78 +53,38 @@
     }
   }
 
-  function openSection(sec) {
-    var stage = overlay.querySelector('.rmp-sf-stage');
-    var title = overlay.querySelector('.rmp-sf-title');
-    var back = overlay.querySelector('.rmp-sf-back');
-    title.textContent = sec.en;
-    back.style.display = '';
-
-    var url = BASE + sec.slug;
-    stage.innerHTML =
-      '<div class="rmp-sf-loading">' + esc(sec.hi) + ' — loading from the division portal…</div>' +
-      '<iframe class="rmp-sf-frame" src="' + esc(url) + '" title="' + esc(sec.en) + '" ' +
-      'referrerpolicy="no-referrer-when-downgrade"></iframe>';
-
-    var frame = stage.querySelector('.rmp-sf-frame');
-    var note = stage.querySelector('.rmp-sf-loading');
-    var settled = false;
-
-    frame.addEventListener('load', function () {
-      settled = true;
-      if (note) note.remove();
-      frame.classList.add('is-ready');
-    });
-
-    // A frame Google refuses to serve never fires load, and never errors
-    // either — it simply stays blank. Without this the screen would just sit
-    // there looking broken.
-    setTimeout(function () {
-      if (settled || !overlay || !stage.contains(frame)) return;
-      stage.innerHTML =
-        '<div class="rmp-sf-fallback">' +
-          '<p><strong>' + esc(sec.hi) + '</strong></p>' +
-          '<p>This section would not open inside the app. Google Sites does not ' +
-          'always allow its pages to be embedded, and that is decided on their ' +
-          'side, not here.</p>' +
-          '<a class="rmp-sf-ext" href="' + esc(url) + '" target="_blank" rel="noopener">' +
-            'Open ' + esc(sec.en) + ' in your browser</a>' +
-        '</div>';
-    }, 6000);
-  }
+  function urlFor(sec) { return BASE + sec.slug; }
 
   function showIndex() {
     var stage = overlay.querySelector('.rmp-sf-stage');
     var title = overlay.querySelector('.rmp-sf-title');
-    var back = overlay.querySelector('.rmp-sf-back');
     title.textContent = 'Delhi Division · Operating';
-    back.style.display = 'none';
 
     var html =
       '<div class="rmp-sf-intro">' +
         '<h2>दिल्ली मंडल परिचालन डिजिटल संग्रह</h2>' +
         '<p>Safety circulars, drives, joint procedure orders and headquarters ' +
         'instructions for Delhi Division.</p>' +
-        '<p class="rmp-sf-warn">These pages come from the division portal and need ' +
-        'an internet connection. The seven manuals in this app work offline; this ' +
-        'section does not.</p>' +
+        '<p class="rmp-sf-warn">These open in your browser, on the division portal, ' +
+        'and need an internet connection. Google does not allow its Sites pages to ' +
+        'be shown inside another app. The seven manuals here work offline; these ' +
+        'circulars do not.</p>' +
       '</div><div class="rmp-sf-grid">';
 
-    SECTIONS.forEach(function (s, i) {
-      html += '<button type="button" class="rmp-sf-card" data-i="' + i + '">' +
+    // Real anchors, not buttons. A link the browser owns opens reliably from a
+    // PWA, restores long-press "open in new tab", and shows the destination.
+    SECTIONS.forEach(function (s) {
+      html += '<a class="rmp-sf-card" href="' + esc(urlFor(s)) + '" target="_blank" rel="noopener">' +
                 '<span class="rmp-sf-ic">' + s.icon + '</span>' +
                 '<span class="rmp-sf-hi">' + esc(s.hi) + '</span>' +
-                '<span class="rmp-sf-en">' + esc(s.en) + '</span>' +
-              '</button>';
+                '<span class="rmp-sf-en">' + esc(s.en) + ' ↗</span>' +
+              '</a>';
     });
 
     html += '</div><a class="rmp-sf-whole" href="' + BASE + 'home" target="_blank" rel="noopener">' +
             'Open the full portal in your browser ↗</a>';
 
     stage.innerHTML = html;
-    stage.querySelectorAll('.rmp-sf-card').forEach(function (b) {
-      b.onclick = function () { openSection(SECTIONS[Number(b.dataset.i)]); };
-    });
   }
 
   function open() {
@@ -129,7 +93,6 @@
     overlay.className = 'rmp-sf';
     overlay.innerHTML =
       '<div class="rmp-sf-head">' +
-        '<button type="button" class="rmp-sf-back" aria-label="Back to sections">‹</button>' +
         '<span class="rmp-sf-title">Delhi Division · Operating</span>' +
         '<button type="button" class="rmp-sf-x" aria-label="Close">✕</button>' +
       '</div>' +
@@ -137,13 +100,15 @@
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
     overlay.querySelector('.rmp-sf-x').onclick = close;
-    overlay.querySelector('.rmp-sf-back').onclick = showIndex;
     showIndex();
   }
 
   window.rmpSafetyPortal = { open: open, close: close };
 
-  /* A card on the home screen, next to the other tools. */
+  /* First thing on the home screen, above the manuals and above Continue
+   * reading. The manuals change a few times a year; safety circulars, drives
+   * and JPOs change constantly, so this is the item most likely to be the
+   * reason someone opened the app today. */
   function mountCard() {
     if (document.getElementById('rmp-sf-open')) return;
     var lib = document.querySelector('#home .rmp-lib');
@@ -159,7 +124,7 @@
         '<em>JPO · divisional and HQ circulars · Delhi Division portal</em>' +
       '</span><span class="rmp-sf-entry-go">›</span>';
     card.onclick = open;
-    lib.appendChild(card);
+    lib.insertBefore(card, lib.firstChild);
   }
 
   function routeCheck() {
